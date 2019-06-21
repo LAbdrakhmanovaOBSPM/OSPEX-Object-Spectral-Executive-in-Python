@@ -48,7 +48,7 @@ Contacts:
 
 @: Liaisian.Abdrakhmanova@obspm.fr
 
-@: Abdallah.Hamini@obspm.fr
+@: abdallah.hamini@obspm.fr
 
 LESIA, Observatory of Paris, France
 
