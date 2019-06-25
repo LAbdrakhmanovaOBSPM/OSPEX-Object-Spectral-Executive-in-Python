@@ -1,5 +1,21 @@
-# Project: OSPEX in Python
-# Started in March 2019 by Liaisian Abdrakhmanova and Abdallah Hamini at LESIA, Observatory of Paris, France
+
+  """
+
+  Application: OSPEX in Python
+
+  Started date: 11/03/2019
+
+  Creators: Liaisian Abdrakhmanova, Abdallah Hamini
+
+  Organization: LESIA, Observatory of Paris, France
+  
+  Graphical User Interface: GUI was created using tkinter library
+
+  Usage: information to test the program provided in Requirements file
+
+  Status = 'Development'
+
+  """
 
 
 import webbrowser
