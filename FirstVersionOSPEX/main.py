@@ -1,3 +1,7 @@
+# Project: OSPEX in Python
+# Started in March 2019 by Liaisian Abdrakhmanova and Abdallah Hamini at LESIA, Observatory of Paris, France
+
+
 import webbrowser
 from tkinter import *
 from tkinter import messagebox
