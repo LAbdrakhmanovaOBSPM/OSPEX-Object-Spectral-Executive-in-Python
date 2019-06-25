@@ -1,10 +1,11 @@
+   
    """
    
    Class for loading the parameters and plotting Spectrum, Time Profile and Spectrogram
        
    Called Units: Rate, Counts, Flux
    
-    """
+   """
 
 import numpy as np
 import pandas as pd
