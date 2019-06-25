@@ -1,9 +1,23 @@
 
-"""
+   """
 
-Class to create "Select Input Window" menu option in OSPEX
+   Application: OSPEX in Python
 
-"""
+   Started date: 11/03/2019
+
+   Creators: Liaisian Abdrakhmanova, Abdallah Hamini
+
+   Organization: LESIA, Observatory of Paris, France
+  
+   Graphical User Interface: GUI was created using tkinter library
+
+   Usage: information to test the program provided in Requirements file
+
+   Status = 'Development'
+
+   """
+
+
 
 from tkinter import *
 from tkinter.filedialog import askopenfilename
@@ -16,6 +30,11 @@ import warnings
 
 
 class SecondWindow():
+   
+   """
+   Class to create "Select Input Window" menu option in OSPEX
+
+   """
    
     def __init__(self, root):
         self.top1 = Toplevel()
