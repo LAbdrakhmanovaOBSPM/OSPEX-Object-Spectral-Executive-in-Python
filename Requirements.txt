@@ -1,19 +1,29 @@
 
 Requirements to run OSPEX software
 
-Tools: Python 3.6
+Tools: 
+Python 3.6
+
+Libraries: 
+Astropy
+Numpy
+Pandas
+Matplotlib
+Tkinter
+
+Following modules should come by default with Python after installation, but we recommend you to check if they work correctly. If not, please, import them manually:
+Webbrowser
+Datetime
+Re
+Copy
+Importlib
 
 To run:
-Linux, Mac, Windows: You should call main script from command line: python3 filename.py
- 
-If you don’t have Python library on your local PC and want to test the software:
+Linux, Mac, Windows: Afer importing the libraries you should call main script from command line: python3 main.py
 
-1. Go to the directory
-2. Launch the executable file filename.exe
+If you want to work directly from command line:
 
-If you want to work from command line:
-
-1. Go  to the directory where your program is located:
+1. Go to the directory where your program is located:
 cd directory location
 
 2. Call Python:
