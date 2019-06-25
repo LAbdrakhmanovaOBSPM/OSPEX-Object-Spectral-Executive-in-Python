@@ -1,3 +1,11 @@
+   """
+   
+   Class for loading the parameters and plotting Spectrum, Time Profile and Spectrogram
+       
+   Called Units: Rate, Counts, Flux
+   
+    """
+
 import numpy as np
 import pandas as pd
 from astropy.io import fits
@@ -8,6 +16,7 @@ from datetime import timedelta
 
 
 class Input:
+    
     def __init__(self, file):
         data1, data2, header3, header1 = self.__load_data(file)
 
@@ -45,7 +54,7 @@ class Input:
         self.x_position = str(self.TimeNew2[70])
 
 
-        #
+        
         self.t1 = pd.to_timedelta(self.Time2, unit='s')
         #self.t1 = map(self.t1, float)
 
