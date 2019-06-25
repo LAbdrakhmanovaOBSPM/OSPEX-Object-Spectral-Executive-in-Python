@@ -16,9 +16,9 @@
    Status = 'Development'
 
    """
-
-
-
+   
+   
+   
 from tkinter import *
 from tkinter.filedialog import askopenfilename
 from astropy.io import fits
