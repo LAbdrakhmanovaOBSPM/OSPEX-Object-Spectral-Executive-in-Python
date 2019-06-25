@@ -1,3 +1,10 @@
+
+"""
+
+Class to create "Select Input Window" menu option in OSPEX
+
+"""
+
 from tkinter import *
 from tkinter.filedialog import askopenfilename
 from astropy.io import fits
@@ -9,8 +16,7 @@ import warnings
 
 
 class SecondWindow():
-    """Class to create a Select Input Window"""
-
+   
     def __init__(self, root):
         self.top1 = Toplevel()
         self.top1.title('SPEX Input Options')
