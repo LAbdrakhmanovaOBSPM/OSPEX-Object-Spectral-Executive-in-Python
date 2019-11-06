@@ -24,6 +24,7 @@ from tkinter import *
 from tkinter import messagebox
 import importlib
 import second
+import background
 
 
 def clickedContact():
@@ -67,6 +68,9 @@ def OSPEX_Parameter_Tables():
 def SelectInput():
     second.SecondWindow(root)
 
+def SelectBackground():
+    background.BackgroundWindow(root)
+
 
 root = Tk()
 root.title('SPEX Main Window')
@@ -105,7 +109,7 @@ filemenu = Menu(mainmenu, tearoff=0)
 helpmenu = Menu(mainmenu, tearoff=0)
 
 Select_Input = filemenu.add_command(label="Select Input ...", command=SelectInput)
-Select_Background = filemenu.add_command(label="Select Background ...")
+Select_Background = filemenu.add_command(label="Select Background ...", command=SelectBackground)
 filemenu.add_command(label="Select Fit Options and Do Fit ...")
 filemenu.add_command(label="Plot Fit Results ...")
 filemenu.add_command(label="Set parameters manually ...")
