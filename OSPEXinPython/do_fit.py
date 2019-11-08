@@ -106,8 +106,8 @@ class Fitting:
 
         :return:
         """
-        # Local file specified for file
-        # Ideally, operations should be performed on the file that was loaded in the Select Input part
+        # Local file specified for data
+        # Ideally, procedures should be applied for the data loaded in the Select Input part
 
         hdulist = fits.open("C:/Users/a_lesya007/PycharmProjects/SpectralDataAnalysisPackage/hsi_spectrum_20020220_080000.fits")
         hdulist.info()
@@ -155,7 +155,7 @@ class Fitting:
         sigma = 1.0
 
         # Predefine Input Data in x and y.
-        # Here we equate the three components to y1, y2, y3. The value of x is the same for all cases. Further we work only with them
+        # We equate the three components to y1, y2, y3. The value of x is the same for all cases. Further we work only with them
         x = E_min
 
         y1 = CountRate
@@ -167,7 +167,7 @@ class Fitting:
 
         # -------------------------Define Fitters---------------
         
-        # Fitter creates a new model for х, у, with finding the best fit values
+        # Fitter creates a new model for x and у, with finding the best fit values
         
 
         fitg1 = fitting.LevMarLSQFitter()
