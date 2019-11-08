@@ -19,7 +19,7 @@ Copy
 Importlib
 
 To run:
-Linux, Mac, Windows: Afer importing the libraries you should call main script from command line: python3 main.py
+Linux, Mac, Windows: When imported the libraries you should call main script from command line: python3 main.py
 
 If you want to work directly from command line:
 
