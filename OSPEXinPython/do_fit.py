@@ -99,15 +99,15 @@ class Fitting:
     def destroy5(self):
         self.top2.destroy()
 
-    # FIXME: по сути содержит копию содержимого FitPowerLaw - необходимо переделать под отдельный класс
+    # FIXME: essentially contains a copy of the content of Fit Power Law.py - redo it for a separate class
     def _selective_fit(self):
         """
-        Выбор в зависимости от Plot Units и Function Model
+        Selection depending on Plot Units and Function Model
 
         :return:
         """
-        # Для файла указана локальная папка
-        # В идеале операции должны производиться с файлом, который был загружен в части Select Input
+        # Local file specified for file
+        # Ideally, operations should be performed on the file that was loaded in the Select Input part
 
         hdulist = fits.open("C:/Users/a_lesya007/PycharmProjects/SpectralDataAnalysisPackage/hsi_spectrum_20020220_080000.fits")
         hdulist.info()
@@ -132,8 +132,7 @@ class Fitting:
         for i in range(n):
             deltaE[i] = E_max[i] - E_min[i]
 
-        # Далее мы определяем компоненты, для которых будут строиться графики,
-        # В части интерфейса они называются Plot Units. Их всего три: Rate, Counts, Flux
+        # Next, we determine the PLot Units components
 
         # Rate
         CountRate = np.zeros(shape=(n))
@@ -156,7 +155,7 @@ class Fitting:
         sigma = 1.0
 
         # Predefine Input Data in x and y.
-        # Здесь мы приравниваем три компоненты к у1, у2, у3. Значение x одинаково для всех случаев. Дальше работаем только с ними
+        # Here we equate the three components to y1, y2, y3. The value of x is the same for all cases. Further we work only with them
         x = E_min
 
         y1 = CountRate
@@ -167,17 +166,15 @@ class Fitting:
         y_err = sigma / np.random.rand(N)
 
         # -------------------------Define Fitters---------------
-        # В этой части происходит назначение сборщика.
-        # Он собирает новую модель для х, у, с нахождением лучших параметров.
-        # Это все сделано в нижней части.
+        
+        # Fitter creates a new model for х, у, with finding the best fit values
+        
 
         fitg1 = fitting.LevMarLSQFitter()
         fitg2 = fitting.SLSQPLSQFitter()
         fitg3 = fitting.SimplexLSQFitter()
         print(fitg1)
 
-        # Далее назначаются две функции для построения модели: One dimensional power law model и One dimensional power law model with a break
-        # В части интерфейса они называются PowerLaw1D и BrokenPowerLaw1D
 
         """-----------------------Fitting the data using astropy.modeling------------------------------"""
 
@@ -196,7 +193,7 @@ class Fitting:
 
         """
 
-        # Тут происходит сборка модели для компоненты Flux(y3)
+        # Determine the default parameters for PowerLaw1D
         PowerLaw1D = models.PowerLaw1D(amplitude=0.00729868, x_0=1.72324, alpha=0)
         # Apply LevMarLSQFitter
         gPLFlux = fitg1(PowerLaw1D, x[7:18], y3[7:18], weights=1.0 / y3[7:18])
@@ -209,12 +206,7 @@ class Fitting:
         gBPLFlux = fitg1(BrokenPowerLaw1D, x[7:18], y3[7:18], weights=1.0 / y3[7:18])
         print(gBPLFlux)
 
-        # Задача начинается ниже: нужно привязать графики к интерфейсу, точнее к кнопке Do Fit
-        # при нажатии на Do Fit должен строится ниже указанный график
-        # -------------------------------------------------------------------------
-        # Далее выполняется действие, в зависимости от выбора модели и юнитов:
-
-        # Если пользователь выбрал Rate в Plot Units и PowerLaw1D в Choose Fit Function Model
+        # If user selected the Rate in Plot Units and PowerLaw1D in Choose Fit Function Model, plot:
         if (self.var.get() == 'Rate') & (self.lbox.curselection()[0] == 0):
             gPLRate = fitg1(PowerLaw1D, x[7:18], y1[7:18], weights=1.0 / y1[7:18])
             print(gPLRate)
@@ -231,7 +223,7 @@ class Fitting:
             plt.show()
             # print('RATE & PowerLaw1D')
 
-        # Если пользователь выбрал Rate в Plot Units и BrokenPowerLaw1D в Choose Fit Function Model
+        # If user selected Rate in Plot Units and BrokenPowerLaw1D in Choose Fit Function Model, plot:
         elif (self.var.get() == 'Rate') & (self.lbox.curselection()[0] == 1):
             gBPLRate = fitg1(BrokenPowerLaw1D, x[7:18], y1[7:18], weights=1.0 / y1[7:18])
             print(gBPLRate)
@@ -247,7 +239,7 @@ class Fitting:
             plt.show()
             # print('RATE & BrokenPowerLaw1D')
 
-        # Если пользователь выбрал Counts в Plot Units и PowerLaw1D в Choose Fit Function Model
+        # If user selected Counts in Plot Units and PowerLaw1D in Choose Fit Function Model:
         elif (self.var.get() == 'Counts') & (self.lbox.curselection()[0] == 0):
             gPLCounts = fitg1(PowerLaw1D, x[7:18], y2[7:18], weights=1.0 / y2[7:18])
             print(gPLCounts)
@@ -263,7 +255,7 @@ class Fitting:
             plt.show()
             # print('COUNTS & PowerLaw1D')
 
-        # Если пользователь выбрал Counts в Plot Units и BrokenPowerLaw1D в Choose Fit Function Model
+        # If user selected Counts in Plot Units and BrokenPowerLaw1D in Choose Fit Function Model:
         elif (self.var.get() == 'Counts') & (self.lbox.curselection()[0] == 1):
             gBPLCounts = fitg1(BrokenPowerLaw1D, x[7:18], y2[7:18], weights=1.0 / y2[7:18])
             print(gBPLCounts)
@@ -279,7 +271,7 @@ class Fitting:
             plt.show()
             # print('COUNTS & BrokenPowerLaw1D')
 
-        # Если пользователь выбрал Flux в Plot Units и PowerLaw1D в Choose Fit Function Model
+        # If user selected Flux in Plot Units and PowerLaw1D in Choose Fit Function Model:
         elif (self.var.get() == 'Flux') & (self.lbox.curselection()[0] == 0):
             plt.plot(x[7:18], y3[7:18], drawstyle='steps-post', label="Flux")
             plt.plot(x[7:18], gPLFlux(x[7:18]), drawstyle='steps-post', color='red', label="PowerLaw1D")
@@ -292,7 +284,7 @@ class Fitting:
             plt.show()
             # print('FLUX & PowerLaw1D')
 
-        # Если пользователь выбрал Flux в Plot Units и BrokenPowerLaw1D в Choose Fit Function Model
+        # If user selected Flux in Plot Units and BrokenPowerLaw1D in Choose Fit Function Model:
         elif (self.var.get() == 'Flux') & (self.lbox.curselection()[0] == 1):
             """
             BrokenPowerLaw1D(amplitude=1, x_break=1, alpha_1=1, alpha_2=1, **kwargs)
@@ -326,7 +318,7 @@ class Fitting:
             plt.show()
             # print('FLUX & BrokenPowerLaw1D')
 
-        # Нижние вычисления происходят в консоли, их не нужно никуда добавлять в интерфейсе
+        # Calculate the Reduced Chi - square
         def calc_reduced_chi_square(fit, x, y, yerr, N, n_free):
             """
             fit (array) values for the fit
