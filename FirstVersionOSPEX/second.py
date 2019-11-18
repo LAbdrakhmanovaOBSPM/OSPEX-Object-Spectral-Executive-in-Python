@@ -27,7 +27,7 @@ import copy
 import pandas as pd
 import plotting
 import warnings
-
+import background
 
 class SecondWindow():
    
@@ -212,6 +212,7 @@ class SecondWindow():
                                     filetypes=(("FITS files", "*.fits"), ("All Files", "*.*")),
                                     title="Please Select Spectrum or Image File")
         self.textFilename.delete(0, 'end')
+        background.BackgroundWindow.fname=self.name
         try:
             with fits.open(self.name) as hdul:
                 self.hdul = hdul
