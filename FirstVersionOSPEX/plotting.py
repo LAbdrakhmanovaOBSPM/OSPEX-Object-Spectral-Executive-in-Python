@@ -64,7 +64,7 @@ class Input:
 
 
         # Time format conversion (from sec to h/m/sec/)
-        self.TimeNew = pd.to_datetime(self.Time, unit='s')
+        #self.TimeNew = pd.to_datetime(self.Time, unit='s')
 
         # Time -2
         self.TimeNew2 = pd.to_datetime(self.Time2, unit='s')
