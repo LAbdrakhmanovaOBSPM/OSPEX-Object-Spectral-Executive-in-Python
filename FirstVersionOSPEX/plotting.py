@@ -1,4 +1,4 @@
-   """
+"""
 
    Application: OSPEX in Python
 
@@ -14,7 +14,7 @@
 
    Status = 'Development'
 
-   """
+"""
    
    
    
@@ -29,12 +29,12 @@ from datetime import timedelta
 
 class Input:
    
-   """
-   Class for loading the parameters and plotting Spectrum, Time Profile and Spectrogram
+    """
+    Class for loading the parameters and plotting Spectrum, Time Profile and Spectrogram
        
-   Called Units: Rate, Counts, Flux
+    Called Units: Rate, Counts, Flux
    
-   """
+    """
     
     def __init__(self, file):
         data1, data2, header3, header1 = self.__load_data(file)

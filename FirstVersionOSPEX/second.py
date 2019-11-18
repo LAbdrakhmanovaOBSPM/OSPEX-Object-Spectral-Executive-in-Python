@@ -1,5 +1,5 @@
 
-   """
+"""
 
    Application: OSPEX in Python
 
@@ -15,7 +15,7 @@
 
    Status = 'Development'
 
-   """
+"""
    
    
    
@@ -31,10 +31,10 @@ import warnings
 
 class SecondWindow():
    
-   """
-   Class to create "Select Input Window" menu option in OSPEX
+    """
+    Class to create "Select Input Window" menu option in OSPEX
 
-   """
+    """
    
     def __init__(self, root):
         self.top1 = Toplevel()
