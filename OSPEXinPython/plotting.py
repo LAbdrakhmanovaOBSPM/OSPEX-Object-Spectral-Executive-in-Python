@@ -1,3 +1,23 @@
+"""
+
+   Application: OSPEX in Python
+
+   Started date: 11/03/2019
+
+   Creators: Liaisian Abdrakhmanova, Abdallah Hamini
+
+   Organization: LESIA, Observatory of Paris, France
+  
+   Graphical User Interface: GUI was created using tkinter library
+
+   Usage: information to test the program provided in Requirements file
+
+   Status = 'Development'
+
+"""
+   
+   
+   
 import numpy as np
 import pandas as pd
 from astropy.io import fits
@@ -8,6 +28,14 @@ from datetime import timedelta
 
 
 class Input:
+   
+    """
+    Class for loading the parameters and plotting Spectrum, Time Profile and Spectrogram
+       
+    Called Units: Rate, Counts, Flux
+   
+    """
+    
     def __init__(self, file):
         data1, data2, header3, header1 = self.__load_data(file)
 

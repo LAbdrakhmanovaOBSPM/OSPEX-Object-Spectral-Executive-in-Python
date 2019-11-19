@@ -1,3 +1,24 @@
+
+"""
+
+  Application: OSPEX in Python
+
+  Started date: 11/03/2019
+
+  Creators: Liaisian Abdrakhmanova, Abdallah Hamini
+
+  Organization: LESIA, Observatory of Paris, France
+  
+  Graphical User Interface: GUI was created using tkinter library
+
+  Usage: information to test the program provided in Requirements file
+
+  Status = 'Development'
+
+"""
+  
+  
+  
 import webbrowser
 from tkinter import *
 from tkinter import messagebox

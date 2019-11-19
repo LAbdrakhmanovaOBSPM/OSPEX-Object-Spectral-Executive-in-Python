@@ -1,3 +1,24 @@
+
+"""
+
+   Application: OSPEX in Python
+
+   Started date: 11/03/2019
+
+   Creators: Liaisian Abdrakhmanova, Abdallah Hamini
+
+   Organization: LESIA, Observatory of Paris, France
+  
+   Graphical User Interface: GUI was created using tkinter library
+
+   Usage: information to test the program provided in Requirements file
+
+   Status = 'Development'
+
+"""
+   
+   
+   
 from tkinter import *
 from tkinter.filedialog import askopenfilename
 from astropy.io import fits
@@ -6,11 +27,15 @@ import copy
 import pandas as pd
 import plotting
 import warnings
-
+import background
 
 class SecondWindow():
-    """Class to create a Select Input Window"""
+   
+    """
+    Class to create "Select Input Window" menu option in OSPEX
 
+    """
+   
     def __init__(self, root):
         self.top1 = Toplevel()
         self.top1.title('SPEX Input Options')
@@ -187,6 +212,7 @@ class SecondWindow():
                                     filetypes=(("FITS files", "*.fits"), ("All Files", "*.*")),
                                     title="Please Select Spectrum or Image File")
         self.textFilename.delete(0, 'end')
+        background.BackgroundWindow.fname=self.name
         try:
             with fits.open(self.name) as hdul:
                 self.hdul = hdul
