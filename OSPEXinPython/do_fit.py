@@ -109,7 +109,7 @@ class Fitting:
         # Local file specified for data
         # Ideally, procedures should be applied for the data loaded in the Select Input part
 
-        hdulist = fits.open("C:/Users/a_lesya007/PycharmProjects/SpectralDataAnalysisPackage/hsi_spectrum_20020220_080000.fits")
+        hdulist = fits.open("/home/stage/PycharmProjects/SpectralDataAnalysisPackage/hsi_spectrum_20020220_080000.fits")
         hdulist.info()
         header1 = hdulist[1].header
         header3 = hdulist[3].header
@@ -150,7 +150,7 @@ class Fitting:
             Flux[i] = np.mean(Rate[:, i] / (Area * deltaE[i] - 2))
 
         # Initial guess
-        N = len(E_min[7:18])
+        N = len(E_min)
         print(N)
         sigma = 1.0
 
@@ -196,23 +196,23 @@ class Fitting:
         # Determine the default parameters for PowerLaw1D
         PowerLaw1D = models.PowerLaw1D(amplitude=0.00729868, x_0=1.72324, alpha=0)
         # Apply LevMarLSQFitter
-        gPLFlux = fitg1(PowerLaw1D, x[7:18], y3[7:18], weights=1.0 / y3[7:18])
+        gPLFlux = fitg1(PowerLaw1D, x, y3, weights=1.0 / y3)
         print(gPLFlux)
 
 
         BrokenPowerLaw1D = models.BrokenPowerLaw1D(amplitude=0.0653331, x_break=1.7, alpha_1=0, alpha_2=0)
 
         # Apply LevMarLSQFitter
-        gBPLFlux = fitg1(BrokenPowerLaw1D, x[7:18], y3[7:18], weights=1.0 / y3[7:18])
+        gBPLFlux = fitg1(BrokenPowerLaw1D, x, y3, weights=1.0 / y3)
         print(gBPLFlux)
 
         # If user selected the Rate in Plot Units and PowerLaw1D in Choose Fit Function Model, plot:
         if (self.var.get() == 'Rate') & (self.lbox.curselection()[0] == 0):
-            gPLRate = fitg1(PowerLaw1D, x[7:18], y1[7:18], weights=1.0 / y1[7:18])
+            gPLRate = fitg1(PowerLaw1D, x, y1, weights=1.0 / y1)
             print(gPLRate)
 
-            plt.plot(x[7:18], y1[7:18], drawstyle='steps-post', label="Rate")
-            plt.plot(x[7:18], gPLRate(x[7:18]), drawstyle='steps-post', color='red',
+            plt.plot(x, y1, drawstyle='steps-post', label="Rate")
+            plt.plot(x, gPLRate(x), drawstyle='steps-post', color='red',
                      label="PowerLaw1D")
             plt.yscale('log')
             plt.xscale('log')
@@ -225,11 +225,11 @@ class Fitting:
 
         # If user selected Rate in Plot Units and BrokenPowerLaw1D in Choose Fit Function Model, plot:
         elif (self.var.get() == 'Rate') & (self.lbox.curselection()[0] == 1):
-            gBPLRate = fitg1(BrokenPowerLaw1D, x[7:18], y1[7:18], weights=1.0 / y1[7:18])
+            gBPLRate = fitg1(BrokenPowerLaw1D, x, y1, weights=1.0 / y1)
             print(gBPLRate)
 
-            plt.plot(x[7:18], y1[7:18], drawstyle='steps-post', label="Rate")
-            plt.plot(x[7:18], gBPLRate(x[7:18]), drawstyle='steps-post', color='red', label="BrokenPowerLaw1D")
+            plt.plot(x, y1, drawstyle='steps-post', label="Rate")
+            plt.plot(x, gBPLRate(x), drawstyle='steps-post', color='red', label="BrokenPowerLaw1D")
             plt.yscale('log')
             plt.xscale('log')
             plt.xlabel('Energy(keV)')
@@ -241,11 +241,11 @@ class Fitting:
 
         # If user selected Counts in Plot Units and PowerLaw1D in Choose Fit Function Model:
         elif (self.var.get() == 'Counts') & (self.lbox.curselection()[0] == 0):
-            gPLCounts = fitg1(PowerLaw1D, x[7:18], y2[7:18], weights=1.0 / y2[7:18])
+            gPLCounts = fitg1(PowerLaw1D, x, y2, weights=1.0 / y2)
             print(gPLCounts)
 
-            plt.plot(x[7:18], y2[7:18], drawstyle='steps-post', label="Counts")
-            plt.plot(x[7:18], gPLCounts(x[7:18]), drawstyle='steps-post', color='red', label="PowerLaw1D")
+            plt.plot(x, y2, drawstyle='steps-post', label="Counts")
+            plt.plot(x, gPLCounts(x), drawstyle='steps-post', color='red', label="PowerLaw1D")
             plt.yscale('log')
             plt.xscale('log')
             plt.xlabel('Energy(keV)')
@@ -257,11 +257,11 @@ class Fitting:
 
         # If user selected Counts in Plot Units and BrokenPowerLaw1D in Choose Fit Function Model:
         elif (self.var.get() == 'Counts') & (self.lbox.curselection()[0] == 1):
-            gBPLCounts = fitg1(BrokenPowerLaw1D, x[7:18], y2[7:18], weights=1.0 / y2[7:18])
+            gBPLCounts = fitg1(BrokenPowerLaw1D, x, y2, weights=1.0 / y2)
             print(gBPLCounts)
 
-            plt.plot(x[7:18], y2[7:18], drawstyle='steps-post', label="Counts")
-            plt.plot(x[7:18], gBPLCounts(x[7:18]), drawstyle='steps-post', color='red', label="BrokenPowerLaw1D")
+            plt.plot(x, y2, drawstyle='steps-post', label="Counts")
+            plt.plot(x, gBPLCounts(x), drawstyle='steps-post', color='red', label="BrokenPowerLaw1D")
             plt.yscale('log')
             plt.xscale('log')
             plt.xlabel('Energy(keV)')
@@ -273,8 +273,8 @@ class Fitting:
 
         # If user selected Flux in Plot Units and PowerLaw1D in Choose Fit Function Model:
         elif (self.var.get() == 'Flux') & (self.lbox.curselection()[0] == 0):
-            plt.plot(x[7:18], y3[7:18], drawstyle='steps-post', label="Flux")
-            plt.plot(x[7:18], gPLFlux(x[7:18]), drawstyle='steps-post', color='red', label="PowerLaw1D")
+            plt.plot(x, y3, drawstyle='steps-post', label="Flux")
+            plt.plot(x, gPLFlux(x), drawstyle='steps-post', color='red', label="PowerLaw1D")
             plt.yscale('log')
             plt.xscale('log')
             plt.xlabel('Energy(keV)')
@@ -304,11 +304,11 @@ class Fitting:
             BrokenPowerLaw1D = models.BrokenPowerLaw1D(amplitude=0.0653331, x_break=1.7, alpha_1=0, alpha_2=0)
 
             # Apply LevMarLSQFitter
-            gBPLFlux = fitg1(BrokenPowerLaw1D, x[7:18], y3[7:18], weights=1.0 / y3[7:18])
+            gBPLFlux = fitg1(BrokenPowerLaw1D, x, y3, weights=1.0 / y3)
             print(gBPLFlux)
 
-            plt.plot(x[7:18], y3[7:18], drawstyle='steps-post', label="Flux")
-            plt.plot(x[7:18], gBPLFlux(x[7:18]), drawstyle='steps-post', color='red', label="BrokenPowerLaw1D")
+            plt.plot(x, y3, drawstyle='steps-post', label="Flux")
+            plt.plot(x, gBPLFlux(x), drawstyle='steps-post', color='red', label="BrokenPowerLaw1D")
             plt.yscale('log')
             plt.xscale('log')
             plt.xlabel('Energy(keV)')
@@ -328,5 +328,5 @@ class Fitting:
             """
             return 1.0 / (N - n_free) * sum(((fit - y) / y_err) ** 2)
 
-        reduced_chi_squared = calc_reduced_chi_square(gPLFlux(x[7:18]), x[7:18], y3[7:18], y3[7:18], N, 3)
+        reduced_chi_squared = calc_reduced_chi_square(gPLFlux(x), x, y3, y3, N, 3)
         print('Reduced Chi Squared with LinearLSQFitter: {}'.format(reduced_chi_squared))

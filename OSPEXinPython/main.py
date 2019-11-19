@@ -4,7 +4,7 @@ from tkinter import messagebox
 import importlib
 import second
 import do_fit
-
+import background
 
 def clickedContact():
     messagebox.showinfo('OSPEX Contact Information', 'The OSPEX package was developed by Liaisian Abdrakhmanova and Abdallah Hamini'
@@ -48,6 +48,9 @@ def OSPEX_Parameter_Tables():
 def SelectInput():
     second.SecondWindow(root)
 
+def SelectBackground():
+    background.BackgroundWindow(root)
+
 def Fitting():
     do_fit.Fitting(root)
 
@@ -87,7 +90,7 @@ filemenu = Menu(mainmenu, tearoff=0)
 helpmenu = Menu(mainmenu, tearoff=0)
 
 Select_Input = filemenu.add_command(label="Select Input ...", command=SelectInput)
-Select_Background = filemenu.add_command(label="Select Background ...")
+Select_Background = filemenu.add_command(label="Select Background ...", command=SelectBackground)
 filemenu.add_command(label="Select Fit Options and Do Fit ...", command=Fitting)
 filemenu.add_command(label="Plot Fit Results ...")
 filemenu.add_command(label="Set parameters manually ...")
