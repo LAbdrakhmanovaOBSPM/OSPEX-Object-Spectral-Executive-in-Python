@@ -166,10 +166,10 @@ class BackgroundWindow():
 
         """ Scrollbar """
         self.vscrollbar = Scrollbar(self.frame3, orient="vertical")
-        self.vscrollbar.pack(side='right', fill="y")
+        #self.vscrollbar.pack(side='right', fill="y")
 
         self.hscrollbar = Scrollbar(self.frame3, orient="horizontal")
-        self.hscrollbar.pack(side='bottom', fill="x")
+        #self.hscrollbar.pack(side='bottom', fill="x")
         #self.hscrollbar.place(relx=0.1, rely=0.3)
         #################################################################################################
 
