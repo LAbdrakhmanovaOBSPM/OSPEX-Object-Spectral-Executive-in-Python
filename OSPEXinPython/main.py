@@ -24,14 +24,14 @@ from tkinter import *
 from tkinter import messagebox
 import importlib
 import second
+import do_fit
 import background
 
-
 def clickedContact():
-    messagebox.showinfo('OSPEX Contact Information', 'The OSPEX package was developed by Abdallah Hamini and Liaisian Abdrakhmanova'
-                                                     '\nat LESIA, Observatory of Paris, France'
-                                                     '\n\n@:Abdallah.Hamini@obspm.fr'
-                                                     '\n@:Liaisian.Abdrakhmanova@obspm.fr'
+    messagebox.showinfo('OSPEX Contact Information', 'The OSPEX package was developed by Liaisian Abdrakhmanova and Abdallah Hamini'
+                                                     ' at LESIA, Paris Observatory, France'
+                                                     '\n\n@:liaisian.abdrakhmanova@obspm.fr'
+                                                     '\n@:abdallah.hamini@obspm.fr'
                                                      '\n\n№:(+33)145077470')
 
 
@@ -44,7 +44,8 @@ def clickedHelp_on_Help():
 
 def clickedOSPEX_ORR():
     messagebox.showinfo('OSPEX Object Reference Retrieval',
-                        'Will be filled in the future')
+                        '\nGitHub repository: '
+                        '\nhttps://github.com/LAbdrakhmanovaOBSPM/OSPEX-Object-\nSpectral-Executive-in-Python')
 
 
 new = 1
@@ -70,6 +71,9 @@ def SelectInput():
 
 def SelectBackground():
     background.BackgroundWindow(root)
+
+def Fitting():
+    do_fit.Fitting(root)
 
 
 root = Tk()
@@ -98,9 +102,7 @@ Label(root,
            "\n 2. Define Background and Analysis Intervals, \n and Select Fit Function Components"
            "\n 3. Fit data "
            "\n 4. View Fit Results "
-           "\n 5. Save Session and Results"
-           "\n \n \n Use Plot_Control buttons to change display of current plot."
-           "\n Use Window_Control buttons to redisplay previous plots.",
+           "\n 5. Save Session and Results",
       fg="blue",
       font="Times",
       justify='left').pack()
@@ -110,7 +112,7 @@ helpmenu = Menu(mainmenu, tearoff=0)
 
 Select_Input = filemenu.add_command(label="Select Input ...", command=SelectInput)
 Select_Background = filemenu.add_command(label="Select Background ...", command=SelectBackground)
-filemenu.add_command(label="Select Fit Options and Do Fit ...")
+filemenu.add_command(label="Select Fit Options and Do Fit ...", command=Fitting)
 filemenu.add_command(label="Plot Fit Results ...")
 filemenu.add_command(label="Set parameters manually ...")
 filemenu.add_command(label="Set parameters from script")

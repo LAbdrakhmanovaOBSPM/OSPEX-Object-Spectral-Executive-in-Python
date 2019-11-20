@@ -73,7 +73,7 @@ class Input:
         self.x_position = str(self.TimeNew2[70])
 
 
-        
+        #
         self.t1 = pd.to_timedelta(self.Time2, unit='s')
         #self.t1 = map(self.t1, float)
 
@@ -139,8 +139,8 @@ class Input:
         plt.ylabel(xlabel)
         plt.title(title)
         #plt.text(self.x_position, 166, 'Detectors: ' + self.detectors) #rate
-        plt.text(self.x_position, 664, 'Detectors: ' + self.detectors)  # counts
-        plt.text(self.x_position, 0.023, 'Detectors: ' + self.detectors) #flux
+        #plt.text(self.x_position, 664, 'Detectors: ' + self.detectors)  # counts
+        #plt.text(self.x_position, 0.023, 'Detectors: ' + self.detectors) #flux
         if show:
             plt.show()
         if name:
@@ -171,10 +171,10 @@ class Input:
             for i in range(n):
                 data[i] = np.mean(self.rate[:, i])
                 plt.rcParams["figure.figsize"] = [8, 8]
-                plt.text(20.8146, 8.1881, 'Detectors: ' + self.detectors,
-                         fontdict={'fontsize': 8, 'fontweight': 'medium'})
-                plt.text(11.4332, 6.71774, self.Date_start + ' to ' + self.Date_end,
-                         fontdict={'fontsize': 8, 'fontweight': 'medium'})
+                plt.text(21.25, 28.1881, 'Detectors: ' + self.detectors,
+                         fontdict={'fontsize': 9, 'fontweight': 'medium'})
+                plt.text(14.0,23.95, self.Date_start + ' to ' + self.Date_end,
+                         fontdict={'fontsize': 9, 'fontweight': 'medium'})
                 plt.xlabel('Energy(keV)')
                 plt.ylabel('counts/s')
                 plt.title('SPEX HESSI Count Rate vs Energy')
@@ -183,9 +183,9 @@ class Input:
             for i in range(n):
                 data[i] = np.mean(self.rate[:, i] * self.sum)
                 plt.rcParams["figure.figsize"] = [8, 8]
-                plt.text(26, 5100, 'Detectors: ' + self.detectors, fontdict={'fontsize': 8, 'fontweight': 'medium'})
-                plt.text(11.9, 4353.52, self.Date_start + ' to ' + self.Date_end,
-                         fontdict={'fontsize': 8, 'fontweight': 'medium'})
+                plt.text(16.57, 71384, 'Detectors: ' + self.detectors, fontdict={'fontsize': 9, 'fontweight': 'medium'})
+                plt.text(14, 65440, self.Date_start + ' to ' + self.Date_end,
+                         fontdict={'fontsize': 9, 'fontweight': 'medium'})
                 plt.xlabel('Energy(keV)')
                 plt.ylabel('counts')
                 plt.title('SPEX HESSI Counts vs Energy')
@@ -198,9 +198,9 @@ class Input:
             for i in range(n):
                 data[i] = np.mean(self.rate[:, i]) / (self.Area * deltaE[i]-2)
                 plt.rcParams["figure.figsize"] = [8, 8]
-                plt.text(32, 0.029, 'Detectors: ' + self.detectors, fontdict={'fontsize': 8, 'fontweight': 'medium'})
-                plt.text(11.9, 0.023, self.Date_start + ' to ' + self.Date_end,
-                         fontdict={'fontsize': 8, 'fontweight': 'medium'})
+                plt.text(17.095, 0.1019, 'Detectors: ' + self.detectors, fontdict={'fontsize': 9, 'fontweight': 'medium'})
+                plt.text(13.132, 0.088, self.Date_start + ' to ' + self.Date_end,
+                         fontdict={'fontsize': 9, 'fontweight': 'medium'})
                 plt.xlabel('Energy(keV)')
                 plt.ylabel('counts s^(-1) cm^(-2) keV^(-1)')
                 plt.title('SPEX HESSI Count Flux vs Energy')
@@ -265,10 +265,11 @@ class Input:
         #plt.axis([self.TimeNew2[0], self.TimeNew2[-1], 1, 1000])
 
         # plt.xsticks(rotation = 90)
+        T = len(tick)/5
         plt.colorbar()
         plt.yscale('log')
         plt.yticks([1, 1000])
-        plt.xticks(np.arange(len(tick), step=30))  # , rotation = 90)
+        plt.xticks(np.arange(len(tick), step = T)) # for 1st data: step = 30 # , rotation = 90)
         plt.show()
 
 
@@ -298,3 +299,4 @@ if __name__ == '__main__':
     plots.plot_spectrogram_rate()
     plots.plot_spectrogram_counts()
     plots.plot_spectrogram_flux()
+

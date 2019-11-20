@@ -229,7 +229,7 @@ class SecondWindow():
 
                 self.textFilename.insert(0, self.name)
         except:
-            self.textFilename.insert(0, "No file exists")
+            self.textFilename.insert(0, "C:/Users/a_lesya007/PycharmProjects/SpectralDataAnalysisPackage/hsi_spectrum_20020220_080000.fits")
 
     # def Summarize
 
