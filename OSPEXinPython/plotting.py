@@ -2,9 +2,9 @@
 
    Application: OSPEX in Python
 
-   Started date: 11/03/2019
+   Start date: 11/03/2019
 
-   Creators: Liaisian Abdrakhmanova, Abdallah Hamini
+   Creators: Liaisian Abdrakhmanova, Abdallah Hamini, Aichatou Aboubacar
 
    Organization: LESIA, Observatory of Paris, France
   
@@ -30,17 +30,17 @@ from datetime import timedelta
 class Input:
    
     """
-    Class for loading the parameters and plotting Spectrum, Time Profile and Spectrogram
+    Class to load the parameters from input data and plot Spectrum, Time Profile and Spectrogram
        
     Called Units: Rate, Counts, Flux
    
     """
-    
+  
     def __init__(self, file):
-        data1, data2, header3, header1 = self.__load_data(file)
+        data1, data2, header3, header1 = self.__load_data(file) 
 
         # Define the parameters from HEADER and DATA
-        self.rate = data1.RATE
+        self.rate = data1.RATE 
         self.Time = data1.TIME
         self.Time2 = data1.TIME - 2
         self.Livetime = data1.LIVETIME
@@ -73,30 +73,62 @@ class Input:
         self.x_position = str(self.TimeNew2[70])
 
 
-        #
+
         self.t1 = pd.to_timedelta(self.Time2, unit='s')
         #self.t1 = map(self.t1, float)
 
         self.t2 = np.array([str(timedelta(seconds=s)) for s in self.Time])
+    
+    """
 
-    def __load_data(self, file):
+    When open the file, the returned object, called hdulist, behaves like a Python list
+
+    Each element maps to a Header-Data Unit(HDU) in FITs file
+
+    """
+
+    def __load_data(self, file):   #load the input file choosen in 'Select Input' section
         hdulist = fits.open(file)
         hdulist.info()
-        return hdulist[1].data, hdulist[2].data, hdulist[1].header, hdulist[3].header
+        return hdulist[1].data, hdulist[2].data, hdulist[1].header, hdulist[3].header  #read the Data and Header content from input file
 
-    # Define the Rate for "Plot Time Profile"
+################### 1. Time Profile Plotting ####################
+
+    """
+
+    Define the Rate for "Plot Time Profile"
+
+    Rate  = array which has a count rate data to each energy channel
+
+    There are 6 energy channels
+    1: 3-6 kEV
+    2: 6-12 keV
+    3: 12-25 keV
+    4: 25-49 keV
+    5: 49-100 keV
+    6: 100-250 keV 
+    
+    """
+ 
     def __get_rate_data(self):
         data = np.zeros(shape=(self.time_len, 6))
         for i in range(self.time_len):
-            data[i, 0] = sum(self.rate[i, 0:3])
-            data[i, 1] = sum(self.rate[i, 3:9])
-            data[i, 2] = sum(self.rate[i, 9:22])
-            data[i, 3] = sum(self.rate[i, 22:40])
-            data[i, 4] = sum(self.rate[i, 40:57])
-            data[i, 5] = sum(self.rate[i, 57:76])
-        return data
+            # determine the energy distribution for different channels relative to the time of observed data
+            data[i, 0] = sum(self.rate[i, 0:3]) #energy channel = 3-6 kEV
+            data[i, 1] = sum(self.rate[i, 3:9]) #6-12 keV
+            data[i, 2] = sum(self.rate[i, 9:22]) #12-25 keV
+            data[i, 3] = sum(self.rate[i, 22:40]) #25-49 keV
+            data[i, 4] = sum(self.rate[i, 40:57]) #49-100 keV
+            data[i, 5] = sum(self.rate[i, 57:76]) #100-250 keV
+        return data #return Rate unit
 
-    # Define the Counts for "Plot Time Profile"
+    """
+    Define the Counts for "Plot Time Profile"
+      
+    In order to perform the conversion between Rate and Counts, multiply accumulation time by Rate
+
+    """
+
     def __get_counts_data(self):
         data = np.zeros(shape=(self.time_len, 6))
         for i in range(self.time_len):
@@ -106,9 +138,16 @@ class Input:
             data[i, 3] = sum(self.rate[i, 22:40]) * self.Time_del[i]
             data[i, 4] = sum(self.rate[i, 40:57]) * self.Time_del[i]
             data[i, 5] = sum(self.rate[i, 57:76]) * self.Time_del[i]
-        return data
+        return data #return Counts unit
 
-    # Define the Flux for "Plot Time Profile"
+    """
+    
+    Define the Flux for "Plot Time Profile"
+
+    In order to convert Rate to count flux, divide the Rate by Area and Energy bin width
+
+    """
+
     def __get_flux_data(self):
         data = np.zeros(shape=(self.time_len, 6))
         for i in range(self.time_len):
@@ -118,14 +157,16 @@ class Input:
             data[i, 3] = sum(self.rate[i, 22:40]) / (self.Area * self.E4)
             data[i, 4] = sum(self.rate[i, 40:57]) / (self.Area * self.E5)
             data[i, 5] = sum(self.rate[i, 57:76]) / (self.Area * self.E6)
-        return data
+        return data #return Flux unit
+
+    
 
     # 1. Plot Time Profile for Rate, Counts, Flux
 
     def __time_profile_plotting(self, data, xlabel, title, show=True, name=None):
         df = pd.DataFrame(data, index=self.TimeNew2,
                           columns=['3-6keV(Data with Bk)', '6-12keV(Data with Bk)', '12-25keV(Data with Bk)',
-                                   '25-49keV(Data with Bk)', '49-100keV(Data with Bk)', '100-250keV(Data with Bk)'])
+                                   '25-49keV(Data with Bk)', '49-100keV(Data with Bk)', '100-250keV(Data with Bk)']) #choose the specific color for each energy channel 
         colors = ['gray','magenta','lime', 'cyan', 'yellow', 'red']
         #df.style.set_properties(subset=['columns'], **{'height': '50px'})
         df.plot(figsize=(8, 8), drawstyle='steps-post', color = colors)
@@ -146,30 +187,40 @@ class Input:
         if name:
             plt.savefig(name, format='png')
 
-    # RATE vs Time
+    # If user pick Rate in 'Plot Units' section, plot for 'Time profile':
     def rate_vs_time_plotting(self):
         rate_data = self.__get_rate_data()
         self.__time_profile_plotting(rate_data, 'counts/s', 'SPEX HESSI Count Rate vs Time')
 
-    # COUNTS vs Time
+    # if Counts:
     def counts_vs_time_plotting(self):
         count_data = self.__get_counts_data()
 
         self.__time_profile_plotting(count_data, 'counts', 'SPEX HESSI Counts vs Time')
 
-    # FLUX vs Time
+    # if Flux:
     def flux_vs_time_plotting(self):
         flux_data = self.__get_flux_data()
         self.__time_profile_plotting(flux_data, 'counts s^(-1) cm^(-2) keV^(-1)', 'SPEX HESSI Count Flux vs Time')
 
-    # 2. Plot Spectrum
+############################# 2. Spectrum plotting #################
+
+    """ 
+
+    As a photons come in over the time and with different energies,
+
+    we should restore the original spectra for Rate, Counts and Flux
+
+    They convolve with both the effect of energy dispersion and the effective area of the detector 
+
+    """
+
     def __plot_spectrum(self, typ):
         n = len(self.E_min)
-        data = np.zeros(shape=n)
-        # Define Rate for "Plot Spectrum"
+        data = np.zeros(shape=n) 
         if typ == 'rate':
             for i in range(n):
-                data[i] = np.mean(self.rate[:, i])
+                data[i] = np.mean(self.rate[:, i]) #determine Rate for "Plot Spectrum"
                 plt.rcParams["figure.figsize"] = [8, 8]
                 plt.text(21.25, 28.1881, 'Detectors: ' + self.detectors,
                          fontdict={'fontsize': 9, 'fontweight': 'medium'})
@@ -178,10 +229,9 @@ class Input:
                 plt.xlabel('Energy(keV)')
                 plt.ylabel('counts/s')
                 plt.title('SPEX HESSI Count Rate vs Energy')
-        # Define Counts for "Plot Spectrum"
         elif typ == 'counts':
             for i in range(n):
-                data[i] = np.mean(self.rate[:, i] * self.sum)
+                data[i] = np.mean(self.rate[:, i] * self.sum) #determine Counts for "Plot Spectrum"
                 plt.rcParams["figure.figsize"] = [8, 8]
                 plt.text(16.57, 71384, 'Detectors: ' + self.detectors, fontdict={'fontsize': 9, 'fontweight': 'medium'})
                 plt.text(14, 65440, self.Date_start + ' to ' + self.Date_end,
@@ -189,14 +239,13 @@ class Input:
                 plt.xlabel('Energy(keV)')
                 plt.ylabel('counts')
                 plt.title('SPEX HESSI Counts vs Energy')
-        # Define Flux for "Plot Spectrum"
         elif typ == 'flux':
             deltaE = np.zeros(shape=(n))
             for i in range(n):
                 deltaE[i] = self.E_max[i] - self.E_min[i]
 
             for i in range(n):
-                data[i] = np.mean(self.rate[:, i]) / (self.Area * deltaE[i]-2)
+                data[i] = np.mean(self.rate[:, i]) / (self.Area * deltaE[i]-2) #determine Flux for "Plot Spectrum"
                 plt.rcParams["figure.figsize"] = [8, 8]
                 plt.text(17.095, 0.1019, 'Detectors: ' + self.detectors, fontdict={'fontsize': 9, 'fontweight': 'medium'})
                 plt.text(13.132, 0.088, self.Date_start + ' to ' + self.Date_end,
@@ -208,25 +257,25 @@ class Input:
             print('error')
             return
 
-        plt.plot(self.E_min, data, drawstyle='steps-post')
+        plt.plot(self.E_min, data, drawstyle='steps-post') #Unit vs Energy
         plt.yscale('log')
         plt.xscale('log')
         plt.show()
 
-    # Plot Spectrum for Rate, Counts, Flux
-    # Spectrum for Rate
+    # Plot:
+    #Spectrum for Rate
     def plot_spectrum_rate(self):
         self.__plot_spectrum('rate')
 
-    # Spectrum for Counts
+    #Spectrum for Counts
     def plot_spectrum_counts(self):
         self.__plot_spectrum('counts')
 
-    # Spectrum for Flux
+    #Spectrum for Flux
     def plot_spectrum_flux(self):
         self.__plot_spectrum('flux')
 
-    # 3. Plot Spectrogram
+########################### 3. Spectrogram Plotting ################
     def __plot_spectrogram(self, typ):
         tick = np.array([str(timedelta(seconds=s)) for s in self.Time2])
         #X, Y = np.meshgrid(tick, self.E_min)
@@ -245,8 +294,6 @@ class Input:
             plt.ylabel('keV')
             plt.title('SPEX HESSI Counts Spectrogram')
 
-
-
         # Define Flux for Plot Spectrogram
         elif typ == 'flux':
             n = len(self.E_min)
@@ -258,7 +305,6 @@ class Input:
             plt.ylabel('keV')
             plt.title('SPEX HESSI Count Flux Spectrogram')
 
-
         else:
             print('error')
             return
@@ -269,9 +315,9 @@ class Input:
         plt.colorbar()
         plt.yscale('log')
         plt.yticks([1, 1000])
-        plt.xticks(np.arange(len(tick), step = T)) # for 1st data: step = 30 # , rotation = 90)
+        plt.xticks(np.arange(len(tick), step = T)) #FIXME: 'step' calculation should be automated 
+        # for 1st data: step = 30 # , rotation = 90)
         plt.show()
-
 
     # Plot Spectrogram
     # Spectrogram for Rate
@@ -289,14 +335,14 @@ class Input:
 
 # testing
 if __name__ == '__main__':
-    plots = Input(".fits")
-    plots.rate_vs_time_plotting()
-    plots.counts_vs_time_plotting()
-    plots.flux_vs_time_plotting()
-    plots.plot_spectrum_rate()
-    plots.plot_spectrum_counts()
-    plots.plot_spectrum_flux()
-    plots.plot_spectrogram_rate()
-    plots.plot_spectrogram_counts()
-    plots.plot_spectrogram_flux()
+    plots = Input(".fits") #any input file with .fits extension
+    plots.rate_vs_time_plotting() #plot Count Rate vs Time
+    plots.counts_vs_time_plotting() #plot Counts vs Time
+    plots.flux_vs_time_plotting() #plot Count Flux vs Time
+    plots.plot_spectrum_rate() #plot Count Rate vs Energy
+    plots.plot_spectrum_counts() #plot Counts vs Energy
+    plots.plot_spectrum_flux() #plot Flux vs Energy
+    plots.plot_spectrogram_rate() #plot Count Rate Spectrogram
+    plots.plot_spectrogram_counts() #plot Counts Spectrogram
+    plots.plot_spectrogram_flux() #plot Flux Spectrogram
 
