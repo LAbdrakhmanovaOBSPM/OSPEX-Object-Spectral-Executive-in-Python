@@ -16,6 +16,7 @@
 
 """
 
+
 #import the libraries
 from tkinter import *
 from astropy.io import fits
@@ -29,9 +30,11 @@ import plotting
 
 
 class Fitting:
-      """ 
-      Class to perform a spectrum fitting 
-      """
+    """ 
+
+    Class to perform a spectrum fitting
+
+    """
     #create a new window called 'SPEX Fit Options'
     def __init__(self, root):
         self.top2 = Toplevel()
@@ -42,26 +45,12 @@ class Fitting:
               fg="red", #in red
               font="Helvetica 12 bold italic").pack() #with specific text font
 
-        # Create new frame
-        # #self.frame3 = LabelFrame(self.top2, relief=RAISED, borderwidth=1)
-        # #self.frame3.place(relx=0.05, rely=0.04, relheight=0.9, relwidth=0.9)
-        # #Text on the top of the fram
-        # #self.FitOptions = Label(self.frame3, text="Choose Fit Function Components and Set Parameters")
-        # #self.FitOptions.place(relx=0.35, rely=0.065)
-        # #self.Choice = Label(self.frame3, text="Choose : ")
-        # #self.Choice.place(relx=0.15, rely=0.15)
-        # #Listbox test
-
-        
-
-        
         self.lbl1 = Label(self.top2, text="Choose Fit Function Model:", fg='blue', font=("Helvetica", 11, "bold")) #name the listbox
         self.lbl1.place(relx=0.07, rely=0.07) # set the position on window
 
         self.lbl2 = Label(self.top2, text="Information:", fg='blue', font=("Helvetica", 11,"bold")) #name the scrollbar
         self.lbl2.place(relx=0.65, rely=0.07) #set the position
         
-
         """ 
         On the left: place a list of text alternatives (listbox)
         The user can choose(highlight) one of the options
@@ -75,8 +64,9 @@ class Fitting:
 
         """ 
         On the right: place an 'entry text' Scrollbar widget (scrollbar)
-        When user highlight the function, displays the text information about function input parameters
+        When user highlight the function, displays the text information about function description and input parameters
         """
+
         self.scroll = Scrollbar(self.top2, command=self.lbox.yview)
         self.scroll.place(relx=0.3, rely=0.15, relheight=0.45, relwidth=0.02)
         self.lbox.config(yscrollcommand=self.scroll.set)
@@ -147,8 +137,8 @@ class Fitting:
     def destroy5(self):
         self.top2.destroy()
 
-    # FIXME: essentially contains a copy of the content of Fit Power Law.py - redo it for a separate class
     def _selective_fit(self):
+
         """
         Selection depending on Plot Units and Function Model
 
@@ -197,21 +187,15 @@ class Fitting:
         for i in range(n):
             Flux[i] = np.mean(Rate[:, i] / (Area * deltaE[i] - 2))
 
-        # Initial guess
-        N = len(E_min)
-        print(N)
-        sigma = 1.0
-
         # Predefine Input Data in x and y
-        # We equate the three components to y1, y2, y3. The value of x is the same for all cases. Further we work only with them
+        # We equate three components to y1, y2, y3. The value of x is the same for all cases
         x = E_min
 
         y1 = CountRate
         y2 = Counts
         y3 = Flux
 
-        error = 0.05
-        y_err = sigma / np.random.rand(N)
+        
 
 #################################################### Define Fitters ######################################################
         
@@ -220,22 +204,20 @@ class Fitting:
         print(fitg1)
 
         """ 
-            Levenberg - Marquandt algorithm for non - linear least - squares optimization
+        Levenberg - Marquandt algorithm for non - linear least - squares optimization
 
-            The algorithm works by minimizing the squared residuals, defined as:
+        The algorithm works by minimizing the squared residuals, defined as:
             
-                                 Residual^2 = (y - f(t))^2 ,
+                Residual^2 = (y - f(t))^2 ,
  
-            where y is the measured dependent variable;
+        where y is the measured dependent variable;
 
-            f(t) is the calculated value
+        f(t) is the calculated value
 
-            The LM algorithm is an iterative process, guessing at the solution of the best minimum
+        The LM algorithm is an iterative process, guessing at the solution of the best minimum
 
 
          """
-        
-
 
 #################################################### Fitting the data using astropy.modeling ###############################
 
@@ -257,7 +239,7 @@ class Fitting:
         # Determine the default parameters for PowerLaw1D
         PowerLaw1D = models.PowerLaw1D(amplitude=0.00729868, x_0=1.72324, alpha=0)
         # Apply LevMarLSQFitter
-        gPLFlux = fitg1(PowerLaw1D, x, y3, weights=1.0 / y3)
+        gPLFlux = fitg1(PowerLaw1D, x, y3, weights=1.0 / y3) # value for weights from IDL
         print(gPLFlux)
 
 
@@ -379,15 +361,21 @@ class Fitting:
             plt.show()
             # print('FLUX & BrokenPowerLaw1D')
 
-        # Calculate the Reduced Chi - square
+        # Calculate the Reduced Chi - square, test version
+        # Initial guess
+        N = len(E_min) #total number of points
+        print(N)
+        sigma = 1.0
+        y_err = sigma / E_min
+
         def calc_reduced_chi_square(fit, x, y, yerr, N, n_free):
             """
             fit (array) values for the fit
-            x,y,yerr (arrays) data
+            x,y,y_err (arrays) data
             N total number of points
             n_free number of parameters we are fitting
             """
             return 1.0 / (N - n_free) * sum(((fit - y) / y_err) ** 2)
 
-        reduced_chi_squared = calc_reduced_chi_square(gPLFlux(x), x, y3, y3, N, 3)
+        reduced_chi_squared = calc_reduced_chi_square(gPLFlux(x), x, y3, y3, N, 3) # calculate for Flux
         print('Reduced Chi Squared with LinearLSQFitter: {}'.format(reduced_chi_squared))

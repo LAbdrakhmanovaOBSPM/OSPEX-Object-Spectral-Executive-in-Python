@@ -220,8 +220,10 @@ class SecondWindow():
 
     ############################################################# Main methods ####################################################
 
-   """ Function to read the input data through Astropy library
-       It can be any extension. We analyse the RHESSI .fits files  """
+    """ 
+    Function to read the input data through Astropy library
+    It can be any extension. We analyse the RHESSI .fits files
+    """
 
     def OpenFile(self):
         self.name = askopenfilename(initialdir=("."),
