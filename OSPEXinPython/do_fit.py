@@ -36,6 +36,7 @@ class Fitting:
 
     """
     #create a new window called 'SPEX Fit Options'
+    fname=None
     def __init__(self, root):
         self.top2 = Toplevel()
         self.top2.title('SPEX Fit Options') #title of the window
@@ -44,6 +45,9 @@ class Fitting:
               text="Fit Options", #place the text at the top of the window  
               fg="red", #in red
               font="Helvetica 12 bold italic").pack() #with specific text font
+
+        self.root = root
+        self.sepBkVar = IntVar()
 
         self.lbl1 = Label(self.top2, text="Choose Fit Function Model:", fg='blue', font=("Helvetica", 11, "bold")) #name the listbox
         self.lbl1.place(relx=0.07, rely=0.07) # set the position on window
@@ -139,16 +143,18 @@ class Fitting:
 
     def _selective_fit(self):
 
-        """
+       """
         Selection depending on Plot Units and Function Model
 
-        :return:
-        """
-        # Local file specified for data
-        # FIXME: procedures should be applied for the data loaded in the Select Input part
+       """
+       # load chosen file in Select Input section 
+       fname = Fitting.fname
 
-        hdulist = fits.open("/home/stage/PycharmProjects/SpectralDataAnalysisPackage/hsi_spectrum_20020220_080000.fits")
-        hdulist.info()
+       if fname is None: # if file not choosen, print
+         print('Please, choose input file')
+
+       else:
+        hdulist = fits.open(fname) 
         header1 = hdulist[1].header
         header3 = hdulist[3].header
         data1 = hdulist[1].data
@@ -237,13 +243,13 @@ class Fitting:
         """
 
         # Determine the default parameters for PowerLaw1D
-        PowerLaw1D = models.PowerLaw1D(amplitude=0.00729868, x_0=1.72324, alpha=0)
+        PowerLaw1D = models.PowerLaw1D(amplitude=1, x_0=3, alpha=50)
         # Apply LevMarLSQFitter
         gPLFlux = fitg1(PowerLaw1D, x, y3, weights=1.0 / y3) # value for weights from IDL
         print(gPLFlux)
 
 
-        BrokenPowerLaw1D = models.BrokenPowerLaw1D(amplitude=0.0653331, x_break=1.7, alpha_1=0, alpha_2=0)
+        BrokenPowerLaw1D = models.BrokenPowerLaw1D(amplitude=1, x_break=3, alpha_1=400, alpha_2=1.93, fixed = {'alpha_1': True, 'alpha_2': True})
 
         # Apply LevMarLSQFitter
         gBPLFlux = fitg1(BrokenPowerLaw1D, x, y3, weights=1.0 / y3)

@@ -27,6 +27,7 @@ import pandas as pd
 import plotting
 import warnings
 import background
+import do_fit
 
 class SecondWindow():
    
@@ -231,9 +232,11 @@ class SecondWindow():
                                     title="Please Select Spectrum or Image File")
         self.textFilename.delete(0, 'end') 
         background.BackgroundWindow.fname=self.name
+        do_fit.Fitting.fname = self.name
         try:
             with fits.open(self.name) as hdul:
                 self.hdul = hdul 
+                #do_fit.Fitting.fname = self.hdul
                 #load the data and header parameters
                 self.timeData = [self.hdul[3].header[17], self.hdul[3].header[18], self.hdul[1].data.TIMEDEL] 
                 self.summarizeData = [self.hdul[1].header[24], str(self.hdul[1].header[25])[10:],
