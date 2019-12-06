@@ -181,8 +181,8 @@ class BackgroundWindow():
         self.backCanv.config(yscrollcommand=self.vscrollbar.set)
         self.backCanv.config(xscrollcommand=self.hscrollbar.set)
         self.backCanv.config(scrollregion = (0,0,700,700))
-        self.backCanv.place(relx=0.01, rely=0.1)
-        
+        #self.backCanv.place(relx=0.01, rely=0.1)
+        self.backCanv.pack(fill="both", expand=True)
         #self.SeparateBk.config(command=self.backCanv.config(state="normal"))
   
         #self.backCanv.delete(ALL)
