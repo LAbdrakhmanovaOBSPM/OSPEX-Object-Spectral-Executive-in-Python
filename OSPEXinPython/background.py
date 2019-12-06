@@ -109,7 +109,7 @@ class BackgroundWindow():
         self.Bands0.place(relx=0.3, rely=0.4)
 
         """ Change Energy Band Button """
-        self.ChangeEnergBand = Button(self.frame2, text="Change", state=DISABLED)
+        self.ChangeEnergBand = Button(self.frame2, text="Change", state=DISABLED, command=self.selectEnergyBand)
         self.ChangeEnergBand.place(relx=0.38, rely=0.4)
 
         """ set_to_spex_eband Button """
@@ -190,7 +190,9 @@ class BackgroundWindow():
 
 ##############################################      Functions          ####################################################################
 
-
+    def selectEnergyBand(self):
+        selectEnergy.SelectEnergyWindow()
+    
     def notSeparateCanva(self):
         self.backCanv.config(scrollregion = (0,0,700,100))
         self.frame0 = Frame(self.backCanv, relief=RAISED, borderwidth=2, width=800, height=90)
