@@ -192,7 +192,7 @@ class BackgroundWindow():
 
 
     def notSeparateCanva(self):
-        
+        self.backCanv.config(scrollregion = (0,0,700,100))
         self.frame0 = Frame(self.backCanv, relief=RAISED, borderwidth=2, width=800, height=90)
 
         self.backCanv.create_window(400, 70,  window=self.frame0, width=800, height=90)
@@ -335,6 +335,7 @@ class BackgroundWindow():
 
     def onClikSeparateBk(self):
          print('separa', self.sepBkVar.get())
+         self.backCanv.config(scrollregion = (0,0,700,650))
          energyLab = ['3.0 to 6.0 keV', '6.0 to 12.0 keV', '12.0 to 25.0 keV', '25.0 to 50.0 keV',
                       '50.0 to 100.0 keV', '100.0 to 300.0 keV' ]
          if self.sepBkVar.get() == 1:
