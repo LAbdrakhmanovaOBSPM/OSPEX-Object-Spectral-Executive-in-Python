@@ -1,3 +1,16 @@
+
+"""
+        Application: Background in OSPEX with Python
+        
+        Started date: 11/10/2019
+        
+        Creators: Aichatou Aboubacar, LIAISIAN Abdrakhmanova, Abdallah Hamini
+        
+        Organization: LESIA, Observatory of Paris, France
+"""
+
+
+
 from tkinter import *
 from astropy.io import fits
 import re

@@ -20,8 +20,11 @@ Importlib
 
 To run:
 Linux, Mac, Windows: When imported the libraries you should call main script from command line: python3 main.py
+When the application opens, you can test it using .fits files from "Data" folder
+To load the input data go to "File" menu bar, pick "Select Input" option
+In new window, clicking on "Browse" widget, select desired file to analyse 
 
-If you want to work directly from command line:
+If you want to work with content and make modifications:
 
 1. Go to the directory where your program is located:
 cd directory location
@@ -29,13 +32,13 @@ cd directory location
 2. Call Python:
 python3
 
-3. Upload file content from the script plotting.py:
+3. Upload file content from the plotting.py script :
 from plotting import *
 
-4. Choose desired file(s). You can find the data to test in the Data folder:
+4. Choose desired file(s), "Data" folder:
 File = Input(“filename.fits”)
 
-Now you have the access to all parameters and functions of the .fits file
+Now you are able to call any parameters and functions of the .fits file
 
 5. Some examples:
 a) to load the parameter RATE from DATA:
@@ -50,9 +53,9 @@ And etc.
 
 Good luck!
 
-Let us remind you that this software is an internship project and will be improved and complemented 
+Let us remind you that this software started as an internship project and will be improved and complemented 
 
-Don’t hesitate to contact us
+Don’t hesitate to contribute and contact us
 
 Contacts:
 

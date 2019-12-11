@@ -3,9 +3,9 @@
 
    Application: OSPEX in Python
 
-   Started date: 11/03/2019
+   Start date: 11/03/2019
 
-   Creators: Liaisian Abdrakhmanova, Abdallah Hamini
+   Creators: Liaisian Abdrakhmanova, Abdallah Hamini, Aichatou Aboubacar
 
    Organization: LESIA, Observatory of Paris, France
   
@@ -17,8 +17,7 @@
 
 """
    
-   
-   
+# import the libraries    
 from tkinter import *
 from tkinter.filedialog import askopenfilename
 from astropy.io import fits
@@ -28,14 +27,17 @@ import pandas as pd
 import plotting
 import warnings
 import background
+import do_fit
 
 class SecondWindow():
    
     """
     Class to create "Select Input Window" menu option in OSPEX
+    
+    rout: Go to top menu bars -> File -> Select Input 
 
     """
-   
+    # create a new window
     def __init__(self, root):
         self.top1 = Toplevel()
         self.top1.title('SPEX Input Options')
@@ -52,10 +54,22 @@ class SecondWindow():
         self.root = root
         # self.root.wm_atributes("-disabled", True)
 
-        """First frame"""
+        """
+        'Select input' window should contain 2 frames:
+         - in first we arrange the widgets to load the data, read the content of .fits file extensions and etc
+         - in second - widgets to  select the energy band and time band intervals and plot
+        
 
+        We use the 'place' geometry manage. It allows us explicitly set the position and size of a window, 
+        either in absolute terms, or relative to another window. The place manager can be accessed through the place method. 
+        It can be applied to all standard widgets.
+        
+        """
+        
+        #create a first farme and additional widgets
+        # name of the widget is in the 'text' parameter
         self.frame1 = LabelFrame(self.top1, relief=RAISED, borderwidth=1)
-        self.frame1.place(relx=0.05, rely=0.04, relheight=0.35, relwidth=0.9)
+        self.frame1.place(relx=0.05, rely=0.04, relheight=0.35, relwidth=0.9) #specify the position of the button in frame
 
         self.lblFilename = Label(self.frame1, text="Spectrum or Image File: ")
         self.lblFilename.place(relx=0.01, rely=0.2)
@@ -106,7 +120,7 @@ class SecondWindow():
         self.SpinboxTimeOffset.place(relx=0.37, rely=0.85, width=80)
 
         # "Summarize" button. If we click on it, it gives the information from self.hdul[1].header
-        # It should be a new window with the name "SPEX::PREVIEW"
+        #  Creates a new window with the name "SPEX::PREVIEW"
 
         self.SummarizeButton = Button(self.frame1, text="Summarize ->", command=self.Summarize)
         self.SummarizeButton.place(relx=0.48, rely=0.81)
@@ -205,18 +219,26 @@ class SecondWindow():
 
 
 
-    """Main methods"""
+    ############################################################# Main methods ####################################################
+
+    """ 
+    Function to read the input data through Astropy library
+    It can be any extension. We analyse the RHESSI .fits files
+    """
 
     def OpenFile(self):
         self.name = askopenfilename(initialdir=("."),
                                     filetypes=(("FITS files", "*.fits"), ("All Files", "*.*")),
                                     title="Please Select Spectrum or Image File")
-        self.textFilename.delete(0, 'end')
+        self.textFilename.delete(0, 'end') 
         background.BackgroundWindow.fname=self.name
+        do_fit.Fitting.fname = self.name
         try:
             with fits.open(self.name) as hdul:
-                self.hdul = hdul
-                self.timeData = [self.hdul[3].header[17], self.hdul[3].header[18], self.hdul[1].data.TIMEDEL]
+                self.hdul = hdul 
+                #do_fit.Fitting.fname = self.hdul
+                #load the data and header parameters
+                self.timeData = [self.hdul[3].header[17], self.hdul[3].header[18], self.hdul[1].data.TIMEDEL] 
                 self.summarizeData = [self.hdul[1].header[24], str(self.hdul[1].header[25])[10:],
                                       self.hdul[1].header[15],
                                       self.hdul[1].data.TIME, self.hdul[2].data.E_MIN,
@@ -227,12 +249,11 @@ class SecondWindow():
                 self.TimeNew = pd.to_datetime(self.plotData[1], unit='s')
                 self.TimeNew2 = self.plotData[1] - 2
 
-                self.textFilename.insert(0, self.name)
+                self.textFilename.insert(0, self.name) #display the input file name in 'Spectrum or Image file:' section'
         except:
-            self.textFilename.insert(0, "C:/Users/a_lesya007/PycharmProjects/SpectralDataAnalysisPackage/hsi_spectrum_20020220_080000.fits")
-
-    # def Summarize
-
+            self.textFilename.insert(0, "No file chosen")
+    
+    # create a new window for Summarize button
     def Summarize(self):
         top = Toplevel()
         top.title('SPEX::PREVIEW')
@@ -242,9 +263,9 @@ class SecondWindow():
 
         # textSummarize = ['Spectrum or Image File Summary: ', 'Data Type: ', 'Time Bins:', 'Time range:', '#Energy Bins: ',
         # 'Area: ', 'Detectors Used: ', 'Response Info: ']
-
+        # for each section call the parameters from header and data
         txt = ["\n\n\nSpectrum or Image File Summary",
-               "\nData Type: ", self.summarizeData[2],
+               "\nData Type: ", self.summarizeData[2], 
                "\nFile name: ", self.name,
                "\n#Time Bins: ", self.time_len, "Time range: ", self.timeData[0], 'to', self.timeData[1],
                "\n#Energy Bins: ", len(self.summarizeData[4]),
@@ -256,9 +277,9 @@ class SecondWindow():
         list.insert(END, txt)
         list.pack()
 
-    # def ShowHeader
-    # Can read the information and display it
-    # Text should be well-organized in the window 'SPEX::FITSHEADER'
+    # Create a Show Header button. 
+    # Reads text information from header and display it in new window
+    # FIXME: Text should be well-organized in the window 'SPEX::FITSHEADER'
     def ShowHeader(self):
         text = re.sub(" +", " ", self.hdul[0].header.tostring())
         top = Toplevel()
@@ -274,8 +295,12 @@ class SecondWindow():
 
     def destroy(self):
         # self.root.wm_attributes("-disabled", False)
-        self.top1.destroy()
+        self.top1.destroy() #close the window when user click 
 
+        """ 
+        In next section activate a Set From button
+        Allows a user to read and select between two distinct values (e.g. on/off)
+        """
     def checked(self):
         if self.SetFromButton['state'] == 'disabled':
             self.SetFromButton['state'] = 'normal'
@@ -305,28 +330,38 @@ class SecondWindow():
             self.textDuration['state'] = 'disabled'
             self.lblDuration['state'] = 'disabled'
 
-    # ------------PLOTTING------------------------------
+    ########################################################### PLOTTING ##################################################
 
     def show_plot(self, e):
-        plots = plotting.Input(self.name)
+        plots = plotting.Input(self.name) # call the class to plot Spectrum, Time profile, Spectrogram
+                                          # parameters are taken from loaded .fits file
+        #if user pick in Plot Units section 'Rate' and 'Spectrum', plot:
         if self.var.get() == 'Rate':
             if e == 'spec':
                 plots.plot_spectrum_rate()
+            #Rate and Time Profile:
             elif e == 'time':
                 plots.rate_vs_time_plotting()
+            #Rate and Time Spectrogram:
             elif e == 'specgr':
                 plots.plot_spectrogram_rate()
+        #if 'Counts' and 'Spectrum', plot:
         if self.var.get() == 'Counts':
             if e == 'spec':
                 plots.plot_spectrum_counts()
+            #if 'Counts' and 'Time Profile', plot:
             elif e == 'time':
                 plots.counts_vs_time_plotting()
+            #if 'Counts' and 'Spectrogram', plot:
             elif e == 'specgr':
                 plots.plot_spectrogram_counts()
+        #if 'Flux' and 'Spectrum', plot:
         if self.var.get() == 'Flux':
             if e == 'spec':
                 plots.plot_spectrum_flux()
+            #if 'Flux' and 'Time Profile', plot:
             elif e == 'time':
                 plots.flux_vs_time_plotting()
+            #if 'Flux' and 'Spectrogram', plot:
             elif e == 'specgr':
                 plots.plot_spectrogram_flux()
