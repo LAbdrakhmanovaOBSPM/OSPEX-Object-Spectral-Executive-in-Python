@@ -109,7 +109,7 @@ class BackgroundWindow():
         self.Bands0.place(relx=0.3, rely=0.4)
 
         """ Change Energy Band Button """
-        self.ChangeEnergBand = Button(self.frame2, text="Change", state=DISABLED)
+        self.ChangeEnergBand = Button(self.frame2, text="Change", state=DISABLED, command=self.selectEnergyBand)
         self.ChangeEnergBand.place(relx=0.38, rely=0.4)
 
         """ set_to_spex_eband Button """
@@ -181,8 +181,8 @@ class BackgroundWindow():
         self.backCanv.config(yscrollcommand=self.vscrollbar.set)
         self.backCanv.config(xscrollcommand=self.hscrollbar.set)
         self.backCanv.config(scrollregion = (0,0,700,700))
-        self.backCanv.place(relx=0.01, rely=0.1)
-        
+        #self.backCanv.place(relx=0.01, rely=0.1)
+        self.backCanv.pack(fill="both", expand=True)
         #self.SeparateBk.config(command=self.backCanv.config(state="normal"))
   
         #self.backCanv.delete(ALL)
@@ -190,9 +190,11 @@ class BackgroundWindow():
 
 ##############################################      Functions          ####################################################################
 
-
+    def selectEnergyBand(self):
+        selectEnergy.SelectEnergyWindow()
+    
     def notSeparateCanva(self):
-        
+        self.backCanv.config(scrollregion = (0,0,700,100))
         self.frame0 = Frame(self.backCanv, relief=RAISED, borderwidth=2, width=800, height=90)
 
         self.backCanv.create_window(400, 70,  window=self.frame0, width=800, height=90)
@@ -335,6 +337,7 @@ class BackgroundWindow():
 
     def onClikSeparateBk(self):
          print('separa', self.sepBkVar.get())
+         self.backCanv.config(scrollregion = (0,0,700,650))
          energyLab = ['3.0 to 6.0 keV', '6.0 to 12.0 keV', '12.0 to 25.0 keV', '25.0 to 50.0 keV',
                       '50.0 to 100.0 keV', '100.0 to 300.0 keV' ]
          if self.sepBkVar.get() == 1:
