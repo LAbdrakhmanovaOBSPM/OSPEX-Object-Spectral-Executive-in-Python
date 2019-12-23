@@ -54,8 +54,31 @@ class Fitting:
         self.lbl1.place(relx=0.07, rely=0.07) # set the position on window
 
         self.lbl2 = Label(self.top2, text="Information:", fg='blue', font=("Helvetica", 11,"bold")) #name the scrollbar
-        self.lbl2.place(relx=0.65, rely=0.07) #set the position
+        self.lbl2.place(relx=0.44, rely=0.07) #set the position
+
+        self.lbl3 = Label(self.top2, text="Set function components and x, y parameters:", fg='blue', font=("Helvetica", 11,"bold")) #name the scrollbar
+        self.lbl3.place(relx=0.65, rely=0.07) #set the position
         
+        self.Value_Button = Button(self.top2, text="Function value") #place a "Function value" button 
+        self.Value_Button.place(relx=0.65, rely=0.20, relheight=0.05, relwidth=0.13) #locate
+
+        self.X_Label = Label(self.top2, text="Set X") #place a "Set X" button 
+        self.X_Label.place(relx=0.65, rely=0.30, relheight=0.05, relwidth=0.13) #locate
+
+        self.Y_Label = Label(self.top2, text="Set Y") #place a "Set Y" button 
+        self.Y_Label.place(relx=0.65, rely=0.40, relheight=0.05, relwidth=0.13) #locate
+
+        self.e1 = Entry(self.top2)
+        self.e1.place(relx=0.75, rely=0.30, relheight=0.05,relwidth=0.20)               
+        self.e2 = Entry(self.top2)
+        self.e2.place(relx=0.75, rely=0.40, relheight=0.05,relwidth=0.20)
+
+        def show_entry_fields():
+            print("Set X: %s\nSet Y: %s" % (self.e1.get(), self.e2.get()))
+
+        self.show_Button = Button(self.top2, text = "Show", command = show_entry_fields)
+        self.show_Button.place(relx=0.75, rely=0.50)
+
         """ 
         On the left: place a list of text alternatives (listbox)
         The user can choose(highlight) one of the options
@@ -130,9 +153,9 @@ class Fitting:
                      'Single Power Law Times an Exponetial': {'Multiplication of Single Power Law and Exponential', '\n',
                      'p0 - normalization at epivot for power-law', '\n', 'p1 - negative power - law index', '\n',
                      'p2 - epivot (kEv) for power - law', '\n', 'e1 - normalization for exponential', '\n', 'e2 - pseudo temperature for exponential'}} 
-                      #Single Power Law Times an Exponetial
+                      #Single Power Law Times an Exponential
         self.list_selection = Listbox(self.top2, highlightcolor = 'red', bd = 4)
-        self.list_selection.place(relx=0.45, rely=0.15, relheight=0.45, relwidth=0.45)
+        self.list_selection.place(relx=0.33, rely=0.15, relheight=0.45, relwidth=0.30)
 
     def onSelect(self, event):
         widget = event.widget
@@ -423,6 +446,7 @@ class Fitting:
             plt.plot(x, gPLRate(x), drawstyle='steps-post', color='red', label="PowerLaw1D")
             plt.yscale('log')
             plt.xscale('log')
+            plt.ylim(ymax = 100, ymin = 0.1) #FIXME: find a solution for general case
             plt.xlabel('Energy(keV)')
             plt.ylabel('Rate(Counts/s)')
             plt.legend(loc=2)
@@ -438,6 +462,7 @@ class Fitting:
             plt.plot(x, gBPLRate(x), drawstyle='steps-post', color='red', label="BrokenPowerLaw1D")
             plt.yscale('log')
             plt.xscale('log')
+            plt.ylim(ymax = 100, ymin = 0.1)
             plt.xlabel('Energy(keV)')
             plt.ylabel('Rate(Counts/s)')
             plt.legend(loc=2)
@@ -453,6 +478,7 @@ class Fitting:
             plt.plot(x,gaussianRate(x),drawstyle='steps-pre', label='Gaussian')
             plt.yscale('log')
             plt.xscale('log')
+            plt.ylim(ymax = 100, ymin = 0.1)
             plt.xlabel('Energy(keV)')
             plt.ylabel('Rate(Counts/s)')
             plt.title('Rate Fitting using Gaussian Model')
@@ -467,6 +493,7 @@ class Fitting:
             plt.plot(x,PolyRate(x),drawstyle='steps-pre', label='Polynomial')
             plt.yscale('log')
             plt.xscale('log')
+            plt.ylim(ymax = 100, ymin = 0.1)
             plt.xlabel('Energy(keV)')
             plt.ylabel('Rate(Counts/s)')
             plt.title('Rate Fitting using Polynomial Model')
@@ -481,6 +508,7 @@ class Fitting:
             plt.plot(x,expRate(x),drawstyle='steps-pre', label='Exponential')
             plt.yscale('log')
             plt.xscale('log')
+            plt.ylim(ymax = 100, ymin = 0.1)
             plt.xlabel('Energy(keV)')
             plt.ylabel('Rate(Counts/s)')
             plt.title('Rate Fitting using Exponential Model')
@@ -495,6 +523,7 @@ class Fitting:
             plt.plot(x, ExpPLRate(x), drawstyle='steps-post', color='red', label="ExpPowerLaw")
             plt.yscale('log')
             plt.xscale('log')
+            plt.ylim(ymax = 100, ymin = 0.1)
             plt.xlabel('Energy(keV)')
             plt.ylabel('Rate(Counts/s)')
             plt.legend(loc=2)
@@ -513,6 +542,7 @@ class Fitting:
             plt.plot(x, gPLCounts(x), drawstyle='steps-post', color='red', label="PowerLaw1D")
             plt.yscale('log')
             plt.xscale('log')
+            plt.ylim(ymax = 1000, ymin = 0.1) #FIXME: find a solution for general case
             plt.xlabel('Energy(keV)')
             plt.ylabel('Counts(Counts)')
             plt.legend(loc=2)
@@ -528,6 +558,7 @@ class Fitting:
             plt.plot(x, gBPLCounts(x), drawstyle='steps-post', color='red', label="BrokenPowerLaw1D")
             plt.yscale('log')
             plt.xscale('log')
+            plt.ylim(ymax = 1000, ymin = 0.1)
             plt.xlabel('Energy(keV)')
             plt.ylabel('Counts(Counts)')
             plt.legend(loc=2)
@@ -543,6 +574,7 @@ class Fitting:
             plt.plot(x,gaussianCounts(x),drawstyle='steps-pre', label='Gaussian')
             plt.yscale('log')
             plt.xscale('log')
+            plt.ylim(ymax = 1000, ymin = 0.1)
             plt.xlabel('Energy(keV)')
             plt.ylabel('Counts(Counts)')
             plt.title('Counts Fitting using Gaussian Model')
@@ -557,6 +589,7 @@ class Fitting:
             plt.plot(x,PolyCounts(x),drawstyle='steps-pre', label='Polynomial')
             plt.yscale('log')
             plt.xscale('log')
+            plt.ylim(ymax = 1000, ymin = 0.1)
             plt.xlabel('Energy(keV)')
             plt.ylabel('Counts(Counts)')
             plt.title('Counts Fitting using Polynomial Model')
@@ -571,6 +604,7 @@ class Fitting:
             plt.plot(x,expCounts(x),drawstyle='steps-pre', label='Exponential')
             plt.yscale('log')
             plt.xscale('log')
+            plt.ylim(ymax = 1000, ymin = 0.1)
             plt.xlabel('Energy(keV)')
             plt.ylabel('Counts(Counts)')
             plt.title('Counts Fitting using Exponential Model')
@@ -585,6 +619,7 @@ class Fitting:
             plt.plot(x, ExpPLCounts(x), drawstyle='steps-post', color='red', label="ExpPowerLaw")
             plt.yscale('log')
             plt.xscale('log')
+            plt.ylim(ymax = 1000, ymin = 0.1)
             plt.xlabel('Energy(keV)')
             plt.ylabel('Counts(Counts)')
             plt.legend(loc=2)
