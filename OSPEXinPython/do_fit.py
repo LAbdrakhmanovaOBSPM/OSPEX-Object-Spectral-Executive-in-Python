@@ -665,7 +665,7 @@ class Fitting:
 
         # If user select Flux in Plot Units and PowerLaw1D in Choose Fit Function Model:
         elif (self.var.get() == 'Flux') & (self.lbox.curselection()[0] == 0):
-            gPLFlux = fitg1(PowerLaw1D, x, y3, weights=1.0 / y3])
+            gPLFlux = fitg1(PowerLaw1D, x, y3, weights=1.0 / y3)
             plt.plot(x, y3, drawstyle='steps-post', label="Flux")
             plt.plot(x, gPLFlux(x), drawstyle='steps-post', color='red', label="PowerLaw1D")
             plt.yscale('log')
