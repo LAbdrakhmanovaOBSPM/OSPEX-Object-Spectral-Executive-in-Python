@@ -22,6 +22,9 @@ from astropy.io import fits
 from matplotlib import pyplot as plt
 from pandas.plotting import register_matplotlib_converters
 register_matplotlib_converters()
+from matplotlib import rcParams
+rcParams['font.family'] = 'sans-serif'
+rcParams['font.sans-serif'] = ['Lucida Grande']
 from datetime import timedelta
 
 
@@ -160,7 +163,7 @@ class Input:
                                    '25-49keV(Data with Bk)', '49-100keV(Data with Bk)', '100-250keV(Data with Bk)']) # add labels for each energy channel
         colors = ['gray','magenta','lime', 'cyan', 'yellow', 'red'] #choose the specific color for each energy channel 
         #df.style.set_properties(subset=['columns'], **{'height': '50px'})
-        df.plot(figsize=(8, 8), drawstyle='steps-post', color = colors) # set the size of the figure 
+        df.plot(figsize=(6, 6), drawstyle='steps-post', color = colors) # set the size of the figure 
         # define where the steps should be placed: 'steps-pre': The y value is continued constantly to the left from
         # every x position, i.e. the interval (x[i-1], x[i]] has the value y[i]
         # 'steps-post': The y value is continued constantly to the right from every x position, i.e. the interval [x[i], x[i+1]) has the value y[i]
@@ -210,21 +213,21 @@ class Input:
         if typ == 'rate':
             for i in range(n):
                 data[i] = np.mean(self.rate[:, i]) # determine Rate for "Plot Spectrum"
-                plt.rcParams["figure.figsize"] = [8, 8] # plot window size
+                plt.rcParams["figure.figsize"] = [6, 6] # plot window size
                 plt.text(21.25, 28.1881, 'Detectors: ' + self.detectors, # display the information about detectors, set the text position on the plot
-                         fontdict={'fontsize': 9, 'fontweight': 'medium'}) 
+                         fontdict={'fontsize': 7}) 
                 plt.text(14.0,23.95, self.Date_start + ' to ' + self.Date_end, # + start & end date of observed event, load directly from header
-                         fontdict={'fontsize': 9, 'fontweight': 'medium'}) # set text size and font 
+                         fontdict={'fontsize': 7}) # set text size and font 
                 plt.xlabel('Energy(keV)') # label X - axis
                 plt.ylabel('counts/s') # Label Y - axis
                 plt.title('SPEX HESSI Count Rate vs Energy') # plot title
         elif typ == 'counts':
             for i in range(n):
                 data[i] = np.mean(self.rate[:, i] * self.sum) #determine Counts for "Plot Spectrum"
-                plt.rcParams["figure.figsize"] = [8, 8]
-                plt.text(16.57, 71384, 'Detectors: ' + self.detectors, fontdict={'fontsize': 9, 'fontweight': 'medium'})
-                plt.text(14, 65440, self.Date_start + ' to ' + self.Date_end,
-                         fontdict={'fontsize': 9, 'fontweight': 'medium'})
+                plt.rcParams["figure.figsize"] = [6, 6]
+                plt.text(16.57, 69294, 'Detectors: ' + self.detectors, fontdict={'fontsize': 7})
+                plt.text(14, 60805, self.Date_start + ' to ' + self.Date_end,
+                         fontdict={'fontsize': 7})
                 plt.xlabel('Energy(keV)')
                 plt.ylabel('counts')
                 plt.title('SPEX HESSI Counts vs Energy')
@@ -235,10 +238,10 @@ class Input:
 
             for i in range(n):
                 data[i] = np.mean(self.rate[:, i]) / (self.Area * deltaE[i]-2) #determine Flux for "Plot Spectrum"
-                plt.rcParams["figure.figsize"] = [8, 8]
-                plt.text(17.095, 0.1019, 'Detectors: ' + self.detectors, fontdict={'fontsize': 9, 'fontweight': 'medium'})
+                plt.rcParams["figure.figsize"] = [6, 6]
+                plt.text(17.095, 0.1019, 'Detectors: ' + self.detectors, fontdict={'fontsize': 7})
                 plt.text(13.132, 0.088, self.Date_start + ' to ' + self.Date_end,
-                         fontdict={'fontsize': 9, 'fontweight': 'medium'})
+                         fontdict={'fontsize': 7})
                 plt.xlabel('Energy(keV)')
                 plt.ylabel('counts s^(-1) cm^(-2) keV^(-1)')
                 plt.title('SPEX HESSI Count Flux vs Energy')

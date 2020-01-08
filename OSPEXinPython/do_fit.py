@@ -55,12 +55,17 @@ class Fitting:
 
         self.lbl2 = Label(self.top2, text="Information:", fg='blue', font=("Helvetica", 11,"bold")) #name the scrollbar
         self.lbl2.place(relx=0.44, rely=0.07) #set the position
-
+        
         self.lbl3 = Label(self.top2, text="Set function components and x, y parameters:", fg='blue', font=("Helvetica", 11,"bold")) #name the scrollbar
         self.lbl3.place(relx=0.65, rely=0.07) #set the position
-        
-        self.Value_Button = Button(self.top2, text="Function value") #place a "Function value" button 
-        self.Value_Button.place(relx=0.65, rely=0.20, relheight=0.05, relwidth=0.13) #locate
+        def new_window(): # new window definition
+            newwin = Toplevel(root)
+            newwin.title('Function values') #title of the window
+            newwin.geometry("600x400") #size of the new window
+            display = Label(newwin, text="Choose function values: ", fg='blue', font=("Helvetica", 11,"bold"))
+            display.place(relx=0.04, rely=0.07)
+        self.Value_Button = Button(self.top2, text="Function value", command = new_window) #place a "Function value" button
+        self.Value_Button.place(relx=0.75, rely=0.20, relheight=0.05, relwidth=0.13) #locate
 
         self.X_Label = Label(self.top2, text="Set X") #place a "Set X" button 
         self.X_Label.place(relx=0.65, rely=0.30, relheight=0.05, relwidth=0.13) #locate
@@ -78,6 +83,12 @@ class Fitting:
 
         self.show_Button = Button(self.top2, text = "Show", command = show_entry_fields)
         self.show_Button.place(relx=0.75, rely=0.50)
+
+
+
+
+
+
 
         """ 
         On the left: place a list of text alternatives (listbox)
@@ -138,14 +149,16 @@ class Fitting:
             self.lbox.insert(END, p)
         self.lbox.bind("<<ListboxSelect>>", self.onSelect)
         self.list = {'PowerLaw1D': {'One dimensional power law model','\n\n',
-                                    'PowerLaw1D(amplitude=1, x_0=1, alpha=1, **kwargs)'}, #if user choose PowerLaw1D, display
-                     'BrokenPowerLaw1D': {'One dimensional power law model with a break',
-                                          'BrokenPowerLaw1D(amplitude=1, x_break=1,',
-                                          ' alpha_1=1, alpha_2=1, **kwargs)'}, #if user choose BrokenPowerLaw1D, display
+                                    'amplitude – model amplitude at the reference energy', '\n',
+                                    'x – reference energy', '\n', 'alpha – power law index'}, #if user choose PowerLaw1D, display
+                     'BrokenPowerLaw1D': {'One dimensional power law model with a break','\n\n',
+                                          'amplitude - model amplitude at the break energy', '\n',
+                                          'alpha 1 – power law index for x<x_break', '\n',
+                                          'alpha 2 – power law index for x>x_break'}, #if user choose BrokenPowerLaw1D, display
                      'Gaussian': {'Single Gaussian function(high quality), width in sigma', '\n', 
                                   'does not go through DRM','\n',
-                                  'This function returns the sum of Gaussian and 2nd order Polynomial',
-                                  'amplitude - integrated intensity, mean - centroid, stddev - sigma'}, #if user choose Gaussian, display
+                                  'This function returns the sum of Gaussian and ', '\n', '2nd order Polynomial',
+                                  'amplitude - integrated intensity, mean - centroid', '\n', 'stddev - sigma'}, #if user choose Gaussian, display
                      'Polynomial': {'Polynomial function with offset in x','\n',
                      'c0 - 0th order coefficient', '\n', 'c1 - 1st order coefficient', '\n', 'c2 - 2nd order coefficient', '\n',
                      'c3 - 3rd order coefficient', '\n', 'c4 - 4th order coefficient', '\n', 'c5 - x offset, such that function value at x = c5 is C0 '}, #Polynomial
@@ -242,8 +255,30 @@ class Fitting:
         y2 = Counts
         y3 = Flux
         """ y - Plot Unit """
-
-        
+        # def find_all_indexes(input_str, search_str):
+        #     l1 = []
+        #     length = len(input_str)
+        #     index = 0
+        #     while index < length:
+        #         i = input_str.find(search_str, index)
+        #         if i == -1:
+        #             return l1
+        #         l1.append(i)
+        #         index = i + 1
+        #     return l1
+        # print(find_all_indexes(str(E_min), str(E_min[0:-1])))
+        indexesX = np.where((x <= x[-1]) & (x >= x[0]))
+        print(indexesX)
+        indexesY1 = np.where((y3 < y3[-1]) & (y3 > y3[0]))
+        print(indexesY1)
+        # nX = int(input(self.e1.get()))
+        # nY = int(input(self.e1.get()))
+        # keyword_arrayX = []
+        # keyword_arrayY = []
+        # first_E_min = indexes[0]
+        # last_E_min = indexes[-1]
+        #
+        # if first_E_min < arrayX[0] and last_E_min<arrayX[-1]:
 
 #################################################### Define Fitters ######################################################
         
@@ -413,7 +448,7 @@ class Fitting:
         @custom_model
         def func_exponential_powerlaw(x, p0 = 1., p1 = 1., p2 = 1., e3 = 1.,e4 =1.):
             return ((p0*(x/p2)**p1)*(np.exp(e3-x/e4)))
-        exp_powerlaw = func_exponential_powerlaw(p0=1., p1 = 3., p2= 50., e3= 1.,e4=1., fixed = {'a2': True})
+        exp_powerlaw = func_exponential_powerlaw(p0=1., p1 = 3., p2= 50., e3= 1.,e4=1., fixed = {'p2': True})
 
         """
         Purpose: single power - law times an exponential
@@ -630,7 +665,7 @@ class Fitting:
 
         # If user select Flux in Plot Units and PowerLaw1D in Choose Fit Function Model:
         elif (self.var.get() == 'Flux') & (self.lbox.curselection()[0] == 0):
-            gPLFlux = fitg1(PowerLaw1D, x, y3, weights=1.0 / y3)
+            gPLFlux = fitg1(PowerLaw1D, x, y3, weights=1.0 / y3])
             plt.plot(x, y3, drawstyle='steps-post', label="Flux")
             plt.plot(x, gPLFlux(x), drawstyle='steps-post', color='red', label="PowerLaw1D")
             plt.yscale('log')
