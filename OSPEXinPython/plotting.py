@@ -22,9 +22,9 @@ from astropy.io import fits
 from matplotlib import pyplot as plt
 from pandas.plotting import register_matplotlib_converters
 register_matplotlib_converters()
-from matplotlib import rcParams
-rcParams['font.family'] = 'sans-serif'
-rcParams['font.sans-serif'] = ['Lucida Grande']
+#from matplotlib import rcParams
+#rcParams['font.family'] = 'sans-serif'
+#rcParams['font.sans-serif'] = ['DejaVu Sans']
 from datetime import timedelta
 
 

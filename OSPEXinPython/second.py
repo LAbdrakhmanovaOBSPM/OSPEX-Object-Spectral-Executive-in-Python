@@ -246,7 +246,7 @@ class SecondWindow():
                 self.plotData = [self.hdul[1].data.RATE, self.hdul[1].data.TIME, self.hdul[1].data.LIVETIME,
                                  self.hdul[1].data.CHANNEL]
                 self.time_len = len(self.summarizeData[3])
-                self.TimeNew = pd.to_datetime(self.plotData[1], unit='s')
+          
                 self.TimeNew2 = self.plotData[1] - 2
 
                 self.textFilename.insert(0, self.name) #display the input file name in 'Spectrum or Image file:' section'

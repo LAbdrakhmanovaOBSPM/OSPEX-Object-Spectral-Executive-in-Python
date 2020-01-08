@@ -305,7 +305,7 @@ class Fitting:
 #################################################### Fitting the data using astropy.modeling ###############################
 
         # Define a One dimensional power law model with initial guess
-        PowerLaw1D = models.PowerLaw1D(amplitude=1, x_0=3, alpha=50, fixed = {'alpha': True})
+        PowerLaw1D = models.PowerLaw1D() #(amplitude=1, x_0=3, alpha=50, fixed = {'alpha': True})
 
         """
         PowerLaw1D(amplitude=1, x_0=1, alpha=1, **kwargs)
