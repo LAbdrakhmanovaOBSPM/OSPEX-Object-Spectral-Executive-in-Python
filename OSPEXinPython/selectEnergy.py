@@ -99,19 +99,19 @@ class SelectEnergyWindow():
 
 ##################################################################################
 
-        self.AdjustData = Button(self.top1, text="Adjust to Data boundaries", state=DISABLED)
+        self.AdjustData = Button(self.top1, text="Adjust to Data boundaries")
         self.AdjustData.place(relx=0.17, rely=0.8)
 
-        self.DisplayCurrent = Button(self.top1, text="Display current", state=DISABLED)
+        self.DisplayCurrent = Button(self.top1, text="Display current")
         self.DisplayCurrent.place(relx=0.52, rely=0.8)
 
-        self.DeleteAll = Button(self.top1, text="Delete all", state=DISABLED)
+        self.DeleteAll = Button(self.top1, text="Delete all")
         self.DeleteAll.place(relx=0.75, rely=0.8)
 
-        self.Help = Button(self.top1, text="Help", state=DISABLED)
+        self.Help = Button(self.top1, text="Help")
         self.Help.place(relx=0.27, rely=0.9)
 
-        self.Cancel = Button(self.top1, text="Cancel", state=DISABLED)
+        self.Cancel = Button(self.top1, text="Cancel")
         self.Cancel.place(relx=0.38, rely=0.9)
 
         self.AcceptClose = Button(self.top1, text="Accept and Close", state=DISABLED)
