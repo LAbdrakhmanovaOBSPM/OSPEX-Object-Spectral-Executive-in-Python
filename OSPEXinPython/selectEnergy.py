@@ -59,65 +59,72 @@ class SelectEnergyWindow():
 
         self.DeleteSelectedInterv = Button(self.frame1, text="Delete selected interval", state=DISABLED)
         self.DeleteSelectedInterv.place(relx=0.01, rely=0.7)
+
+        self.EditSelectedInterv = Button(self.frame1, text="Edit selected interval ...", command=lambda: self.editSelectedInterval(self.top1)) #, command=self.editSelectedInterval)
+        self.EditSelectedInterv.place(relx=0.35, rely=0.7)
+
+
+        self.EditInterv = Button(self.frame1, text="Edit interval ...", state=DISABLED)
+        self.EditInterv.place(relx=0.7, rely=0.7)
 ##
 ##        #################################################################################
 ##        """                          Second frame                             """
 ##        self.frame2 = Frame(self.top1, relief=RAISED, borderwidth=2)
 ##        self.frame2.place(relx=0.05, rely=0.14, relheight=0.27, relwidth=0.9)
-##        #self.frame2.pack(fill='x')
-##
-##        self.SeparateBk = Checkbutton(self.frame2, text="Separate BK for each energy band",
-##        variable=self.sepBkVar, command=self.onClikSeparateBk, state=NORMAL) #command=self.onClikSeparateBk, onvalue = True, offvalue = False,
-##        self.SeparateBk.place(relx=0.01, rely=0.04)
-##        #self.SeparateBk.pack(side=TOP)
-##        #self.SeparateBk.bind("<Button-1>", self.onClikSeparateBk)
-##
-##        self.AllBands_choices = ('Set all bands to', '0Poly', '1Poly', '2Poly', '3Poly', 'Exp', 'High E Profile', 'This E Profile')
-##        self.AllBandsVar = StringVar(self.frame2)
-##        self.AllBandsVar.set(self.AllBands_choices[0])
-##        self.AllBandsSelection = OptionMenu(self.frame2, self.AllBandsVar, *self.AllBands_choices)
-##        self.AllBandsSelection.place(relx=0.26, rely=0.04)
-##        self.AllBandsSelection.config(state="disabled")
-##
-##        """ half smoothing """
-##        self.HalfSmooth = Label(self.frame2, text="Profile Half Smoothing width(#pts):")
-##        self.HalfSmooth.place(relx=0.41, rely=0.05)
-##
-##        self.HalfSmoothList = ("0","1","4","8","16","32","64","128","256")
-##
-##        self.SpinboxHalfSmooth = Spinbox(self.frame2, values=self.HalfSmoothList )
-##        self.SpinboxHalfSmooth.place(relx=0.63, rely=0.05, width=50)
-##
-##        """ show profile """
-##        self.ShowProfile = Checkbutton(self.frame2, text="Show Profile", variable='ShowProf')
-##        self.ShowProfile.place(relx=0.7, rely=0.04)
-##
-##        """ Current Energy Bands """
-##        self.lblCurrentEnergy = Label(self.frame2, text="Current Energy Bands:")
-##        self.lblCurrentEnergy.place(relx=0.01, rely=0.4)
-##
-##        self.CurrentEnergy_choices = ('3.0 to 6.0', '6.0 to 12.0', '12.0 to 25.0', '25.0 to 50.0', '50.0 to 100.0', '100.0 to 300.0')
-##        self.CurrentEnergyVar = StringVar(self.frame2)
-##        self.CurrentEnergyVar.set(self.CurrentEnergy_choices[0])
-##        self.CurrentEnergySelection = OptionMenu(self.frame2, self.CurrentEnergyVar, *self.CurrentEnergy_choices)
-##        self.CurrentEnergySelection.place(relx=0.15, rely=0.4)
-##        self.CurrentEnergySelection.config(state="disabled")
-##
-##        """ Bands 0 """
-##        self.Bands0 = Label(self.frame2, text="#Bands:0")
-##        self.Bands0.place(relx=0.3, rely=0.4)
-##
-##        """ Change Energy Band Button """
-##        self.ChangeEnergBand = Button(self.frame2, text="Change", state=DISABLED)
-##        self.ChangeEnergBand.place(relx=0.38, rely=0.4)
-##
-##        """ set_to_spex_eband Button """
-##        self.SetSpex = Button(self.frame2, text="Set to spex_eband", state=DISABLED)
-##        self.SetSpex.place(relx=0.45, rely=0.4)
-##
-##        """ show Button """
-##        self.ShowFluxEnerg = Button(self.frame2, text="Show", state=DISABLED)
-##        self.ShowFluxEnerg.place(relx=0.58, rely=0.4)
+        self.frame2 = LabelFrame(self.top1, relief=RAISED, borderwidth=2)
+        self.frame2.place(relx=0.05, rely=0.42, relheight=0.34, relwidth=0.9)
+
+        self.OptionsCursor = Label(self.frame2, text="Options for cursor selection:")
+        self.OptionsCursor.place(relx=0.03, rely=0.07)
+
+        self.ContiguousInterv = Checkbutton(self.frame2, text="Contiguous intervals", state=NORMAL) 
+        self.ContiguousInterv.place(relx=0.01, rely=0.22)
+
+        self.ff = Checkbutton(self.frame2, text="Contiguous intervals", state=NORMAL) 
+        self.ff.place(relx=0.01, rely=0.37)
+
+        self.EditOptionParam = Label(self.frame2, text="Editing Option Parameters:")
+        self.EditOptionParam.place(relx=0.45, rely=0.07)
+
+        self.SubIntervalName = Label(self.frame2, text="# Sub-intervals(N):")
+        self.SubIntervalName.place(relx=0.45, rely=0.22)
+        self.SubInterval = Entry(self.frame2, width=7)
+        self.SubInterval.place(relx=0.72, rely=0.22)
+
+        self.LenghtSubIntervalName = Label(self.frame2, text="Length of Sub-intervals:")
+        self.LenghtSubIntervalName.place(relx=0.45, rely=0.44)
+        self.LenghtSubInterval = Entry(self.frame2, width=7)
+        self.LenghtSubInterval.place(relx=0.77, rely=0.44)
+
+        self.DataBinsName = Label(self.frame2, text="# Data Bins per Sub-interval(M):")
+        self.DataBinsName.place(relx=0.45, rely=0.66)
+        self.DataBins = Entry(self.frame2, width=7)
+        self.DataBins.place(relx=0.86, rely=0.66)
+
+##################################################################################
+
+        self.AdjustData = Button(self.top1, text="Adjust to Data boundaries", state=DISABLED)
+        self.AdjustData.place(relx=0.17, rely=0.8)
+
+        self.DisplayCurrent = Button(self.top1, text="Display current", state=DISABLED)
+        self.DisplayCurrent.place(relx=0.52, rely=0.8)
+
+        self.DeleteAll = Button(self.top1, text="Delete all", state=DISABLED)
+        self.DeleteAll.place(relx=0.75, rely=0.8)
+
+        self.Help = Button(self.top1, text="Help", state=DISABLED)
+        self.Help.place(relx=0.27, rely=0.9)
+
+        self.Cancel = Button(self.top1, text="Cancel", state=DISABLED)
+        self.Cancel.place(relx=0.38, rely=0.9)
+
+        self.AcceptClose = Button(self.top1, text="Accept and Close", state=DISABLED)
+        self.AcceptClose.place(relx=0.54, rely=0.9)
+        
+        
+    def editSelectedInterval(self, parent):
+        editInterval.EditSelectedInterval(parent)
+        
 ##
 ##        """ Loop_set_times button """
 ##        self.LoopSetTimes = Button(self.frame2, text="Loop to Set Times", state=DISABLED)
