@@ -161,14 +161,14 @@ class BackgPlots():
                fitRslt = np.poly1d(np.polyfit(Time2[startIndex:endIndex +1], unitData[startIndex:endIndex +1], 3))
  
                               
-            plt.plot(TimeNew2.time, fitRslt(Time2), drawstyle='steps-post', color='green')
+            plt.plot(TimeNew2.time, fitRslt(Time2), drawstyle='steps-post', color='green', label = 'Bk')
 
 
 
             ################## plot data - bkg ################################################################################################
 
             ####### flux data #######
-            plt.plot(TimeNew2.time, unitData - fitRslt(Time2),drawstyle='steps-post', label = "Polynomial1D, degree = 0", color="#FF00FF")
+            plt.plot(TimeNew2.time, unitData - fitRslt(Time2),drawstyle='steps-post', color="blue" , label = "Data - Bk")
             #plt.plot(Time2Array, np.sqrt(np.abs(unitData - fitRslt(Time2))),drawstyle='steps-post', label = "Polynomial1D, degree = 0")
 
 
@@ -181,7 +181,9 @@ class BackgPlots():
             plt.title('SPEX HESSI Count ' + unit + ' vs Time')
             #plt.legend()
             ax = plt.axes()
-            ax.set_facecolor("black")
+            legend = ax.legend(loc='upper right' )
+            
+            #ax.set_facecolor("black")
             #ax.xaxis.set_major_formatter(mdates.DateFormatter('%H:%M'))
 
             plt.show()
