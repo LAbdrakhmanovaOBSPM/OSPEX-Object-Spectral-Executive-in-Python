@@ -6,11 +6,15 @@ import plotting
 import background_plot
 import warnings
 import second
+import selectEnergy
+import bkgPlots
 
 
 class BackgroundWindow():
     """Class to create a Select Input Window"""
     fname=None
+    bkgTimeInterv = ""
+    polyDeg = None
     def __init__(self, root):
         self.top1 = Toplevel()
         self.top1.title('SPEX Background Options')
@@ -308,11 +312,13 @@ class BackgroundWindow():
           self.Method = Label(self.fr, text="Method:")
           self.Method.place(relx=0.7, rely=0.12)
 
-          self.Method_choices = ('0Poly', '1Poly', '2Poly', '3Poly', 'Exp', 'High E Profile', 'This E Profile')
-          self.MethodVar = StringVar(self.fr)
-          self.MethodVar.set(self.Method_choices[0])
-          self.MethodSelection = OptionMenu(self.fr, self.MethodVar, *self.Method_choices)
-          self.MethodSelection.place(relx=0.76, rely=0.09)
+          self.MethodChoices = ('0Poly', '1Poly', '2Poly', '3Poly', 'Exp', 'High E Profile', 'This E Profile')
+          self.MethodVars = StringVar(self.fr)
+          self.MethodVars.set(self.MethodChoices[0])
+          self.MethodSelect = OptionMenu(self.fr, self.MethodVars, *self.MethodChoices, command=self.testchoices(self.MethodVars.get() ))
+          self.MethodSelect.place(relx=0.76, rely=0.09)
+          BackgroundWindow.polyDeg = self.MethodVars.get()
+          print("choices method", self.MethodVars.get())
 
           self.BkTimeInterv = Label(self.fr, text="Bk Time Intervals: ")
           self.BkTimeInterv.place(relx=0.01, rely=0.55)
@@ -335,6 +341,8 @@ class BackgroundWindow():
           self.Error2 = Checkbutton(self.fr, text="Error", variable='Error2')
           self.Error2.place(relx=0.58, rely=0.55)
 
+    def testchoices(self, v):
+         print('separa', v)
     def onClikSeparateBk(self):
          print('separa', self.sepBkVar.get())
          self.backCanv.config(scrollregion = (0,0,700,650))
@@ -383,28 +391,32 @@ class BackgroundWindow():
 
     def show_backgroundplot(self, e, i):
 
+         print('separa', self.sepBkVar.get(), self.var.get(), BackgroundWindow.polyDeg)
+      
+         if BackgroundWindow.bkgTimeInterv is not None:
+             print('time interv', BackgroundWindow.bkgTimeInterv)         
             
          if self.sepBkVar.get() == 1:
           if BackgroundWindow.fname is not None:          
-           plots = background_plot.Input(BackgroundWindow.fname)
+           plots = bkgPlots.BackgPlots() #background_plot.Input(BackgroundWindow.fname)
            if self.var.get() == 'Rate':
             if e == 'time':
                 #plots.rate_vs_time_plotting()
-                plots.backg_plot_vs_time('rate', i)
+                plots.plot(BackgroundWindow.bkgTimeInterv, 'Rate', i, self.polyDeg) #plots.backg_plot_vs_time('counts', i)
 ##            elif e == 'show':
 ##                plots.rate_vs_time_plotting()
 ##            elif e == 'specgr':
 ##                plots.plot_spectrogram_rate()
            if self.var.get() == 'Counts':
             if e == 'time':
-               plots.backg_plot_vs_time('counts', i)
+               plots.plot(BackgroundWindow.bkgTimeInterv, 'Counts', i, self.polyDeg) #plots.backg_plot_vs_time('counts', i)
 ##          elif e == 'show':
 ##             plots.rate_vs_time_plotting()
 ##          elif e == 'specgr':
 ##               plots.plot_spectrogram_rate()
            if self.var.get() == 'Flux':
             if e == 'time':
-                plots.backg_plot_vs_time('flux', i)
+                plots.plot(BackgroundWindow.bkgTimeInterv, 'Flux', i, self.polyDeg) #plots.backg_plot_vs_time('flux', i)
 ##            elif e == 'show':
 ##                plots.flux_vs_time_plotting()
 ##            elif e == 'specgr':
