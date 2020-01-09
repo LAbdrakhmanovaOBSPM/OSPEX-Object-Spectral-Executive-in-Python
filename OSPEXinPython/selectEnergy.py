@@ -6,15 +6,16 @@ import plotting
 import background_plot
 import warnings
 import second
+import editInterval
 
 
 class SelectEnergyWindow():
     """Class to create a Select Energy Window"""
-    fname=None
+  
     def __init__(self):
         self.top1 = Toplevel()
         self.top1.title('SPEX Energy Bands for Background')
-        self.top1.geometry("450x500")
+        self.top1.geometry("480x500")
         Label(self.top1,
               text="Select Energy Bands for Background",
               fg="black",
@@ -28,13 +29,8 @@ class SelectEnergyWindow():
               fg="black",
               font="Helvetica 8").pack()
 
-        self.hdul = None
 
-        #self.root = root
-        #self.sepBkVar = BooleanVar()
-        self.sepBkVar = IntVar()
-        #self.sepBkVar.set(1)
-        # self.root.wm_atributes("-disabled", True)
+
 
         #########################################################################################
 ##        """                         First frame                                     """
@@ -69,8 +65,8 @@ class SelectEnergyWindow():
 ##
 ##        #################################################################################
 ##        """                          Second frame                             """
-##        self.frame2 = Frame(self.top1, relief=RAISED, borderwidth=2)
-##        self.frame2.place(relx=0.05, rely=0.14, relheight=0.27, relwidth=0.9)
+
+        
         self.frame2 = LabelFrame(self.top1, relief=RAISED, borderwidth=2)
         self.frame2.place(relx=0.05, rely=0.42, relheight=0.34, relwidth=0.9)
 
@@ -125,19 +121,7 @@ class SelectEnergyWindow():
     def editSelectedInterval(self, parent):
         editInterval.EditSelectedInterval(parent)
         
-##
-##        """ Loop_set_times button """
-##        self.LoopSetTimes = Button(self.frame2, text="Loop to Set Times", state=DISABLED)
-##        self.LoopSetTimes.place(relx=0.01, rely=0.7)
-##
-##        """ Delete_all_times Button """
-##        self.DelAllTimes = Button(self.frame2, text="Delete all Times", state=DISABLED)
-##        self.DelAllTimes.place(relx=0.15, rely=0.7)
-##        ########################################################################################
-##        
-##        """                           Third frame                         """
-##        self.frame3 = LabelFrame(self.top1, relief=RAISED, borderwidth=2)
-##        self.frame3.place(relx=0.05, rely=0.41, relheight=0.27, relwidth=0.9)
+
 
 
 
