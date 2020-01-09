@@ -118,11 +118,11 @@ class BackgPlots():
                 dataFlux[i, 5] = sum(Rate[i, 57:76]) / (Area * E6)
                    
             if unit == 'Rate':
-                unitData =  dataRate[:,energyBinIndex] #dRate 
+                unitData =  dataRate[:,int(energyBinIndex)] #dRate 
             elif unit == 'Counts':
-                unitData = dataCounts[:,energyBinIndex]
+                unitData = dataCounts[:,int(energyBinIndex)]
             elif unit == 'Flux':
-                unitData = dataFlux[:,energyBinIndex]
+                unitData = dataFlux[:,int(energyBinIndex)]
                 
             TimeNew2 = pd.to_datetime(Time2, unit='s')
             Time2Array = TimeNew2.to_numpy()
