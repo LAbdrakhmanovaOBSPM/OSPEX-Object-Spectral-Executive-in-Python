@@ -177,7 +177,7 @@ class BackgPlots():
             plt.ylabel('Counts/s cm(-2) keV(-1)')
             plt.yscale('log')
             ##plt.xscale('log')
-            plt.title('SPEX HESSI ' + unit + ' vs Time')
+            plt.title('SPEX HESSI Count ' + unit + ' vs Time')
             #plt.legend()
             ax = plt.axes()
             ax.set_facecolor("black")
