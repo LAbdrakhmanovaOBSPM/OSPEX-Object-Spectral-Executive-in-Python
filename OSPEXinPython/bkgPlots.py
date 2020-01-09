@@ -143,8 +143,9 @@ class BackgPlots():
             #Time2bkg = Time2Array[startIndex:endIndex +1]
 
             ################### plot data with bkg ##########################################################################################
+            colors = ['gray','magenta','lime', 'cyan', 'yellow', 'red']
             xticksVal = TimeNew2.strftime('%H:%M') #TimeNew2.time
-            plt.plot(TimeNew2.time, unitData, drawstyle='steps-post', color='white')
+            plt.plot(TimeNew2.time, unitData, drawstyle='steps-post', color=colors[int(energyBinIndex)], label = 'Data with Bk')
 
             ####################### numpy poly plot bkg : poly1d ############################################################################
             bkgMethod = {0:'0Poly', 1:'1Poly', 2:'2Poly', 3:'3Poly', 4:'Exp', 5:'High E Profile', 6:'This E Profile'}
