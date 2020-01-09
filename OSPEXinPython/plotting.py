@@ -72,9 +72,6 @@ class Input:
         self.detectors = str(header1[25])[10:] # load the names of used detectors 
 
 
-        # Time format conversion (from sec to h/m/sec/)
-        self.TimeNew = pd.to_datetime(self.Time, unit='s')
-
         # Time format conversion for Time - 2, 2 seconds difference
         # conversion from seconds to hours/minutes/seconds
         self.TimeNew2 = pd.to_datetime(self.Time2, unit='s')
