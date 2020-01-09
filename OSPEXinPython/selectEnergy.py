@@ -114,8 +114,11 @@ class SelectEnergyWindow():
         self.Cancel = Button(self.top1, text="Cancel")
         self.Cancel.place(relx=0.38, rely=0.9)
 
-        self.AcceptClose = Button(self.top1, text="Accept and Close", state=DISABLED)
+        self.AcceptClose = Button(self.top1, text="Accept and Close", command=self.quit)
         self.AcceptClose.place(relx=0.54, rely=0.9)
+
+    def quit(self):
+        self.top1.destroy()
         
         
     def editSelectedInterval(self, parent):
