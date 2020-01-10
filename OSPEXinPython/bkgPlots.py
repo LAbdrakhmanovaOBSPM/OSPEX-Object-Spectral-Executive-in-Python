@@ -13,7 +13,6 @@ from astropy.modeling.models import custom_model
 from astropy.modeling.fitting import LevMarLSQFitter
 from scipy.optimize import curve_fit
 import matplotlib.dates as mdates
-import sep
 import background
 
 
