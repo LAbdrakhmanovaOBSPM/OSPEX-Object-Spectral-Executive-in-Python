@@ -9,17 +9,22 @@ import second
 import editInterval
 
 
-class SelectEnergyWindow():
-    """Class to create a Select Energy Window"""
+class EditTimeWindow():
+    """Class to create a Select Time Window"""
+    bkgTimeInterv = None
   
-    def __init__(self):
+    def __init__(self, energyBin):
         self.top1 = Toplevel()
-        self.top1.title('SPEX Energy Bands for Background')
+        self.top1.title('Select Time Intervals for Background')
         self.top1.geometry("480x500")
         Label(self.top1,
-              text="Select Energy Bands for Background",
+              text="Select Time Intervals for Background",
               fg="black",
-              font="Helvetica 12 bold").pack()
+              font="Helvetica 8").pack()
+        Label(self.top1,
+              text="for Energy Band " + str(energyBin),
+              fg="black",
+              font="Helvetica 8").pack()
         Label(self.top1,
               text="Left/right click to define start/end of intervals",
               fg="black",
@@ -42,15 +47,15 @@ class SelectEnergyWindow():
         self.lblCurrentIntervals = Label(self.frame1, text="Current Intervals:")
         self.lblCurrentIntervals.place(relx=0.01, rely=0.25)
 
-        self.CurrentIntervals_choices = ('Interval 0, 3.000 to 6.000', 'Interval 1, 6.000 to 12.000', 'Interval 2, 12.000 to 25.000',
-                                         'Interval 3, 25.000 to 50.000', 'Interval 4, 50.000 to 100.000', 'Interval 5, 100.000 to 300.000')
-        self.CurrentIntervalsVar = StringVar(self.frame1)
-        self.CurrentIntervalsVar.set(self.CurrentIntervals_choices[0])
-        self.CurrentIntervalsSelection = OptionMenu(self.frame1, self.CurrentIntervalsVar, *self.CurrentIntervals_choices)
-        self.CurrentIntervalsSelection.place(relx=0.28, rely=0.25)
-        #self.CurrentEnergySelection.config(state="disabled")
 
-        self.lblIntervals = Label(self.frame1, text="#Intervals = 6")
+        timeInterv =  str(EditTimeWindow.bkgTimeInterv) if EditTimeWindow.bkgTimeInterv is not None else str(energyBin)
+        print('time intervallllllllllll', timeInterv)
+        self.defaultTime = StringVar()
+        self.defaultTime.set(timeInterv)        
+        self.CurrentInterval = Entry(self.frame1, width=25, textvariable = self.defaultTime)
+        self.CurrentInterval.place(relx=0.28, rely=0.25)
+
+        self.lblIntervals = Label(self.frame1, text="#Intervals = 1")
         self.lblIntervals.place(relx=0.7, rely=0.25)
 
         self.DeleteSelectedInterv = Button(self.frame1, text="Delete selected interval", state=DISABLED)
