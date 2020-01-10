@@ -147,6 +147,7 @@ class BackgPlots():
                       '49.0 to 100.0 keV', '100.0 to 250.0 keV' ]
             xticksVal = TimeNew2.strftime('%H:%M') #TimeNew2.time
             plt.plot(TimeNew2.time, unitData, drawstyle='steps-post', color=colors[int(energyBinIndex)], label = 'Data with Bk')
+            plt.figure()
             plt.plot(TimeNew2.time, unitData, drawstyle='steps-post', color=colors[int(energyBinIndex)], label = str(energyLab[int(energyBinIndex)]) + ' (Data with Bk)')
 
             ####################### numpy poly plot bkg : poly1d ############################################################################

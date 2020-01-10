@@ -165,6 +165,8 @@ class Input:
         # 'steps-post': The y value is continued constantly to the right from every x position, i.e. the interval [x[i], x[i+1]) has the value y[i]
         # 'steps-mid': Steps occur half-way between the x positions
         #plt.rc('legend', labelsize=6)
+
+        
         plt.yscale('log') # set Y-axis in log
         plt.xlabel('Start time: ' + str(self.Date_start)) # load start time from header and display it in X - axis
         plt.ylabel(xlabel)
@@ -244,7 +246,7 @@ class Input:
         else:
             print('error')
             return
-
+        plt.figure()
         plt.plot(self.E_min, data, drawstyle='steps-post') #Unit vs Energy
         plt.yscale('log')
         plt.xscale('log')
@@ -278,6 +280,7 @@ class Input:
         #X, Y = np.meshgrid(tick, self.E_min)
         # Define Rate for Plot Spectrogram
         if typ == 'rate':
+            plt.figure()
             plt.pcolormesh(tick, self.E_min, np.transpose(self.rate), cmap='gray_r') # cmap = color of the content
             # plt.xticks(np.arange(min(self.TimeNew), max(self.TimeNew), 1.0))
             plt.xlabel('Start Time: ' + self.Date_start) # to name the X -axis load the start date from header
@@ -286,6 +289,7 @@ class Input:
 
         # Define Counts for Plot Spectrogram
         elif typ == 'counts':
+            plt.figure()
             plt.pcolormesh(tick, self.E_min, np.transpose(self.rate) * self.sum, cmap='gray_r')
             plt.xlabel('Start Time: ' + self.Date_start)
             plt.ylabel('keV')
@@ -297,6 +301,7 @@ class Input:
             deltaE = np.zeros(shape=(n))
             for i in range(n):
                 deltaE[i] = self.E_max[i] - self.E_min[i]
+            plt.figure()
             plt.pcolormesh(tick, self.E_min, np.transpose(self.rate) / (self.Area * deltaE[i]), cmap='gray_r')
             plt.xlabel('Start Time: ' + self.Date_start)
             plt.ylabel('keV')
