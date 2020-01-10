@@ -1,5 +1,6 @@
 from tkinter import *
 import background
+import editTime
 
 class EditSelectedInterval():
     """Class to create an editSelectedInterval Window"""
@@ -34,11 +35,10 @@ class EditSelectedInterval():
 
 
     def quit(self):
-
-##        self.p.update()
-##        self.p.deiconify()
-        print('cccccccccccc',  self.setIntervalText.get())
+   
         background.BackgroundWindow.bkgTimeInterv = self.setIntervalText.get()
+        editTime.EditTimeWindow.bkgTimeInterv = self.setIntervalText.get()
+        print('cccccccccccc',  self.setIntervalText.get())
 
         self.top1.destroy()
 
