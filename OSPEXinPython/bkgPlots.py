@@ -143,8 +143,11 @@ class BackgPlots():
 
             ################### plot data with bkg ##########################################################################################
             colors = ['gray','magenta','lime', 'cyan', 'yellow', 'red']
+            energyLab = ['3.0 to 6.0 keV', '6.0 to 12.0 keV', '12.0 to 25.0 keV', '25.0 to 49.0 keV',
+                      '49.0 to 100.0 keV', '100.0 to 250.0 keV' ]
             xticksVal = TimeNew2.strftime('%H:%M') #TimeNew2.time
             plt.plot(TimeNew2.time, unitData, drawstyle='steps-post', color=colors[int(energyBinIndex)], label = 'Data with Bk')
+            plt.plot(TimeNew2.time, unitData, drawstyle='steps-post', color=colors[int(energyBinIndex)], label = str(energyLab[int(energyBinIndex)]) + ' (Data with Bk)')
 
             ####################### numpy poly plot bkg : poly1d ############################################################################
             bkgMethod = {0:'0Poly', 1:'1Poly', 2:'2Poly', 3:'3Poly', 4:'Exp', 5:'High E Profile', 6:'This E Profile'}
@@ -159,6 +162,7 @@ class BackgPlots():
             elif polyDeg == bkgMethod[3]:
                fitRslt = np.poly1d(np.polyfit(Time2[startIndex:endIndex +1], unitData[startIndex:endIndex +1], 3))
  
+            plt.plot(TimeNew2.time, fitRslt(Time2), drawstyle='steps-post', color='green', label = str(energyLab[int(energyBinIndex)]) + ' (Bk)')
                               
             plt.plot(TimeNew2.time, fitRslt(Time2), drawstyle='steps-post', color='green', label = 'Bk')
 
@@ -166,7 +170,7 @@ class BackgPlots():
 
             ################## plot data - bkg ################################################################################################
 
-            ####### flux data #######
+            plt.plot(TimeNew2.time, unitData - fitRslt(Time2),drawstyle='steps-post', color="blue" , label = str(energyLab[int(energyBinIndex)]) + ' (Data - Bk')
             plt.plot(TimeNew2.time, unitData - fitRslt(Time2),drawstyle='steps-post', color="blue" , label = "Data - Bk")
             #plt.plot(Time2Array, np.sqrt(np.abs(unitData - fitRslt(Time2))),drawstyle='steps-post', label = "Polynomial1D, degree = 0")
 
