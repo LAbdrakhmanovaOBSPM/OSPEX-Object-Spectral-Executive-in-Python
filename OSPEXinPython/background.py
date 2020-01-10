@@ -6,7 +6,7 @@ import plotting
 import background_plot
 import warnings
 import second
-import selectEnergy
+import editTime
 import bkgPlots
 
 
@@ -107,7 +107,7 @@ class BackgroundWindow():
         self.Bands0.place(relx=0.3, rely=0.4)
 
         """ Change Energy Band Button """
-        self.ChangeEnergBand = Button(self.frame2, text="Change", state=DISABLED, command=self.selectEnergyBand)
+        self.ChangeEnergBand = Button(self.frame2, text="Change") #, state=DISABLED, command=self.editTimeInterval)
         self.ChangeEnergBand.place(relx=0.38, rely=0.4)
 
         """ set_to_spex_eband Button """
@@ -188,8 +188,8 @@ class BackgroundWindow():
 
 ##############################################      Functions          ####################################################################
 
-    def selectEnergyBand(self):
-        selectEnergy.SelectEnergyWindow()
+    def editTimeInterval(self, binInterval):
+        editTime.EditTimeWindow(binInterval)
 
     """ Display all energybans in one frame """
     def notSeparateCanva(self):
@@ -248,8 +248,9 @@ class BackgroundWindow():
 
           fr = 'frame'+str(i)
           v0 = 'AllEnerg' + str(i)
-          v1 = 'BkTimes' + str(i)
-          v2 = 'BkTSelection' + str(i)
+          v1 = 'MethodSelect' + str(i)
+          v2 = 'MethodVars' + str(i)
+          v3 = 'MethodChoices' + str(i)
         
           self.fr= Frame(self.backCanv, relief=RAISED, borderwidth=2, width=800, height=110)
           self.backCanv.create_window(x, y,  window=self.fr, width=800, height=90)
@@ -268,14 +269,25 @@ class BackgroundWindow():
 
           self.Method = Label(self.fr, text="Method:")
           self.Method.place(relx=0.7, rely=0.12)
+##
+##          self.MethodChoices = ('0Poly', '1Poly', '2Poly', '3Poly', 'Exp', 'High E Profile', 'This E Profile')
+##          self.MethodVars = StringVar(self.fr)
+##          self.MethodVars.set(self.MethodChoices[0])
+##          self.MethodSelect = OptionMenu(self.fr, self.MethodVars, *self.MethodChoices, command=self.testchoices(self.MethodVars.get() ))
+##          self.MethodSelect.place(relx=0.76, rely=0.09)
+##          #self.MethodVars.set(self.MethodVars.get())
+##          BackgroundWindow.polyDeg = self.MethodVars.get()
 
-          self.MethodChoices = ('0Poly', '1Poly', '2Poly', '3Poly', 'Exp', 'High E Profile', 'This E Profile')
-          self.MethodVars = StringVar(self.fr)
-          self.MethodVars.set(self.MethodChoices[0])
-          self.MethodSelect = OptionMenu(self.fr, self.MethodVars, *self.MethodChoices, command=self.testchoices(self.MethodVars.get() ))
-          self.MethodSelect.place(relx=0.76, rely=0.09)
-          BackgroundWindow.polyDeg = self.MethodVars.get()
-          print("choices method", self.MethodVars.get())
+          
+          self.v3 = ('0Poly', '1Poly', '2Poly', '3Poly', 'Exp', 'High E Profile', 'This E Profile')
+          self.v2 = StringVar(self.fr)
+          self.v2.set(self.v3[0])
+          self.v1 = OptionMenu(self.fr, self.v2, *self.v3, command=self.testchoices(self.v2.get() ))
+          self.v1.place(relx=0.76, rely=0.09)
+          #self.MethodVars.set(self.MethodVars.get())
+          BackgroundWindow.polyDeg = self.v2.get()
+          
+          print("choices method", self.v2.get())
 
           self.BkTimeInterv = Label(self.fr, text="Bk Time Intervals: ")
           self.BkTimeInterv.place(relx=0.01, rely=0.55)
@@ -283,7 +295,7 @@ class BackgroundWindow():
           self.Delete = Button(self.fr, text="Delete")
           self.Delete.place(relx=0.15, rely=0.55)
 
-          self.Change = Button(self.fr, text="Change")
+          self.Change = Button(self.fr, text="Change", command= lambda: self.editTimeInterval(energyLabel) )
           self.Change.place(relx=0.22, rely=0.55)
 
           self.Show = Button(self.fr, text="Show", command=lambda: self.show_backgroundplot("show", i))
@@ -297,6 +309,7 @@ class BackgroundWindow():
 
           self.Error2 = Checkbutton(self.fr, text="Error", variable='Error2')
           self.Error2.place(relx=0.58, rely=0.55)
+          return self.v2.get()
 
     def testchoices(self, v):
          print('separa', v)
@@ -345,7 +358,12 @@ class BackgroundWindow():
     """ Code to be executed when user clik on a plot button like 'plot vs time', 'plot spectrum', 'plot' """
     def show_backgroundplot(self, e, i):
 
-         print('separa', self.sepBkVar.get(), self.var.get(), BackgroundWindow.polyDeg)
+         energyLab = ['3.0 to 6.0 keV', '6.0 to 12.0 keV', '12.0 to 25.0 keV', '25.0 to 50.0 keV',
+                      '50.0 to 100.0 keV', '100.0 to 300.0 keV' ]
+
+         vv=self.energBandCanvList(i, 400, 70 + 100*i, energyLab[i])
+
+         print('separa', vv, self.sepBkVar.get(), self.var.get(), BackgroundWindow.polyDeg)
       
          if BackgroundWindow.bkgTimeInterv is not None:
              print('time interv', BackgroundWindow.bkgTimeInterv)         
