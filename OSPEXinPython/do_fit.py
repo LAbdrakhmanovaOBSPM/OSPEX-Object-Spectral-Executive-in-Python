@@ -37,7 +37,6 @@ class Fitting:
 
     """
     #create a new window called 'SPEX Fit Options'
-    fname=None
     def __init__(self, root):
         self.top2 = Toplevel()
         self.top2.title('SPEX Fit Options') #title of the window
@@ -67,6 +66,7 @@ class Fitting:
         self.Value_Button = Button(self.top2, text="Function value", command = new_window) #place a "Function value" button
         self.Value_Button.place(relx=0.75, rely=0.20, relheight=0.05, relwidth=0.13) #locate
 
+
         self.X_Label = Label(self.top2, text="Set X") #place a "Set X" button 
         self.X_Label.place(relx=0.65, rely=0.30, relheight=0.05, relwidth=0.13) #locate
 
@@ -79,16 +79,12 @@ class Fitting:
         self.e2.place(relx=0.75, rely=0.40, relheight=0.05,relwidth=0.20)
 
         def show_entry_fields():
-            print("Set X: %s\nSet Y: %s" % (self.e1.get(), self.e2.get()))
+            if self.e1 in list(E_min):    #  & self.e2 in list(y1)
+              print("Set X: %s\nSet Y: %s" % (self.e1.get(), self.e2.get()))
 
+        
         self.show_Button = Button(self.top2, text = "Show", command = show_entry_fields)
         self.show_Button.place(relx=0.75, rely=0.50)
-
-
-
-
-
-
 
         """ 
         On the left: place a list of text alternatives (listbox)
@@ -254,6 +250,7 @@ class Fitting:
         y1 = CountRate
         y2 = Counts
         y3 = Flux
+
         """ y - Plot Unit """
         # def find_all_indexes(input_str, search_str):
         #     l1 = []
@@ -774,7 +771,7 @@ class Fitting:
             plt.title('Flux Fitting using Exponential Power Law Model')
             plt.show()
 
-
+        
         # FIXME:
         # Calculate the Reduced Chi - square, test version
         # Initial guess
