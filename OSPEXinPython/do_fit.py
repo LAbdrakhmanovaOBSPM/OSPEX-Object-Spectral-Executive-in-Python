@@ -477,6 +477,7 @@ class Fitting:
         if (self.var.get() == 'Rate') & (self.lbox.curselection()[0] == 0):
             gPLRate = fitg1(PowerLaw1D, x, y1, weights=1.0 / y1)
             print(gPLRate)
+            plt.figure()
             plt.plot(x, y1, drawstyle='steps-post', label="Rate")
             plt.plot(x, gPLRate(x), drawstyle='steps-post', color='red', label="PowerLaw1D")
             plt.yscale('log')
@@ -493,6 +494,7 @@ class Fitting:
         elif (self.var.get() == 'Rate') & (self.lbox.curselection()[0] == 1):
             gBPLRate = fitg1(BrokenPowerLaw1D, x, y1, weights=1.0 / y1)
             print(gBPLRate)
+            plt.figure()
             plt.plot(x, y1, drawstyle='steps-post', label="Rate")
             plt.plot(x, gBPLRate(x), drawstyle='steps-post', color='red', label="BrokenPowerLaw1D")
             plt.yscale('log')
@@ -509,6 +511,7 @@ class Fitting:
         elif (self.var.get() == 'Rate') & (self.lbox.curselection()[0] == 2):
             gaussianRate = fitg1(Model,x,y1, weights = 1.0/y1)
             print(gaussianRate)
+            plt.figure()
             plt.plot(x,y1,drawstyle='steps-post', label = "Rate")
             plt.plot(x,gaussianRate(x),drawstyle='steps-pre', label='Gaussian')
             plt.yscale('log')
@@ -524,6 +527,7 @@ class Fitting:
         elif (self.var.get() == 'Rate') & (self.lbox.curselection()[0] == 3):
             PolyRate = fitg1(Poly,x,y1, weights = 1.0/y1)
             print(PolyRate)
+            plt.figure()
             plt.plot(x,y1,drawstyle='steps-post', label = "Rate")
             plt.plot(x,PolyRate(x),drawstyle='steps-pre', label='Polynomial')
             plt.yscale('log')
@@ -539,6 +543,7 @@ class Fitting:
         elif (self.var.get() == 'Rate') & (self.lbox.curselection()[0] == 4):
             expRate = fitg1(exp, x, y1)
             print(expRate)
+            plt.figure()
             plt.plot(x,y1,drawstyle='steps-post', label = "Rate")
             plt.plot(x,expRate(x),drawstyle='steps-pre', label='Exponential')
             plt.yscale('log')
@@ -554,6 +559,7 @@ class Fitting:
         elif (self.var.get() == 'Rate') & (self.lbox.curselection()[0] == 5):
             ExpPLRate = fitg1(exp_powerlaw, x, y1, weights=1.0 / y1)
             print(ExpPLRate)
+            plt.figure()
             plt.plot(x, y1, drawstyle='steps-post', label="Rate")
             plt.plot(x, ExpPLRate(x), drawstyle='steps-post', color='red', label="ExpPowerLaw")
             plt.yscale('log')
@@ -573,6 +579,7 @@ class Fitting:
         elif (self.var.get() == 'Counts') & (self.lbox.curselection()[0] == 0):
             gPLCounts = fitg1(PowerLaw1D, x, y2, weights=1.0 / y2)
             print(gPLCounts)
+            plt.figure()
             plt.plot(x, y2, drawstyle='steps-post', label="Counts")
             plt.plot(x, gPLCounts(x), drawstyle='steps-post', color='red', label="PowerLaw1D")
             plt.yscale('log')
@@ -589,6 +596,7 @@ class Fitting:
         elif (self.var.get() == 'Counts') & (self.lbox.curselection()[0] == 1):
             gBPLCounts = fitg1(BrokenPowerLaw1D, x, y2, weights=1.0 / y2)
             print(gBPLCounts)
+            plt.figure()
             plt.plot(x, y2, drawstyle='steps-post', label="Counts")
             plt.plot(x, gBPLCounts(x), drawstyle='steps-post', color='red', label="BrokenPowerLaw1D")
             plt.yscale('log')
@@ -605,6 +613,7 @@ class Fitting:
         elif (self.var.get() == 'Counts') & (self.lbox.curselection()[0] == 2):
             gaussianCounts = fitg1(Model,x,y2, weights = 1.0/y2)
             print(gaussianCounts)
+            plt.figure()
             plt.plot(x,y2,drawstyle='steps-post', label = "Counts")
             plt.plot(x,gaussianCounts(x),drawstyle='steps-pre', label='Gaussian')
             plt.yscale('log')
@@ -620,6 +629,7 @@ class Fitting:
         elif (self.var.get() == 'Counts') & (self.lbox.curselection()[0] == 3):
             PolyCounts = fitg1(Poly,x,y2, weights = 1.0/y2)
             print(PolyCounts)
+            plt.figure()
             plt.plot(x,y2,drawstyle='steps-post', label = "Counts")
             plt.plot(x,PolyCounts(x),drawstyle='steps-pre', label='Polynomial')
             plt.yscale('log')
@@ -635,6 +645,7 @@ class Fitting:
         elif (self.var.get() == 'Counts') & (self.lbox.curselection()[0] == 4):
             expCounts = fitg1(exp, x, y2, weights=1.0 / y2)
             print(expCounts)
+            plt.figure()
             plt.plot(x,y2,drawstyle='steps-post', label = "Counts")
             plt.plot(x,expCounts(x),drawstyle='steps-pre', label='Exponential')
             plt.yscale('log')
@@ -650,6 +661,7 @@ class Fitting:
         elif (self.var.get() == 'Counts') & (self.lbox.curselection()[0] == 5):
             ExpPLCounts = fitg1(exp_powerlaw, x, y2, weights=1.0 / y2)
             print(ExpPLCounts)
+            plt.figure()
             plt.plot(x, y2, drawstyle='steps-post', label="Counts")
             plt.plot(x, ExpPLCounts(x), drawstyle='steps-post', color='red', label="ExpPowerLaw")
             plt.yscale('log')
@@ -666,6 +678,7 @@ class Fitting:
         # If user select Flux in Plot Units and PowerLaw1D in Choose Fit Function Model:
         elif (self.var.get() == 'Flux') & (self.lbox.curselection()[0] == 0):
             gPLFlux = fitg1(PowerLaw1D, x, y3, weights=1.0 / y3)
+            plt.figure()
             plt.plot(x, y3, drawstyle='steps-post', label="Flux")
             plt.plot(x, gPLFlux(x), drawstyle='steps-post', color='red', label="PowerLaw1D")
             plt.yscale('log')
@@ -684,6 +697,7 @@ class Fitting:
             # Apply Levenberg - Marquandt algorithm
             gBPLFlux = fitg1(BrokenPowerLaw1D, x, y3, weights=1.0 / y3)
             print(gBPLFlux)
+            plt.figure()
             plt.plot(x, y3, drawstyle='steps-post', label="Flux")
             plt.plot(x, gBPLFlux(x), drawstyle='steps-post', color='red', label="BrokenPowerLaw1D")
             plt.yscale('log')
@@ -700,6 +714,7 @@ class Fitting:
         elif (self.var.get() == 'Flux') & (self.lbox.curselection()[0] == 2):
             gaussianFlux = fitg1(Model,x,y3, weights = 1.0/y3)
             print(gaussianFlux)
+            plt.figure()
             plt.plot(x,y3,drawstyle='steps-post', label = "Flux")
             plt.plot(x,gaussianFlux(x),drawstyle='steps-pre', label='Gaussian')
             plt.yscale('log')
@@ -715,6 +730,7 @@ class Fitting:
         elif (self.var.get() == 'Flux') & (self.lbox.curselection()[0] == 3):
             PolyFlux = fitg1(Poly,x,y3, weights = 1.0/y3)
             print(PolyFlux)
+            plt.figure()
             plt.plot(x,y3,drawstyle='steps-post', label = "Flux")
             plt.plot(x,PolyFlux(x),drawstyle='steps-pre', label='Polynomial')
             plt.yscale('log')
@@ -730,6 +746,7 @@ class Fitting:
         elif (self.var.get() == 'Flux') & (self.lbox.curselection()[0] == 4):
             expFlux = fitg1(exp, x, y3)
             print(expFlux)
+            plt.figure()
             plt.plot(x,y3,drawstyle='steps-post', label = "Flux")
             plt.plot(x,expFlux(x),drawstyle='steps-pre', label='Exponential')
             plt.yscale('log')
@@ -745,6 +762,7 @@ class Fitting:
         elif (self.var.get() == 'Flux') & (self.lbox.curselection()[0] == 5):
             ExpPLFlux = fitg1(exp_powerlaw, x, y3, weights=1.0 / y3)
             print(ExpPLFlux)
+            plt.figure()
             plt.plot(x, y3, drawstyle='steps-post', label="Flux")
             plt.plot(x, ExpPLFlux(x), drawstyle='steps-post', color='red', label="ExpPowerLaw")
             plt.yscale('log')
