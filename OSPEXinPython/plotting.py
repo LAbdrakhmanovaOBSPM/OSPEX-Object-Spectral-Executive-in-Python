@@ -28,7 +28,7 @@ register_matplotlib_converters()
 from datetime import timedelta
 
 
-class Input:
+class Input():
    
     """
     Class to load the parameters from input data and plot Spectrum, Time Profile and Spectrogram

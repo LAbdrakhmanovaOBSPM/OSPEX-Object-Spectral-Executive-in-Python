@@ -233,6 +233,7 @@ class SecondWindow():
         self.textFilename.delete(0, 'end') 
         background.BackgroundWindow.fname=self.name
         do_fit.Fitting.fname = self.name
+        # do_fit.Fitting.E_min = self.E_min
         try:
             with fits.open(self.name) as hdul:
                 self.hdul = hdul 
