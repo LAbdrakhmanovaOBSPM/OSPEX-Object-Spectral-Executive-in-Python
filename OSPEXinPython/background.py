@@ -251,6 +251,7 @@ class BackgroundWindow():
           v1 = 'MethodSelect' + str(i)
           v2 = 'MethodVars' + str(i)
           v3 = 'MethodChoices' + str(i)
+          v4 = 'PlotVsTim' +str(i)
         
           self.fr= Frame(self.backCanv, relief=RAISED, borderwidth=2, width=800, height=110)
           self.backCanv.create_window(x, y,  window=self.fr, width=800, height=90)
@@ -261,7 +262,10 @@ class BackgroundWindow():
           self.BkTimes = Label(self.fr, text="Bk Times:")
           self.BkTimes.place(relx=0.15, rely=0.12)
 
-          self.BkTSelection = Button(self.fr, text="None")
+
+
+        
+          self.BkTSelection = Button(self.fr, textvariable = BackgroundWindow.defaultTime)
           self.BkTSelection.place(relx=0.24, rely=0.15)
         
           self.Times = Label(self.fr, text="#Times: 0 ")
@@ -277,17 +281,10 @@ class BackgroundWindow():
 ##          self.MethodSelect.place(relx=0.76, rely=0.09)
 ##          #self.MethodVars.set(self.MethodVars.get())
 ##          BackgroundWindow.polyDeg = self.MethodVars.get()
-
           
-          self.v3 = ('0Poly', '1Poly', '2Poly', '3Poly', 'Exp', 'High E Profile', 'This E Profile')
-          self.v2 = StringVar(self.fr)
-          self.v2.set(self.v3[0])
-          self.v1 = OptionMenu(self.fr, self.v2, *self.v3, command=self.testchoices(self.v2.get() ))
+          self.MethodVars[i].set(self.MethodChoices[0])
+          self.v1 = OptionMenu(self.fr, self.MethodVars[i], *self.MethodChoices )
           self.v1.place(relx=0.76, rely=0.09)
-          #self.MethodVars.set(self.MethodVars.get())
-          BackgroundWindow.polyDeg = self.v2.get()
-          
-          print("choices method", self.v2.get())
 
           self.BkTimeInterv = Label(self.fr, text="Bk Time Intervals: ")
           self.BkTimeInterv.place(relx=0.01, rely=0.55)
@@ -304,10 +301,10 @@ class BackgroundWindow():
           self.PlotSpectr = Button(self.fr, text="Plot Spectrum")
           self.PlotSpectr.place(relx=0.36, rely=0.55)
 
-          self.PlotVsTim = Button(self.fr, text="Plot vs Time", command=lambda: self.show_backgroundplot("time", i))
-          self.PlotVsTim.place(relx=0.48, rely=0.55)
+          self.v4 = Button(self.fr, text="Plot vs Time",  command=lambda: self.show_backgroundplot("time", i))
+          self.v4.place(relx=0.48, rely=0.55)
 
-          self.Error2 = Checkbutton(self.fr, text="Error", variable='Error2')
+          self.Error2 = Checkbutton(self.fr, text="Error", variable='Error2' +str(i))
           self.Error2.place(relx=0.58, rely=0.55)
           return self.v2.get()
 
@@ -363,7 +360,8 @@ class BackgroundWindow():
 
          vv=self.energBandCanvList(i, 400, 70 + 100*i, energyLab[i])
 
-         print('separa', vv, self.sepBkVar.get(), self.var.get(), BackgroundWindow.polyDeg)
+         if self.MethodVars is not None:
+             print('separa in showplot', self.sepBkVar.get(), self.var.get(), self.MethodVars[0].get())
       
          if BackgroundWindow.bkgTimeInterv is not None:
              print('time interv', BackgroundWindow.bkgTimeInterv)         
@@ -373,21 +371,21 @@ class BackgroundWindow():
            if self.var.get() == 'Rate':
             if e == 'time':
                 #plots.rate_vs_time_plotting()
-                plots.plot(BackgroundWindow.bkgTimeInterv, 'Rate', i, self.polyDeg) #plots.backg_plot_vs_time('counts', i)
+                plots.plot(BackgroundWindow.bkgTimeInterv, 'Rate', i, self.MethodVars[i].get()) #plots.backg_plot_vs_time('counts', i)
 ##            elif e == 'show':
 ##                plots.rate_vs_time_plotting()
 ##            elif e == 'specgr':
 ##                plots.plot_spectrogram_rate()
            if self.var.get() == 'Counts':
             if e == 'time':
-               plots.plot(BackgroundWindow.bkgTimeInterv, 'Counts', i, self.polyDeg) #plots.backg_plot_vs_time('counts', i)
+               plots.plot(BackgroundWindow.bkgTimeInterv, 'Counts', i, self.MethodVars[i].get()) #plots.backg_plot_vs_time('counts', i)
 ##          elif e == 'show':
 ##             plots.rate_vs_time_plotting()
 ##          elif e == 'specgr':
 ##               plots.plot_spectrogram_rate()
            if self.var.get() == 'Flux':
             if e == 'time':
-                plots.plot(BackgroundWindow.bkgTimeInterv, 'Flux', i, self.polyDeg) #plots.backg_plot_vs_time('flux', i)
+                plots.plot(BackgroundWindow.bkgTimeInterv, 'Flux', i, self.MethodVars[i].get()) #plots.backg_plot_vs_time('flux', i)
 ##            elif e == 'show':
 ##                plots.flux_vs_time_plotting()
 ##            elif e == 'specgr':

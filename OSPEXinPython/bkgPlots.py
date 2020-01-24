@@ -164,6 +164,22 @@ class BackgPlots():
                fitRslt = np.poly1d(np.polyfit(Time2[startIndex:endIndex +1], unitData[startIndex:endIndex +1], 3))
                   
             plt.plot(TimeNew2.time, fitRslt(Time2), drawstyle='steps-post', color='green', label = str(energyLab[int(energyBinIndex)]) + ' (Bk)')
+            #print('plot bkg', TimeNew2.time.shape, fitRslt(Time2).shape, unitData.shape)
+            
+            plotTimeInterv = np.zeros(shape=(len(unitData), len(range(startIndex, endIndex)))) #, len(range(startIndex, endIndex + 1)))
+            plotTimeIntervData = np.zeros(shape=(len(range(startIndex, endIndex + 1))))
+            #plotTimeInterv[:] = Time2[startIndex]
+            k=0
+            for i in range(startIndex, endIndex):
+                plotTimeInterv[:,k] = Time2[i]
+                plt.plot(plotTimeInterv[:,k], unitData - fitRslt(Time2), drawstyle='steps-post', color='red')
+                k+=1
+            plt.plot(plotTimeInterv[:,0], unitData - fitRslt(Time2),linestyle='dashed', drawstyle='steps-post', color='black')
+            plt.plot(plotTimeInterv[:,-1], unitData - fitRslt(Time2),'-', drawstyle='steps-post', color='black')
+##            for j in range(len(unitData)):
+##                plotTimeInterv[j,:] = [Time2[i] for i in range(startIndex, endIndex + 1)]
+##                #plt.plot(val, unitData, drawstyle='steps-post', color='red')
+            print('plot bkg', startIndex, endIndex + 1, plotTimeInterv.shape, len(range(startIndex, endIndex))) 
 
 
 
@@ -172,7 +188,9 @@ class BackgPlots():
             plt.plot(TimeNew2.time, unitData - fitRslt(Time2),drawstyle='steps-post', color="blue" , label = str(energyLab[int(energyBinIndex)]) + ' (Data - Bk')
             #plt.plot(Time2Array, np.sqrt(np.abs(unitData - fitRslt(Time2))),drawstyle='steps-post', label = "Polynomial1D, degree = 0")
 
-
+##            for val in range(Time2[startIndex], Time2[endIndex +1]):
+##                plt.plot(val, unitData, drawstyle='steps-post', color='red')
+                
 
             ############################ plot #####################################
             plotTitle = 'SPEX HESSI Counts vs Time' if 'Counts' in unit else 'SPEX HESSI Count ' + unit + ' vs Time'
