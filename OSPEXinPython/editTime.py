@@ -12,6 +12,7 @@ import editInterval
 class EditTimeWindow():
     """Class to create a Select Time Window"""
     bkgTimeInterv = None
+    defaultTime = None
   
     def __init__(self, energyBin):
         self.top1 = Toplevel()
@@ -50,9 +51,9 @@ class EditTimeWindow():
 
         timeInterv =  str(EditTimeWindow.bkgTimeInterv) if EditTimeWindow.bkgTimeInterv is not None else str(energyBin)
         print('time intervallllllllllll', timeInterv)
-        self.defaultTime = StringVar()
-        self.defaultTime.set(timeInterv)        
-        self.CurrentInterval = Entry(self.frame1, width=25, textvariable = self.defaultTime)
+        EditTimeWindow.defaultTime = StringVar()
+        EditTimeWindow.defaultTime.set(timeInterv)        
+        self.CurrentInterval = Button(self.frame1,  textvariable = EditTimeWindow.defaultTime)
         self.CurrentInterval.place(relx=0.28, rely=0.25)
 
         self.lblIntervals = Label(self.frame1, text="#Intervals = 1")

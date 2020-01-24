@@ -13,8 +13,8 @@ import bkgPlots
 class BackgroundWindow():
     """Class to create a background Window"""
     fname=None
-    bkgTimeInterv = ""
-    polyDeg = None
+    bkgTimeInterv = None
+    defaultTime = ""
     
     def __init__(self, root):
         self.top1 = Toplevel()
@@ -32,6 +32,13 @@ class BackgroundWindow():
         self.root = root
         self.sepBkVar = IntVar()
         #self.polyDeg = None
+        self.MethodChoices = ('0Poly', '1Poly', '2Poly', '3Poly', 'Exp', 'High E Profile', 'This E Profile')
+        self.MethodVars = [StringVar() for i in range(7)]
+        #self.MethodVars[i].set(self.MethodChoices[0]) for i in range(7)
+
+        timeInterv =  str(BackgroundWindow.bkgTimeInterv) if BackgroundWindow.bkgTimeInterv is not None else 'None'
+        BackgroundWindow.defaultTime = StringVar()
+        BackgroundWindow.defaultTime.set(timeInterv)
 
         #########################################################################################
         """                         First frame                                     """

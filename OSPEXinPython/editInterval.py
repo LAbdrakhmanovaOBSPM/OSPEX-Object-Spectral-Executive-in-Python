@@ -6,7 +6,7 @@ class EditSelectedInterval():
     """Class to create an editSelectedInterval Window"""
  
     def __init__(self, p):
-        #self.p = p
+        
         self.top1 = Toplevel(p)
         self.top1.title('Edit time interval')
         self.top1.geometry("480x200")
@@ -37,8 +37,9 @@ class EditSelectedInterval():
     def quit(self):
    
         background.BackgroundWindow.bkgTimeInterv = self.setIntervalText.get()
+        background.BackgroundWindow.defaultTime.set(self.setIntervalText.get())
         editTime.EditTimeWindow.bkgTimeInterv = self.setIntervalText.get()
-        print('cccccccccccc',  self.setIntervalText.get())
+        editTime.EditTimeWindow.defaultTime.set(self.setIntervalText.get())
 
         self.top1.destroy()
 
