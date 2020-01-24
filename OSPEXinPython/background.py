@@ -16,6 +16,7 @@ class BackgroundWindow():
     bkgTimeInterv = None
     defaultTime = ""
     
+    
     def __init__(self, root):
         self.top1 = Toplevel()
         self.top1.title('SPEX Background Options')
@@ -83,7 +84,7 @@ class BackgroundWindow():
         self.AllBandsSelection = OptionMenu(self.frame2, self.AllBandsVar, *self.AllBands_choices)
         self.AllBandsSelection.place(relx=0.26, rely=0.04)
         self.AllBandsSelection.config(state="disabled")
-        #self.polyDeg = self.AllBandsVar.get()
+        
 
         """ half smoothing """
         self.HalfSmooth = Label(self.frame2, text="Profile Half Smoothing width(#pts):")
@@ -198,7 +199,7 @@ class BackgroundWindow():
     def editTimeInterval(self, binInterval):
         editTime.EditTimeWindow(binInterval)
 
-    """ Display all energybans in one frame """
+    """ Display all energybins in one frame """
     def notSeparateCanva(self):
         self.backCanv.config(scrollregion = (0,0,700,100))
         self.frame0 = Frame(self.backCanv, relief=RAISED, borderwidth=2, width=800, height=90)
@@ -238,13 +239,13 @@ class BackgroundWindow():
         self.Change = Button(self.frame0, text="Change")
         self.Change.place(relx=0.22, rely=0.55)
 
-        self.Show = Button(self.frame0, text="Show", command=lambda: self.show_backgroundplot("show", 6))
+        self.Show = Button(self.frame0, text="Show") #, command=lambda: self.show_backgroundplot("show", 6))
         self.Show.place(relx=0.29, rely=0.55)
 
         self.PlotSpectr = Button(self.frame0, text="Plot Spectrum")
         self.PlotSpectr.place(relx=0.36, rely=0.55)
 
-        self.PlotVsTim = Button(self.frame0, text="Plot vs Time", command=lambda: self.show_backgroundplot("time", 6))
+        self.PlotVsTim = Button(self.frame0, text="Plot vs Time") #, command=lambda: self.show_backgroundplot("time", 6))
         self.PlotVsTim.place(relx=0.48, rely=0.55)
 
         self.Error2 = Checkbutton(self.frame0, text="Error", variable='Error2')
@@ -280,14 +281,6 @@ class BackgroundWindow():
 
           self.Method = Label(self.fr, text="Method:")
           self.Method.place(relx=0.7, rely=0.12)
-##
-##          self.MethodChoices = ('0Poly', '1Poly', '2Poly', '3Poly', 'Exp', 'High E Profile', 'This E Profile')
-##          self.MethodVars = StringVar(self.fr)
-##          self.MethodVars.set(self.MethodChoices[0])
-##          self.MethodSelect = OptionMenu(self.fr, self.MethodVars, *self.MethodChoices, command=self.testchoices(self.MethodVars.get() ))
-##          self.MethodSelect.place(relx=0.76, rely=0.09)
-##          #self.MethodVars.set(self.MethodVars.get())
-##          BackgroundWindow.polyDeg = self.MethodVars.get()
           
           self.MethodVars[i].set(self.MethodChoices[0])
           self.v1 = OptionMenu(self.fr, self.MethodVars[i], *self.MethodChoices )
@@ -313,21 +306,16 @@ class BackgroundWindow():
 
           self.Error2 = Checkbutton(self.fr, text="Error", variable='Error2' +str(i))
           self.Error2.place(relx=0.58, rely=0.55)
-          return self.v2.get()
 
-    def testchoices(self, v):
-         print('separa', v)
 
     """ Code to be executed when user clik on separeBK """
     def onClikSeparateBk(self):
-         #print('separa', self.sepBkVar.get(), self.polyDeg, self.var.get(), BackgroundWindow.polyDeg)
          
          self.backCanv.config(scrollregion = (0,0,700,650))
          energyLab = ['3.0 to 6.0 keV', '6.0 to 12.0 keV', '12.0 to 25.0 keV', '25.0 to 50.0 keV',
                       '50.0 to 100.0 keV', '100.0 to 300.0 keV' ]
          if self.sepBkVar.get() == 1:
             if BackgroundWindow.fname is not None:
-               #self.backCanv.place_forget()
                self.backCanv.delete(ALL)
                for j in range(6):
                  self.energBandCanvList(j, 400, 70 + 100*j, energyLab[j])
@@ -344,10 +332,9 @@ class BackgroundWindow():
             self.CurrentEnergySelection.config(state="normal")
             self.AllBandsSelection.config(state="normal")
          else:
-            #self.backCanv.place()
+            
             self.backCanv.delete(ALL)
             self.notSeparateCanva()
-            #self.backCanv.place(relx=0.01, rely=0.1)
             
             self.ChangeEnergBand.config(state="disabled")
             self.SetSpex.config(state="disabled")
@@ -365,7 +352,7 @@ class BackgroundWindow():
          energyLab = ['3.0 to 6.0 keV', '6.0 to 12.0 keV', '12.0 to 25.0 keV', '25.0 to 50.0 keV',
                       '50.0 to 100.0 keV', '100.0 to 300.0 keV' ]
 
-         vv=self.energBandCanvList(i, 400, 70 + 100*i, energyLab[i])
+         #vv=self.energBandCanvList(i, 400, 70 + 100*i, energyLab[i])
 
          if self.MethodVars is not None:
              print('separa in showplot', self.sepBkVar.get(), self.var.get(), self.MethodVars[0].get())
