@@ -15,7 +15,7 @@ from scipy.optimize import curve_fit
 import matplotlib.dates as mdates
 import background
 
-
+""" Class for background plots """
 class BackgPlots():
 
     fname=None
@@ -81,8 +81,7 @@ class BackgPlots():
 
             ####################" background ############################
              
-            # Define the Rate for "Plot Time Profile"
-
+            # Define Rate Unit Data for "Plot Time Profile"
             dataRate = np.zeros(shape=(time_len, 6))
             for i in range(time_len):
                 dataRate[i, 0] = sum(Rate[i, 0:3])
@@ -93,7 +92,7 @@ class BackgPlots():
                 dataRate[i, 5] = sum(Rate[i, 57:76])
 
 
-            # Define the Counts for "Plot Time Profile"
+            # Define Counts Unit Data for "Plot Time Profile"
 
             dataCounts = np.zeros(shape=(time_len, 6))
             for i in range(time_len):
@@ -105,7 +104,7 @@ class BackgPlots():
                 dataCounts[i, 5] = sum(Rate[i, 57:76]) * Time_del[i]
 
 
-            # Define the Flux for "Plot Time Profile"
+            # Define the Flux  Unit Data for "Plot Time Profile"
 
             dataFlux = np.zeros(shape=(time_len, 6))
             for i in range(time_len):
@@ -125,12 +124,10 @@ class BackgPlots():
                 
             TimeNew2 = pd.to_datetime(Time2, unit='s')
             Time2Array = TimeNew2.to_numpy()
-##            df = pd.DataFrame(dataRate, index=TimeNew2,
-##                            columns=['3-6keV(Data with Bk)', '6-12keV(Data with Bk)', '12-25keV(Data with Bk)',
-##                                      '25-49keV(Data with Bk)', '49-100keV(Data with Bk)', '100-250keV(Data with Bk)'])
 
 
-            ################################## 08:05 to 08:07 ################################
+            ################################## time interval : default 08:30 to 08:40 ################################
+            """ Get start / end time from time interval  """
             if len(timeInterv) > 0:
                 if '-' in timeInterv or 'to' in timeInterv:
                     timeInterval = timeInterv.split('-') if '-' in timeInterv else timeInterv.split('to')
@@ -139,7 +136,6 @@ class BackgPlots():
                     startIndex = int(((int(startTimeInterv[0])*3600 + int(startTimeInterv[1])*60) - (int(startTimeInterv[0]) * 3600 ))/4)
                     endIndex = int(((int(endTimeInterv[0])*3600 + int(endTimeInterv[1])*60) - (int(startTimeInterv[0]) * 3600))/4)
 
-            #Time2bkg = Time2Array[startIndex:endIndex +1]
 
             ################### plot data with bkg ##########################################################################################
             colors = ['gray','magenta','lime', 'cyan', 'yellow', 'red']
@@ -151,10 +147,8 @@ class BackgPlots():
             plt.plot(TimeNew2.time, unitData, drawstyle='steps-post', color=colors[int(energyBinIndex)], label = str(energyLab[int(energyBinIndex)]) + ' (Data with Bk)')
 
             ####################### numpy poly plot bkg : poly1d ############################################################################
+            ####################### plot bkg ########################################################################################
             bkgMethod = {0:'0Poly', 1:'1Poly', 2:'2Poly', 3:'3Poly', 4:'Exp', 5:'High E Profile', 6:'This E Profile'}
-            #methodNum = list(bkgMethod.keys())
-            print ('eeeeee', polyDeg,  bkgMethod[0], polyDeg == bkgMethod[1])
-            if polyDeg == bkgMethod[0]:
                fitRslt = np.poly1d(np.polyfit(Time2[startIndex:endIndex +1], unitData[startIndex:endIndex +1], 0)) #,  w= 1.0/unitData[startIndex:endIndex +1]))
             elif polyDeg == bkgMethod[1]:
                fitRslt = np.poly1d(np.polyfit(Time2[startIndex:endIndex +1], unitData[startIndex:endIndex +1], 1))
@@ -192,12 +186,11 @@ class BackgPlots():
 ##                plt.plot(val, unitData, drawstyle='steps-post', color='red')
                 
 
-            ############################ plot #####################################
+            ############################ plot parameters #####################################
             plotTitle = 'SPEX HESSI Counts vs Time' if 'Counts' in unit else 'SPEX HESSI Count ' + unit + ' vs Time'
             plt.xlabel('Start time: ' + str(Date_start))
             plt.ylabel('Counts/s cm(-2) keV(-1)')
             plt.yscale('log')
-            ##plt.xscale('log')
             plt.title(plotTitle)
             #plt.legend()
             ax = plt.axes()

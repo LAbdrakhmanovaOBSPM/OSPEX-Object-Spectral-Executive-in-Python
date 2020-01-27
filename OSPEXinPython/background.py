@@ -9,9 +9,9 @@ import second
 import editTime
 import bkgPlots
 
-
+"""Class to create a background Window"""
 class BackgroundWindow():
-    """Class to create a background Window"""
+    
     fname=None
     bkgTimeInterv = None
     defaultTime = ""
@@ -32,18 +32,15 @@ class BackgroundWindow():
 
         self.root = root
         self.sepBkVar = IntVar()
-        #self.polyDeg = None
         self.MethodChoices = ('0Poly', '1Poly', '2Poly', '3Poly', 'Exp', 'High E Profile', 'This E Profile')
         self.MethodVars = [StringVar() for i in range(7)]
-        #self.MethodVars[i].set(self.MethodChoices[0]) for i in range(7)
 
         timeInterv =  str(BackgroundWindow.bkgTimeInterv) if BackgroundWindow.bkgTimeInterv is not None else 'None'
         BackgroundWindow.defaultTime = StringVar()
         BackgroundWindow.defaultTime.set(timeInterv)
 
         #########################################################################################
-        """                         First frame                                     """
-        """ Create interval selection frame (with widgets: graphical, full options, plot_units) """
+        """                         First frame: Create interval selection frame                                    """
 
         self.frame1 = LabelFrame(self.top1, relief=RAISED, borderwidth=2)
         self.frame1.place(relx=0.05, rely=0.04, relheight=0.1, relwidth=0.9)
@@ -67,8 +64,9 @@ class BackgroundWindow():
         self.lblPlotUnits.place(relx=0.37, rely=0.18)
 
         #################################################################################
-        """                          Second frame                             """
-        """ Create frame for separate bk parameters """
+        
+        """                  Second frame: options for separate bk parameters            """
+     
         
         self.frame2 = Frame(self.top1, relief=RAISED, borderwidth=2)
         self.frame2.place(relx=0.05, rely=0.14, relheight=0.27, relwidth=0.9)
@@ -135,14 +133,15 @@ class BackgroundWindow():
         self.DelAllTimes.place(relx=0.15, rely=0.7)
         ########################################################################################
         
-        """                           Third frame                         """
-        """ Frame to display each bk energy_bin """
+        """              Third frame: display group of bk energy_bins                         """
+        
         self.frame3 = LabelFrame(self.top1, relief=RAISED, borderwidth=2)
         self.frame3.place(relx=0.05, rely=0.41, relheight=0.27, relwidth=0.9)
 
 
         ########################################################################################
-        """                           Fourth frame                        """
+        
+        """                           Fourth frame: Time profile in spex_ebands                         """
         self.frame4 = LabelFrame(self.top1, relief=RAISED, borderwidth=2)
         self.frame4.place(relx=0.05, rely=0.68, relheight=0.08, relwidth=0.9)
 
@@ -195,11 +194,11 @@ class BackgroundWindow():
         self.notSeparateCanva()
 
 ##############################################      Functions          ####################################################################
-
+    """ Function to be executed when user clik on an energy bin 's change button """
     def editTimeInterval(self, binInterval):
         editTime.EditTimeWindow(binInterval)
 
-    """ Display all energybins in one frame """
+    """ Display all energybins in one frame when user unchecked the 'separate_bk_for each energy band checkbox'  """
     def notSeparateCanva(self):
         self.backCanv.config(scrollregion = (0,0,700,100))
         self.frame0 = Frame(self.backCanv, relief=RAISED, borderwidth=2, width=800, height=90)
@@ -251,14 +250,11 @@ class BackgroundWindow():
         self.Error2 = Checkbutton(self.frame0, text="Error", variable='Error2')
         self.Error2.place(relx=0.58, rely=0.55)
 
-    """ function to create a subframe foe each energy band """
+    """ function to create a subframe for each energy band """
     def energBandCanvList(self, i, x, y, energyLabel):
 
           fr = 'frame'+str(i)
-          v0 = 'AllEnerg' + str(i)
           v1 = 'MethodSelect' + str(i)
-          v2 = 'MethodVars' + str(i)
-          v3 = 'MethodChoices' + str(i)
           v4 = 'PlotVsTim' +str(i)
         
           self.fr= Frame(self.backCanv, relief=RAISED, borderwidth=2, width=800, height=110)
@@ -269,10 +265,7 @@ class BackgroundWindow():
 
           self.BkTimes = Label(self.fr, text="Bk Times:")
           self.BkTimes.place(relx=0.15, rely=0.12)
-
-
-
-        
+      
           self.BkTSelection = Button(self.fr, textvariable = BackgroundWindow.defaultTime)
           self.BkTSelection.place(relx=0.24, rely=0.15)
         
@@ -308,17 +301,17 @@ class BackgroundWindow():
           self.Error2.place(relx=0.58, rely=0.55)
 
 
-    """ Code to be executed when user clik on separeBK """
+    """ Code to be executed when user checked the 'separate Bk for each energy band' checkbox """
     def onClikSeparateBk(self):
          
          self.backCanv.config(scrollregion = (0,0,700,650))
          energyLab = ['3.0 to 6.0 keV', '6.0 to 12.0 keV', '12.0 to 25.0 keV', '25.0 to 50.0 keV',
                       '50.0 to 100.0 keV', '100.0 to 300.0 keV' ]
          if self.sepBkVar.get() == 1:
-            if BackgroundWindow.fname is not None:
+            if BackgroundWindow.fname is not None: # check if user already choose a '.fit' file with 'select input' window, if not, 'next else block' will be executed
                self.backCanv.delete(ALL)
                for j in range(6):
-                 self.energBandCanvList(j, 400, 70 + 100*j, energyLab[j])
+                 self.energBandCanvList(j, 400, 70 + 100*j, energyLab[j]) # create energy band frame
                      
             else:
                self.backCanv.delete(ALL)
@@ -346,13 +339,12 @@ class BackgroundWindow():
 
          print('plt', BackgroundWindow.fname)
 
-    """ Code to be executed when user clik on a plot button like 'plot vs time', 'plot spectrum', 'plot' """
-    def show_backgroundplot(self, e, i):
+    """ Code to be executed when user clik on a plot button like 'plot vs time', 'plot spectrum', 'plot' of a specific energy band """
+    def show_backgroundplot(self, e, i): #make plots (plot vs time, plot spectrum ... ) 
 
          energyLab = ['3.0 to 6.0 keV', '6.0 to 12.0 keV', '12.0 to 25.0 keV', '25.0 to 50.0 keV',
                       '50.0 to 100.0 keV', '100.0 to 300.0 keV' ]
 
-         #vv=self.energBandCanvList(i, 400, 70 + 100*i, energyLab[i])
 
          if self.MethodVars is not None:
              print('separa in showplot', self.sepBkVar.get(), self.var.get(), self.MethodVars[0].get())
