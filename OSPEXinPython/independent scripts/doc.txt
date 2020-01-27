@@ -1,0 +1,7 @@
+'Independent_scripts' folder consist of the scripts to be added to the interface when fully implemented
+
+testDRM.py realizes the algorithm to convert count space to photon space
+
+Used method: forward folding. Will be explained in detail in Technical documentation
+
+

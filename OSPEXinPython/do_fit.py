@@ -28,16 +28,23 @@ import warnings
 from astropy.modeling import models, fitting
 from astropy.modeling.models import custom_model
 import plotting
+import second
+import new_window
+
 
 
 class Fitting:
+
+    
+    E_min = None
+    setEVal = None
+    evalue = None
     """ 
 
     Class to perform a spectrum fitting
 
     """
     #create a new window called 'SPEX Fit Options'
-    fname=None
     def __init__(self, root):
         self.top2 = Toplevel()
         self.top2.title('SPEX Fit Options') #title of the window
@@ -49,7 +56,8 @@ class Fitting:
 
         self.root = root
         self.sepBkVar = IntVar()
-
+        
+        #E_min = "global"
         self.lbl1 = Label(self.top2, text="Choose Fit Function Model:", fg='blue', font=("Helvetica", 11, "bold")) #name the listbox
         self.lbl1.place(relx=0.07, rely=0.07) # set the position on window
 
@@ -58,37 +66,58 @@ class Fitting:
         
         self.lbl3 = Label(self.top2, text="Set function components and x, y parameters:", fg='blue', font=("Helvetica", 11,"bold")) #name the scrollbar
         self.lbl3.place(relx=0.65, rely=0.07) #set the position
-        def new_window(): # new window definition
+
+
+        self.lblFunc = Label(self.top2, text="Set function components: ")#name the scrollbar
+        self.lblFunc.place(relx=0.73, rely=0.20) #set the position
+
+
+
+        setY = str(Fitting.setEVal) if Fitting.setEVal is not None else '10 - 20'
+        print("set val", setY, new_window.Set_Energy.yVal)
+        Fitting.evalue = StringVar()
+        Fitting.evalue.set(setY)
+        self.show_Button = Button(self.top2, textvariable=Fitting.evalue, command = lambda:self.editEnergy(self.top2))
+        self.show_Button.place(relx=0.81, rely=0.39, relheight=0.05, relwidth=0.07)
+
+
+        def Set_Function(): # new window Set_Function definition
             newwin = Toplevel(root)
             newwin.title('Function values') #title of the window
             newwin.geometry("600x400") #size of the new window
             display = Label(newwin, text="Choose function values: ", fg='blue', font=("Helvetica", 11,"bold"))
             display.place(relx=0.04, rely=0.07)
-        self.Value_Button = Button(self.top2, text="Function value", command = new_window) #place a "Function value" button
-        self.Value_Button.place(relx=0.75, rely=0.20, relheight=0.05, relwidth=0.13) #locate
+            
+        self.Value_Button = Button(self.top2, text="Function value(s)", command = Set_Function) #place a "Function value" button
+        self.Value_Button.place(relx=0.75, rely=0.26, relheight=0.05, relwidth=0.13) #locate
 
-        self.X_Label = Label(self.top2, text="Set X") #place a "Set X" button 
-        self.X_Label.place(relx=0.65, rely=0.30, relheight=0.05, relwidth=0.13) #locate
 
-        self.Y_Label = Label(self.top2, text="Set Y") #place a "Set Y" button 
-        self.Y_Label.place(relx=0.65, rely=0.40, relheight=0.05, relwidth=0.13) #locate
+       
 
-        self.e1 = Entry(self.top2)
-        self.e1.place(relx=0.75, rely=0.30, relheight=0.05,relwidth=0.20)               
-        self.e2 = Entry(self.top2)
-        self.e2.place(relx=0.75, rely=0.40, relheight=0.05,relwidth=0.20)
 
-        def show_entry_fields():
-            print("Set X: %s\nSet Y: %s" % (self.e1.get(), self.e2.get()))
+        self.X_Label = Label(self.top2, text="Energy range(s) to fit: ") #place a "Set X" button 
+        self.X_Label.place(relx=0.65, rely=0.40) #locate
+        
 
-        self.show_Button = Button(self.top2, text = "Show", command = show_entry_fields)
-        self.show_Button.place(relx=0.75, rely=0.50)
+
+            
 
 
 
+        # self.Y_Label = Label(self.top2, text="Set Y") #place a "Set Y" button 
+        # self.Y_Label.place(relx=0.65, rely=0.40, relheight=0.05, relwidth=0.13) #locate
 
 
+        #self.e1 = Entry(self.top2, textvariable = self.e)
+        #self.e1.place(relx=0.75, rely=0.30, relheight=0.05,relwidth=0.20)               
+        #self.e2 = Entry(self.top2, textvariable = self.e)
+        #self.e2.place(relx=0.75, rely=0.40, relheight=0.05,relwidth=0.20)
 
+        
+
+   
+        
+        
 
         """ 
         On the left: place a list of text alternatives (listbox)
@@ -170,6 +199,9 @@ class Fitting:
         self.list_selection = Listbox(self.top2, highlightcolor = 'red', bd = 4)
         self.list_selection.place(relx=0.33, rely=0.15, relheight=0.45, relwidth=0.30)
 
+    def editEnergy(self, p1):
+        new_window.Set_Energy(p1)
+
     def onSelect(self, event):
         widget = event.widget
         selection=widget.curselection()
@@ -202,6 +234,7 @@ class Fitting:
        """
        # load chosen file in Select Input section 
        fname = Fitting.fname
+              
 
        if fname is None: # if file not choosen, print
          print('Please, choose input file')
@@ -217,18 +250,20 @@ class Fitting:
         Livetime = data1.LIVETIME
         Time_del = data1.TIMEDEL
         Channel = data1.CHANNEL
-        E_min = data2.E_MIN
+        Fitting.E_min = data2.E_MIN
         E_max = data2.E_MAX
         Area = header3[24]
-        E_mean = np.mean(E_min)
+        E_mean = np.mean(Fitting.E_min)
+        
+    
 
         """Define Spectrum Units: Rate, Counts, Flux"""
 
         # Define the range for Low and High energies
-        n = len(E_min)
+        n = len(Fitting.E_min)
         deltaE = np.zeros(shape=(n))
         for i in range(n):
-            deltaE[i] = E_max[i] - E_min[i]
+            deltaE[i] = E_max[i] - Fitting.E_min[i]
 
         # Next, we determine the PLot Units components
         # Rate
@@ -248,12 +283,13 @@ class Fitting:
 
         # Predefine Input Data in x and y
         # We equate three components to y1, y2, y3. The value of x is the same for all cases
-        x = E_min
+        x = Fitting.E_min
         """ x - independent variable, nominally energy in keV """
 
         y1 = CountRate
         y2 = Counts
         y3 = Flux
+
         """ y - Plot Unit """
         # def find_all_indexes(input_str, search_str):
         #     l1 = []
@@ -774,7 +810,7 @@ class Fitting:
             plt.title('Flux Fitting using Exponential Power Law Model')
             plt.show()
 
-
+        
         # FIXME:
         # Calculate the Reduced Chi - square, test version
         # Initial guess

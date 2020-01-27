@@ -28,7 +28,7 @@ register_matplotlib_converters()
 from datetime import timedelta
 
 
-class Input:
+class Input():
    
     """
     Class to load the parameters from input data and plot Spectrum, Time Profile and Spectrogram
@@ -348,4 +348,5 @@ if __name__ == '__main__':
     plots.plot_spectrogram_rate() #plot Count Rate Spectrogram
     plots.plot_spectrogram_counts() #plot Counts Spectrogram
     plots.plot_spectrogram_flux() #plot Flux Spectrogram
+    plots.self.E_min
 
