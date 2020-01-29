@@ -1,5 +1,6 @@
 from tkinter import *
 from astropy.io import fits
+from matplotlib import pyplot as plt, figure
 import re
 import pandas as pd
 import plotting
@@ -15,6 +16,7 @@ class BackgroundWindow():
     fname=None
     bkgTimeInterv = None
     defaultTime = ""
+    plotType = None
     
     
     def __init__(self, root):
@@ -282,19 +284,19 @@ class BackgroundWindow():
           self.BkTimeInterv = Label(self.fr, text="Bk Time Intervals: ")
           self.BkTimeInterv.place(relx=0.01, rely=0.55)
 
-          self.Delete = Button(self.fr, text="Delete")
+          self.Delete = Button(self.fr, text="Delete", command= lambda: self.deleteTimeInterval())
           self.Delete.place(relx=0.15, rely=0.55)
 
           self.Change = Button(self.fr, text="Change", command= lambda: self.editTimeInterval(energyLabel) )
           self.Change.place(relx=0.22, rely=0.55)
 
-          self.Show = Button(self.fr, text="Show", command=lambda: self.show_backgroundplot("show", i))
+          self.Show = Button(self.fr, text="Show", command=lambda: self.showTimeInterval(i))
           self.Show.place(relx=0.29, rely=0.55)
 
           self.PlotSpectr = Button(self.fr, text="Plot Spectrum")
           self.PlotSpectr.place(relx=0.36, rely=0.55)
 
-          self.v4 = Button(self.fr, text="Plot vs Time",  command=lambda: self.show_backgroundplot("time", i))
+          self.v4 = Button(self.fr, text="Plot vs Time",  command=lambda: self.show_backgroundplot("time", i, False))
           self.v4.place(relx=0.48, rely=0.55)
 
           self.Error2 = Checkbutton(self.fr, text="Error", variable='Error2' +str(i))
@@ -358,8 +360,9 @@ class BackgroundWindow():
         
 ##        plots = bkgPlots.BackgPlots() if BackgroundWindow.fname is not None else None #background_plot.Input(BackgroundWindow.fname)
 ##        plots.plot(BackgroundWindow.bkgTimeInterv, self.var.get(), i, self.MethodVars[i].get(), True)
+
     """ Code to be executed when user clik on a plot button like 'plot vs time', 'plot spectrum', 'plot' of a specific energy band """
-    def show_backgroundplot(self, e, i): #make plots (plot vs time, plot spectrum ... ) 
+    def show_backgroundplot(self, e, i, showTime): #make plots (plot vs time, plot spectrum ... ) 
 
          energyLab = ['3.0 to 6.0 keV', '6.0 to 12.0 keV', '12.0 to 25.0 keV', '25.0 to 50.0 keV',
                       '50.0 to 100.0 keV', '100.0 to 300.0 keV' ]
@@ -367,6 +370,11 @@ class BackgroundWindow():
 
          if self.MethodVars is not None:
              print('separa in showplot', self.sepBkVar.get(), self.var.get(), self.MethodVars[0].get())
+
+         
+         BackgroundWindow.plotType = 'time' if e == 'time' else 'specgr'
+         print('show valll', BackgroundWindow.plotType)
+        
       
          if BackgroundWindow.bkgTimeInterv is not None:
              print('time interv', BackgroundWindow.bkgTimeInterv)         
@@ -376,21 +384,21 @@ class BackgroundWindow():
            if self.var.get() == 'Rate':
             if e == 'time':
                 #plots.rate_vs_time_plotting()
-                plots.plot(BackgroundWindow.bkgTimeInterv, 'Rate', i, self.MethodVars[i].get()) #plots.backg_plot_vs_time('counts', i)
+                plots.plot(BackgroundWindow.bkgTimeInterv, 'Rate', i, self.MethodVars[i].get(), showTime) #plots.backg_plot_vs_time('counts', i)
 ##            elif e == 'show':
 ##                plots.rate_vs_time_plotting()
 ##            elif e == 'specgr':
 ##                plots.plot_spectrogram_rate()
            if self.var.get() == 'Counts':
             if e == 'time':
-               plots.plot(BackgroundWindow.bkgTimeInterv, 'Counts', i, self.MethodVars[i].get()) #plots.backg_plot_vs_time('counts', i)
+               plots.plot(BackgroundWindow.bkgTimeInterv, 'Counts', i, self.MethodVars[i].get(), showTime) #plots.backg_plot_vs_time('counts', i)
 ##          elif e == 'show':
 ##             plots.rate_vs_time_plotting()
 ##          elif e == 'specgr':
 ##               plots.plot_spectrogram_rate()
            if self.var.get() == 'Flux':
             if e == 'time':
-                plots.plot(BackgroundWindow.bkgTimeInterv, 'Flux', i, self.MethodVars[i].get()) #plots.backg_plot_vs_time('flux', i)
+                plots.plot(BackgroundWindow.bkgTimeInterv, 'Flux', i, self.MethodVars[i].get(), showTime) #plots.backg_plot_vs_time('flux', i)
 ##            elif e == 'show':
 ##                plots.flux_vs_time_plotting()
 ##            elif e == 'specgr':
