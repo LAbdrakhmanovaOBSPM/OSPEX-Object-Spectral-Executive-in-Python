@@ -71,8 +71,7 @@ class Fitting:
         self.lblFunc = Label(self.top2, text="Set function components: ")#name the scrollbar
         self.lblFunc.place(relx=0.73, rely=0.20) #set the position
 
-
-
+        """Set Y axis. User choice from the interafce"""
         setY = str(Fitting.setEVal) if Fitting.setEVal is not None else '10 - 20'
         print("set val", setY, new_window.Set_Energy.yVal)
         Fitting.evalue = StringVar()
@@ -80,7 +79,7 @@ class Fitting:
         self.show_Button = Button(self.top2, textvariable=Fitting.evalue, command = lambda:self.editEnergy(self.top2))
         self.show_Button.place(relx=0.81, rely=0.39, relheight=0.05, relwidth=0.07)
 
-
+        """Creates a new window for "Set Y axis part" """
         def Set_Function(): # new window Set_Function definition
             newwin = Toplevel(root)
             newwin.title('Function values') #title of the window
@@ -91,34 +90,10 @@ class Fitting:
         self.Value_Button = Button(self.top2, text="Function value(s)", command = Set_Function) #place a "Function value" button
         self.Value_Button.place(relx=0.75, rely=0.26, relheight=0.05, relwidth=0.13) #locate
 
-
-       
-
-
         self.X_Label = Label(self.top2, text="Energy range(s) to fit: ") #place a "Set X" button 
         self.X_Label.place(relx=0.65, rely=0.40) #locate
-        
 
-
-            
-
-
-
-        # self.Y_Label = Label(self.top2, text="Set Y") #place a "Set Y" button 
-        # self.Y_Label.place(relx=0.65, rely=0.40, relheight=0.05, relwidth=0.13) #locate
-
-
-        #self.e1 = Entry(self.top2, textvariable = self.e)
-        #self.e1.place(relx=0.75, rely=0.30, relheight=0.05,relwidth=0.20)               
-        #self.e2 = Entry(self.top2, textvariable = self.e)
-        #self.e2.place(relx=0.75, rely=0.40, relheight=0.05,relwidth=0.20)
-
-        
-
-   
-        
-        
-
+#################### Main window description ######################
         """ 
         On the left: place a list of text alternatives (listbox)
         The user can choose(highlight) one of the options
@@ -168,7 +143,6 @@ class Fitting:
         self.closeButton5 = Button(self.top2, text="Close", command=self.destroy5) #add Close button
                                                                                    #Close "Fit Options" window
 
-
         """Next, we fill scrollbar with information related to each function
         """
         self.closeButton5.place(relx=0.5, rely=0.94)
@@ -198,10 +172,11 @@ class Fitting:
                       #Single Power Law Times an Exponential
         self.list_selection = Listbox(self.top2, highlightcolor = 'red', bd = 4)
         self.list_selection.place(relx=0.33, rely=0.15, relheight=0.45, relwidth=0.30)
-
+    """Call new class to edit Y axis"""
     def editEnergy(self, p1):
         new_window.Set_Energy(p1)
 
+    """Definitions to function selection from the list"""
     def onSelect(self, event):
         widget = event.widget
         selection=widget.curselection()
@@ -234,8 +209,6 @@ class Fitting:
        """
        # load chosen file in Select Input section 
        fname = Fitting.fname
-              
-
        if fname is None: # if file not choosen, print
          print('Please, choose input file')
 
@@ -254,8 +227,6 @@ class Fitting:
         E_max = data2.E_MAX
         Area = header3[24]
         E_mean = np.mean(Fitting.E_min)
-        
-    
 
         """Define Spectrum Units: Rate, Counts, Flux"""
 
@@ -281,16 +252,35 @@ class Fitting:
         for i in range(n):
             Flux[i] = np.mean(Rate[:, i] / (Area * deltaE[i] - 2))
 
-        # Predefine Input Data in x and y
-        # We equate three components to y1, y2, y3. The value of x is the same for all cases
-        x = Fitting.E_min
-        """ x - independent variable, nominally energy in keV """
+        """ 
+        Predefine Input Data in x and y
+        
+        We equate three components to y1, y2, y3. The value of x is the same for all cases
+        
+        x - independent variable, nominally energy in keV 
+        
+        y - Plot Unit
+        
+        """
 
-        y1 = CountRate
-        y2 = Counts
-        y3 = Flux
+        # Set the conditions to Set Y axis
+        if Fitting.setEVal is None:
+            x = Fitting.E_min
+            y1 = CountRate
+            y2 = Counts
+            y3 = Flux
+        else:
+            # Energy boundaries
+            energy_min = int(Fitting.setEVal.split(' - ')[0])
+            energy_max = int(Fitting.setEVal.split(' - ')[1])
+            assert energy_max > energy_min
+            # Energy value mask
+            energy_mask = (Fitting.E_min >= energy_min) & (Fitting.E_min <= energy_max)
+            x = Fitting.E_min[energy_mask]
+            y1 = CountRate[energy_mask]
+            y2 = Counts[energy_mask]
+            y3 = Flux[energy_mask]
 
-        """ y - Plot Unit """
         # def find_all_indexes(input_str, search_str):
         #     l1 = []
         #     length = len(input_str)
@@ -303,10 +293,10 @@ class Fitting:
         #         index = i + 1
         #     return l1
         # print(find_all_indexes(str(E_min), str(E_min[0:-1])))
-        indexesX = np.where((x <= x[-1]) & (x >= x[0]))
-        print(indexesX)
-        indexesY1 = np.where((y3 < y3[-1]) & (y3 > y3[0]))
-        print(indexesY1)
+        # indexesX = np.where((x <= x[-1]) & (x >= x[0]))
+        # print(indexesX)
+        # indexesY1 = np.where((y3 < y3[-1]) & (y3 > y3[0]))
+        # print(indexesY1)
         # nX = int(input(self.e1.get()))
         # nY = int(input(self.e1.get()))
         # keyword_arrayX = []
@@ -504,8 +494,6 @@ class Fitting:
         Outputs:
         result of function, a power - law times an exponential
         """
-
-
 
 ######################### Define the functions for Rate ###############################
 
@@ -810,7 +798,6 @@ class Fitting:
             plt.title('Flux Fitting using Exponential Power Law Model')
             plt.show()
 
-        
         # FIXME:
         # Calculate the Reduced Chi - square, test version
         # Initial guess
