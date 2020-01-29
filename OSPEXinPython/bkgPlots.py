@@ -23,7 +23,7 @@ class BackgPlots():
         
         bkgTimeIntv = ""
 
-    def plot(self, timeInterv, unit, energyBinIndex, polyDeg):
+    def plot(self, timeInterv, unit, energyBinIndex, polyDeg, showTimeInterv):
         if background.BackgroundWindow.fname is not None:
             hdulist = fits.open(background.BackgroundWindow.fname)
             hdulist.info()
@@ -142,13 +142,18 @@ class BackgPlots():
             energyLab = ['3.0 to 6.0 keV', '6.0 to 12.0 keV', '12.0 to 25.0 keV', '25.0 to 49.0 keV',
                       '49.0 to 100.0 keV', '100.0 to 250.0 keV' ]
             xticksVal = TimeNew2.strftime('%H:%M') #TimeNew2.time
-            
-            plt.figure()
+
+            figName = "plot vs time" if background.BackgroundWindow.plotType == 'time' else "specgr"
+            if background.BackgroundWindow.plotType != 'time' or  background.BackgroundWindow.plotType != "specgr" :
+                plt.clf()
+                plt.close()
+            plt.figure(figName)
             plt.plot(TimeNew2.time, unitData, drawstyle='steps-post', color=colors[int(energyBinIndex)], label = str(energyLab[int(energyBinIndex)]) + ' (Data with Bk)')
 
             ####################### numpy poly plot bkg : poly1d ############################################################################
             ####################### plot bkg ########################################################################################
             bkgMethod = {0:'0Poly', 1:'1Poly', 2:'2Poly', 3:'3Poly', 4:'Exp', 5:'High E Profile', 6:'This E Profile'}
+            if polyDeg == bkgMethod[0]:
                fitRslt = np.poly1d(np.polyfit(Time2[startIndex:endIndex +1], unitData[startIndex:endIndex +1], 0)) #,  w= 1.0/unitData[startIndex:endIndex +1]))
             elif polyDeg == bkgMethod[1]:
                fitRslt = np.poly1d(np.polyfit(Time2[startIndex:endIndex +1], unitData[startIndex:endIndex +1], 1))
@@ -159,21 +164,20 @@ class BackgPlots():
                   
             plt.plot(TimeNew2.time, fitRslt(Time2), drawstyle='steps-post', color='green', label = str(energyLab[int(energyBinIndex)]) + ' (Bk)')
             #print('plot bkg', TimeNew2.time.shape, fitRslt(Time2).shape, unitData.shape)
-            
-            plotTimeInterv = np.zeros(shape=(len(unitData), len(range(startIndex, endIndex)))) #, len(range(startIndex, endIndex + 1)))
-            plotTimeIntervData = np.zeros(shape=(len(range(startIndex, endIndex + 1))))
-            #plotTimeInterv[:] = Time2[startIndex]
-            k=0
-            for i in range(startIndex, endIndex):
-                plotTimeInterv[:,k] = Time2[i]
-                plt.plot(plotTimeInterv[:,k], unitData - fitRslt(Time2), drawstyle='steps-post', color='red')
-                k+=1
-            plt.plot(plotTimeInterv[:,0], unitData - fitRslt(Time2),linestyle='dashed', drawstyle='steps-post', color='black')
-            plt.plot(plotTimeInterv[:,-1], unitData - fitRslt(Time2),'-', drawstyle='steps-post', color='black')
-##            for j in range(len(unitData)):
-##                plotTimeInterv[j,:] = [Time2[i] for i in range(startIndex, endIndex + 1)]
-##                #plt.plot(val, unitData, drawstyle='steps-post', color='red')
-            print('plot bkg', startIndex, endIndex + 1, plotTimeInterv.shape, len(range(startIndex, endIndex))) 
+
+            ############################################ plot timeinterval #################################"
+            if showTimeInterv:
+                plotTimeInterv = np.zeros(shape=(len(unitData), len(range(startIndex, endIndex)))) #, len(range(startIndex, endIndex + 1)))
+                plotTimeIntervData = np.zeros(shape=(len(range(startIndex, endIndex + 1))))
+                #plotTimeInterv[:] = Time2[startIndex]
+                k=0
+                for i in range(startIndex, endIndex):
+                    plotTimeInterv[:,k] = Time2[i]
+                    plt.plot(plotTimeInterv[:,k], unitData - fitRslt(Time2), drawstyle='steps-post', color='red')
+                    k+=1
+                plt.plot(plotTimeInterv[:,0], unitData - fitRslt(Time2),linestyle='dashed', drawstyle='steps-post', color='black')
+                plt.plot(plotTimeInterv[:,-1], unitData - fitRslt(Time2),'-', drawstyle='steps-post', color='black')
+                print('plot bkg', startIndex, endIndex + 1, plotTimeInterv.shape, len(range(startIndex, endIndex))) 
 
 
 
