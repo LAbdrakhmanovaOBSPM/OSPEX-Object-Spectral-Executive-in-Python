@@ -49,7 +49,7 @@ class EditTimeWindow():
         self.lblCurrentIntervals.place(relx=0.01, rely=0.25)
 
 
-        timeInterv =  str(EditTimeWindow.bkgTimeInterv) if EditTimeWindow.bkgTimeInterv is not None else str(energyBin)
+        timeInterv =  str(EditTimeWindow.bkgTimeInterv) if EditTimeWindow.bkgTimeInterv is not None else 'None' # str(energyBin)
         print('time intervallllllllllll', timeInterv)
         EditTimeWindow.defaultTime = StringVar()
         EditTimeWindow.defaultTime.set(timeInterv)        
