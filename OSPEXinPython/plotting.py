@@ -246,7 +246,7 @@ class Input():
         else:
             print('error')
             return
-        plt.figure()
+        #plt.figure()
         plt.plot(self.E_min, data, drawstyle='steps-post') #Unit vs Energy
         plt.yscale('log')
         plt.xscale('log')
