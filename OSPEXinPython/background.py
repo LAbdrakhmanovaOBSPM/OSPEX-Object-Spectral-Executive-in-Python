@@ -339,6 +339,25 @@ class BackgroundWindow():
 
          print('plt', BackgroundWindow.fname)
 
+
+    def deleteTimeInterval(self):
+        BackgroundWindow.bkgTimeInterv = None
+        BackgroundWindow.defaultTime.set(None)
+        editTime.EditTimeWindow.bkgTimeInterv = None
+        editTime.EditTimeWindow.defaultTime.set(None)
+
+        print('show val', BackgroundWindow.plotType)
+        #plt.figure("plot vs time")
+##
+    def showTimeInterval(self, i):
+        
+        #plt.figure()
+        plt.clf()
+        plt.figure('plot vs time')
+        self.show_backgroundplot(BackgroundWindow.plotType, i, True)
+        
+##        plots = bkgPlots.BackgPlots() if BackgroundWindow.fname is not None else None #background_plot.Input(BackgroundWindow.fname)
+##        plots.plot(BackgroundWindow.bkgTimeInterv, self.var.get(), i, self.MethodVars[i].get(), True)
     """ Code to be executed when user clik on a plot button like 'plot vs time', 'plot spectrum', 'plot' of a specific energy band """
     def show_backgroundplot(self, e, i): #make plots (plot vs time, plot spectrum ... ) 
 
