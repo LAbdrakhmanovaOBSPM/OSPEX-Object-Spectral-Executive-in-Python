@@ -29,28 +29,15 @@ from datetime import timedelta
 
 
 class Input():
-   
-    """
-    Class to load the parameters from input data and plot Spectrum, Time Profile and Spectrogram
-       
-    Called Units: Rate, Counts, Flux
-   
-    """
+    """Class to load the parameters from input data and plot Spectrum, Time Profile and Spectrogram.
+       Called Units: Rate, Counts, Flux."""
   
     def __init__(self, file):
-        data1, data2, header3, header1 = self.__load_data(file) 
-
-        """
-
-        When open the .fits file, the returned object, called hdulist, behaves like a Python list and each element maps
-
+        """When open the .fits file, the returned object, called hdulist, behaves like a Python list and each element maps
         to a Header - Data Unit(HDU). We are primarily interested in RATE extension which contains the spectral data.
-
         Extracted object has two important attributes: data, which behaves like an array, can be used to access to the numerical data;
-
-        and header, which behaves like a dictionary, can be used to access to the header information
-
-        """
+        and header, which behaves like a dictionary, can be used to access to the header information"""
+        data1, data2, header3, header1 = self.__load_data(file) 
 
         # Define the parameters from HEADER and DATA
         # access by keywords
@@ -78,30 +65,24 @@ class Input():
         # conversion from seconds to hours/minutes/seconds
         self.TimeNew2 = pd.to_datetime(self.Time2, unit='s')
 
-    def __load_data(self, file):   #load the input file choosen in 'Select Input' section
+    def __load_data(self, file):
+        """Loading the input file choosen in 'Select Input' section"""
         hdulist = fits.open(file) # read the data
         hdulist.info() # display the content of the read file
         return hdulist[1].data, hdulist[2].data, hdulist[1].header, hdulist[3].header  #read the Data and Header contents from input file
 
 ################### 1. Time Profile Plotting ####################
 
-    """
-
-    Define the Rate for "Plot Time Profile"
-
-    Rate  = array which has a count rate data to each energy channel
-
-    There are 6 energy channels
-    1: 3-6 kEV
-    2: 6-12 keV
-    3: 12-25 keV
-    4: 25-49 keV
-    5: 49-100 keV
-    6: 100-250 keV 
-    
-    """
- 
     def __get_rate_data(self):
+        """Define the Rate for "Plot Time Profile"
+        Rate  = array which has a count rate data for each energy channel
+        There are 6 energy channels
+        1: 3-6 kEV
+        2: 6-12 keV
+        3: 12-25 keV
+        4: 25-49 keV
+        5: 49-100 keV
+        6: 100-250 keV """
         data = np.zeros(shape=(self.time_len, 6))
         for i in range(self.time_len):
             # determine the energy distribution for different channels relative to the time of observed data
@@ -113,14 +94,9 @@ class Input():
             data[i, 5] = sum(self.rate[i, 57:76]) #100-250 keV
         return data #return Rate unit
 
-    """
-    Define the Counts for "Plot Time Profile"
-      
-    In order to perform the conversion between Rate and Counts, multiply accumulation time by Rate
-
-    """
-
     def __get_counts_data(self):
+        """Define the Counts for "Plot Time Profile"
+        In order to perform the conversion between Rate and Counts, multiply accumulation time by Rate"""
         data = np.zeros(shape=(self.time_len, 6))
         for i in range(self.time_len):
             data[i, 0] = sum(self.rate[i, 0:3]) * self.Time_del[i]
@@ -131,15 +107,9 @@ class Input():
             data[i, 5] = sum(self.rate[i, 57:76]) * self.Time_del[i]
         return data #return Counts unit
 
-    """
-    
-    Define the Flux for "Plot Time Profile"
-
-    In order to convert Rate to count flux, divide the Rate by Area and Energy bin width
-
-    """
-
     def __get_flux_data(self):
+        """Define the Flux for "Plot Time Profile"
+        In order to convert Rate to count flux, divide the Rate by Area and Energy bin width"""
         data = np.zeros(shape=(self.time_len, 6))
         for i in range(self.time_len):
             data[i, 0] = sum(self.rate[i, 0:3]) / (self.Area * self.E1)
@@ -154,6 +124,7 @@ class Input():
 
     # 1. Plot Time Profile for Rate, Counts, Flux
     def __time_profile_plotting(self, data, xlabel, title, show=True, name=None):
+        """Plotting the function of time by selected Unit"""
         df = pd.DataFrame(data, index=self.TimeNew2,
                           columns=['3-6keV(Data with Bk)', '6-12keV(Data with Bk)', '12-25keV(Data with Bk)',
                                    '25-49keV(Data with Bk)', '49-100keV(Data with Bk)', '100-250keV(Data with Bk)']) # add labels for each energy channel
@@ -165,8 +136,6 @@ class Input():
         # 'steps-post': The y value is continued constantly to the right from every x position, i.e. the interval [x[i], x[i+1]) has the value y[i]
         # 'steps-mid': Steps occur half-way between the x positions
         #plt.rc('legend', labelsize=6)
-
-        
         plt.yscale('log') # set Y-axis in log
         plt.xlabel('Start time: ' + str(self.Date_start)) # load start time from header and display it in X - axis
         plt.ylabel(xlabel)
@@ -179,36 +148,34 @@ class Input():
         if name:
             plt.savefig(name, format='png')
 
-    # if user pick Rate in 'Plot Units' section, plot 'Time profile':
+    # if Rate, plot:
     def rate_vs_time_plotting(self):
+        """If user pick Rate in 'Plot Units' section, plot 'Time profile':"""
         rate_data = self.__get_rate_data()
         self.__time_profile_plotting(rate_data, 'counts/s', 'SPEX HESSI Count Rate vs Time') # name Y -axis and title for Rate 
 
     # if Counts:
     def counts_vs_time_plotting(self):
+        """If user pick Counts in 'Plot Units' section, plot 'Time profile':"""
         count_data = self.__get_counts_data()
 
         self.__time_profile_plotting(count_data, 'counts', 'SPEX HESSI Counts vs Time') # name Y -axis and title for Counts 
 
     # if Flux:
     def flux_vs_time_plotting(self):
+        """If user pick Flux in 'Plot Units' section, plot 'Time profile':"""
         flux_data = self.__get_flux_data()
         self.__time_profile_plotting(flux_data, 'counts s^(-1) cm^(-2) keV^(-1)', 'SPEX HESSI Count Flux vs Time') # name Y -axis and title for Flux
 
 ############################# 2. Spectrum plotting #################
 
-    """ 
-
-    As a photons come in over the time and with different energies, the spectrum of counts is built up
-
-    Spectrum = function of energies for Rate/Counts/Flux 
-
-    """
-
     def __plot_spectrum(self, typ):
+        """As a photons come in over the time and with different energies, the spectrum of counts is built up
+        Spectrum = function of energies for Rate/Counts/Flux"""
         n = len(self.E_min)
         data = np.zeros(shape=n) 
         if typ == 'rate':
+            plt.figure()
             for i in range(n):
                 data[i] = np.mean(self.rate[:, i]) # determine Rate for "Plot Spectrum"
                 plt.rcParams["figure.figsize"] = [6, 6] # plot window size
@@ -220,6 +187,7 @@ class Input():
                 plt.ylabel('counts/s') # Label Y - axis
                 plt.title('SPEX HESSI Count Rate vs Energy') # plot title
         elif typ == 'counts':
+            plt.figure()
             for i in range(n):
                 data[i] = np.mean(self.rate[:, i] * self.sum) #determine Counts for "Plot Spectrum"
                 plt.rcParams["figure.figsize"] = [6, 6]
@@ -230,6 +198,7 @@ class Input():
                 plt.ylabel('counts')
                 plt.title('SPEX HESSI Counts vs Energy')
         elif typ == 'flux':
+            plt.figure()
             deltaE = np.zeros(shape=(n))
             for i in range(n):
                 deltaE[i] = self.E_max[i] - self.E_min[i] # energy range
@@ -253,28 +222,24 @@ class Input():
         plt.show()
 
     # Plot:
-    #Spectrum for Rate
+
     def plot_spectrum_rate(self):
+        """Plot spectrum for Rate"""
         self.__plot_spectrum('rate')
 
-    #Spectrum for Counts
     def plot_spectrum_counts(self):
+        """Plot spectrum for Counts"""
         self.__plot_spectrum('counts')
 
-    #Spectrum for Flux
     def plot_spectrum_flux(self):
+        """Plot spectrum for Flux"""
         self.__plot_spectrum('flux')
 
 ########################### 3. Spectrogram Plotting ################
 
-    """
-
-    Spectrogram = function of Rate/Counts/Flux as a function of energy and time
-    
-    Parameters: x = tick(Time in h:m:s) and y(Energy bounds) are bounds, z is the value *inside* those bounds (Rate/Counts/Flux)
-
-    """
     def __plot_spectrogram(self, typ):
+        """Spectrogram = function of Rate/Counts/Flux as a function of energy and time
+        Parameters: x = tick(Time in h:m:s) and y(Energy bounds) are bounds, z is the value *inside* those bounds (Rate/Counts/Flux)"""
         tick = np.array([str(timedelta(seconds=s)) for s in self.Time2]) # rewrite the time array in a new format: hours:minutes:seconds
         # pcolormesh function(below) doesn't work with pandas time conversion function(TimeNew), that's why we rewrite it again
         #X, Y = np.meshgrid(tick, self.E_min)
@@ -322,19 +287,19 @@ class Input():
         # for 1st data: step = 30 # , rotation = 90)
         plt.show()
 
-    # Plot Spectrogram
-    # Spectrogram for Rate
+    # Plot Spectrogram for Rate
     def plot_spectrogram_rate(self):
+        """Plot Spectrogram for Rate"""
         self.__plot_spectrogram('rate')
 
-    # Spectrogram for Counts
     def plot_spectrogram_counts(self):
+        """Plot Spectrogram for Counts"""
         self.__plot_spectrogram('counts')
 
-    # Spectrogram for Flux
+    # Plot spectrogram for Flux
     def plot_spectrogram_flux(self):
+        """Spectrogram for Flux"""
         self.__plot_spectrogram('flux')
-
 
 # testing
 if __name__ == '__main__':
@@ -348,5 +313,4 @@ if __name__ == '__main__':
     plots.plot_spectrogram_rate() #plot Count Rate Spectrogram
     plots.plot_spectrogram_counts() #plot Counts Spectrogram
     plots.plot_spectrogram_flux() #plot Flux Spectrogram
-    plots.self.E_min
 

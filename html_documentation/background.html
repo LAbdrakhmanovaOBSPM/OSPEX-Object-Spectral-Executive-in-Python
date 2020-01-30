@@ -1,0 +1,1262 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.7.2" />
+<title>background API documentation</title>
+<meta name="description" content="" />
+<link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
+<link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+<style>.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{font-weight:bold}#index h4 + ul{margin-bottom:.6em}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>background</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">from tkinter import *
+from astropy.io import fits
+from matplotlib import pyplot as plt, figure
+import re
+import pandas as pd
+import plotting
+import background_plot
+import warnings
+import second
+import editTime
+import bkgPlots
+
+&#34;&#34;&#34;Class to create a background Window&#34;&#34;&#34;
+class BackgroundWindow():
+    
+    fname=None
+    bkgTimeInterv = None
+    defaultTime = &#34;&#34;
+    plotType = None
+    
+    
+    def __init__(self, root):
+        self.top1 = Toplevel()
+        self.top1.title(&#39;SPEX Background Options&#39;)
+        self.top1.geometry(&#34;1000x600&#34;)
+        Label(self.top1,
+              text=&#34;Select Background&#34;,
+              fg=&#34;black&#34;,
+              font=&#34;Helvetica 12 bold italic&#34;).pack()
+
+        &#34;&#34;&#34;Initiate the parameters and widgets&#34;&#34;&#34;
+
+        self.hdul = None
+
+        self.root = root
+        self.sepBkVar = IntVar()
+        self.MethodChoices = (&#39;0Poly&#39;, &#39;1Poly&#39;, &#39;2Poly&#39;, &#39;3Poly&#39;, &#39;Exp&#39;, &#39;High E Profile&#39;, &#39;This E Profile&#39;)
+        self.MethodVars = [StringVar() for i in range(7)]
+
+        timeInterv =  str(BackgroundWindow.bkgTimeInterv) if BackgroundWindow.bkgTimeInterv is not None else &#39;None&#39;
+        BackgroundWindow.defaultTime = StringVar()
+        BackgroundWindow.defaultTime.set(timeInterv)
+
+        #########################################################################################
+        &#34;&#34;&#34;                         First frame: Create interval selection frame                                    &#34;&#34;&#34;
+
+        self.frame1 = LabelFrame(self.top1, relief=RAISED, borderwidth=2)
+        self.frame1.place(relx=0.05, rely=0.04, relheight=0.1, relwidth=0.9)
+
+        self.lblFilename = Label(self.frame1, text=&#34;Interval Selection: &#34;)
+        self.lblFilename.place(relx=0.01, rely=0.2)
+
+        self.chkBtGraphical = Checkbutton(self.frame1, text=&#34;Graphical&#34;, variable=&#39;Graphical&#39;)
+        self.chkBtGraphical.place(relx=0.15, rely=0.2)
+
+        self.chkBtFullOptions = Checkbutton(self.frame1, text=&#34;Full Options&#34;, variable=&#39;FullOpt&#39;)
+        self.chkBtFullOptions.place(relx=0.25, rely=0.2)
+    
+        self.Component_choices = (&#39;Rate&#39;, &#39;Counts&#39;, &#39;Flux&#39;)
+        self.var = StringVar(self.frame1)
+        self.var.set(self.Component_choices[2])
+        self.selection = OptionMenu(self.frame1, self.var, *self.Component_choices)
+        self.selection.place(relx=0.46, rely=0.18)
+
+        self.lblPlotUnits = Label(self.frame1, text=&#34;Plot Units: &#34;)
+        self.lblPlotUnits.place(relx=0.37, rely=0.18)
+
+        #################################################################################
+        
+        &#34;&#34;&#34;                  Second frame: options for separate bk parameters            &#34;&#34;&#34;
+     
+        
+        self.frame2 = Frame(self.top1, relief=RAISED, borderwidth=2)
+        self.frame2.place(relx=0.05, rely=0.14, relheight=0.27, relwidth=0.9)
+
+        self.SeparateBk = Checkbutton(self.frame2, text=&#34;Separate BK for each energy band&#34;,
+        variable=self.sepBkVar, command=self.onClikSeparateBk, state=NORMAL) #command=self.onClikSeparateBk, onvalue = True, offvalue = False,
+        self.SeparateBk.place(relx=0.01, rely=0.04)
+        #self.SeparateBk.bind(&#34;&lt;Button-1&gt;&#34;, self.onClikSeparateBk)
+
+        self.AllBands_choices = (&#39;Set all bands to&#39;, &#39;0Poly&#39;, &#39;1Poly&#39;, &#39;2Poly&#39;, &#39;3Poly&#39;, &#39;Exp&#39;, &#39;High E Profile&#39;, &#39;This E Profile&#39;)
+        self.AllBandsVar = StringVar(self.frame2)
+        self.AllBandsVar.set(self.AllBands_choices[0])
+        self.AllBandsSelection = OptionMenu(self.frame2, self.AllBandsVar, *self.AllBands_choices)
+        self.AllBandsSelection.place(relx=0.26, rely=0.04)
+        self.AllBandsSelection.config(state=&#34;disabled&#34;)
+        
+
+        &#34;&#34;&#34; half smoothing &#34;&#34;&#34;
+        self.HalfSmooth = Label(self.frame2, text=&#34;Profile Half Smoothing width(#pts):&#34;)
+        self.HalfSmooth.place(relx=0.41, rely=0.05)
+
+        self.HalfSmoothList = (&#34;0&#34;,&#34;1&#34;,&#34;4&#34;,&#34;8&#34;,&#34;16&#34;,&#34;32&#34;,&#34;64&#34;,&#34;128&#34;,&#34;256&#34;)
+
+        self.SpinboxHalfSmooth = Spinbox(self.frame2, values=self.HalfSmoothList )
+        self.SpinboxHalfSmooth.place(relx=0.63, rely=0.05, width=50)
+
+        &#34;&#34;&#34; show profile &#34;&#34;&#34;
+        self.ShowProfile = Checkbutton(self.frame2, text=&#34;Show Profile&#34;, variable=&#39;ShowProf&#39;)
+        self.ShowProfile.place(relx=0.7, rely=0.04)
+
+        &#34;&#34;&#34; Current Energy Bands &#34;&#34;&#34;
+        self.lblCurrentEnergy = Label(self.frame2, text=&#34;Current Energy Bands:&#34;)
+        self.lblCurrentEnergy.place(relx=0.01, rely=0.4)
+
+        self.CurrentEnergy_choices = (&#39;3.0 to 6.0&#39;, &#39;6.0 to 12.0&#39;, &#39;12.0 to 25.0&#39;, &#39;25.0 to 50.0&#39;, &#39;50.0 to 100.0&#39;, &#39;100.0 to 300.0&#39;)
+        self.CurrentEnergyVar = StringVar(self.frame2)
+        self.CurrentEnergyVar.set(self.CurrentEnergy_choices[0])
+        self.CurrentEnergySelection = OptionMenu(self.frame2, self.CurrentEnergyVar, *self.CurrentEnergy_choices)
+        self.CurrentEnergySelection.place(relx=0.15, rely=0.4)
+        self.CurrentEnergySelection.config(state=&#34;disabled&#34;)
+
+        &#34;&#34;&#34; Bands 0 &#34;&#34;&#34;
+        self.Bands0 = Label(self.frame2, text=&#34;#Bands:0&#34;)
+        self.Bands0.place(relx=0.3, rely=0.4)
+
+        &#34;&#34;&#34; Change Energy Band Button &#34;&#34;&#34;
+        self.ChangeEnergBand = Button(self.frame2, text=&#34;Change&#34;) #, state=DISABLED, command=self.editTimeInterval)
+        self.ChangeEnergBand.place(relx=0.38, rely=0.4)
+
+        &#34;&#34;&#34; set_to_spex_eband Button &#34;&#34;&#34;
+        self.SetSpex = Button(self.frame2, text=&#34;Set to spex_eband&#34;, state=DISABLED)
+        self.SetSpex.place(relx=0.45, rely=0.4)
+
+        &#34;&#34;&#34; show Button &#34;&#34;&#34;
+        self.ShowFluxEnerg = Button(self.frame2, text=&#34;Show&#34;, state=DISABLED)
+        self.ShowFluxEnerg.place(relx=0.58, rely=0.4)
+
+        &#34;&#34;&#34; Loop_set_times button &#34;&#34;&#34;
+        self.LoopSetTimes = Button(self.frame2, text=&#34;Loop to Set Times&#34;, state=DISABLED)
+        self.LoopSetTimes.place(relx=0.01, rely=0.7)
+
+        &#34;&#34;&#34; Delete_all_times Button &#34;&#34;&#34;
+        self.DelAllTimes = Button(self.frame2, text=&#34;Delete all Times&#34;, state=DISABLED)
+        self.DelAllTimes.place(relx=0.15, rely=0.7)
+        ########################################################################################
+        
+        &#34;&#34;&#34;              Third frame: display group of bk energy_bins                         &#34;&#34;&#34;
+        
+        self.frame3 = LabelFrame(self.top1, relief=RAISED, borderwidth=2)
+        self.frame3.place(relx=0.05, rely=0.41, relheight=0.27, relwidth=0.9)
+
+
+        ########################################################################################
+        
+        &#34;&#34;&#34;                           Fourth frame: Time profile in spex_ebands                         &#34;&#34;&#34;
+        self.frame4 = LabelFrame(self.top1, relief=RAISED, borderwidth=2)
+        self.frame4.place(relx=0.05, rely=0.68, relheight=0.08, relwidth=0.9)
+
+        self.SpexBands = Label(self.frame4, text=&#34;Time Profile in spex_ebands:&#34;)
+        self.SpexBands.place(relx=0.01, rely=0.04)
+
+        self.Data = Checkbutton(self.frame4, text=&#34;Data&#34;, variable=&#39;Data&#39;)
+        self.Data.place(relx=0.22, rely=0.04)
+
+        self.Background = Checkbutton(self.frame4, text=&#34;Background&#34;, variable=&#39;Background&#39;)
+        self.Background.place(relx=0.29, rely=0.04)
+
+        self.DataBackground = Checkbutton(self.frame4, text=&#34;Data-Background&#34;, variable=&#39;DataBack&#39;)
+        self.DataBackground.place(relx=0.4, rely=0.04)
+
+        self.Error = Checkbutton(self.frame4, text=&#34;Error&#34;, variable=&#39;Error&#39;)
+        self.Error.place(relx=0.54, rely=0.04)
+
+        self.Plot = Button(self.frame4, text=&#34;Plot&#34;)
+        self.Plot.place(relx=0.63, rely=0.04)
+
+        self.Refresh = Button(self.top1, text=&#34;Refresh&#34;)
+        self.Refresh.place(relx=0.45, rely=0.8)
+
+        self.Close = Button(self.top1, text=&#34;Close&#34;)
+        self.Close.place(relx=0.54, rely=0.8)
+
+        &#34;&#34;&#34; Scrollbar &#34;&#34;&#34;
+        self.vscrollbar = Scrollbar(self.frame3, orient=&#34;vertical&#34;)
+        self.vscrollbar.pack(side=&#39;right&#39;, fill=&#34;y&#34;)
+
+        self.hscrollbar = Scrollbar(self.frame3, orient=&#34;horizontal&#34;)
+        self.hscrollbar.pack(side=&#39;bottom&#39;, fill=&#34;x&#34;)
+        #self.hscrollbar.place(relx=0.1, rely=0.3)
+        #################################################################################################
+
+        &#34;&#34;&#34;                                  Canvas                                    &#34;&#34;&#34;
+        self.backCanv = Canvas(self.frame3, bd=2, width=850, bg=&#34;#FFFFFF&#34;, height=120) #, background=&#39;#FFFFFF&#39;
+        #self.backCanv.pack(fill=&#39;x&#39;)
+        self.vscrollbar.config(command=self.backCanv.yview)
+        self.hscrollbar.config(command=self.backCanv.xview)
+        self.backCanv.config(yscrollcommand=self.vscrollbar.set)
+        self.backCanv.config(xscrollcommand=self.hscrollbar.set)
+        self.backCanv.config(scrollregion = (0,0,700,700))
+        #self.backCanv.place(relx=0.01, rely=0.1)
+        self.backCanv.pack(fill=&#34;both&#34;, expand=True)
+        #self.SeparateBk.config(command=self.backCanv.config(state=&#34;normal&#34;))
+  
+        #self.backCanv.delete(ALL)
+        self.notSeparateCanva()
+
+##############################################      Functions          ####################################################################
+    &#34;&#34;&#34; Function to be executed when user clik on an energy bin &#39;s change button &#34;&#34;&#34;
+    def editTimeInterval(self, binInterval):
+        editTime.EditTimeWindow(binInterval)
+
+    &#34;&#34;&#34; Display all energybins in one frame when user unchecked the &#39;separate_bk_for each energy band checkbox&#39;  &#34;&#34;&#34;
+    def notSeparateCanva(self):
+        self.backCanv.config(scrollregion = (0,0,700,100))
+        self.frame0 = Frame(self.backCanv, relief=RAISED, borderwidth=2, width=800, height=90)
+
+        self.backCanv.create_window(400, 70,  window=self.frame0, width=800, height=90)
+        
+        self.AllEnerg = Label(self.frame0, text=&#34;For all Energies: &#34;)
+        self.AllEnerg.place(relx=0.01, rely=0.12)
+
+        self.BkTimes = Label(self.frame0, text=&#34;Bk Times:&#34;)
+        self.BkTimes.place(relx=0.15, rely=0.12)
+
+
+        self.BkTSelection = Button(self.frame0, text=&#34;None&#34;)
+        self.BkTSelection.place(relx=0.24, rely=0.15)
+
+
+        self.Times = Label(self.frame0, text=&#34;#Times: 0 &#34;)
+        self.Times.place(relx=0.62, rely=0.12)
+
+        self.Method = Label(self.frame0, text=&#34;Method:&#34;)
+        self.Method.place(relx=0.7, rely=0.12)
+
+        self.Method_choices = (&#39;0Poly&#39;, &#39;1Poly&#39;, &#39;2Poly&#39;, &#39;3Poly&#39;, &#39;Exp&#39;, &#39;High E Profile&#39;, &#39;This E Profile&#39;)
+        self.MethodVar = StringVar(self.frame0)
+        self.MethodVar.set(self.Method_choices[0])
+        self.MethodSelection = OptionMenu(self.frame0, self.MethodVar, *self.Method_choices)
+        self.MethodSelection.place(relx=0.76, rely=0.09)
+        
+
+        self.BkTimeInterv = Label(self.frame0, text=&#34;Bk Time Intervals: &#34;)
+        self.BkTimeInterv.place(relx=0.01, rely=0.55)
+
+        self.Delete = Button(self.frame0, text=&#34;Delete&#34;)
+        self.Delete.place(relx=0.15, rely=0.55)
+
+        self.Change = Button(self.frame0, text=&#34;Change&#34;)
+        self.Change.place(relx=0.22, rely=0.55)
+
+        self.Show = Button(self.frame0, text=&#34;Show&#34;) #, command=lambda: self.show_backgroundplot(&#34;show&#34;, 6))
+        self.Show.place(relx=0.29, rely=0.55)
+
+        self.PlotSpectr = Button(self.frame0, text=&#34;Plot Spectrum&#34;)
+        self.PlotSpectr.place(relx=0.36, rely=0.55)
+
+        self.PlotVsTim = Button(self.frame0, text=&#34;Plot vs Time&#34;) #, command=lambda: self.show_backgroundplot(&#34;time&#34;, 6))
+        self.PlotVsTim.place(relx=0.48, rely=0.55)
+
+        self.Error2 = Checkbutton(self.frame0, text=&#34;Error&#34;, variable=&#39;Error2&#39;)
+        self.Error2.place(relx=0.58, rely=0.55)
+
+    &#34;&#34;&#34; function to create a subframe for each energy band &#34;&#34;&#34;
+    def energBandCanvList(self, i, x, y, energyLabel):
+
+          fr = &#39;frame&#39;+str(i)
+          v1 = &#39;MethodSelect&#39; + str(i)
+          v4 = &#39;PlotVsTim&#39; +str(i)
+        
+          self.fr= Frame(self.backCanv, relief=RAISED, borderwidth=2, width=800, height=110)
+          self.backCanv.create_window(x, y,  window=self.fr, width=800, height=90)
+
+          self.AllEnerg = Label(self.fr, text=energyLabel)
+          self.AllEnerg.place(relx=0.01, rely=0.12)
+
+          self.BkTimes = Label(self.fr, text=&#34;Bk Times:&#34;)
+          self.BkTimes.place(relx=0.15, rely=0.12)
+      
+          self.BkTSelection = Button(self.fr, textvariable = BackgroundWindow.defaultTime)
+          self.BkTSelection.place(relx=0.24, rely=0.15)
+        
+          self.Times = Label(self.fr, text=&#34;#Times: 0 &#34;)
+          self.Times.place(relx=0.62, rely=0.12)
+
+          self.Method = Label(self.fr, text=&#34;Method:&#34;)
+          self.Method.place(relx=0.7, rely=0.12)
+          
+          self.MethodVars[i].set(self.MethodChoices[0])
+          self.v1 = OptionMenu(self.fr, self.MethodVars[i], *self.MethodChoices )
+          self.v1.place(relx=0.76, rely=0.09)
+
+          self.BkTimeInterv = Label(self.fr, text=&#34;Bk Time Intervals: &#34;)
+          self.BkTimeInterv.place(relx=0.01, rely=0.55)
+
+          self.Delete = Button(self.fr, text=&#34;Delete&#34;, command= lambda: self.deleteTimeInterval())
+          self.Delete.place(relx=0.15, rely=0.55)
+
+          self.Change = Button(self.fr, text=&#34;Change&#34;, command= lambda: self.editTimeInterval(energyLabel) )
+          self.Change.place(relx=0.22, rely=0.55)
+
+          self.Show = Button(self.fr, text=&#34;Show&#34;, command=lambda: self.showTimeInterval(i))
+          self.Show.place(relx=0.29, rely=0.55)
+
+          self.PlotSpectr = Button(self.fr, text=&#34;Plot Spectrum&#34;)
+          self.PlotSpectr.place(relx=0.36, rely=0.55)
+
+          self.v4 = Button(self.fr, text=&#34;Plot vs Time&#34;,  command=lambda: self.show_backgroundplot(&#34;time&#34;, i, False))
+          self.v4.place(relx=0.48, rely=0.55)
+
+          self.Error2 = Checkbutton(self.fr, text=&#34;Error&#34;, variable=&#39;Error2&#39; +str(i))
+          self.Error2.place(relx=0.58, rely=0.55)
+
+
+    &#34;&#34;&#34; Code to be executed when user checked the &#39;separate Bk for each energy band&#39; checkbox &#34;&#34;&#34;
+    def onClikSeparateBk(self):
+         
+         self.backCanv.config(scrollregion = (0,0,700,650))
+         energyLab = [&#39;3.0 to 6.0 keV&#39;, &#39;6.0 to 12.0 keV&#39;, &#39;12.0 to 25.0 keV&#39;, &#39;25.0 to 50.0 keV&#39;,
+                      &#39;50.0 to 100.0 keV&#39;, &#39;100.0 to 300.0 keV&#39; ]
+         if self.sepBkVar.get() == 1:
+            if BackgroundWindow.fname is not None: # check if user already choose a &#39;.fit&#39; file with &#39;select input&#39; window, if not, &#39;next else block&#39; will be executed
+               self.backCanv.delete(ALL)
+               for j in range(6):
+                 self.energBandCanvList(j, 400, 70 + 100*j, energyLab[j]) # create energy band frame
+                     
+            else:
+               self.backCanv.delete(ALL)
+   
+            
+            self.ChangeEnergBand.config(state=&#34;normal&#34;)
+            self.SetSpex.config(state=&#34;normal&#34;)
+            self.ShowFluxEnerg.config(state=&#34;normal&#34;)
+            self.LoopSetTimes.config(state=&#34;normal&#34;)
+            self.DelAllTimes.config(state=&#34;normal&#34;)
+            self.CurrentEnergySelection.config(state=&#34;normal&#34;)
+            self.AllBandsSelection.config(state=&#34;normal&#34;)
+         else:
+            
+            self.backCanv.delete(ALL)
+            self.notSeparateCanva()
+            
+            self.ChangeEnergBand.config(state=&#34;disabled&#34;)
+            self.SetSpex.config(state=&#34;disabled&#34;)
+            self.ShowFluxEnerg.config(state=&#34;disabled&#34;)
+            self.LoopSetTimes.config(state=&#34;disabled&#34;)
+            self.DelAllTimes.config(state=&#34;disabled&#34;)
+            self.CurrentEnergySelection.config(state=&#34;disabled&#34;)
+            self.AllBandsSelection.config(state=&#34;disabled&#34;)
+
+         print(&#39;plt&#39;, BackgroundWindow.fname)
+
+
+    def deleteTimeInterval(self):
+        BackgroundWindow.bkgTimeInterv = None
+        BackgroundWindow.defaultTime.set(None)
+        editTime.EditTimeWindow.bkgTimeInterv = None
+        editTime.EditTimeWindow.defaultTime.set(None)
+
+        print(&#39;show val&#39;, BackgroundWindow.plotType)
+        #plt.figure(&#34;plot vs time&#34;)
+##
+    def showTimeInterval(self, i):
+        
+        #plt.figure()
+        plt.clf()
+        plt.figure(&#39;plot vs time&#39;)
+        self.show_backgroundplot(BackgroundWindow.plotType, i, True)
+        
+##        plots = bkgPlots.BackgPlots() if BackgroundWindow.fname is not None else None #background_plot.Input(BackgroundWindow.fname)
+##        plots.plot(BackgroundWindow.bkgTimeInterv, self.var.get(), i, self.MethodVars[i].get(), True)
+
+    &#34;&#34;&#34; Code to be executed when user clik on a plot button like &#39;plot vs time&#39;, &#39;plot spectrum&#39;, &#39;plot&#39; of a specific energy band &#34;&#34;&#34;
+    def show_backgroundplot(self, e, i, showTime): #make plots (plot vs time, plot spectrum ... ) 
+
+         energyLab = [&#39;3.0 to 6.0 keV&#39;, &#39;6.0 to 12.0 keV&#39;, &#39;12.0 to 25.0 keV&#39;, &#39;25.0 to 50.0 keV&#39;,
+                      &#39;50.0 to 100.0 keV&#39;, &#39;100.0 to 300.0 keV&#39; ]
+
+
+         if self.MethodVars is not None:
+             print(&#39;separa in showplot&#39;, self.sepBkVar.get(), self.var.get(), self.MethodVars[0].get())
+
+         
+         BackgroundWindow.plotType = &#39;time&#39; if e == &#39;time&#39; else &#39;specgr&#39;
+         print(&#39;show valll&#39;, BackgroundWindow.plotType)
+        
+      
+         if BackgroundWindow.bkgTimeInterv is not None:
+             print(&#39;time interv&#39;, BackgroundWindow.bkgTimeInterv)         
+         if self.sepBkVar.get() == 1:
+          if BackgroundWindow.fname is not None:          
+           plots = bkgPlots.BackgPlots() #background_plot.Input(BackgroundWindow.fname)
+           if self.var.get() == &#39;Rate&#39;:
+            if e == &#39;time&#39;:
+                #plots.rate_vs_time_plotting()
+                plots.plot(BackgroundWindow.bkgTimeInterv, &#39;Rate&#39;, i, self.MethodVars[i].get(), showTime) #plots.backg_plot_vs_time(&#39;counts&#39;, i)
+##            elif e == &#39;show&#39;:
+##                plots.rate_vs_time_plotting()
+##            elif e == &#39;specgr&#39;:
+##                plots.plot_spectrogram_rate()
+           if self.var.get() == &#39;Counts&#39;:
+            if e == &#39;time&#39;:
+               plots.plot(BackgroundWindow.bkgTimeInterv, &#39;Counts&#39;, i, self.MethodVars[i].get(), showTime) #plots.backg_plot_vs_time(&#39;counts&#39;, i)
+##          elif e == &#39;show&#39;:
+##             plots.rate_vs_time_plotting()
+##          elif e == &#39;specgr&#39;:
+##               plots.plot_spectrogram_rate()
+           if self.var.get() == &#39;Flux&#39;:
+            if e == &#39;time&#39;:
+                plots.plot(BackgroundWindow.bkgTimeInterv, &#39;Flux&#39;, i, self.MethodVars[i].get(), showTime) #plots.backg_plot_vs_time(&#39;flux&#39;, i)
+##            elif e == &#39;show&#39;:
+##                plots.flux_vs_time_plotting()
+##            elif e == &#39;specgr&#39;:
+##                plots.plot_spectrogram_flux()
+
+##                
+         else:
+           plots = plotting.Input(BackgroundWindow.fname)
+          
+           if self.var.get() == &#39;Rate&#39;:
+            if e == &#39;time&#39;:
+                plots.rate_vs_time_plotting()
+##            elif e == &#39;show&#39;:
+##                plots.rate_vs_time_plotting()
+##            elif e == &#39;specgr&#39;:
+##                plots.plot_spectrogram_rate()
+           if self.var.get() == &#39;Counts&#39;:
+            if e == &#39;time&#39;:
+               plots.counts_vs_time_plotting()
+##          elif e == &#39;show&#39;:
+##             plots.rate_vs_time_plotting()
+##          elif e == &#39;specgr&#39;:
+##               plots.plot_spectrogram_rate()
+           if self.var.get() == &#39;Flux&#39;:
+            if e == &#39;time&#39;:
+                plots.flux_vs_time_plotting()
+##            elif e == &#39;show&#39;:
+##                plots.flux_vs_time_plotting()
+##            elif e == &#39;specgr&#39;:
+##                plots.plot_spectrogram_flux()
+        
+            
+##
+
+
+
+
+
+
+  </code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="background.BackgroundWindow"><code class="flex name class">
+<span>class <span class="ident">BackgroundWindow</span></span>
+<span>(</span><span>root)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class BackgroundWindow():
+    
+    fname=None
+    bkgTimeInterv = None
+    defaultTime = &#34;&#34;
+    plotType = None
+    
+    
+    def __init__(self, root):
+        self.top1 = Toplevel()
+        self.top1.title(&#39;SPEX Background Options&#39;)
+        self.top1.geometry(&#34;1000x600&#34;)
+        Label(self.top1,
+              text=&#34;Select Background&#34;,
+              fg=&#34;black&#34;,
+              font=&#34;Helvetica 12 bold italic&#34;).pack()
+
+        &#34;&#34;&#34;Initiate the parameters and widgets&#34;&#34;&#34;
+
+        self.hdul = None
+
+        self.root = root
+        self.sepBkVar = IntVar()
+        self.MethodChoices = (&#39;0Poly&#39;, &#39;1Poly&#39;, &#39;2Poly&#39;, &#39;3Poly&#39;, &#39;Exp&#39;, &#39;High E Profile&#39;, &#39;This E Profile&#39;)
+        self.MethodVars = [StringVar() for i in range(7)]
+
+        timeInterv =  str(BackgroundWindow.bkgTimeInterv) if BackgroundWindow.bkgTimeInterv is not None else &#39;None&#39;
+        BackgroundWindow.defaultTime = StringVar()
+        BackgroundWindow.defaultTime.set(timeInterv)
+
+        #########################################################################################
+        &#34;&#34;&#34;                         First frame: Create interval selection frame                                    &#34;&#34;&#34;
+
+        self.frame1 = LabelFrame(self.top1, relief=RAISED, borderwidth=2)
+        self.frame1.place(relx=0.05, rely=0.04, relheight=0.1, relwidth=0.9)
+
+        self.lblFilename = Label(self.frame1, text=&#34;Interval Selection: &#34;)
+        self.lblFilename.place(relx=0.01, rely=0.2)
+
+        self.chkBtGraphical = Checkbutton(self.frame1, text=&#34;Graphical&#34;, variable=&#39;Graphical&#39;)
+        self.chkBtGraphical.place(relx=0.15, rely=0.2)
+
+        self.chkBtFullOptions = Checkbutton(self.frame1, text=&#34;Full Options&#34;, variable=&#39;FullOpt&#39;)
+        self.chkBtFullOptions.place(relx=0.25, rely=0.2)
+    
+        self.Component_choices = (&#39;Rate&#39;, &#39;Counts&#39;, &#39;Flux&#39;)
+        self.var = StringVar(self.frame1)
+        self.var.set(self.Component_choices[2])
+        self.selection = OptionMenu(self.frame1, self.var, *self.Component_choices)
+        self.selection.place(relx=0.46, rely=0.18)
+
+        self.lblPlotUnits = Label(self.frame1, text=&#34;Plot Units: &#34;)
+        self.lblPlotUnits.place(relx=0.37, rely=0.18)
+
+        #################################################################################
+        
+        &#34;&#34;&#34;                  Second frame: options for separate bk parameters            &#34;&#34;&#34;
+     
+        
+        self.frame2 = Frame(self.top1, relief=RAISED, borderwidth=2)
+        self.frame2.place(relx=0.05, rely=0.14, relheight=0.27, relwidth=0.9)
+
+        self.SeparateBk = Checkbutton(self.frame2, text=&#34;Separate BK for each energy band&#34;,
+        variable=self.sepBkVar, command=self.onClikSeparateBk, state=NORMAL) #command=self.onClikSeparateBk, onvalue = True, offvalue = False,
+        self.SeparateBk.place(relx=0.01, rely=0.04)
+        #self.SeparateBk.bind(&#34;&lt;Button-1&gt;&#34;, self.onClikSeparateBk)
+
+        self.AllBands_choices = (&#39;Set all bands to&#39;, &#39;0Poly&#39;, &#39;1Poly&#39;, &#39;2Poly&#39;, &#39;3Poly&#39;, &#39;Exp&#39;, &#39;High E Profile&#39;, &#39;This E Profile&#39;)
+        self.AllBandsVar = StringVar(self.frame2)
+        self.AllBandsVar.set(self.AllBands_choices[0])
+        self.AllBandsSelection = OptionMenu(self.frame2, self.AllBandsVar, *self.AllBands_choices)
+        self.AllBandsSelection.place(relx=0.26, rely=0.04)
+        self.AllBandsSelection.config(state=&#34;disabled&#34;)
+        
+
+        &#34;&#34;&#34; half smoothing &#34;&#34;&#34;
+        self.HalfSmooth = Label(self.frame2, text=&#34;Profile Half Smoothing width(#pts):&#34;)
+        self.HalfSmooth.place(relx=0.41, rely=0.05)
+
+        self.HalfSmoothList = (&#34;0&#34;,&#34;1&#34;,&#34;4&#34;,&#34;8&#34;,&#34;16&#34;,&#34;32&#34;,&#34;64&#34;,&#34;128&#34;,&#34;256&#34;)
+
+        self.SpinboxHalfSmooth = Spinbox(self.frame2, values=self.HalfSmoothList )
+        self.SpinboxHalfSmooth.place(relx=0.63, rely=0.05, width=50)
+
+        &#34;&#34;&#34; show profile &#34;&#34;&#34;
+        self.ShowProfile = Checkbutton(self.frame2, text=&#34;Show Profile&#34;, variable=&#39;ShowProf&#39;)
+        self.ShowProfile.place(relx=0.7, rely=0.04)
+
+        &#34;&#34;&#34; Current Energy Bands &#34;&#34;&#34;
+        self.lblCurrentEnergy = Label(self.frame2, text=&#34;Current Energy Bands:&#34;)
+        self.lblCurrentEnergy.place(relx=0.01, rely=0.4)
+
+        self.CurrentEnergy_choices = (&#39;3.0 to 6.0&#39;, &#39;6.0 to 12.0&#39;, &#39;12.0 to 25.0&#39;, &#39;25.0 to 50.0&#39;, &#39;50.0 to 100.0&#39;, &#39;100.0 to 300.0&#39;)
+        self.CurrentEnergyVar = StringVar(self.frame2)
+        self.CurrentEnergyVar.set(self.CurrentEnergy_choices[0])
+        self.CurrentEnergySelection = OptionMenu(self.frame2, self.CurrentEnergyVar, *self.CurrentEnergy_choices)
+        self.CurrentEnergySelection.place(relx=0.15, rely=0.4)
+        self.CurrentEnergySelection.config(state=&#34;disabled&#34;)
+
+        &#34;&#34;&#34; Bands 0 &#34;&#34;&#34;
+        self.Bands0 = Label(self.frame2, text=&#34;#Bands:0&#34;)
+        self.Bands0.place(relx=0.3, rely=0.4)
+
+        &#34;&#34;&#34; Change Energy Band Button &#34;&#34;&#34;
+        self.ChangeEnergBand = Button(self.frame2, text=&#34;Change&#34;) #, state=DISABLED, command=self.editTimeInterval)
+        self.ChangeEnergBand.place(relx=0.38, rely=0.4)
+
+        &#34;&#34;&#34; set_to_spex_eband Button &#34;&#34;&#34;
+        self.SetSpex = Button(self.frame2, text=&#34;Set to spex_eband&#34;, state=DISABLED)
+        self.SetSpex.place(relx=0.45, rely=0.4)
+
+        &#34;&#34;&#34; show Button &#34;&#34;&#34;
+        self.ShowFluxEnerg = Button(self.frame2, text=&#34;Show&#34;, state=DISABLED)
+        self.ShowFluxEnerg.place(relx=0.58, rely=0.4)
+
+        &#34;&#34;&#34; Loop_set_times button &#34;&#34;&#34;
+        self.LoopSetTimes = Button(self.frame2, text=&#34;Loop to Set Times&#34;, state=DISABLED)
+        self.LoopSetTimes.place(relx=0.01, rely=0.7)
+
+        &#34;&#34;&#34; Delete_all_times Button &#34;&#34;&#34;
+        self.DelAllTimes = Button(self.frame2, text=&#34;Delete all Times&#34;, state=DISABLED)
+        self.DelAllTimes.place(relx=0.15, rely=0.7)
+        ########################################################################################
+        
+        &#34;&#34;&#34;              Third frame: display group of bk energy_bins                         &#34;&#34;&#34;
+        
+        self.frame3 = LabelFrame(self.top1, relief=RAISED, borderwidth=2)
+        self.frame3.place(relx=0.05, rely=0.41, relheight=0.27, relwidth=0.9)
+
+
+        ########################################################################################
+        
+        &#34;&#34;&#34;                           Fourth frame: Time profile in spex_ebands                         &#34;&#34;&#34;
+        self.frame4 = LabelFrame(self.top1, relief=RAISED, borderwidth=2)
+        self.frame4.place(relx=0.05, rely=0.68, relheight=0.08, relwidth=0.9)
+
+        self.SpexBands = Label(self.frame4, text=&#34;Time Profile in spex_ebands:&#34;)
+        self.SpexBands.place(relx=0.01, rely=0.04)
+
+        self.Data = Checkbutton(self.frame4, text=&#34;Data&#34;, variable=&#39;Data&#39;)
+        self.Data.place(relx=0.22, rely=0.04)
+
+        self.Background = Checkbutton(self.frame4, text=&#34;Background&#34;, variable=&#39;Background&#39;)
+        self.Background.place(relx=0.29, rely=0.04)
+
+        self.DataBackground = Checkbutton(self.frame4, text=&#34;Data-Background&#34;, variable=&#39;DataBack&#39;)
+        self.DataBackground.place(relx=0.4, rely=0.04)
+
+        self.Error = Checkbutton(self.frame4, text=&#34;Error&#34;, variable=&#39;Error&#39;)
+        self.Error.place(relx=0.54, rely=0.04)
+
+        self.Plot = Button(self.frame4, text=&#34;Plot&#34;)
+        self.Plot.place(relx=0.63, rely=0.04)
+
+        self.Refresh = Button(self.top1, text=&#34;Refresh&#34;)
+        self.Refresh.place(relx=0.45, rely=0.8)
+
+        self.Close = Button(self.top1, text=&#34;Close&#34;)
+        self.Close.place(relx=0.54, rely=0.8)
+
+        &#34;&#34;&#34; Scrollbar &#34;&#34;&#34;
+        self.vscrollbar = Scrollbar(self.frame3, orient=&#34;vertical&#34;)
+        self.vscrollbar.pack(side=&#39;right&#39;, fill=&#34;y&#34;)
+
+        self.hscrollbar = Scrollbar(self.frame3, orient=&#34;horizontal&#34;)
+        self.hscrollbar.pack(side=&#39;bottom&#39;, fill=&#34;x&#34;)
+        #self.hscrollbar.place(relx=0.1, rely=0.3)
+        #################################################################################################
+
+        &#34;&#34;&#34;                                  Canvas                                    &#34;&#34;&#34;
+        self.backCanv = Canvas(self.frame3, bd=2, width=850, bg=&#34;#FFFFFF&#34;, height=120) #, background=&#39;#FFFFFF&#39;
+        #self.backCanv.pack(fill=&#39;x&#39;)
+        self.vscrollbar.config(command=self.backCanv.yview)
+        self.hscrollbar.config(command=self.backCanv.xview)
+        self.backCanv.config(yscrollcommand=self.vscrollbar.set)
+        self.backCanv.config(xscrollcommand=self.hscrollbar.set)
+        self.backCanv.config(scrollregion = (0,0,700,700))
+        #self.backCanv.place(relx=0.01, rely=0.1)
+        self.backCanv.pack(fill=&#34;both&#34;, expand=True)
+        #self.SeparateBk.config(command=self.backCanv.config(state=&#34;normal&#34;))
+  
+        #self.backCanv.delete(ALL)
+        self.notSeparateCanva()
+
+##############################################      Functions          ####################################################################
+    &#34;&#34;&#34; Function to be executed when user clik on an energy bin &#39;s change button &#34;&#34;&#34;
+    def editTimeInterval(self, binInterval):
+        editTime.EditTimeWindow(binInterval)
+
+    &#34;&#34;&#34; Display all energybins in one frame when user unchecked the &#39;separate_bk_for each energy band checkbox&#39;  &#34;&#34;&#34;
+    def notSeparateCanva(self):
+        self.backCanv.config(scrollregion = (0,0,700,100))
+        self.frame0 = Frame(self.backCanv, relief=RAISED, borderwidth=2, width=800, height=90)
+
+        self.backCanv.create_window(400, 70,  window=self.frame0, width=800, height=90)
+        
+        self.AllEnerg = Label(self.frame0, text=&#34;For all Energies: &#34;)
+        self.AllEnerg.place(relx=0.01, rely=0.12)
+
+        self.BkTimes = Label(self.frame0, text=&#34;Bk Times:&#34;)
+        self.BkTimes.place(relx=0.15, rely=0.12)
+
+
+        self.BkTSelection = Button(self.frame0, text=&#34;None&#34;)
+        self.BkTSelection.place(relx=0.24, rely=0.15)
+
+
+        self.Times = Label(self.frame0, text=&#34;#Times: 0 &#34;)
+        self.Times.place(relx=0.62, rely=0.12)
+
+        self.Method = Label(self.frame0, text=&#34;Method:&#34;)
+        self.Method.place(relx=0.7, rely=0.12)
+
+        self.Method_choices = (&#39;0Poly&#39;, &#39;1Poly&#39;, &#39;2Poly&#39;, &#39;3Poly&#39;, &#39;Exp&#39;, &#39;High E Profile&#39;, &#39;This E Profile&#39;)
+        self.MethodVar = StringVar(self.frame0)
+        self.MethodVar.set(self.Method_choices[0])
+        self.MethodSelection = OptionMenu(self.frame0, self.MethodVar, *self.Method_choices)
+        self.MethodSelection.place(relx=0.76, rely=0.09)
+        
+
+        self.BkTimeInterv = Label(self.frame0, text=&#34;Bk Time Intervals: &#34;)
+        self.BkTimeInterv.place(relx=0.01, rely=0.55)
+
+        self.Delete = Button(self.frame0, text=&#34;Delete&#34;)
+        self.Delete.place(relx=0.15, rely=0.55)
+
+        self.Change = Button(self.frame0, text=&#34;Change&#34;)
+        self.Change.place(relx=0.22, rely=0.55)
+
+        self.Show = Button(self.frame0, text=&#34;Show&#34;) #, command=lambda: self.show_backgroundplot(&#34;show&#34;, 6))
+        self.Show.place(relx=0.29, rely=0.55)
+
+        self.PlotSpectr = Button(self.frame0, text=&#34;Plot Spectrum&#34;)
+        self.PlotSpectr.place(relx=0.36, rely=0.55)
+
+        self.PlotVsTim = Button(self.frame0, text=&#34;Plot vs Time&#34;) #, command=lambda: self.show_backgroundplot(&#34;time&#34;, 6))
+        self.PlotVsTim.place(relx=0.48, rely=0.55)
+
+        self.Error2 = Checkbutton(self.frame0, text=&#34;Error&#34;, variable=&#39;Error2&#39;)
+        self.Error2.place(relx=0.58, rely=0.55)
+
+    &#34;&#34;&#34; function to create a subframe for each energy band &#34;&#34;&#34;
+    def energBandCanvList(self, i, x, y, energyLabel):
+
+          fr = &#39;frame&#39;+str(i)
+          v1 = &#39;MethodSelect&#39; + str(i)
+          v4 = &#39;PlotVsTim&#39; +str(i)
+        
+          self.fr= Frame(self.backCanv, relief=RAISED, borderwidth=2, width=800, height=110)
+          self.backCanv.create_window(x, y,  window=self.fr, width=800, height=90)
+
+          self.AllEnerg = Label(self.fr, text=energyLabel)
+          self.AllEnerg.place(relx=0.01, rely=0.12)
+
+          self.BkTimes = Label(self.fr, text=&#34;Bk Times:&#34;)
+          self.BkTimes.place(relx=0.15, rely=0.12)
+      
+          self.BkTSelection = Button(self.fr, textvariable = BackgroundWindow.defaultTime)
+          self.BkTSelection.place(relx=0.24, rely=0.15)
+        
+          self.Times = Label(self.fr, text=&#34;#Times: 0 &#34;)
+          self.Times.place(relx=0.62, rely=0.12)
+
+          self.Method = Label(self.fr, text=&#34;Method:&#34;)
+          self.Method.place(relx=0.7, rely=0.12)
+          
+          self.MethodVars[i].set(self.MethodChoices[0])
+          self.v1 = OptionMenu(self.fr, self.MethodVars[i], *self.MethodChoices )
+          self.v1.place(relx=0.76, rely=0.09)
+
+          self.BkTimeInterv = Label(self.fr, text=&#34;Bk Time Intervals: &#34;)
+          self.BkTimeInterv.place(relx=0.01, rely=0.55)
+
+          self.Delete = Button(self.fr, text=&#34;Delete&#34;, command= lambda: self.deleteTimeInterval())
+          self.Delete.place(relx=0.15, rely=0.55)
+
+          self.Change = Button(self.fr, text=&#34;Change&#34;, command= lambda: self.editTimeInterval(energyLabel) )
+          self.Change.place(relx=0.22, rely=0.55)
+
+          self.Show = Button(self.fr, text=&#34;Show&#34;, command=lambda: self.showTimeInterval(i))
+          self.Show.place(relx=0.29, rely=0.55)
+
+          self.PlotSpectr = Button(self.fr, text=&#34;Plot Spectrum&#34;)
+          self.PlotSpectr.place(relx=0.36, rely=0.55)
+
+          self.v4 = Button(self.fr, text=&#34;Plot vs Time&#34;,  command=lambda: self.show_backgroundplot(&#34;time&#34;, i, False))
+          self.v4.place(relx=0.48, rely=0.55)
+
+          self.Error2 = Checkbutton(self.fr, text=&#34;Error&#34;, variable=&#39;Error2&#39; +str(i))
+          self.Error2.place(relx=0.58, rely=0.55)
+
+
+    &#34;&#34;&#34; Code to be executed when user checked the &#39;separate Bk for each energy band&#39; checkbox &#34;&#34;&#34;
+    def onClikSeparateBk(self):
+         
+         self.backCanv.config(scrollregion = (0,0,700,650))
+         energyLab = [&#39;3.0 to 6.0 keV&#39;, &#39;6.0 to 12.0 keV&#39;, &#39;12.0 to 25.0 keV&#39;, &#39;25.0 to 50.0 keV&#39;,
+                      &#39;50.0 to 100.0 keV&#39;, &#39;100.0 to 300.0 keV&#39; ]
+         if self.sepBkVar.get() == 1:
+            if BackgroundWindow.fname is not None: # check if user already choose a &#39;.fit&#39; file with &#39;select input&#39; window, if not, &#39;next else block&#39; will be executed
+               self.backCanv.delete(ALL)
+               for j in range(6):
+                 self.energBandCanvList(j, 400, 70 + 100*j, energyLab[j]) # create energy band frame
+                     
+            else:
+               self.backCanv.delete(ALL)
+   
+            
+            self.ChangeEnergBand.config(state=&#34;normal&#34;)
+            self.SetSpex.config(state=&#34;normal&#34;)
+            self.ShowFluxEnerg.config(state=&#34;normal&#34;)
+            self.LoopSetTimes.config(state=&#34;normal&#34;)
+            self.DelAllTimes.config(state=&#34;normal&#34;)
+            self.CurrentEnergySelection.config(state=&#34;normal&#34;)
+            self.AllBandsSelection.config(state=&#34;normal&#34;)
+         else:
+            
+            self.backCanv.delete(ALL)
+            self.notSeparateCanva()
+            
+            self.ChangeEnergBand.config(state=&#34;disabled&#34;)
+            self.SetSpex.config(state=&#34;disabled&#34;)
+            self.ShowFluxEnerg.config(state=&#34;disabled&#34;)
+            self.LoopSetTimes.config(state=&#34;disabled&#34;)
+            self.DelAllTimes.config(state=&#34;disabled&#34;)
+            self.CurrentEnergySelection.config(state=&#34;disabled&#34;)
+            self.AllBandsSelection.config(state=&#34;disabled&#34;)
+
+         print(&#39;plt&#39;, BackgroundWindow.fname)
+
+
+    def deleteTimeInterval(self):
+        BackgroundWindow.bkgTimeInterv = None
+        BackgroundWindow.defaultTime.set(None)
+        editTime.EditTimeWindow.bkgTimeInterv = None
+        editTime.EditTimeWindow.defaultTime.set(None)
+
+        print(&#39;show val&#39;, BackgroundWindow.plotType)
+        #plt.figure(&#34;plot vs time&#34;)
+##
+    def showTimeInterval(self, i):
+        
+        #plt.figure()
+        plt.clf()
+        plt.figure(&#39;plot vs time&#39;)
+        self.show_backgroundplot(BackgroundWindow.plotType, i, True)
+        
+##        plots = bkgPlots.BackgPlots() if BackgroundWindow.fname is not None else None #background_plot.Input(BackgroundWindow.fname)
+##        plots.plot(BackgroundWindow.bkgTimeInterv, self.var.get(), i, self.MethodVars[i].get(), True)
+
+    &#34;&#34;&#34; Code to be executed when user clik on a plot button like &#39;plot vs time&#39;, &#39;plot spectrum&#39;, &#39;plot&#39; of a specific energy band &#34;&#34;&#34;
+    def show_backgroundplot(self, e, i, showTime): #make plots (plot vs time, plot spectrum ... ) 
+
+         energyLab = [&#39;3.0 to 6.0 keV&#39;, &#39;6.0 to 12.0 keV&#39;, &#39;12.0 to 25.0 keV&#39;, &#39;25.0 to 50.0 keV&#39;,
+                      &#39;50.0 to 100.0 keV&#39;, &#39;100.0 to 300.0 keV&#39; ]
+
+
+         if self.MethodVars is not None:
+             print(&#39;separa in showplot&#39;, self.sepBkVar.get(), self.var.get(), self.MethodVars[0].get())
+
+         
+         BackgroundWindow.plotType = &#39;time&#39; if e == &#39;time&#39; else &#39;specgr&#39;
+         print(&#39;show valll&#39;, BackgroundWindow.plotType)
+        
+      
+         if BackgroundWindow.bkgTimeInterv is not None:
+             print(&#39;time interv&#39;, BackgroundWindow.bkgTimeInterv)         
+         if self.sepBkVar.get() == 1:
+          if BackgroundWindow.fname is not None:          
+           plots = bkgPlots.BackgPlots() #background_plot.Input(BackgroundWindow.fname)
+           if self.var.get() == &#39;Rate&#39;:
+            if e == &#39;time&#39;:
+                #plots.rate_vs_time_plotting()
+                plots.plot(BackgroundWindow.bkgTimeInterv, &#39;Rate&#39;, i, self.MethodVars[i].get(), showTime) #plots.backg_plot_vs_time(&#39;counts&#39;, i)
+##            elif e == &#39;show&#39;:
+##                plots.rate_vs_time_plotting()
+##            elif e == &#39;specgr&#39;:
+##                plots.plot_spectrogram_rate()
+           if self.var.get() == &#39;Counts&#39;:
+            if e == &#39;time&#39;:
+               plots.plot(BackgroundWindow.bkgTimeInterv, &#39;Counts&#39;, i, self.MethodVars[i].get(), showTime) #plots.backg_plot_vs_time(&#39;counts&#39;, i)
+##          elif e == &#39;show&#39;:
+##             plots.rate_vs_time_plotting()
+##          elif e == &#39;specgr&#39;:
+##               plots.plot_spectrogram_rate()
+           if self.var.get() == &#39;Flux&#39;:
+            if e == &#39;time&#39;:
+                plots.plot(BackgroundWindow.bkgTimeInterv, &#39;Flux&#39;, i, self.MethodVars[i].get(), showTime) #plots.backg_plot_vs_time(&#39;flux&#39;, i)
+##            elif e == &#39;show&#39;:
+##                plots.flux_vs_time_plotting()
+##            elif e == &#39;specgr&#39;:
+##                plots.plot_spectrogram_flux()
+
+##                
+         else:
+           plots = plotting.Input(BackgroundWindow.fname)
+          
+           if self.var.get() == &#39;Rate&#39;:
+            if e == &#39;time&#39;:
+                plots.rate_vs_time_plotting()
+##            elif e == &#39;show&#39;:
+##                plots.rate_vs_time_plotting()
+##            elif e == &#39;specgr&#39;:
+##                plots.plot_spectrogram_rate()
+           if self.var.get() == &#39;Counts&#39;:
+            if e == &#39;time&#39;:
+               plots.counts_vs_time_plotting()
+##          elif e == &#39;show&#39;:
+##             plots.rate_vs_time_plotting()
+##          elif e == &#39;specgr&#39;:
+##               plots.plot_spectrogram_rate()
+           if self.var.get() == &#39;Flux&#39;:
+            if e == &#39;time&#39;:
+                plots.flux_vs_time_plotting()</code></pre>
+</details>
+<h3>Class variables</h3>
+<dl>
+<dt id="background.BackgroundWindow.bkgTimeInterv"><code class="name">var <span class="ident">bkgTimeInterv</span></code></dt>
+<dd>
+<section class="desc"></section>
+</dd>
+<dt id="background.BackgroundWindow.defaultTime"><code class="name">var <span class="ident">defaultTime</span></code></dt>
+<dd>
+<section class="desc"><p>str(object='') -&gt; str
+str(bytes_or_buffer[, encoding[, errors]]) -&gt; str</p>
+<p>Create a new string object from the given object. If encoding or
+errors is specified, then the object must expose a data buffer
+that will be decoded using the given encoding and error handler.
+Otherwise, returns the result of object.<strong>str</strong>() (if defined)
+or repr(object).
+encoding defaults to sys.getdefaultencoding().
+errors defaults to 'strict'.</p></section>
+</dd>
+<dt id="background.BackgroundWindow.fname"><code class="name">var <span class="ident">fname</span></code></dt>
+<dd>
+<section class="desc"></section>
+</dd>
+<dt id="background.BackgroundWindow.plotType"><code class="name">var <span class="ident">plotType</span></code></dt>
+<dd>
+<section class="desc"></section>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="background.BackgroundWindow.deleteTimeInterval"><code class="name flex">
+<span>def <span class="ident">deleteTimeInterval</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def deleteTimeInterval(self):
+    BackgroundWindow.bkgTimeInterv = None
+    BackgroundWindow.defaultTime.set(None)
+    editTime.EditTimeWindow.bkgTimeInterv = None
+    editTime.EditTimeWindow.defaultTime.set(None)
+
+    print(&#39;show val&#39;, BackgroundWindow.plotType)</code></pre>
+</details>
+</dd>
+<dt id="background.BackgroundWindow.editTimeInterval"><code class="name flex">
+<span>def <span class="ident">editTimeInterval</span></span>(<span>self, binInterval)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def editTimeInterval(self, binInterval):
+    editTime.EditTimeWindow(binInterval)</code></pre>
+</details>
+</dd>
+<dt id="background.BackgroundWindow.energBandCanvList"><code class="name flex">
+<span>def <span class="ident">energBandCanvList</span></span>(<span>self, i, x, y, energyLabel)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def energBandCanvList(self, i, x, y, energyLabel):
+
+      fr = &#39;frame&#39;+str(i)
+      v1 = &#39;MethodSelect&#39; + str(i)
+      v4 = &#39;PlotVsTim&#39; +str(i)
+    
+      self.fr= Frame(self.backCanv, relief=RAISED, borderwidth=2, width=800, height=110)
+      self.backCanv.create_window(x, y,  window=self.fr, width=800, height=90)
+
+      self.AllEnerg = Label(self.fr, text=energyLabel)
+      self.AllEnerg.place(relx=0.01, rely=0.12)
+
+      self.BkTimes = Label(self.fr, text=&#34;Bk Times:&#34;)
+      self.BkTimes.place(relx=0.15, rely=0.12)
+  
+      self.BkTSelection = Button(self.fr, textvariable = BackgroundWindow.defaultTime)
+      self.BkTSelection.place(relx=0.24, rely=0.15)
+    
+      self.Times = Label(self.fr, text=&#34;#Times: 0 &#34;)
+      self.Times.place(relx=0.62, rely=0.12)
+
+      self.Method = Label(self.fr, text=&#34;Method:&#34;)
+      self.Method.place(relx=0.7, rely=0.12)
+      
+      self.MethodVars[i].set(self.MethodChoices[0])
+      self.v1 = OptionMenu(self.fr, self.MethodVars[i], *self.MethodChoices )
+      self.v1.place(relx=0.76, rely=0.09)
+
+      self.BkTimeInterv = Label(self.fr, text=&#34;Bk Time Intervals: &#34;)
+      self.BkTimeInterv.place(relx=0.01, rely=0.55)
+
+      self.Delete = Button(self.fr, text=&#34;Delete&#34;, command= lambda: self.deleteTimeInterval())
+      self.Delete.place(relx=0.15, rely=0.55)
+
+      self.Change = Button(self.fr, text=&#34;Change&#34;, command= lambda: self.editTimeInterval(energyLabel) )
+      self.Change.place(relx=0.22, rely=0.55)
+
+      self.Show = Button(self.fr, text=&#34;Show&#34;, command=lambda: self.showTimeInterval(i))
+      self.Show.place(relx=0.29, rely=0.55)
+
+      self.PlotSpectr = Button(self.fr, text=&#34;Plot Spectrum&#34;)
+      self.PlotSpectr.place(relx=0.36, rely=0.55)
+
+      self.v4 = Button(self.fr, text=&#34;Plot vs Time&#34;,  command=lambda: self.show_backgroundplot(&#34;time&#34;, i, False))
+      self.v4.place(relx=0.48, rely=0.55)
+
+      self.Error2 = Checkbutton(self.fr, text=&#34;Error&#34;, variable=&#39;Error2&#39; +str(i))
+      self.Error2.place(relx=0.58, rely=0.55)</code></pre>
+</details>
+</dd>
+<dt id="background.BackgroundWindow.notSeparateCanva"><code class="name flex">
+<span>def <span class="ident">notSeparateCanva</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def notSeparateCanva(self):
+    self.backCanv.config(scrollregion = (0,0,700,100))
+    self.frame0 = Frame(self.backCanv, relief=RAISED, borderwidth=2, width=800, height=90)
+
+    self.backCanv.create_window(400, 70,  window=self.frame0, width=800, height=90)
+    
+    self.AllEnerg = Label(self.frame0, text=&#34;For all Energies: &#34;)
+    self.AllEnerg.place(relx=0.01, rely=0.12)
+
+    self.BkTimes = Label(self.frame0, text=&#34;Bk Times:&#34;)
+    self.BkTimes.place(relx=0.15, rely=0.12)
+
+
+    self.BkTSelection = Button(self.frame0, text=&#34;None&#34;)
+    self.BkTSelection.place(relx=0.24, rely=0.15)
+
+
+    self.Times = Label(self.frame0, text=&#34;#Times: 0 &#34;)
+    self.Times.place(relx=0.62, rely=0.12)
+
+    self.Method = Label(self.frame0, text=&#34;Method:&#34;)
+    self.Method.place(relx=0.7, rely=0.12)
+
+    self.Method_choices = (&#39;0Poly&#39;, &#39;1Poly&#39;, &#39;2Poly&#39;, &#39;3Poly&#39;, &#39;Exp&#39;, &#39;High E Profile&#39;, &#39;This E Profile&#39;)
+    self.MethodVar = StringVar(self.frame0)
+    self.MethodVar.set(self.Method_choices[0])
+    self.MethodSelection = OptionMenu(self.frame0, self.MethodVar, *self.Method_choices)
+    self.MethodSelection.place(relx=0.76, rely=0.09)
+    
+
+    self.BkTimeInterv = Label(self.frame0, text=&#34;Bk Time Intervals: &#34;)
+    self.BkTimeInterv.place(relx=0.01, rely=0.55)
+
+    self.Delete = Button(self.frame0, text=&#34;Delete&#34;)
+    self.Delete.place(relx=0.15, rely=0.55)
+
+    self.Change = Button(self.frame0, text=&#34;Change&#34;)
+    self.Change.place(relx=0.22, rely=0.55)
+
+    self.Show = Button(self.frame0, text=&#34;Show&#34;) #, command=lambda: self.show_backgroundplot(&#34;show&#34;, 6))
+    self.Show.place(relx=0.29, rely=0.55)
+
+    self.PlotSpectr = Button(self.frame0, text=&#34;Plot Spectrum&#34;)
+    self.PlotSpectr.place(relx=0.36, rely=0.55)
+
+    self.PlotVsTim = Button(self.frame0, text=&#34;Plot vs Time&#34;) #, command=lambda: self.show_backgroundplot(&#34;time&#34;, 6))
+    self.PlotVsTim.place(relx=0.48, rely=0.55)
+
+    self.Error2 = Checkbutton(self.frame0, text=&#34;Error&#34;, variable=&#39;Error2&#39;)
+    self.Error2.place(relx=0.58, rely=0.55)</code></pre>
+</details>
+</dd>
+<dt id="background.BackgroundWindow.onClikSeparateBk"><code class="name flex">
+<span>def <span class="ident">onClikSeparateBk</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def onClikSeparateBk(self):
+     
+     self.backCanv.config(scrollregion = (0,0,700,650))
+     energyLab = [&#39;3.0 to 6.0 keV&#39;, &#39;6.0 to 12.0 keV&#39;, &#39;12.0 to 25.0 keV&#39;, &#39;25.0 to 50.0 keV&#39;,
+                  &#39;50.0 to 100.0 keV&#39;, &#39;100.0 to 300.0 keV&#39; ]
+     if self.sepBkVar.get() == 1:
+        if BackgroundWindow.fname is not None: # check if user already choose a &#39;.fit&#39; file with &#39;select input&#39; window, if not, &#39;next else block&#39; will be executed
+           self.backCanv.delete(ALL)
+           for j in range(6):
+             self.energBandCanvList(j, 400, 70 + 100*j, energyLab[j]) # create energy band frame
+                 
+        else:
+           self.backCanv.delete(ALL)
+
+        
+        self.ChangeEnergBand.config(state=&#34;normal&#34;)
+        self.SetSpex.config(state=&#34;normal&#34;)
+        self.ShowFluxEnerg.config(state=&#34;normal&#34;)
+        self.LoopSetTimes.config(state=&#34;normal&#34;)
+        self.DelAllTimes.config(state=&#34;normal&#34;)
+        self.CurrentEnergySelection.config(state=&#34;normal&#34;)
+        self.AllBandsSelection.config(state=&#34;normal&#34;)
+     else:
+        
+        self.backCanv.delete(ALL)
+        self.notSeparateCanva()
+        
+        self.ChangeEnergBand.config(state=&#34;disabled&#34;)
+        self.SetSpex.config(state=&#34;disabled&#34;)
+        self.ShowFluxEnerg.config(state=&#34;disabled&#34;)
+        self.LoopSetTimes.config(state=&#34;disabled&#34;)
+        self.DelAllTimes.config(state=&#34;disabled&#34;)
+        self.CurrentEnergySelection.config(state=&#34;disabled&#34;)
+        self.AllBandsSelection.config(state=&#34;disabled&#34;)
+
+     print(&#39;plt&#39;, BackgroundWindow.fname)</code></pre>
+</details>
+</dd>
+<dt id="background.BackgroundWindow.showTimeInterval"><code class="name flex">
+<span>def <span class="ident">showTimeInterval</span></span>(<span>self, i)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def showTimeInterval(self, i):
+    
+    #plt.figure()
+    plt.clf()
+    plt.figure(&#39;plot vs time&#39;)
+    self.show_backgroundplot(BackgroundWindow.plotType, i, True)</code></pre>
+</details>
+</dd>
+<dt id="background.BackgroundWindow.show_backgroundplot"><code class="name flex">
+<span>def <span class="ident">show_backgroundplot</span></span>(<span>self, e, i, showTime)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">    def show_backgroundplot(self, e, i, showTime): #make plots (plot vs time, plot spectrum ... ) 
+
+         energyLab = [&#39;3.0 to 6.0 keV&#39;, &#39;6.0 to 12.0 keV&#39;, &#39;12.0 to 25.0 keV&#39;, &#39;25.0 to 50.0 keV&#39;,
+                      &#39;50.0 to 100.0 keV&#39;, &#39;100.0 to 300.0 keV&#39; ]
+
+
+         if self.MethodVars is not None:
+             print(&#39;separa in showplot&#39;, self.sepBkVar.get(), self.var.get(), self.MethodVars[0].get())
+
+         
+         BackgroundWindow.plotType = &#39;time&#39; if e == &#39;time&#39; else &#39;specgr&#39;
+         print(&#39;show valll&#39;, BackgroundWindow.plotType)
+        
+      
+         if BackgroundWindow.bkgTimeInterv is not None:
+             print(&#39;time interv&#39;, BackgroundWindow.bkgTimeInterv)         
+         if self.sepBkVar.get() == 1:
+          if BackgroundWindow.fname is not None:          
+           plots = bkgPlots.BackgPlots() #background_plot.Input(BackgroundWindow.fname)
+           if self.var.get() == &#39;Rate&#39;:
+            if e == &#39;time&#39;:
+                #plots.rate_vs_time_plotting()
+                plots.plot(BackgroundWindow.bkgTimeInterv, &#39;Rate&#39;, i, self.MethodVars[i].get(), showTime) #plots.backg_plot_vs_time(&#39;counts&#39;, i)
+##            elif e == &#39;show&#39;:
+##                plots.rate_vs_time_plotting()
+##            elif e == &#39;specgr&#39;:
+##                plots.plot_spectrogram_rate()
+           if self.var.get() == &#39;Counts&#39;:
+            if e == &#39;time&#39;:
+               plots.plot(BackgroundWindow.bkgTimeInterv, &#39;Counts&#39;, i, self.MethodVars[i].get(), showTime) #plots.backg_plot_vs_time(&#39;counts&#39;, i)
+##          elif e == &#39;show&#39;:
+##             plots.rate_vs_time_plotting()
+##          elif e == &#39;specgr&#39;:
+##               plots.plot_spectrogram_rate()
+           if self.var.get() == &#39;Flux&#39;:
+            if e == &#39;time&#39;:
+                plots.plot(BackgroundWindow.bkgTimeInterv, &#39;Flux&#39;, i, self.MethodVars[i].get(), showTime) #plots.backg_plot_vs_time(&#39;flux&#39;, i)
+##            elif e == &#39;show&#39;:
+##                plots.flux_vs_time_plotting()
+##            elif e == &#39;specgr&#39;:
+##                plots.plot_spectrogram_flux()
+
+##                
+         else:
+           plots = plotting.Input(BackgroundWindow.fname)
+          
+           if self.var.get() == &#39;Rate&#39;:
+            if e == &#39;time&#39;:
+                plots.rate_vs_time_plotting()
+##            elif e == &#39;show&#39;:
+##                plots.rate_vs_time_plotting()
+##            elif e == &#39;specgr&#39;:
+##                plots.plot_spectrogram_rate()
+           if self.var.get() == &#39;Counts&#39;:
+            if e == &#39;time&#39;:
+               plots.counts_vs_time_plotting()
+##          elif e == &#39;show&#39;:
+##             plots.rate_vs_time_plotting()
+##          elif e == &#39;specgr&#39;:
+##               plots.plot_spectrogram_rate()
+           if self.var.get() == &#39;Flux&#39;:
+            if e == &#39;time&#39;:
+                plots.flux_vs_time_plotting()</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="background.BackgroundWindow" href="#background.BackgroundWindow">BackgroundWindow</a></code></h4>
+<ul class="two-column">
+<li><code><a title="background.BackgroundWindow.bkgTimeInterv" href="#background.BackgroundWindow.bkgTimeInterv">bkgTimeInterv</a></code></li>
+<li><code><a title="background.BackgroundWindow.defaultTime" href="#background.BackgroundWindow.defaultTime">defaultTime</a></code></li>
+<li><code><a title="background.BackgroundWindow.deleteTimeInterval" href="#background.BackgroundWindow.deleteTimeInterval">deleteTimeInterval</a></code></li>
+<li><code><a title="background.BackgroundWindow.editTimeInterval" href="#background.BackgroundWindow.editTimeInterval">editTimeInterval</a></code></li>
+<li><code><a title="background.BackgroundWindow.energBandCanvList" href="#background.BackgroundWindow.energBandCanvList">energBandCanvList</a></code></li>
+<li><code><a title="background.BackgroundWindow.fname" href="#background.BackgroundWindow.fname">fname</a></code></li>
+<li><code><a title="background.BackgroundWindow.notSeparateCanva" href="#background.BackgroundWindow.notSeparateCanva">notSeparateCanva</a></code></li>
+<li><code><a title="background.BackgroundWindow.onClikSeparateBk" href="#background.BackgroundWindow.onClikSeparateBk">onClikSeparateBk</a></code></li>
+<li><code><a title="background.BackgroundWindow.plotType" href="#background.BackgroundWindow.plotType">plotType</a></code></li>
+<li><code><a title="background.BackgroundWindow.showTimeInterval" href="#background.BackgroundWindow.showTimeInterval">showTimeInterval</a></code></li>
+<li><code><a title="background.BackgroundWindow.show_backgroundplot" href="#background.BackgroundWindow.show_backgroundplot">show_backgroundplot</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.7.2</a>.</p>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad()</script>
+</body>
+</html>

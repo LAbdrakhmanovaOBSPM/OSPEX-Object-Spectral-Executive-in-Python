@@ -34,18 +34,20 @@ import new_window
 
 
 class Fitting:
-
-    
-    E_min = None
-    setEVal = None
-    evalue = None
-    """ 
-
-    Class to perform a spectrum fitting
-
     """
+    Class to perform a spectrum fitting
+    """
+
+    E_min = None
+    """Energy in keV"""
+    setEVal = None
+    """Energy setting value"""
+    evalue = None
+    """Value from Energy array chosen by user"""
+
     #create a new window called 'SPEX Fit Options'
     def __init__(self, root):
+        """Creates a new window, providing widgets to perform fitting analysis"""
         self.top2 = Toplevel()
         self.top2.title('SPEX Fit Options') #title of the window
         self.top2.geometry("1000x600") #size of the new window
@@ -56,7 +58,6 @@ class Fitting:
 
         self.root = root
         self.sepBkVar = IntVar()
-        
         #E_min = "global"
         self.lbl1 = Label(self.top2, text="Choose Fit Function Model:", fg='blue', font=("Helvetica", 11, "bold")) #name the listbox
         self.lbl1.place(relx=0.07, rely=0.07) # set the position on window
@@ -67,20 +68,23 @@ class Fitting:
         self.lbl3 = Label(self.top2, text="Set function components and x, y parameters:", fg='blue', font=("Helvetica", 11,"bold")) #name the scrollbar
         self.lbl3.place(relx=0.65, rely=0.07) #set the position
 
-
         self.lblFunc = Label(self.top2, text="Set function components: ")#name the scrollbar
         self.lblFunc.place(relx=0.73, rely=0.20) #set the position
 
-        """Set Y axis. User choice from the interafce"""
+
         setY = str(Fitting.setEVal) if Fitting.setEVal is not None else '10 - 20'
+        """Set Y axis. User choice from the interafce"""
         print("set val", setY, new_window.Set_Energy.yVal)
         Fitting.evalue = StringVar()
         Fitting.evalue.set(setY)
         self.show_Button = Button(self.top2, textvariable=Fitting.evalue, command = lambda:self.editEnergy(self.top2))
+        """Button to select the value(s) for Y axis.
+           By default it is called '10 - 20'. Changes the name by user choice. For example: 
+           If user selected Energy range '30 - 100', the name of the button will display this info('30 - 100')"""
         self.show_Button.place(relx=0.81, rely=0.39, relheight=0.05, relwidth=0.07)
 
-        """Creates a new window for "Set Y axis part" """
         def Set_Function(): # new window Set_Function definition
+            """Creates a new window for "Set Y axis" part"""
             newwin = Toplevel(root)
             newwin.title('Function values') #title of the window
             newwin.geometry("600x400") #size of the new window
@@ -90,29 +94,24 @@ class Fitting:
         self.Value_Button = Button(self.top2, text="Function value(s)", command = Set_Function) #place a "Function value" button
         self.Value_Button.place(relx=0.75, rely=0.26, relheight=0.05, relwidth=0.13) #locate
 
-        self.X_Label = Label(self.top2, text="Energy range(s) to fit: ") #place a "Set X" button 
+        self.X_Label = Label(self.top2, text="Energy range(s) to fit: ") #name "Energy range(s) to fit"
         self.X_Label.place(relx=0.65, rely=0.40) #locate
 
 #################### Main window description ######################
-        """ 
-        On the left: place a list of text alternatives (listbox)
-        The user can choose(highlight) one of the options
-        Options(functions):
-        1) One Dimensional Power Law 
-        2) 1-D Broken Power Law
-        3) Gaussian
-        4) Polynomial
-        5) Exponential
-        6) Single Power Law Times an Exponetial
-        """
 
         self.lbox = Listbox(self.top2, selectmode=EXTENDED, highlightcolor = 'red', bd = 4, selectbackground = 'grey')
-        self.lbox.place(relx=0.05, rely=0.15, relheight=0.45, relwidth=0.25)
-
         """ 
-        On the right: place an 'entry text' Scrollbar widget (scrollbar)
-        When user highlight the function, displays the text information about function description and input parameters
+        On the left side of the 'SPEX Fit Options' window: place a list of text alternatives (listbox).
+        The user can choose(highlight) one of the options.
+        Options(functions):
+        1) One Dimensional Power Law;
+        2) 1-D Broken Power Law;
+        3) Gaussian;
+        4) Polynomial;
+        5) Exponential;
+        6) Single Power Law Times an Exponetial
         """
+        self.lbox.place(relx=0.05, rely=0.15, relheight=0.45, relwidth=0.25)
 
         self.scroll = Scrollbar(self.top2, command=self.lbox.yview)
         self.scroll.place(relx=0.3, rely=0.15, relheight=0.45, relwidth=0.02)
@@ -140,15 +139,16 @@ class Fitting:
                                                                 #resets original view
         self.refreshButton5.place(relx=0.4, rely=0.94)
 
+        """Scrollbar with information related to each function"""
         self.closeButton5 = Button(self.top2, text="Close", command=self.destroy5) #add Close button
                                                                                    #Close "Fit Options" window
-
-        """Next, we fill scrollbar with information related to each function
-        """
         self.closeButton5.place(relx=0.5, rely=0.94)
-
         self.models = ['PowerLaw1D', 'BrokenPowerLaw1D', 'Gaussian', 'Polynomial', 'Exponential', 'Single Power Law Times an Exponetial'] #function names
         for p in self.models:
+            """ 
+            On the right: place an 'entry text' Scrollbar widget (scrollbar)
+            When user highlight the function, displays the text information about function description and input parameters
+            """
             self.lbox.insert(END, p)
         self.lbox.bind("<<ListboxSelect>>", self.onSelect)
         self.list = {'PowerLaw1D': {'One dimensional power law model','\n\n',
@@ -172,12 +172,13 @@ class Fitting:
                       #Single Power Law Times an Exponential
         self.list_selection = Listbox(self.top2, highlightcolor = 'red', bd = 4)
         self.list_selection.place(relx=0.33, rely=0.15, relheight=0.45, relwidth=0.30)
-    """Call new class to edit Y axis"""
+
     def editEnergy(self, p1):
+        """Call new class to edit Y axis"""
         new_window.Set_Energy(p1)
 
-    """Definitions to function selection from the list"""
     def onSelect(self, event):
+        """Determine the function selection from the list"""
         widget = event.widget
         selection=widget.curselection()
         files_avalibe = []
@@ -191,23 +192,26 @@ class Fitting:
                 self.update_file_list(files_avalibe)
 
     def update_file_list(self, file_list):
+        """Updating the frame(In Information: ) and adding new function description, related to the user choice"""
         self.list_selection.delete(0, END)
         for i in file_list:
             self.list_selection.insert(END, i)
 
     def findfiles(self, val):
+        """Finding the information related to the function name"""
         sender = val.widget
 
     def destroy5(self):
+        """Closing 'SPEX Fit Options' window"""
         self.top2.destroy()
 
     def _selective_fit(self):
-
-       """
-        Selection depending on Plot Units and Function Model
-
-       """
-       # load chosen file in Select Input section 
+       """Selection depending on Plot Units and Function Model
+          Predefine Input Data in x and y
+          We equate three components to y1, y2, y3. The value of x is the same for all cases
+          x - independent variable, nominally energy in keV
+          y - Plot Unit"""
+       # load chosen file in Select Input section
        fname = Fitting.fname
        if fname is None: # if file not choosen, print
          print('Please, choose input file')
@@ -251,17 +255,6 @@ class Fitting:
         Flux = np.zeros(shape=(n))
         for i in range(n):
             Flux[i] = np.mean(Rate[:, i] / (Area * deltaE[i] - 2))
-
-        """ 
-        Predefine Input Data in x and y
-        
-        We equate three components to y1, y2, y3. The value of x is the same for all cases
-        
-        x - independent variable, nominally energy in keV 
-        
-        y - Plot Unit
-        
-        """
 
         # Set the conditions to Set Y axis
         if Fitting.setEVal is None:

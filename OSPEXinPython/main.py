@@ -31,6 +31,9 @@ import background
 
 # to set a "Contacts" in Help menu bar
 def clickedContact():
+    """
+    Adding the information about creators and contacts in "Contacts" menu option
+    """
     messagebox.showinfo('OSPEX Contact Information', 'The OSPEX package was developed by Liaisian Abdrakhmanova and Abdallah Hamini'
                                                      ' at LESIA, Paris Observatory, France'
                                                      '\n\n@:liaisian.abdrakhmanova@obspm.fr'
@@ -39,6 +42,7 @@ def clickedContact():
 
 # to set a "Help on Help" in Help menu bar
 def clickedHelp_on_Help():
+    """Adding the description for Help on Help menu option"""
     messagebox.showinfo('OSPEX Help Information', 'The documentation for OSPEX is in HTML format.'
                                                   '\n\nWhen you click the help buttons, your preferred browser will be activated.'
                                                   '\n\nThe browser may start in iconized mode.'
@@ -46,53 +50,50 @@ def clickedHelp_on_Help():
 
 # to set a "OSPEX Object Reference Retrieval" in Help menu bar
 def clickedOSPEX_ORR():
+    """Adding the description for "OSPEX Object Reference Retrieval" menu option"""
     messagebox.showinfo('OSPEX Object Reference Retrieval',
                         '\nGitHub repository: '
                         '\nhttps://github.com/LAbdrakhmanovaOBSPM/OSPEX-Object-\nSpectral-Executive-in-Python')
-
-
 new = 1
-
 # function to set a "What is New" in Help menu bar
-# Provides the web page showing updates of OSPEX
 def WhatsNew():
+    """Provides the web page showing updates of OSPEX"""
     url1 = "https://hesperia.gsfc.nasa.gov/ssw/packages/spex/doc/ospex_whatsnew.htm"
     webbrowser.open(url1, new=new)
 
 # function to set a "OSPEX Guide" in Help menu bar
-# Opens up HTML version of the OSPEX documentation using default browser
 def OSPEX_Guide():
+    """Opens up HTML version of the OSPEX documentation using default browser"""
     url2 = "https://hesperia.gsfc.nasa.gov/ssw/packages/spex/doc/ospex_explanation.htm"
     webbrowser.open(url2, new=new)
 
 # function to set a "OSPEX Parameter Tables" in Help menu bar
-# Provides the web page with all OSPEX parameter tables
 def OSPEX_Parameter_Tables():
+    """Provides the web page with all OSPEX parameter tables"""
     url3 = "https://hesperia.gsfc.nasa.gov/ssw/packages/spex/doc/ospex_params_all.htm"
     webbrowser.open(url3, new=new)
 
-# To create a new window called Select Input.
 # Has a widgets to load input data from local directory, display the information from fits file extensions,
 # plot the data for 3 Units: Rate, Counts, Flux in different profiles
 def SelectInput():
+    """To create a new window called Select Input"""
     second.SecondWindow(root)
 
-# Creates a new window with widgets and options to Select background, display new plots
 def SelectBackground():
+    """Creating a new window with widgets and options to Select background, display new plots"""
     background.BackgroundWindow(root)
 
-# Creates a new window where user can select function to fit and plot
 def Fitting():
+    """Creating a new window where user can select function to fit and plot"""
     do_fit.Fitting(root)
 
-# Creates a main window of the software with fixed size and color preferences 
 root = Tk()
+"""Creates a main window of the software with fixed size and color preferences"""
 root.title('SPEX Main Window')
 # root.iconbitmap(r"/home/stage/PycharmProjects/testing/Rhessi.ico")
 root.geometry("500x600")
 # root.config(bg = "black")
 # root["bg"] = "gray22"
-
 mainmenu = Menu(root)
 root.config(menu=mainmenu)
 
@@ -123,8 +124,7 @@ filemenu = Menu(mainmenu, tearoff=0)
 windowmenu = Menu(mainmenu, tearoff=0)
 helpmenu = Menu(mainmenu, tearoff=0)
 
-
-""" Name a menu options in File, Window control and Help menu bars """
+# Name a menu options in File, Window control and Help menu bars
 Select_Input = filemenu.add_command(label="Select Input ...", command=SelectInput)
 Select_Background = filemenu.add_command(label="Select Background ...", command=SelectBackground)
 filemenu.add_command(label="Select Fit Options and Do Fit ...", command=Fitting)

@@ -1,0 +1,683 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.7.2" />
+<title>bkgPlots API documentation</title>
+<meta name="description" content="" />
+<link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
+<link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+<style>.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{font-weight:bold}#index h4 + ul{margin-bottom:.6em}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>bkgPlots</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">from astropy.io import fits
+import numpy as np
+from matplotlib import pyplot as plt, figure
+import pandas as pd
+from datetime import timedelta
+from matplotlib.pyplot import imshow, text
+from pandas.plotting import register_matplotlib_converters
+register_matplotlib_converters()
+from astropy.modeling import models, fitting
+#from sklearn.metrics import mean_squared_error
+from math import *
+from astropy.modeling.models import custom_model
+from astropy.modeling.fitting import LevMarLSQFitter
+from scipy.optimize import curve_fit
+import matplotlib.dates as mdates
+import background
+
+
+class BackgPlots():
+    &#34;&#34;&#34;Class for background plots&#34;&#34;&#34;
+    fname=None
+    def __init__(self):
+        
+        bkgTimeIntv = &#34;&#34;
+
+    def plot(self, timeInterv, unit, energyBinIndex, polyDeg, showTimeInterv):
+        if background.BackgroundWindow.fname is not None:
+            hdulist = fits.open(background.BackgroundWindow.fname)
+            hdulist.info()
+            header1 = hdulist[1].header
+            header3 = hdulist[3].header
+            data1 = hdulist[1].data
+            data2 = hdulist[2].data
+            Rate = data1.RATE
+            Time = data1.TIME
+            Time2 = data1.TIME - 2
+            time_len = len(Time)
+            Livetime = data1.LIVETIME
+            Time_del = data1.TIMEDEL
+            Channel = data1.CHANNEL
+            E_min = data2.E_MIN
+            E_max = data2.E_MAX
+            Area = header3[24]
+            E_mean = np.mean(E_min)
+            Accum_Time = np.sum(Time_del)
+            Date_start = header3[17]
+            E1 = E_min[3] - E_min[0]
+            E2 = E_min[9] - E_min[3]
+            E3 = E_min[22] - E_min[9]
+            E4 = E_min[40] - E_min[22]
+            E5 = E_min[57] - E_min[40]
+            E6 = E_min[76] - E_min[57]
+
+            unitData = None
+
+            &#34;&#34;&#34;Define Spectrum Units: Rate, Counts, Flux&#34;&#34;&#34;
+            n = len(E_min)
+            deltaE = np.zeros(shape=(n))
+            for i in range(n):
+                deltaE[i] = E_max[i] - E_min[i]
+            #Rate
+
+            CountRate = np.zeros(shape=(n))
+            for i in range(n):
+                CountRate[i] = np.mean(Rate[:, i])
+
+            #Counts
+            Counts = np.zeros(shape=(n))
+            for i in range(n):
+                Counts[i] = np.mean(Rate[:,i]*Accum_Time)
+
+            #Flux
+            Flux = np.zeros(shape=(n))
+            for i in range(n):
+                Flux[i] = np.mean(Rate[:,i]) / (Area*deltaE[i]-2)
+
+
+            x = E_min
+            y = Flux
+
+
+            ####################&#34; background ############################
+             
+            # Define Rate Unit Data for &#34;Plot Time Profile&#34;
+            dataRate = np.zeros(shape=(time_len, 6))
+            for i in range(time_len):
+                dataRate[i, 0] = sum(Rate[i, 0:3])
+                dataRate[i, 1] = sum(Rate[i, 3:9])
+                dataRate[i, 2] = sum(Rate[i, 9:22])
+                dataRate[i, 3] = sum(Rate[i, 22:40])
+                dataRate[i, 4] = sum(Rate[i, 40:57])
+                dataRate[i, 5] = sum(Rate[i, 57:76])
+
+
+            # Define Counts Unit Data for &#34;Plot Time Profile&#34;
+
+            dataCounts = np.zeros(shape=(time_len, 6))
+            for i in range(time_len):
+                dataCounts[i, 0] = sum(Rate[i, 0:3]) * Time_del[i]
+                dataCounts[i, 1] = sum(Rate[i, 3:9]) * Time_del[i]
+                dataCounts[i, 2] = sum(Rate[i, 9:22]) * Time_del[i]
+                dataCounts[i, 3] = sum(Rate[i, 22:40]) * Time_del[i]
+                dataCounts[i, 4] = sum(Rate[i, 40:57]) * Time_del[i]
+                dataCounts[i, 5] = sum(Rate[i, 57:76]) * Time_del[i]
+
+
+            # Define the Flux  Unit Data for &#34;Plot Time Profile&#34;
+
+            dataFlux = np.zeros(shape=(time_len, 6))
+            for i in range(time_len):
+                dataFlux[i, 0] = sum(Rate[i, 0:3]) / (Area * E1)
+                dataFlux[i, 1] = sum(Rate[i, 3:9]) / (Area * E2)
+                dataFlux[i, 2] = sum(Rate[i, 9:22]) / (Area * E3)
+                dataFlux[i, 3] = sum(Rate[i, 22:40]) / (Area * E4)
+                dataFlux[i, 4] = sum(Rate[i, 40:57]) / (Area * E5)
+                dataFlux[i, 5] = sum(Rate[i, 57:76]) / (Area * E6)
+                   
+            if unit == &#39;Rate&#39;:
+                unitData =  dataRate[:,int(energyBinIndex)] #dRate 
+            elif unit == &#39;Counts&#39;:
+                unitData = dataCounts[:,int(energyBinIndex)]
+            elif unit == &#39;Flux&#39;:
+                unitData = dataFlux[:,int(energyBinIndex)]
+                
+            TimeNew2 = pd.to_datetime(Time2, unit=&#39;s&#39;)
+            Time2Array = TimeNew2.to_numpy()
+
+
+            ################################## time interval : default 08:30 to 08:40 ################################
+            &#34;&#34;&#34; Get start / end time from time interval  &#34;&#34;&#34;
+            if len(timeInterv) &gt; 0:
+                if &#39;-&#39; in timeInterv or &#39;to&#39; in timeInterv:
+                    timeInterval = timeInterv.split(&#39;-&#39;) if &#39;-&#39; in timeInterv else timeInterv.split(&#39;to&#39;)
+                    startTimeInterv = timeInterval[0].strip().split(&#39;:&#39;)
+                    endTimeInterv = timeInterval[1].strip().split(&#39;:&#39;)
+                    startIndex = int(((int(startTimeInterv[0])*3600 + int(startTimeInterv[1])*60) - (int(startTimeInterv[0]) * 3600 ))/4)
+                    endIndex = int(((int(endTimeInterv[0])*3600 + int(endTimeInterv[1])*60) - (int(startTimeInterv[0]) * 3600))/4)
+
+
+            ################### plot data with bkg ##########################################################################################
+            colors = [&#39;gray&#39;,&#39;magenta&#39;,&#39;lime&#39;, &#39;cyan&#39;, &#39;yellow&#39;, &#39;red&#39;]
+            energyLab = [&#39;3.0 to 6.0 keV&#39;, &#39;6.0 to 12.0 keV&#39;, &#39;12.0 to 25.0 keV&#39;, &#39;25.0 to 49.0 keV&#39;,
+                      &#39;49.0 to 100.0 keV&#39;, &#39;100.0 to 250.0 keV&#39; ]
+            xticksVal = TimeNew2.strftime(&#39;%H:%M&#39;) #TimeNew2.time
+
+            figName = &#34;plot vs time&#34; if background.BackgroundWindow.plotType == &#39;time&#39; else &#34;specgr&#34;
+            if background.BackgroundWindow.plotType != &#39;time&#39; or  background.BackgroundWindow.plotType != &#34;specgr&#34; :
+                plt.clf()
+                plt.close()
+            plt.figure(figName)
+            plt.plot(TimeNew2.time, unitData, drawstyle=&#39;steps-post&#39;, color=colors[int(energyBinIndex)], label = str(energyLab[int(energyBinIndex)]) + &#39; (Data with Bk)&#39;)
+
+            ####################### numpy poly plot bkg : poly1d ############################################################################
+            ####################### plot bkg ########################################################################################
+            bkgMethod = {0:&#39;0Poly&#39;, 1:&#39;1Poly&#39;, 2:&#39;2Poly&#39;, 3:&#39;3Poly&#39;, 4:&#39;Exp&#39;, 5:&#39;High E Profile&#39;, 6:&#39;This E Profile&#39;}
+            if polyDeg == bkgMethod[0]:
+               fitRslt = np.poly1d(np.polyfit(Time2[startIndex:endIndex +1], unitData[startIndex:endIndex +1], 0)) #,  w= 1.0/unitData[startIndex:endIndex +1]))
+            elif polyDeg == bkgMethod[1]:
+               fitRslt = np.poly1d(np.polyfit(Time2[startIndex:endIndex +1], unitData[startIndex:endIndex +1], 1))
+            elif polyDeg == bkgMethod[2]:
+               fitRslt = np.poly1d(np.polyfit(Time2[startIndex:endIndex +1], unitData[startIndex:endIndex +1], 2))
+            elif polyDeg == bkgMethod[3]:
+               fitRslt = np.poly1d(np.polyfit(Time2[startIndex:endIndex +1], unitData[startIndex:endIndex +1], 3))
+                  
+            plt.plot(TimeNew2.time, fitRslt(Time2), drawstyle=&#39;steps-post&#39;, color=&#39;green&#39;, label = str(energyLab[int(energyBinIndex)]) + &#39; (Bk)&#39;)
+            #print(&#39;plot bkg&#39;, TimeNew2.time.shape, fitRslt(Time2).shape, unitData.shape)
+
+            ############################################ plot timeinterval #################################&#34;
+            if showTimeInterv:
+                plotTimeInterv = np.zeros(shape=(len(unitData), len(range(startIndex, endIndex)))) #, len(range(startIndex, endIndex + 1)))
+                plotTimeIntervData = np.zeros(shape=(len(range(startIndex, endIndex + 1))))
+                #plotTimeInterv[:] = Time2[startIndex]
+                k=0
+                for i in range(startIndex, endIndex):
+                    plotTimeInterv[:,k] = Time2[i]
+                    plt.plot(plotTimeInterv[:,k], unitData - fitRslt(Time2), drawstyle=&#39;steps-post&#39;, color=&#39;red&#39;)
+                    k+=1
+                plt.plot(plotTimeInterv[:,0], unitData - fitRslt(Time2),linestyle=&#39;dashed&#39;, drawstyle=&#39;steps-post&#39;, color=&#39;black&#39;)
+                plt.plot(plotTimeInterv[:,-1], unitData - fitRslt(Time2),&#39;-&#39;, drawstyle=&#39;steps-post&#39;, color=&#39;black&#39;)
+                print(&#39;plot bkg&#39;, startIndex, endIndex + 1, plotTimeInterv.shape, len(range(startIndex, endIndex))) 
+
+
+
+            ################## plot data - bkg ################################################################################################
+ 
+            plt.plot(TimeNew2.time, unitData - fitRslt(Time2),drawstyle=&#39;steps-post&#39;, color=&#34;blue&#34; , label = str(energyLab[int(energyBinIndex)]) + &#39; (Data - Bk&#39;)
+            #plt.plot(Time2Array, np.sqrt(np.abs(unitData - fitRslt(Time2))),drawstyle=&#39;steps-post&#39;, label = &#34;Polynomial1D, degree = 0&#34;)
+
+##            for val in range(Time2[startIndex], Time2[endIndex +1]):
+##                plt.plot(val, unitData, drawstyle=&#39;steps-post&#39;, color=&#39;red&#39;)
+                
+
+            ############################ plot parameters #####################################
+            plotTitle = &#39;SPEX HESSI Counts vs Time&#39; if &#39;Counts&#39; in unit else &#39;SPEX HESSI Count &#39; + unit + &#39; vs Time&#39;
+            plt.xlabel(&#39;Start time: &#39; + str(Date_start))
+            plt.ylabel(&#39;Counts/s cm(-2) keV(-1)&#39;)
+            plt.yscale(&#39;log&#39;)
+            plt.title(plotTitle)
+            #plt.legend()
+            ax = plt.axes()
+            legend = ax.legend(loc=&#39;upper right&#39; )
+            
+            #ax.set_facecolor(&#34;black&#34;)
+            #ax.xaxis.set_major_formatter(mdates.DateFormatter(&#39;%H:%M&#39;))
+
+            plt.show()
+
+        else:
+            print(&#39; No file name&#39;)</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="bkgPlots.BackgPlots"><code class="flex name class">
+<span>class <span class="ident">BackgPlots</span></span>
+</code></dt>
+<dd>
+<section class="desc"><p>Class for background plots</p></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class BackgPlots():
+    &#34;&#34;&#34;Class for background plots&#34;&#34;&#34;
+    fname=None
+    def __init__(self):
+        
+        bkgTimeIntv = &#34;&#34;
+
+    def plot(self, timeInterv, unit, energyBinIndex, polyDeg, showTimeInterv):
+        if background.BackgroundWindow.fname is not None:
+            hdulist = fits.open(background.BackgroundWindow.fname)
+            hdulist.info()
+            header1 = hdulist[1].header
+            header3 = hdulist[3].header
+            data1 = hdulist[1].data
+            data2 = hdulist[2].data
+            Rate = data1.RATE
+            Time = data1.TIME
+            Time2 = data1.TIME - 2
+            time_len = len(Time)
+            Livetime = data1.LIVETIME
+            Time_del = data1.TIMEDEL
+            Channel = data1.CHANNEL
+            E_min = data2.E_MIN
+            E_max = data2.E_MAX
+            Area = header3[24]
+            E_mean = np.mean(E_min)
+            Accum_Time = np.sum(Time_del)
+            Date_start = header3[17]
+            E1 = E_min[3] - E_min[0]
+            E2 = E_min[9] - E_min[3]
+            E3 = E_min[22] - E_min[9]
+            E4 = E_min[40] - E_min[22]
+            E5 = E_min[57] - E_min[40]
+            E6 = E_min[76] - E_min[57]
+
+            unitData = None
+
+            &#34;&#34;&#34;Define Spectrum Units: Rate, Counts, Flux&#34;&#34;&#34;
+            n = len(E_min)
+            deltaE = np.zeros(shape=(n))
+            for i in range(n):
+                deltaE[i] = E_max[i] - E_min[i]
+            #Rate
+
+            CountRate = np.zeros(shape=(n))
+            for i in range(n):
+                CountRate[i] = np.mean(Rate[:, i])
+
+            #Counts
+            Counts = np.zeros(shape=(n))
+            for i in range(n):
+                Counts[i] = np.mean(Rate[:,i]*Accum_Time)
+
+            #Flux
+            Flux = np.zeros(shape=(n))
+            for i in range(n):
+                Flux[i] = np.mean(Rate[:,i]) / (Area*deltaE[i]-2)
+
+
+            x = E_min
+            y = Flux
+
+
+            ####################&#34; background ############################
+             
+            # Define Rate Unit Data for &#34;Plot Time Profile&#34;
+            dataRate = np.zeros(shape=(time_len, 6))
+            for i in range(time_len):
+                dataRate[i, 0] = sum(Rate[i, 0:3])
+                dataRate[i, 1] = sum(Rate[i, 3:9])
+                dataRate[i, 2] = sum(Rate[i, 9:22])
+                dataRate[i, 3] = sum(Rate[i, 22:40])
+                dataRate[i, 4] = sum(Rate[i, 40:57])
+                dataRate[i, 5] = sum(Rate[i, 57:76])
+
+
+            # Define Counts Unit Data for &#34;Plot Time Profile&#34;
+
+            dataCounts = np.zeros(shape=(time_len, 6))
+            for i in range(time_len):
+                dataCounts[i, 0] = sum(Rate[i, 0:3]) * Time_del[i]
+                dataCounts[i, 1] = sum(Rate[i, 3:9]) * Time_del[i]
+                dataCounts[i, 2] = sum(Rate[i, 9:22]) * Time_del[i]
+                dataCounts[i, 3] = sum(Rate[i, 22:40]) * Time_del[i]
+                dataCounts[i, 4] = sum(Rate[i, 40:57]) * Time_del[i]
+                dataCounts[i, 5] = sum(Rate[i, 57:76]) * Time_del[i]
+
+
+            # Define the Flux  Unit Data for &#34;Plot Time Profile&#34;
+
+            dataFlux = np.zeros(shape=(time_len, 6))
+            for i in range(time_len):
+                dataFlux[i, 0] = sum(Rate[i, 0:3]) / (Area * E1)
+                dataFlux[i, 1] = sum(Rate[i, 3:9]) / (Area * E2)
+                dataFlux[i, 2] = sum(Rate[i, 9:22]) / (Area * E3)
+                dataFlux[i, 3] = sum(Rate[i, 22:40]) / (Area * E4)
+                dataFlux[i, 4] = sum(Rate[i, 40:57]) / (Area * E5)
+                dataFlux[i, 5] = sum(Rate[i, 57:76]) / (Area * E6)
+                   
+            if unit == &#39;Rate&#39;:
+                unitData =  dataRate[:,int(energyBinIndex)] #dRate 
+            elif unit == &#39;Counts&#39;:
+                unitData = dataCounts[:,int(energyBinIndex)]
+            elif unit == &#39;Flux&#39;:
+                unitData = dataFlux[:,int(energyBinIndex)]
+                
+            TimeNew2 = pd.to_datetime(Time2, unit=&#39;s&#39;)
+            Time2Array = TimeNew2.to_numpy()
+
+
+            ################################## time interval : default 08:30 to 08:40 ################################
+            &#34;&#34;&#34; Get start / end time from time interval  &#34;&#34;&#34;
+            if len(timeInterv) &gt; 0:
+                if &#39;-&#39; in timeInterv or &#39;to&#39; in timeInterv:
+                    timeInterval = timeInterv.split(&#39;-&#39;) if &#39;-&#39; in timeInterv else timeInterv.split(&#39;to&#39;)
+                    startTimeInterv = timeInterval[0].strip().split(&#39;:&#39;)
+                    endTimeInterv = timeInterval[1].strip().split(&#39;:&#39;)
+                    startIndex = int(((int(startTimeInterv[0])*3600 + int(startTimeInterv[1])*60) - (int(startTimeInterv[0]) * 3600 ))/4)
+                    endIndex = int(((int(endTimeInterv[0])*3600 + int(endTimeInterv[1])*60) - (int(startTimeInterv[0]) * 3600))/4)
+
+
+            ################### plot data with bkg ##########################################################################################
+            colors = [&#39;gray&#39;,&#39;magenta&#39;,&#39;lime&#39;, &#39;cyan&#39;, &#39;yellow&#39;, &#39;red&#39;]
+            energyLab = [&#39;3.0 to 6.0 keV&#39;, &#39;6.0 to 12.0 keV&#39;, &#39;12.0 to 25.0 keV&#39;, &#39;25.0 to 49.0 keV&#39;,
+                      &#39;49.0 to 100.0 keV&#39;, &#39;100.0 to 250.0 keV&#39; ]
+            xticksVal = TimeNew2.strftime(&#39;%H:%M&#39;) #TimeNew2.time
+
+            figName = &#34;plot vs time&#34; if background.BackgroundWindow.plotType == &#39;time&#39; else &#34;specgr&#34;
+            if background.BackgroundWindow.plotType != &#39;time&#39; or  background.BackgroundWindow.plotType != &#34;specgr&#34; :
+                plt.clf()
+                plt.close()
+            plt.figure(figName)
+            plt.plot(TimeNew2.time, unitData, drawstyle=&#39;steps-post&#39;, color=colors[int(energyBinIndex)], label = str(energyLab[int(energyBinIndex)]) + &#39; (Data with Bk)&#39;)
+
+            ####################### numpy poly plot bkg : poly1d ############################################################################
+            ####################### plot bkg ########################################################################################
+            bkgMethod = {0:&#39;0Poly&#39;, 1:&#39;1Poly&#39;, 2:&#39;2Poly&#39;, 3:&#39;3Poly&#39;, 4:&#39;Exp&#39;, 5:&#39;High E Profile&#39;, 6:&#39;This E Profile&#39;}
+            if polyDeg == bkgMethod[0]:
+               fitRslt = np.poly1d(np.polyfit(Time2[startIndex:endIndex +1], unitData[startIndex:endIndex +1], 0)) #,  w= 1.0/unitData[startIndex:endIndex +1]))
+            elif polyDeg == bkgMethod[1]:
+               fitRslt = np.poly1d(np.polyfit(Time2[startIndex:endIndex +1], unitData[startIndex:endIndex +1], 1))
+            elif polyDeg == bkgMethod[2]:
+               fitRslt = np.poly1d(np.polyfit(Time2[startIndex:endIndex +1], unitData[startIndex:endIndex +1], 2))
+            elif polyDeg == bkgMethod[3]:
+               fitRslt = np.poly1d(np.polyfit(Time2[startIndex:endIndex +1], unitData[startIndex:endIndex +1], 3))
+                  
+            plt.plot(TimeNew2.time, fitRslt(Time2), drawstyle=&#39;steps-post&#39;, color=&#39;green&#39;, label = str(energyLab[int(energyBinIndex)]) + &#39; (Bk)&#39;)
+            #print(&#39;plot bkg&#39;, TimeNew2.time.shape, fitRslt(Time2).shape, unitData.shape)
+
+            ############################################ plot timeinterval #################################&#34;
+            if showTimeInterv:
+                plotTimeInterv = np.zeros(shape=(len(unitData), len(range(startIndex, endIndex)))) #, len(range(startIndex, endIndex + 1)))
+                plotTimeIntervData = np.zeros(shape=(len(range(startIndex, endIndex + 1))))
+                #plotTimeInterv[:] = Time2[startIndex]
+                k=0
+                for i in range(startIndex, endIndex):
+                    plotTimeInterv[:,k] = Time2[i]
+                    plt.plot(plotTimeInterv[:,k], unitData - fitRslt(Time2), drawstyle=&#39;steps-post&#39;, color=&#39;red&#39;)
+                    k+=1
+                plt.plot(plotTimeInterv[:,0], unitData - fitRslt(Time2),linestyle=&#39;dashed&#39;, drawstyle=&#39;steps-post&#39;, color=&#39;black&#39;)
+                plt.plot(plotTimeInterv[:,-1], unitData - fitRslt(Time2),&#39;-&#39;, drawstyle=&#39;steps-post&#39;, color=&#39;black&#39;)
+                print(&#39;plot bkg&#39;, startIndex, endIndex + 1, plotTimeInterv.shape, len(range(startIndex, endIndex))) 
+
+
+
+            ################## plot data - bkg ################################################################################################
+ 
+            plt.plot(TimeNew2.time, unitData - fitRslt(Time2),drawstyle=&#39;steps-post&#39;, color=&#34;blue&#34; , label = str(energyLab[int(energyBinIndex)]) + &#39; (Data - Bk&#39;)
+            #plt.plot(Time2Array, np.sqrt(np.abs(unitData - fitRslt(Time2))),drawstyle=&#39;steps-post&#39;, label = &#34;Polynomial1D, degree = 0&#34;)
+
+##            for val in range(Time2[startIndex], Time2[endIndex +1]):
+##                plt.plot(val, unitData, drawstyle=&#39;steps-post&#39;, color=&#39;red&#39;)
+                
+
+            ############################ plot parameters #####################################
+            plotTitle = &#39;SPEX HESSI Counts vs Time&#39; if &#39;Counts&#39; in unit else &#39;SPEX HESSI Count &#39; + unit + &#39; vs Time&#39;
+            plt.xlabel(&#39;Start time: &#39; + str(Date_start))
+            plt.ylabel(&#39;Counts/s cm(-2) keV(-1)&#39;)
+            plt.yscale(&#39;log&#39;)
+            plt.title(plotTitle)
+            #plt.legend()
+            ax = plt.axes()
+            legend = ax.legend(loc=&#39;upper right&#39; )
+            
+            #ax.set_facecolor(&#34;black&#34;)
+            #ax.xaxis.set_major_formatter(mdates.DateFormatter(&#39;%H:%M&#39;))
+
+            plt.show()
+
+        else:
+            print(&#39; No file name&#39;)</code></pre>
+</details>
+<h3>Class variables</h3>
+<dl>
+<dt id="bkgPlots.BackgPlots.fname"><code class="name">var <span class="ident">fname</span></code></dt>
+<dd>
+<section class="desc"></section>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="bkgPlots.BackgPlots.plot"><code class="name flex">
+<span>def <span class="ident">plot</span></span>(<span>self, timeInterv, unit, energyBinIndex, polyDeg, showTimeInterv)</span>
+</code></dt>
+<dd>
+<section class="desc"></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">    def plot(self, timeInterv, unit, energyBinIndex, polyDeg, showTimeInterv):
+        if background.BackgroundWindow.fname is not None:
+            hdulist = fits.open(background.BackgroundWindow.fname)
+            hdulist.info()
+            header1 = hdulist[1].header
+            header3 = hdulist[3].header
+            data1 = hdulist[1].data
+            data2 = hdulist[2].data
+            Rate = data1.RATE
+            Time = data1.TIME
+            Time2 = data1.TIME - 2
+            time_len = len(Time)
+            Livetime = data1.LIVETIME
+            Time_del = data1.TIMEDEL
+            Channel = data1.CHANNEL
+            E_min = data2.E_MIN
+            E_max = data2.E_MAX
+            Area = header3[24]
+            E_mean = np.mean(E_min)
+            Accum_Time = np.sum(Time_del)
+            Date_start = header3[17]
+            E1 = E_min[3] - E_min[0]
+            E2 = E_min[9] - E_min[3]
+            E3 = E_min[22] - E_min[9]
+            E4 = E_min[40] - E_min[22]
+            E5 = E_min[57] - E_min[40]
+            E6 = E_min[76] - E_min[57]
+
+            unitData = None
+
+            &#34;&#34;&#34;Define Spectrum Units: Rate, Counts, Flux&#34;&#34;&#34;
+            n = len(E_min)
+            deltaE = np.zeros(shape=(n))
+            for i in range(n):
+                deltaE[i] = E_max[i] - E_min[i]
+            #Rate
+
+            CountRate = np.zeros(shape=(n))
+            for i in range(n):
+                CountRate[i] = np.mean(Rate[:, i])
+
+            #Counts
+            Counts = np.zeros(shape=(n))
+            for i in range(n):
+                Counts[i] = np.mean(Rate[:,i]*Accum_Time)
+
+            #Flux
+            Flux = np.zeros(shape=(n))
+            for i in range(n):
+                Flux[i] = np.mean(Rate[:,i]) / (Area*deltaE[i]-2)
+
+
+            x = E_min
+            y = Flux
+
+
+            ####################&#34; background ############################
+             
+            # Define Rate Unit Data for &#34;Plot Time Profile&#34;
+            dataRate = np.zeros(shape=(time_len, 6))
+            for i in range(time_len):
+                dataRate[i, 0] = sum(Rate[i, 0:3])
+                dataRate[i, 1] = sum(Rate[i, 3:9])
+                dataRate[i, 2] = sum(Rate[i, 9:22])
+                dataRate[i, 3] = sum(Rate[i, 22:40])
+                dataRate[i, 4] = sum(Rate[i, 40:57])
+                dataRate[i, 5] = sum(Rate[i, 57:76])
+
+
+            # Define Counts Unit Data for &#34;Plot Time Profile&#34;
+
+            dataCounts = np.zeros(shape=(time_len, 6))
+            for i in range(time_len):
+                dataCounts[i, 0] = sum(Rate[i, 0:3]) * Time_del[i]
+                dataCounts[i, 1] = sum(Rate[i, 3:9]) * Time_del[i]
+                dataCounts[i, 2] = sum(Rate[i, 9:22]) * Time_del[i]
+                dataCounts[i, 3] = sum(Rate[i, 22:40]) * Time_del[i]
+                dataCounts[i, 4] = sum(Rate[i, 40:57]) * Time_del[i]
+                dataCounts[i, 5] = sum(Rate[i, 57:76]) * Time_del[i]
+
+
+            # Define the Flux  Unit Data for &#34;Plot Time Profile&#34;
+
+            dataFlux = np.zeros(shape=(time_len, 6))
+            for i in range(time_len):
+                dataFlux[i, 0] = sum(Rate[i, 0:3]) / (Area * E1)
+                dataFlux[i, 1] = sum(Rate[i, 3:9]) / (Area * E2)
+                dataFlux[i, 2] = sum(Rate[i, 9:22]) / (Area * E3)
+                dataFlux[i, 3] = sum(Rate[i, 22:40]) / (Area * E4)
+                dataFlux[i, 4] = sum(Rate[i, 40:57]) / (Area * E5)
+                dataFlux[i, 5] = sum(Rate[i, 57:76]) / (Area * E6)
+                   
+            if unit == &#39;Rate&#39;:
+                unitData =  dataRate[:,int(energyBinIndex)] #dRate 
+            elif unit == &#39;Counts&#39;:
+                unitData = dataCounts[:,int(energyBinIndex)]
+            elif unit == &#39;Flux&#39;:
+                unitData = dataFlux[:,int(energyBinIndex)]
+                
+            TimeNew2 = pd.to_datetime(Time2, unit=&#39;s&#39;)
+            Time2Array = TimeNew2.to_numpy()
+
+
+            ################################## time interval : default 08:30 to 08:40 ################################
+            &#34;&#34;&#34; Get start / end time from time interval  &#34;&#34;&#34;
+            if len(timeInterv) &gt; 0:
+                if &#39;-&#39; in timeInterv or &#39;to&#39; in timeInterv:
+                    timeInterval = timeInterv.split(&#39;-&#39;) if &#39;-&#39; in timeInterv else timeInterv.split(&#39;to&#39;)
+                    startTimeInterv = timeInterval[0].strip().split(&#39;:&#39;)
+                    endTimeInterv = timeInterval[1].strip().split(&#39;:&#39;)
+                    startIndex = int(((int(startTimeInterv[0])*3600 + int(startTimeInterv[1])*60) - (int(startTimeInterv[0]) * 3600 ))/4)
+                    endIndex = int(((int(endTimeInterv[0])*3600 + int(endTimeInterv[1])*60) - (int(startTimeInterv[0]) * 3600))/4)
+
+
+            ################### plot data with bkg ##########################################################################################
+            colors = [&#39;gray&#39;,&#39;magenta&#39;,&#39;lime&#39;, &#39;cyan&#39;, &#39;yellow&#39;, &#39;red&#39;]
+            energyLab = [&#39;3.0 to 6.0 keV&#39;, &#39;6.0 to 12.0 keV&#39;, &#39;12.0 to 25.0 keV&#39;, &#39;25.0 to 49.0 keV&#39;,
+                      &#39;49.0 to 100.0 keV&#39;, &#39;100.0 to 250.0 keV&#39; ]
+            xticksVal = TimeNew2.strftime(&#39;%H:%M&#39;) #TimeNew2.time
+
+            figName = &#34;plot vs time&#34; if background.BackgroundWindow.plotType == &#39;time&#39; else &#34;specgr&#34;
+            if background.BackgroundWindow.plotType != &#39;time&#39; or  background.BackgroundWindow.plotType != &#34;specgr&#34; :
+                plt.clf()
+                plt.close()
+            plt.figure(figName)
+            plt.plot(TimeNew2.time, unitData, drawstyle=&#39;steps-post&#39;, color=colors[int(energyBinIndex)], label = str(energyLab[int(energyBinIndex)]) + &#39; (Data with Bk)&#39;)
+
+            ####################### numpy poly plot bkg : poly1d ############################################################################
+            ####################### plot bkg ########################################################################################
+            bkgMethod = {0:&#39;0Poly&#39;, 1:&#39;1Poly&#39;, 2:&#39;2Poly&#39;, 3:&#39;3Poly&#39;, 4:&#39;Exp&#39;, 5:&#39;High E Profile&#39;, 6:&#39;This E Profile&#39;}
+            if polyDeg == bkgMethod[0]:
+               fitRslt = np.poly1d(np.polyfit(Time2[startIndex:endIndex +1], unitData[startIndex:endIndex +1], 0)) #,  w= 1.0/unitData[startIndex:endIndex +1]))
+            elif polyDeg == bkgMethod[1]:
+               fitRslt = np.poly1d(np.polyfit(Time2[startIndex:endIndex +1], unitData[startIndex:endIndex +1], 1))
+            elif polyDeg == bkgMethod[2]:
+               fitRslt = np.poly1d(np.polyfit(Time2[startIndex:endIndex +1], unitData[startIndex:endIndex +1], 2))
+            elif polyDeg == bkgMethod[3]:
+               fitRslt = np.poly1d(np.polyfit(Time2[startIndex:endIndex +1], unitData[startIndex:endIndex +1], 3))
+                  
+            plt.plot(TimeNew2.time, fitRslt(Time2), drawstyle=&#39;steps-post&#39;, color=&#39;green&#39;, label = str(energyLab[int(energyBinIndex)]) + &#39; (Bk)&#39;)
+            #print(&#39;plot bkg&#39;, TimeNew2.time.shape, fitRslt(Time2).shape, unitData.shape)
+
+            ############################################ plot timeinterval #################################&#34;
+            if showTimeInterv:
+                plotTimeInterv = np.zeros(shape=(len(unitData), len(range(startIndex, endIndex)))) #, len(range(startIndex, endIndex + 1)))
+                plotTimeIntervData = np.zeros(shape=(len(range(startIndex, endIndex + 1))))
+                #plotTimeInterv[:] = Time2[startIndex]
+                k=0
+                for i in range(startIndex, endIndex):
+                    plotTimeInterv[:,k] = Time2[i]
+                    plt.plot(plotTimeInterv[:,k], unitData - fitRslt(Time2), drawstyle=&#39;steps-post&#39;, color=&#39;red&#39;)
+                    k+=1
+                plt.plot(plotTimeInterv[:,0], unitData - fitRslt(Time2),linestyle=&#39;dashed&#39;, drawstyle=&#39;steps-post&#39;, color=&#39;black&#39;)
+                plt.plot(plotTimeInterv[:,-1], unitData - fitRslt(Time2),&#39;-&#39;, drawstyle=&#39;steps-post&#39;, color=&#39;black&#39;)
+                print(&#39;plot bkg&#39;, startIndex, endIndex + 1, plotTimeInterv.shape, len(range(startIndex, endIndex))) 
+
+
+
+            ################## plot data - bkg ################################################################################################
+ 
+            plt.plot(TimeNew2.time, unitData - fitRslt(Time2),drawstyle=&#39;steps-post&#39;, color=&#34;blue&#34; , label = str(energyLab[int(energyBinIndex)]) + &#39; (Data - Bk&#39;)
+            #plt.plot(Time2Array, np.sqrt(np.abs(unitData - fitRslt(Time2))),drawstyle=&#39;steps-post&#39;, label = &#34;Polynomial1D, degree = 0&#34;)
+
+##            for val in range(Time2[startIndex], Time2[endIndex +1]):
+##                plt.plot(val, unitData, drawstyle=&#39;steps-post&#39;, color=&#39;red&#39;)
+                
+
+            ############################ plot parameters #####################################
+            plotTitle = &#39;SPEX HESSI Counts vs Time&#39; if &#39;Counts&#39; in unit else &#39;SPEX HESSI Count &#39; + unit + &#39; vs Time&#39;
+            plt.xlabel(&#39;Start time: &#39; + str(Date_start))
+            plt.ylabel(&#39;Counts/s cm(-2) keV(-1)&#39;)
+            plt.yscale(&#39;log&#39;)
+            plt.title(plotTitle)
+            #plt.legend()
+            ax = plt.axes()
+            legend = ax.legend(loc=&#39;upper right&#39; )
+            
+            #ax.set_facecolor(&#34;black&#34;)
+            #ax.xaxis.set_major_formatter(mdates.DateFormatter(&#39;%H:%M&#39;))
+
+            plt.show()
+
+        else:
+            print(&#39; No file name&#39;)</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="bkgPlots.BackgPlots" href="#bkgPlots.BackgPlots">BackgPlots</a></code></h4>
+<ul class="">
+<li><code><a title="bkgPlots.BackgPlots.fname" href="#bkgPlots.BackgPlots.fname">fname</a></code></li>
+<li><code><a title="bkgPlots.BackgPlots.plot" href="#bkgPlots.BackgPlots.plot">plot</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.7.2</a>.</p>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad()</script>
+</body>
+</html>

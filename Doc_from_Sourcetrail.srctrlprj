@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<config>
+    <source_groups>
+        <source_group_615fe557-3b36-4812-b3ee-1824d71c7c0b>
+            <name>Python Source Group</name>
+            <source_extensions>
+                <source_extension>.py</source_extension>
+            </source_extensions>
+            <source_paths>
+                <source_path>../../git_workspace/OSPEX-Object-Spectral-Executive-in-Python/OSPEXinPython/background_plot.py</source_path>
+                <source_path>../../git_workspace/OSPEX-Object-Spectral-Executive-in-Python/OSPEXinPython/background.py</source_path>
+                <source_path>../../git_workspace/OSPEX-Object-Spectral-Executive-in-Python/OSPEXinPython/bkgPlots.py</source_path>
+                <source_path>../../git_workspace/OSPEX-Object-Spectral-Executive-in-Python/OSPEXinPython/do_fit.py</source_path>
+                <source_path>../../git_workspace/OSPEX-Object-Spectral-Executive-in-Python/OSPEXinPython/editInterval.py</source_path>
+                <source_path>../../git_workspace/OSPEX-Object-Spectral-Executive-in-Python/OSPEXinPython/editTime.py</source_path>
+                <source_path>../../git_workspace/OSPEX-Object-Spectral-Executive-in-Python/OSPEXinPython/main.py</source_path>
+                <source_path>../../git_workspace/OSPEX-Object-Spectral-Executive-in-Python/OSPEXinPython/new_window.py</source_path>
+                <source_path>../../git_workspace/OSPEX-Object-Spectral-Executive-in-Python/OSPEXinPython/plotting.py</source_path>
+                <source_path>../../git_workspace/OSPEX-Object-Spectral-Executive-in-Python/OSPEXinPython/second.py</source_path>
+            </source_paths>
+            <status>enabled</status>
+            <type>Python Source Group</type>
+        </source_group_615fe557-3b36-4812-b3ee-1824d71c7c0b>
+    </source_groups>
+    <version>8</version>
+</config>

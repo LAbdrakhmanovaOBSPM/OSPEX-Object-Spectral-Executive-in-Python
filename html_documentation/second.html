@@ -1,0 +1,993 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.7.2" />
+<title>second API documentation</title>
+<meta name="description" content="Application: OSPEX in Python …" />
+<link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
+<link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+<style>.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{font-weight:bold}#index h4 + ul{margin-bottom:.6em}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>second</code></h1>
+</header>
+<section id="section-intro">
+<p>Application: OSPEX in Python</p>
+<p>Start date: 11/03/2019</p>
+<p>Creators: Liaisian Abdrakhmanova, Abdallah Hamini, Aichatou Aboubacar</p>
+<p>Organization: LESIA, Observatory of Paris, France</p>
+<p>Graphical User Interface: GUI was created using tkinter library</p>
+<p>Usage: information to test the program provided in Requirements file</p>
+<p>Status = 'Development'</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;
+
+   Application: OSPEX in Python
+
+   Start date: 11/03/2019
+
+   Creators: Liaisian Abdrakhmanova, Abdallah Hamini, Aichatou Aboubacar
+
+   Organization: LESIA, Observatory of Paris, France
+  
+   Graphical User Interface: GUI was created using tkinter library
+
+   Usage: information to test the program provided in Requirements file
+
+   Status = &#39;Development&#39;
+
+&#34;&#34;&#34;
+   
+# import the libraries    
+from tkinter import *
+from tkinter.filedialog import askopenfilename
+from astropy.io import fits
+import re
+import copy
+import pandas as pd
+import plotting
+import warnings
+import background
+import do_fit
+
+class SecondWindow():
+    &#34;&#34;&#34;Class to create &#34;Select Input Window&#34; menu option in OSPEX.
+    Rout: Go to top menu bars -&gt; File -&gt; Select Input.
+    Initiates the parameters and widgets&#34;&#34;&#34;
+    # create a new window
+    def __init__(self, root):
+        &#34;&#34;&#34;Creating a new window for &#39;Select Input&#39; part&#34;&#34;&#34;
+        self.top1 = Toplevel()
+        self.top1.title(&#39;SPEX Input Options&#39;)
+        self.top1.geometry(&#34;1000x600&#34;)
+        Label(self.top1,
+              text=&#34;Select Input&#34;,
+              fg=&#34;red&#34;,
+              font=&#34;Helvetica 12 bold italic&#34;).pack()
+
+        self.hdul = None
+
+        self.root = root
+        # self.root.wm_atributes(&#34;-disabled&#34;, True)
+        
+        #create a first farme and additional widgets
+        # name of the widget is in the &#39;text&#39; parameter
+        self.frame1 = LabelFrame(self.top1, relief=RAISED, borderwidth=1)
+        &#34;&#34;&#34;&#39;Select input&#39; window should contain 2 frames:
+         1) in first we arrange the widgets to load the data, read the content of .fits file extensions and etc; 
+         2) in second - widgets to  select the energy band and time band intervals and plot. 
+        We use the &#39;place&#39; geometry manage. It allows us explicitly set the position and size of the window, 
+        either in absolute terms, or relative to another window. The place manager can be accessed through the place method. 
+        It can be applied to all standard widgets&#34;&#34;&#34;
+        self.frame1.place(relx=0.05, rely=0.04, relheight=0.35, relwidth=0.9) #specify the position of the button in frame
+
+        self.lblFilename = Label(self.frame1, text=&#34;Spectrum or Image File: &#34;)
+        self.lblFilename.place(relx=0.01, rely=0.2)
+
+        self.textFilename = Entry(self.frame1, width=20)
+
+        self.textFilename.place(relx=0.2, rely=0.18, relheight=0.16, relwidth=0.57)
+
+        self.browseButton = Button(self.frame1, text=&#39;Browse -&gt;&#39;, command=self.OpenFile)
+        self.browseButton.place(relx=0.8, rely=0.186)
+
+        self.chkBtEntireFile = Checkbutton(self.frame1, text=&#34;Entire file&#34;, command=self.checked)
+        self.chkBtEntireFile.place(relx=0.03, rely=0.37)
+        self.chkBtEntireFile.select()
+
+        self.SetFromButton = Button(self.frame1, text=&#34;Set from -&gt; &#34;, state=DISABLED)
+        self.SetFromButton.place(relx=0.1, rely=0.55)
+
+        self.StartButton = Button(self.frame1, text=&#34;Start&#34;, state=DISABLED)
+        self.StartButton.place(relx=0.24, rely=0.55)
+
+        self.textStart = Entry(self.frame1, width=20)
+        self.textStart.place(relx=0.31, rely=0.55, height=33, width=190)
+        self.textStart[&#39;state&#39;] = &#39;disabled&#39;
+
+        self.EndButton = Button(self.frame1, text=&#34;End&#34;, state=DISABLED)
+        self.EndButton.place(relx=0.53, rely=0.55)
+
+        self.textEnd = Entry(self.frame1, width=20)
+        self.textEnd.place(relx=0.59, rely=0.55, height=33, width=190)
+        self.textEnd[&#39;state&#39;] = &#39;disabled&#39;
+
+        self.lblDuration = Label(self.frame1, text=&#34;Dur(s): &#34;, state=DISABLED)
+        self.lblDuration.place(relx=0.82, rely=0.58)
+
+        self.textDuration = Entry(self.frame1, width=20)
+        self.textDuration.place(relx=0.88, rely=0.55, height=33, width=80)
+        self.textDuration[&#39;state&#39;] = &#39;disabled&#39;
+
+        self.lblTimeOffset = Label(self.frame1, text=&#34;Time Offset(s): &#34;)
+        self.lblTimeOffset.place(relx=0.24, rely=0.85)
+
+        self.TimeOffsetList = (&#34;-100.00&#34;, &#34;-90.00&#34;, &#34;-80.00&#34;, &#34;-70.00&#34;, &#34;-60.00&#34;, &#34;-50.00&#34;,
+                               &#34;-40.00&#34;, &#34;-30.00&#34;, &#34;-20.00&#34;, &#34;-10.00&#34;, &#34;0.00&#34;, &#34;10.00&#34;, &#34;20.00&#34;,
+                               &#34;30.00&#34;, &#34;40.00&#34;, &#34;50.00&#34;, &#34;60.00&#34;, &#34;70.00&#34;, &#34;80.00&#34;, &#34;90.00&#34;)
+
+        self.SpinboxTimeOffset = Spinbox(self.frame1, values=self.TimeOffsetList, text=&#34;Time Offset(s)&#34;, )
+        self.SpinboxTimeOffset.place(relx=0.37, rely=0.85, width=80)
+
+        # &#34;Summarize&#34; button. If we click on it, it gives the information from self.hdul[1].header
+        #  Creates a new window with the name &#34;SPEX::PREVIEW&#34;
+
+        self.SummarizeButton = Button(self.frame1, text=&#34;Summarize -&gt;&#34;, command=self.Summarize)
+        self.SummarizeButton.place(relx=0.48, rely=0.81)
+
+        # &#34;Show Header&#34; button. If we click on it, it gives the information from primary_header = hdulist[0].header
+
+        self.ShowHeaderButton = Button(self.frame1, text=&#34;Show Header&#34;, command=self.ShowHeader)
+        self.ShowHeaderButton.place(relx=0.67, rely=0.81)
+
+        self.frame2 = LabelFrame(self.top1, relief=RAISED, borderwidth=2)
+        &#34;&#34;&#34;Second frame/Plotting section&#34;&#34;&#34;
+        self.frame2.place(relx=0.005, rely=0.39, relheight=0.52, relwidth=0.99)
+
+        # Interval Selection Interface
+        self.lblIntervalSelection = Label(self.frame2, text=&#34;Interval Selection Interface: &#34;)
+        self.lblIntervalSelection.place(relx=0.013, rely=0.16)
+
+        # Question: what&#39;s the difference between Graphical, Full Options, Show Filter?
+
+        self.chkBtGraphical = Checkbutton(self.frame2, text=&#34;Graphical&#34;)
+        self.chkBtGraphical.place(relx=0.21, rely=0.16)
+
+        self.chkBtFullOptions = Checkbutton(self.frame2, text=&#34;Full Options&#34;)
+        self.chkBtFullOptions.place(relx=0.31, rely=0.16)
+
+        self.chkBtShowFilter = Checkbutton(self.frame2, text=&#34;Show Filter&#34;)
+        self.chkBtShowFilter.place(relx=0.45, rely=0.15)
+
+        # Energy Bands for Time Plots
+        self.lblEnergyBands = Label(self.frame2, text=&#34;Energy Bands for Time Plots: &#34;)
+        self.lblEnergyBands.place(relx=0.013, rely=0.36)
+
+        self.EnergyBands_choices = (&#39;3.à to 6.0&#39;, &#39;6.0 to 12.0&#39;, &#39;12.0 to 25.0&#39;,
+                                    &#39;25.0 to 50.0&#39;, &#39;50.0 to 100.0&#39;, &#39;100.0 to 300.0&#39;)
+        self.varE = StringVar(self.frame1)
+        self.varE.set(self.EnergyBands_choices[0])
+        self.selectionE = OptionMenu(self.frame2, self.varE, *self.EnergyBands_choices)
+        self.selectionE.place(relx=0.228, rely=0.34)
+
+        self.EChangeButton = Button(self.frame2, text=&#34;Change&#34;)
+        self.EChangeButton.place(relx=0.36, rely=0.34)
+
+        self.ShowEbandsButton = Button(self.frame2, text=&#34;Show Ebands&#34;)
+        self.ShowEbandsButton.place(relx=0.46, rely=0.34)
+
+        self.SetToDefaultButton = Button(self.frame2, text=&#34;Set to default&#34;)
+        self.SetToDefaultButton.place(relx=0.6, rely=0.34)
+
+        # Time Bands for Energy Plots
+        self.lblTimeBands = Label(self.frame2, text=&#34;Time Bands for Energy Plots: &#34;)
+        self.lblTimeBands.place(relx=0.013, rely=0.55)
+
+        self.TimeBands_choices = (&#39;1s time interval&#39;, &#39;2nd time interval&#39;, &#39;3rd time interval&#39;, &#39;4th time interval&#39;)
+        self.varT = StringVar(self.frame2)
+        self.varT.set(self.TimeBands_choices[0])
+        self.selectionT = OptionMenu(self.frame2, self.varT, *self.TimeBands_choices)
+        self.selectionT.place(relx=0.228, rely=0.53, width = 320)
+
+        self.TChangeButton = Button(self.frame2, text=&#34;Change&#34;)
+        self.TChangeButton.place(relx=0.58, rely=0.53)
+
+        self.ShowTbandsButton = Button(self.frame2, text=&#34;Show Tbands&#34;)
+        self.ShowTbandsButton.place(relx=0.69, rely=0.53)
+
+        # Plot Units. Plotting for Rate, Counts and Flux
+        self.lblPlotUnits = Label(self.frame2, text=&#34;Plot Units: &#34;)
+        self.lblPlotUnits.place(relx=0.013, rely=0.75)
+
+        # Option menu for Rate, Counts, Flux
+        self.Component_choices = (&#39;Rate&#39;, &#39;Counts&#39;, &#39;Flux&#39;)
+        self.var = StringVar(self.frame1)
+        self.var.set(self.Component_choices[0])
+        self.selection = OptionMenu(self.frame2, self.var, *self.Component_choices)
+        self.selection.place(relx=0.11, rely=0.73)
+
+        self.PlotSpectrumButton = Button(self.frame2, text=&#34;Plot Spectrum&#34;, command=lambda: self.show_plot(&#34;spec&#34;))
+        self.PlotSpectrumButton.place(relx=0.21, rely=0.73)
+
+        self.PlotTimeProfileButton = Button(self.frame2, text=&#34;Plot Time Profile&#34;,
+                                            command=lambda: self.show_plot(&#34;time&#34;))
+        self.PlotTimeProfileButton.place(relx=0.357, rely=0.73)
+
+        self.PlotSpectrogramButton = Button(self.frame2, text=&#34;Plot Spectrogram&#34;,
+                                            command=lambda: self.show_plot(&#34;specgr&#34;))
+        self.PlotSpectrogramButton.place(relx=0.52, rely=0.73)
+
+        # The buttons at the bottom of the &#34;Select Input&#34; window
+
+        self.refreshButton = Button(self.top1, text=&#34;Refresh&#34;)
+        self.refreshButton.place(relx=0.4, rely=0.925)
+        
+        self.closeButton = Button(self.top1, text=&#34;Close&#34;, command=self.destroy)
+        self.closeButton.place(relx=0.5, rely=0.925)
+
+    ############################################################# Main methods ####################################################
+
+    def OpenFile(self):
+        &#34;&#34;&#34; Function to read the input data using Astropy library.
+        It can be any extension. We analyse the RHESSI .fits files&#34;&#34;&#34;
+        self.name = askopenfilename(initialdir=(&#34;.&#34;),
+                                    filetypes=((&#34;FITS files&#34;, &#34;*.fits&#34;), (&#34;All Files&#34;, &#34;*.*&#34;)),
+                                    title=&#34;Please Select Spectrum or Image File&#34;)
+        self.textFilename.delete(0, &#39;end&#39;) 
+        background.BackgroundWindow.fname=self.name
+        do_fit.Fitting.fname = self.name
+        # do_fit.Fitting.E_min = self.E_min
+        try:
+            with fits.open(self.name) as hdul:
+                self.hdul = hdul 
+                #do_fit.Fitting.fname = self.hdul
+                #load the data and header parameters
+                self.timeData = [self.hdul[3].header[17], self.hdul[3].header[18], self.hdul[1].data.TIMEDEL] 
+                self.summarizeData = [self.hdul[1].header[24], str(self.hdul[1].header[25])[10:],
+                                      self.hdul[1].header[15],
+                                      self.hdul[1].data.TIME, self.hdul[2].data.E_MIN,
+                                      self.hdul[2].data.E_MIN[0], self.hdul[2].data.E_MAX[-1]]
+                self.plotData = [self.hdul[1].data.RATE, self.hdul[1].data.TIME, self.hdul[1].data.LIVETIME,
+                                 self.hdul[1].data.CHANNEL]
+                self.time_len = len(self.summarizeData[3])
+          
+                self.TimeNew2 = self.plotData[1] - 2
+
+                self.textFilename.insert(0, self.name) #display the input file name in &#39;Spectrum or Image file:&#39; section&#39;
+        except:
+            self.textFilename.insert(0, &#34;No file chosen&#34;)
+    
+    # create a new window for Summarize button
+    def Summarize(self):
+        &#34;&#34;&#34;Creating a new window for Summarize button.
+        Reads the information from Header and Data and display it in new window&#34;&#34;&#34;
+        top = Toplevel()
+        top.title(&#39;SPEX::PREVIEW&#39;)
+        top.geometry(&#34;400x300&#34;)
+        frameSummarize = LabelFrame(top, relief=RAISED, borderwidth=2)
+        frameSummarize.pack(side=TOP, expand=True)
+
+        # textSummarize = [&#39;Spectrum or Image File Summary: &#39;, &#39;Data Type: &#39;, &#39;Time Bins:&#39;, &#39;Time range:&#39;, &#39;#Energy Bins: &#39;,
+        # &#39;Area: &#39;, &#39;Detectors Used: &#39;, &#39;Response Info: &#39;]
+        # for each section call the parameters from header and data
+        txt = [&#34;\n\n\nSpectrum or Image File Summary&#34;,
+               &#34;\nData Type: &#34;, self.summarizeData[2], 
+               &#34;\nFile name: &#34;, self.name,
+               &#34;\n#Time Bins: &#34;, self.time_len, &#34;Time range: &#34;, self.timeData[0], &#39;to&#39;, self.timeData[1],
+               &#34;\n#Energy Bins: &#34;, len(self.summarizeData[4]),
+               &#34;Energy range: &#34;, self.summarizeData[5], &#39;to&#39;, self.summarizeData[6],
+               &#34;\nArea: &#34;, self.summarizeData[0],
+               &#34;\nDetectors Used: &#34;, self.summarizeData[1],
+               &#34;\nResponse Info: &#34;, self.name]
+        list = Text(frameSummarize)
+        list.insert(END, txt)
+        list.pack()
+
+    # Create a Show Header button.
+    # FIXME: Text should be well-organized in the window &#39;SPEX::FITSHEADER&#39;
+    def ShowHeader(self):
+        &#34;&#34;&#34;Reads text information from header and display it in new window&#34;&#34;&#34;
+        text = re.sub(&#34; +&#34;, &#34; &#34;, self.hdul[0].header.tostring())
+        top = Toplevel()
+        top.title(&#39;SPEX::FITSHEADER&#39;)
+        top.geometry(&#34;500x600&#34;)
+        scrollbar1 = Scrollbar(top)
+        scrollbar1.pack(side=RIGHT, fill=Y)
+        header = Text(top, width=450, height=450)
+        header.insert(END, (text).splitlines())
+        header.config(state=DISABLED)
+        header.pack()
+        scrollbar1.config(command=header.yview)
+
+    def destroy(self):
+        &#34;&#34;&#34;Closing &#39;Select Input&#39; window, clicking &#39;Close&#39; button&#34;&#34;&#34;
+        # self.root.wm_attributes(&#34;-disabled&#34;, False)
+        self.top1.destroy() #close the window when user click 
+
+
+    def checked(self):
+        &#34;&#34;&#34; &#39;Set From&#39; button activation.
+        Allows user to select between two distinct values (e.g. on/off)&#34;&#34;&#34;
+        if self.SetFromButton[&#39;state&#39;] == &#39;disabled&#39;:
+            self.SetFromButton[&#39;state&#39;] = &#39;normal&#39;
+            self.StartButton[&#39;state&#39;] = &#39;normal&#39;
+            self.EndButton[&#39;state&#39;] = &#39;normal&#39;
+
+            self.textStart[&#39;state&#39;] = &#39;normal&#39;
+            self.textEnd[&#39;state&#39;] = &#39;normal&#39;
+            self.textDuration[&#39;state&#39;] = &#39;normal&#39;
+            self.lblDuration[&#39;state&#39;] = &#39;normal&#39;
+
+            self.textStart.delete(0, &#39;end&#39;)
+            self.textEnd.delete(0, &#39;end&#39;)
+            self.textDuration.delete(0, &#39;end&#39;)
+
+            self.textStart.insert(0, self.timeData[0])
+            self.textEnd.insert(0, self.timeData[1])
+            self.textDuration.insert(0, sum(self.timeData[2]))
+
+        else:
+            self.SetFromButton[&#39;state&#39;] = &#39;disabled&#39;
+            self.StartButton[&#39;state&#39;] = &#39;disabled&#39;
+            self.EndButton[&#39;state&#39;] = &#39;disabled&#39;
+
+            self.textStart[&#39;state&#39;] = &#39;disabled&#39;
+            self.textEnd[&#39;state&#39;] = &#39;disabled&#39;
+            self.textDuration[&#39;state&#39;] = &#39;disabled&#39;
+            self.lblDuration[&#39;state&#39;] = &#39;disabled&#39;
+
+    ########################################################### PLOTTING ##################################################
+
+    def show_plot(self, e):
+        &#34;&#34;&#34;Call the class to plot Spectrum, Time profile, Spectrogram;
+        parameters are taken from .fits file, chosen(loaded) by user&#34;&#34;&#34;
+        plots = plotting.Input(self.name)
+        #if user pick in Plot Units section &#39;Rate&#39; and &#39;Spectrum&#39;, plot:
+        if self.var.get() == &#39;Rate&#39;:
+            if e == &#39;spec&#39;:
+                plots.plot_spectrum_rate()
+            #Rate and Time Profile:
+            elif e == &#39;time&#39;:
+                plots.rate_vs_time_plotting()
+            #Rate and Time Spectrogram:
+            elif e == &#39;specgr&#39;:
+                plots.plot_spectrogram_rate()
+        #if &#39;Counts&#39; and &#39;Spectrum&#39;, plot:
+        if self.var.get() == &#39;Counts&#39;:
+            if e == &#39;spec&#39;:
+                plots.plot_spectrum_counts()
+            #if &#39;Counts&#39; and &#39;Time Profile&#39;, plot:
+            elif e == &#39;time&#39;:
+                plots.counts_vs_time_plotting()
+            #if &#39;Counts&#39; and &#39;Spectrogram&#39;, plot:
+            elif e == &#39;specgr&#39;:
+                plots.plot_spectrogram_counts()
+        #if &#39;Flux&#39; and &#39;Spectrum&#39;, plot:
+        if self.var.get() == &#39;Flux&#39;:
+            if e == &#39;spec&#39;:
+                plots.plot_spectrum_flux()
+            #if &#39;Flux&#39; and &#39;Time Profile&#39;, plot:
+            elif e == &#39;time&#39;:
+                plots.flux_vs_time_plotting()
+            #if &#39;Flux&#39; and &#39;Spectrogram&#39;, plot:
+            elif e == &#39;specgr&#39;:
+                plots.plot_spectrogram_flux()</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="second.SecondWindow"><code class="flex name class">
+<span>class <span class="ident">SecondWindow</span></span>
+<span>(</span><span>root)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Class to create "Select Input Window" menu option in OSPEX.
+Rout: Go to top menu bars -&gt; File -&gt; Select Input.
+Initiates the parameters and widgets</p>
+<p>Creating a new window for 'Select Input' part</p></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class SecondWindow():
+    &#34;&#34;&#34;Class to create &#34;Select Input Window&#34; menu option in OSPEX.
+    Rout: Go to top menu bars -&gt; File -&gt; Select Input.
+    Initiates the parameters and widgets&#34;&#34;&#34;
+    # create a new window
+    def __init__(self, root):
+        &#34;&#34;&#34;Creating a new window for &#39;Select Input&#39; part&#34;&#34;&#34;
+        self.top1 = Toplevel()
+        self.top1.title(&#39;SPEX Input Options&#39;)
+        self.top1.geometry(&#34;1000x600&#34;)
+        Label(self.top1,
+              text=&#34;Select Input&#34;,
+              fg=&#34;red&#34;,
+              font=&#34;Helvetica 12 bold italic&#34;).pack()
+
+        self.hdul = None
+
+        self.root = root
+        # self.root.wm_atributes(&#34;-disabled&#34;, True)
+        
+        #create a first farme and additional widgets
+        # name of the widget is in the &#39;text&#39; parameter
+        self.frame1 = LabelFrame(self.top1, relief=RAISED, borderwidth=1)
+        &#34;&#34;&#34;&#39;Select input&#39; window should contain 2 frames:
+         1) in first we arrange the widgets to load the data, read the content of .fits file extensions and etc; 
+         2) in second - widgets to  select the energy band and time band intervals and plot. 
+        We use the &#39;place&#39; geometry manage. It allows us explicitly set the position and size of the window, 
+        either in absolute terms, or relative to another window. The place manager can be accessed through the place method. 
+        It can be applied to all standard widgets&#34;&#34;&#34;
+        self.frame1.place(relx=0.05, rely=0.04, relheight=0.35, relwidth=0.9) #specify the position of the button in frame
+
+        self.lblFilename = Label(self.frame1, text=&#34;Spectrum or Image File: &#34;)
+        self.lblFilename.place(relx=0.01, rely=0.2)
+
+        self.textFilename = Entry(self.frame1, width=20)
+
+        self.textFilename.place(relx=0.2, rely=0.18, relheight=0.16, relwidth=0.57)
+
+        self.browseButton = Button(self.frame1, text=&#39;Browse -&gt;&#39;, command=self.OpenFile)
+        self.browseButton.place(relx=0.8, rely=0.186)
+
+        self.chkBtEntireFile = Checkbutton(self.frame1, text=&#34;Entire file&#34;, command=self.checked)
+        self.chkBtEntireFile.place(relx=0.03, rely=0.37)
+        self.chkBtEntireFile.select()
+
+        self.SetFromButton = Button(self.frame1, text=&#34;Set from -&gt; &#34;, state=DISABLED)
+        self.SetFromButton.place(relx=0.1, rely=0.55)
+
+        self.StartButton = Button(self.frame1, text=&#34;Start&#34;, state=DISABLED)
+        self.StartButton.place(relx=0.24, rely=0.55)
+
+        self.textStart = Entry(self.frame1, width=20)
+        self.textStart.place(relx=0.31, rely=0.55, height=33, width=190)
+        self.textStart[&#39;state&#39;] = &#39;disabled&#39;
+
+        self.EndButton = Button(self.frame1, text=&#34;End&#34;, state=DISABLED)
+        self.EndButton.place(relx=0.53, rely=0.55)
+
+        self.textEnd = Entry(self.frame1, width=20)
+        self.textEnd.place(relx=0.59, rely=0.55, height=33, width=190)
+        self.textEnd[&#39;state&#39;] = &#39;disabled&#39;
+
+        self.lblDuration = Label(self.frame1, text=&#34;Dur(s): &#34;, state=DISABLED)
+        self.lblDuration.place(relx=0.82, rely=0.58)
+
+        self.textDuration = Entry(self.frame1, width=20)
+        self.textDuration.place(relx=0.88, rely=0.55, height=33, width=80)
+        self.textDuration[&#39;state&#39;] = &#39;disabled&#39;
+
+        self.lblTimeOffset = Label(self.frame1, text=&#34;Time Offset(s): &#34;)
+        self.lblTimeOffset.place(relx=0.24, rely=0.85)
+
+        self.TimeOffsetList = (&#34;-100.00&#34;, &#34;-90.00&#34;, &#34;-80.00&#34;, &#34;-70.00&#34;, &#34;-60.00&#34;, &#34;-50.00&#34;,
+                               &#34;-40.00&#34;, &#34;-30.00&#34;, &#34;-20.00&#34;, &#34;-10.00&#34;, &#34;0.00&#34;, &#34;10.00&#34;, &#34;20.00&#34;,
+                               &#34;30.00&#34;, &#34;40.00&#34;, &#34;50.00&#34;, &#34;60.00&#34;, &#34;70.00&#34;, &#34;80.00&#34;, &#34;90.00&#34;)
+
+        self.SpinboxTimeOffset = Spinbox(self.frame1, values=self.TimeOffsetList, text=&#34;Time Offset(s)&#34;, )
+        self.SpinboxTimeOffset.place(relx=0.37, rely=0.85, width=80)
+
+        # &#34;Summarize&#34; button. If we click on it, it gives the information from self.hdul[1].header
+        #  Creates a new window with the name &#34;SPEX::PREVIEW&#34;
+
+        self.SummarizeButton = Button(self.frame1, text=&#34;Summarize -&gt;&#34;, command=self.Summarize)
+        self.SummarizeButton.place(relx=0.48, rely=0.81)
+
+        # &#34;Show Header&#34; button. If we click on it, it gives the information from primary_header = hdulist[0].header
+
+        self.ShowHeaderButton = Button(self.frame1, text=&#34;Show Header&#34;, command=self.ShowHeader)
+        self.ShowHeaderButton.place(relx=0.67, rely=0.81)
+
+        self.frame2 = LabelFrame(self.top1, relief=RAISED, borderwidth=2)
+        &#34;&#34;&#34;Second frame/Plotting section&#34;&#34;&#34;
+        self.frame2.place(relx=0.005, rely=0.39, relheight=0.52, relwidth=0.99)
+
+        # Interval Selection Interface
+        self.lblIntervalSelection = Label(self.frame2, text=&#34;Interval Selection Interface: &#34;)
+        self.lblIntervalSelection.place(relx=0.013, rely=0.16)
+
+        # Question: what&#39;s the difference between Graphical, Full Options, Show Filter?
+
+        self.chkBtGraphical = Checkbutton(self.frame2, text=&#34;Graphical&#34;)
+        self.chkBtGraphical.place(relx=0.21, rely=0.16)
+
+        self.chkBtFullOptions = Checkbutton(self.frame2, text=&#34;Full Options&#34;)
+        self.chkBtFullOptions.place(relx=0.31, rely=0.16)
+
+        self.chkBtShowFilter = Checkbutton(self.frame2, text=&#34;Show Filter&#34;)
+        self.chkBtShowFilter.place(relx=0.45, rely=0.15)
+
+        # Energy Bands for Time Plots
+        self.lblEnergyBands = Label(self.frame2, text=&#34;Energy Bands for Time Plots: &#34;)
+        self.lblEnergyBands.place(relx=0.013, rely=0.36)
+
+        self.EnergyBands_choices = (&#39;3.à to 6.0&#39;, &#39;6.0 to 12.0&#39;, &#39;12.0 to 25.0&#39;,
+                                    &#39;25.0 to 50.0&#39;, &#39;50.0 to 100.0&#39;, &#39;100.0 to 300.0&#39;)
+        self.varE = StringVar(self.frame1)
+        self.varE.set(self.EnergyBands_choices[0])
+        self.selectionE = OptionMenu(self.frame2, self.varE, *self.EnergyBands_choices)
+        self.selectionE.place(relx=0.228, rely=0.34)
+
+        self.EChangeButton = Button(self.frame2, text=&#34;Change&#34;)
+        self.EChangeButton.place(relx=0.36, rely=0.34)
+
+        self.ShowEbandsButton = Button(self.frame2, text=&#34;Show Ebands&#34;)
+        self.ShowEbandsButton.place(relx=0.46, rely=0.34)
+
+        self.SetToDefaultButton = Button(self.frame2, text=&#34;Set to default&#34;)
+        self.SetToDefaultButton.place(relx=0.6, rely=0.34)
+
+        # Time Bands for Energy Plots
+        self.lblTimeBands = Label(self.frame2, text=&#34;Time Bands for Energy Plots: &#34;)
+        self.lblTimeBands.place(relx=0.013, rely=0.55)
+
+        self.TimeBands_choices = (&#39;1s time interval&#39;, &#39;2nd time interval&#39;, &#39;3rd time interval&#39;, &#39;4th time interval&#39;)
+        self.varT = StringVar(self.frame2)
+        self.varT.set(self.TimeBands_choices[0])
+        self.selectionT = OptionMenu(self.frame2, self.varT, *self.TimeBands_choices)
+        self.selectionT.place(relx=0.228, rely=0.53, width = 320)
+
+        self.TChangeButton = Button(self.frame2, text=&#34;Change&#34;)
+        self.TChangeButton.place(relx=0.58, rely=0.53)
+
+        self.ShowTbandsButton = Button(self.frame2, text=&#34;Show Tbands&#34;)
+        self.ShowTbandsButton.place(relx=0.69, rely=0.53)
+
+        # Plot Units. Plotting for Rate, Counts and Flux
+        self.lblPlotUnits = Label(self.frame2, text=&#34;Plot Units: &#34;)
+        self.lblPlotUnits.place(relx=0.013, rely=0.75)
+
+        # Option menu for Rate, Counts, Flux
+        self.Component_choices = (&#39;Rate&#39;, &#39;Counts&#39;, &#39;Flux&#39;)
+        self.var = StringVar(self.frame1)
+        self.var.set(self.Component_choices[0])
+        self.selection = OptionMenu(self.frame2, self.var, *self.Component_choices)
+        self.selection.place(relx=0.11, rely=0.73)
+
+        self.PlotSpectrumButton = Button(self.frame2, text=&#34;Plot Spectrum&#34;, command=lambda: self.show_plot(&#34;spec&#34;))
+        self.PlotSpectrumButton.place(relx=0.21, rely=0.73)
+
+        self.PlotTimeProfileButton = Button(self.frame2, text=&#34;Plot Time Profile&#34;,
+                                            command=lambda: self.show_plot(&#34;time&#34;))
+        self.PlotTimeProfileButton.place(relx=0.357, rely=0.73)
+
+        self.PlotSpectrogramButton = Button(self.frame2, text=&#34;Plot Spectrogram&#34;,
+                                            command=lambda: self.show_plot(&#34;specgr&#34;))
+        self.PlotSpectrogramButton.place(relx=0.52, rely=0.73)
+
+        # The buttons at the bottom of the &#34;Select Input&#34; window
+
+        self.refreshButton = Button(self.top1, text=&#34;Refresh&#34;)
+        self.refreshButton.place(relx=0.4, rely=0.925)
+        
+        self.closeButton = Button(self.top1, text=&#34;Close&#34;, command=self.destroy)
+        self.closeButton.place(relx=0.5, rely=0.925)
+
+    ############################################################# Main methods ####################################################
+
+    def OpenFile(self):
+        &#34;&#34;&#34; Function to read the input data using Astropy library.
+        It can be any extension. We analyse the RHESSI .fits files&#34;&#34;&#34;
+        self.name = askopenfilename(initialdir=(&#34;.&#34;),
+                                    filetypes=((&#34;FITS files&#34;, &#34;*.fits&#34;), (&#34;All Files&#34;, &#34;*.*&#34;)),
+                                    title=&#34;Please Select Spectrum or Image File&#34;)
+        self.textFilename.delete(0, &#39;end&#39;) 
+        background.BackgroundWindow.fname=self.name
+        do_fit.Fitting.fname = self.name
+        # do_fit.Fitting.E_min = self.E_min
+        try:
+            with fits.open(self.name) as hdul:
+                self.hdul = hdul 
+                #do_fit.Fitting.fname = self.hdul
+                #load the data and header parameters
+                self.timeData = [self.hdul[3].header[17], self.hdul[3].header[18], self.hdul[1].data.TIMEDEL] 
+                self.summarizeData = [self.hdul[1].header[24], str(self.hdul[1].header[25])[10:],
+                                      self.hdul[1].header[15],
+                                      self.hdul[1].data.TIME, self.hdul[2].data.E_MIN,
+                                      self.hdul[2].data.E_MIN[0], self.hdul[2].data.E_MAX[-1]]
+                self.plotData = [self.hdul[1].data.RATE, self.hdul[1].data.TIME, self.hdul[1].data.LIVETIME,
+                                 self.hdul[1].data.CHANNEL]
+                self.time_len = len(self.summarizeData[3])
+          
+                self.TimeNew2 = self.plotData[1] - 2
+
+                self.textFilename.insert(0, self.name) #display the input file name in &#39;Spectrum or Image file:&#39; section&#39;
+        except:
+            self.textFilename.insert(0, &#34;No file chosen&#34;)
+    
+    # create a new window for Summarize button
+    def Summarize(self):
+        &#34;&#34;&#34;Creating a new window for Summarize button.
+        Reads the information from Header and Data and display it in new window&#34;&#34;&#34;
+        top = Toplevel()
+        top.title(&#39;SPEX::PREVIEW&#39;)
+        top.geometry(&#34;400x300&#34;)
+        frameSummarize = LabelFrame(top, relief=RAISED, borderwidth=2)
+        frameSummarize.pack(side=TOP, expand=True)
+
+        # textSummarize = [&#39;Spectrum or Image File Summary: &#39;, &#39;Data Type: &#39;, &#39;Time Bins:&#39;, &#39;Time range:&#39;, &#39;#Energy Bins: &#39;,
+        # &#39;Area: &#39;, &#39;Detectors Used: &#39;, &#39;Response Info: &#39;]
+        # for each section call the parameters from header and data
+        txt = [&#34;\n\n\nSpectrum or Image File Summary&#34;,
+               &#34;\nData Type: &#34;, self.summarizeData[2], 
+               &#34;\nFile name: &#34;, self.name,
+               &#34;\n#Time Bins: &#34;, self.time_len, &#34;Time range: &#34;, self.timeData[0], &#39;to&#39;, self.timeData[1],
+               &#34;\n#Energy Bins: &#34;, len(self.summarizeData[4]),
+               &#34;Energy range: &#34;, self.summarizeData[5], &#39;to&#39;, self.summarizeData[6],
+               &#34;\nArea: &#34;, self.summarizeData[0],
+               &#34;\nDetectors Used: &#34;, self.summarizeData[1],
+               &#34;\nResponse Info: &#34;, self.name]
+        list = Text(frameSummarize)
+        list.insert(END, txt)
+        list.pack()
+
+    # Create a Show Header button.
+    # FIXME: Text should be well-organized in the window &#39;SPEX::FITSHEADER&#39;
+    def ShowHeader(self):
+        &#34;&#34;&#34;Reads text information from header and display it in new window&#34;&#34;&#34;
+        text = re.sub(&#34; +&#34;, &#34; &#34;, self.hdul[0].header.tostring())
+        top = Toplevel()
+        top.title(&#39;SPEX::FITSHEADER&#39;)
+        top.geometry(&#34;500x600&#34;)
+        scrollbar1 = Scrollbar(top)
+        scrollbar1.pack(side=RIGHT, fill=Y)
+        header = Text(top, width=450, height=450)
+        header.insert(END, (text).splitlines())
+        header.config(state=DISABLED)
+        header.pack()
+        scrollbar1.config(command=header.yview)
+
+    def destroy(self):
+        &#34;&#34;&#34;Closing &#39;Select Input&#39; window, clicking &#39;Close&#39; button&#34;&#34;&#34;
+        # self.root.wm_attributes(&#34;-disabled&#34;, False)
+        self.top1.destroy() #close the window when user click 
+
+
+    def checked(self):
+        &#34;&#34;&#34; &#39;Set From&#39; button activation.
+        Allows user to select between two distinct values (e.g. on/off)&#34;&#34;&#34;
+        if self.SetFromButton[&#39;state&#39;] == &#39;disabled&#39;:
+            self.SetFromButton[&#39;state&#39;] = &#39;normal&#39;
+            self.StartButton[&#39;state&#39;] = &#39;normal&#39;
+            self.EndButton[&#39;state&#39;] = &#39;normal&#39;
+
+            self.textStart[&#39;state&#39;] = &#39;normal&#39;
+            self.textEnd[&#39;state&#39;] = &#39;normal&#39;
+            self.textDuration[&#39;state&#39;] = &#39;normal&#39;
+            self.lblDuration[&#39;state&#39;] = &#39;normal&#39;
+
+            self.textStart.delete(0, &#39;end&#39;)
+            self.textEnd.delete(0, &#39;end&#39;)
+            self.textDuration.delete(0, &#39;end&#39;)
+
+            self.textStart.insert(0, self.timeData[0])
+            self.textEnd.insert(0, self.timeData[1])
+            self.textDuration.insert(0, sum(self.timeData[2]))
+
+        else:
+            self.SetFromButton[&#39;state&#39;] = &#39;disabled&#39;
+            self.StartButton[&#39;state&#39;] = &#39;disabled&#39;
+            self.EndButton[&#39;state&#39;] = &#39;disabled&#39;
+
+            self.textStart[&#39;state&#39;] = &#39;disabled&#39;
+            self.textEnd[&#39;state&#39;] = &#39;disabled&#39;
+            self.textDuration[&#39;state&#39;] = &#39;disabled&#39;
+            self.lblDuration[&#39;state&#39;] = &#39;disabled&#39;
+
+    ########################################################### PLOTTING ##################################################
+
+    def show_plot(self, e):
+        &#34;&#34;&#34;Call the class to plot Spectrum, Time profile, Spectrogram;
+        parameters are taken from .fits file, chosen(loaded) by user&#34;&#34;&#34;
+        plots = plotting.Input(self.name)
+        #if user pick in Plot Units section &#39;Rate&#39; and &#39;Spectrum&#39;, plot:
+        if self.var.get() == &#39;Rate&#39;:
+            if e == &#39;spec&#39;:
+                plots.plot_spectrum_rate()
+            #Rate and Time Profile:
+            elif e == &#39;time&#39;:
+                plots.rate_vs_time_plotting()
+            #Rate and Time Spectrogram:
+            elif e == &#39;specgr&#39;:
+                plots.plot_spectrogram_rate()
+        #if &#39;Counts&#39; and &#39;Spectrum&#39;, plot:
+        if self.var.get() == &#39;Counts&#39;:
+            if e == &#39;spec&#39;:
+                plots.plot_spectrum_counts()
+            #if &#39;Counts&#39; and &#39;Time Profile&#39;, plot:
+            elif e == &#39;time&#39;:
+                plots.counts_vs_time_plotting()
+            #if &#39;Counts&#39; and &#39;Spectrogram&#39;, plot:
+            elif e == &#39;specgr&#39;:
+                plots.plot_spectrogram_counts()
+        #if &#39;Flux&#39; and &#39;Spectrum&#39;, plot:
+        if self.var.get() == &#39;Flux&#39;:
+            if e == &#39;spec&#39;:
+                plots.plot_spectrum_flux()
+            #if &#39;Flux&#39; and &#39;Time Profile&#39;, plot:
+            elif e == &#39;time&#39;:
+                plots.flux_vs_time_plotting()
+            #if &#39;Flux&#39; and &#39;Spectrogram&#39;, plot:
+            elif e == &#39;specgr&#39;:
+                plots.plot_spectrogram_flux()</code></pre>
+</details>
+<h3>Instance variables</h3>
+<dl>
+<dt id="second.SecondWindow.frame1"><code class="name">var <span class="ident">frame1</span></code></dt>
+<dd>
+<section class="desc"><p>'Select input' window should contain 2 frames:
+1) in first we arrange the widgets to load the data, read the content of .fits file extensions and etc;
+2) in second - widgets to
+select the energy band and time band intervals and plot.
+We use the 'place' geometry manage. It allows us explicitly set the position and size of the window,
+either in absolute terms, or relative to another window. The place manager can be accessed through the place method.
+It can be applied to all standard widgets</p></section>
+</dd>
+<dt id="second.SecondWindow.frame2"><code class="name">var <span class="ident">frame2</span></code></dt>
+<dd>
+<section class="desc"><p>Second frame/Plotting section</p></section>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="second.SecondWindow.OpenFile"><code class="name flex">
+<span>def <span class="ident">OpenFile</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Function to read the input data using Astropy library.
+It can be any extension. We analyse the RHESSI .fits files</p></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def OpenFile(self):
+    &#34;&#34;&#34; Function to read the input data using Astropy library.
+    It can be any extension. We analyse the RHESSI .fits files&#34;&#34;&#34;
+    self.name = askopenfilename(initialdir=(&#34;.&#34;),
+                                filetypes=((&#34;FITS files&#34;, &#34;*.fits&#34;), (&#34;All Files&#34;, &#34;*.*&#34;)),
+                                title=&#34;Please Select Spectrum or Image File&#34;)
+    self.textFilename.delete(0, &#39;end&#39;) 
+    background.BackgroundWindow.fname=self.name
+    do_fit.Fitting.fname = self.name
+    # do_fit.Fitting.E_min = self.E_min
+    try:
+        with fits.open(self.name) as hdul:
+            self.hdul = hdul 
+            #do_fit.Fitting.fname = self.hdul
+            #load the data and header parameters
+            self.timeData = [self.hdul[3].header[17], self.hdul[3].header[18], self.hdul[1].data.TIMEDEL] 
+            self.summarizeData = [self.hdul[1].header[24], str(self.hdul[1].header[25])[10:],
+                                  self.hdul[1].header[15],
+                                  self.hdul[1].data.TIME, self.hdul[2].data.E_MIN,
+                                  self.hdul[2].data.E_MIN[0], self.hdul[2].data.E_MAX[-1]]
+            self.plotData = [self.hdul[1].data.RATE, self.hdul[1].data.TIME, self.hdul[1].data.LIVETIME,
+                             self.hdul[1].data.CHANNEL]
+            self.time_len = len(self.summarizeData[3])
+      
+            self.TimeNew2 = self.plotData[1] - 2
+
+            self.textFilename.insert(0, self.name) #display the input file name in &#39;Spectrum or Image file:&#39; section&#39;
+    except:
+        self.textFilename.insert(0, &#34;No file chosen&#34;)</code></pre>
+</details>
+</dd>
+<dt id="second.SecondWindow.ShowHeader"><code class="name flex">
+<span>def <span class="ident">ShowHeader</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Reads text information from header and display it in new window</p></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def ShowHeader(self):
+    &#34;&#34;&#34;Reads text information from header and display it in new window&#34;&#34;&#34;
+    text = re.sub(&#34; +&#34;, &#34; &#34;, self.hdul[0].header.tostring())
+    top = Toplevel()
+    top.title(&#39;SPEX::FITSHEADER&#39;)
+    top.geometry(&#34;500x600&#34;)
+    scrollbar1 = Scrollbar(top)
+    scrollbar1.pack(side=RIGHT, fill=Y)
+    header = Text(top, width=450, height=450)
+    header.insert(END, (text).splitlines())
+    header.config(state=DISABLED)
+    header.pack()
+    scrollbar1.config(command=header.yview)</code></pre>
+</details>
+</dd>
+<dt id="second.SecondWindow.Summarize"><code class="name flex">
+<span>def <span class="ident">Summarize</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Creating a new window for Summarize button.
+Reads the information from Header and Data and display it in new window</p></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def Summarize(self):
+    &#34;&#34;&#34;Creating a new window for Summarize button.
+    Reads the information from Header and Data and display it in new window&#34;&#34;&#34;
+    top = Toplevel()
+    top.title(&#39;SPEX::PREVIEW&#39;)
+    top.geometry(&#34;400x300&#34;)
+    frameSummarize = LabelFrame(top, relief=RAISED, borderwidth=2)
+    frameSummarize.pack(side=TOP, expand=True)
+
+    # textSummarize = [&#39;Spectrum or Image File Summary: &#39;, &#39;Data Type: &#39;, &#39;Time Bins:&#39;, &#39;Time range:&#39;, &#39;#Energy Bins: &#39;,
+    # &#39;Area: &#39;, &#39;Detectors Used: &#39;, &#39;Response Info: &#39;]
+    # for each section call the parameters from header and data
+    txt = [&#34;\n\n\nSpectrum or Image File Summary&#34;,
+           &#34;\nData Type: &#34;, self.summarizeData[2], 
+           &#34;\nFile name: &#34;, self.name,
+           &#34;\n#Time Bins: &#34;, self.time_len, &#34;Time range: &#34;, self.timeData[0], &#39;to&#39;, self.timeData[1],
+           &#34;\n#Energy Bins: &#34;, len(self.summarizeData[4]),
+           &#34;Energy range: &#34;, self.summarizeData[5], &#39;to&#39;, self.summarizeData[6],
+           &#34;\nArea: &#34;, self.summarizeData[0],
+           &#34;\nDetectors Used: &#34;, self.summarizeData[1],
+           &#34;\nResponse Info: &#34;, self.name]
+    list = Text(frameSummarize)
+    list.insert(END, txt)
+    list.pack()</code></pre>
+</details>
+</dd>
+<dt id="second.SecondWindow.checked"><code class="name flex">
+<span>def <span class="ident">checked</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>'Set From' button activation.
+Allows user to select between two distinct values (e.g. on/off)</p></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def checked(self):
+    &#34;&#34;&#34; &#39;Set From&#39; button activation.
+    Allows user to select between two distinct values (e.g. on/off)&#34;&#34;&#34;
+    if self.SetFromButton[&#39;state&#39;] == &#39;disabled&#39;:
+        self.SetFromButton[&#39;state&#39;] = &#39;normal&#39;
+        self.StartButton[&#39;state&#39;] = &#39;normal&#39;
+        self.EndButton[&#39;state&#39;] = &#39;normal&#39;
+
+        self.textStart[&#39;state&#39;] = &#39;normal&#39;
+        self.textEnd[&#39;state&#39;] = &#39;normal&#39;
+        self.textDuration[&#39;state&#39;] = &#39;normal&#39;
+        self.lblDuration[&#39;state&#39;] = &#39;normal&#39;
+
+        self.textStart.delete(0, &#39;end&#39;)
+        self.textEnd.delete(0, &#39;end&#39;)
+        self.textDuration.delete(0, &#39;end&#39;)
+
+        self.textStart.insert(0, self.timeData[0])
+        self.textEnd.insert(0, self.timeData[1])
+        self.textDuration.insert(0, sum(self.timeData[2]))
+
+    else:
+        self.SetFromButton[&#39;state&#39;] = &#39;disabled&#39;
+        self.StartButton[&#39;state&#39;] = &#39;disabled&#39;
+        self.EndButton[&#39;state&#39;] = &#39;disabled&#39;
+
+        self.textStart[&#39;state&#39;] = &#39;disabled&#39;
+        self.textEnd[&#39;state&#39;] = &#39;disabled&#39;
+        self.textDuration[&#39;state&#39;] = &#39;disabled&#39;
+        self.lblDuration[&#39;state&#39;] = &#39;disabled&#39;</code></pre>
+</details>
+</dd>
+<dt id="second.SecondWindow.destroy"><code class="name flex">
+<span>def <span class="ident">destroy</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Closing 'Select Input' window, clicking 'Close' button</p></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def destroy(self):
+    &#34;&#34;&#34;Closing &#39;Select Input&#39; window, clicking &#39;Close&#39; button&#34;&#34;&#34;
+    # self.root.wm_attributes(&#34;-disabled&#34;, False)
+    self.top1.destroy() #close the window when user click </code></pre>
+</details>
+</dd>
+<dt id="second.SecondWindow.show_plot"><code class="name flex">
+<span>def <span class="ident">show_plot</span></span>(<span>self, e)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Call the class to plot Spectrum, Time profile, Spectrogram;
+parameters are taken from .fits file, chosen(loaded) by user</p></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def show_plot(self, e):
+    &#34;&#34;&#34;Call the class to plot Spectrum, Time profile, Spectrogram;
+    parameters are taken from .fits file, chosen(loaded) by user&#34;&#34;&#34;
+    plots = plotting.Input(self.name)
+    #if user pick in Plot Units section &#39;Rate&#39; and &#39;Spectrum&#39;, plot:
+    if self.var.get() == &#39;Rate&#39;:
+        if e == &#39;spec&#39;:
+            plots.plot_spectrum_rate()
+        #Rate and Time Profile:
+        elif e == &#39;time&#39;:
+            plots.rate_vs_time_plotting()
+        #Rate and Time Spectrogram:
+        elif e == &#39;specgr&#39;:
+            plots.plot_spectrogram_rate()
+    #if &#39;Counts&#39; and &#39;Spectrum&#39;, plot:
+    if self.var.get() == &#39;Counts&#39;:
+        if e == &#39;spec&#39;:
+            plots.plot_spectrum_counts()
+        #if &#39;Counts&#39; and &#39;Time Profile&#39;, plot:
+        elif e == &#39;time&#39;:
+            plots.counts_vs_time_plotting()
+        #if &#39;Counts&#39; and &#39;Spectrogram&#39;, plot:
+        elif e == &#39;specgr&#39;:
+            plots.plot_spectrogram_counts()
+    #if &#39;Flux&#39; and &#39;Spectrum&#39;, plot:
+    if self.var.get() == &#39;Flux&#39;:
+        if e == &#39;spec&#39;:
+            plots.plot_spectrum_flux()
+        #if &#39;Flux&#39; and &#39;Time Profile&#39;, plot:
+        elif e == &#39;time&#39;:
+            plots.flux_vs_time_plotting()
+        #if &#39;Flux&#39; and &#39;Spectrogram&#39;, plot:
+        elif e == &#39;specgr&#39;:
+            plots.plot_spectrogram_flux()</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="second.SecondWindow" href="#second.SecondWindow">SecondWindow</a></code></h4>
+<ul class="two-column">
+<li><code><a title="second.SecondWindow.OpenFile" href="#second.SecondWindow.OpenFile">OpenFile</a></code></li>
+<li><code><a title="second.SecondWindow.ShowHeader" href="#second.SecondWindow.ShowHeader">ShowHeader</a></code></li>
+<li><code><a title="second.SecondWindow.Summarize" href="#second.SecondWindow.Summarize">Summarize</a></code></li>
+<li><code><a title="second.SecondWindow.checked" href="#second.SecondWindow.checked">checked</a></code></li>
+<li><code><a title="second.SecondWindow.destroy" href="#second.SecondWindow.destroy">destroy</a></code></li>
+<li><code><a title="second.SecondWindow.frame1" href="#second.SecondWindow.frame1">frame1</a></code></li>
+<li><code><a title="second.SecondWindow.frame2" href="#second.SecondWindow.frame2">frame2</a></code></li>
+<li><code><a title="second.SecondWindow.show_plot" href="#second.SecondWindow.show_plot">show_plot</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.7.2</a>.</p>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad()</script>
+</body>
+</html>

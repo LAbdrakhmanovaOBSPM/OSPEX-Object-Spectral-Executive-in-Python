@@ -30,15 +30,12 @@ import background
 import do_fit
 
 class SecondWindow():
-   
-    """
-    Class to create "Select Input Window" menu option in OSPEX
-    
-    rout: Go to top menu bars -> File -> Select Input 
-
-    """
+    """Class to create "Select Input Window" menu option in OSPEX.
+    Rout: Go to top menu bars -> File -> Select Input.
+    Initiates the parameters and widgets"""
     # create a new window
     def __init__(self, root):
+        """Creating a new window for 'Select Input' part"""
         self.top1 = Toplevel()
         self.top1.title('SPEX Input Options')
         self.top1.geometry("1000x600")
@@ -47,28 +44,20 @@ class SecondWindow():
               fg="red",
               font="Helvetica 12 bold italic").pack()
 
-        """Initiate the parameters and widgets"""
-
         self.hdul = None
 
         self.root = root
         # self.root.wm_atributes("-disabled", True)
-
-        """
-        'Select input' window should contain 2 frames:
-         - in first we arrange the widgets to load the data, read the content of .fits file extensions and etc
-         - in second - widgets to  select the energy band and time band intervals and plot
-        
-
-        We use the 'place' geometry manage. It allows us explicitly set the position and size of a window, 
-        either in absolute terms, or relative to another window. The place manager can be accessed through the place method. 
-        It can be applied to all standard widgets.
-        
-        """
         
         #create a first farme and additional widgets
         # name of the widget is in the 'text' parameter
         self.frame1 = LabelFrame(self.top1, relief=RAISED, borderwidth=1)
+        """'Select input' window should contain 2 frames:
+         1) in first we arrange the widgets to load the data, read the content of .fits file extensions and etc; 
+         2) in second - widgets to  select the energy band and time band intervals and plot. 
+        We use the 'place' geometry manage. It allows us explicitly set the position and size of the window, 
+        either in absolute terms, or relative to another window. The place manager can be accessed through the place method. 
+        It can be applied to all standard widgets"""
         self.frame1.place(relx=0.05, rely=0.04, relheight=0.35, relwidth=0.9) #specify the position of the button in frame
 
         self.lblFilename = Label(self.frame1, text="Spectrum or Image File: ")
@@ -130,10 +119,8 @@ class SecondWindow():
         self.ShowHeaderButton = Button(self.frame1, text="Show Header", command=self.ShowHeader)
         self.ShowHeaderButton.place(relx=0.67, rely=0.81)
 
-
-        """Second frame/Plotting section"""
-
         self.frame2 = LabelFrame(self.top1, relief=RAISED, borderwidth=2)
+        """Second frame/Plotting section"""
         self.frame2.place(relx=0.005, rely=0.39, relheight=0.52, relwidth=0.99)
 
         # Interval Selection Interface
@@ -217,16 +204,11 @@ class SecondWindow():
         self.closeButton = Button(self.top1, text="Close", command=self.destroy)
         self.closeButton.place(relx=0.5, rely=0.925)
 
-
-
     ############################################################# Main methods ####################################################
 
-    """ 
-    Function to read the input data through Astropy library
-    It can be any extension. We analyse the RHESSI .fits files
-    """
-
     def OpenFile(self):
+        """ Function to read the input data using Astropy library.
+        It can be any extension. We analyse the RHESSI .fits files"""
         self.name = askopenfilename(initialdir=("."),
                                     filetypes=(("FITS files", "*.fits"), ("All Files", "*.*")),
                                     title="Please Select Spectrum or Image File")
@@ -256,6 +238,8 @@ class SecondWindow():
     
     # create a new window for Summarize button
     def Summarize(self):
+        """Creating a new window for Summarize button.
+        Reads the information from Header and Data and display it in new window"""
         top = Toplevel()
         top.title('SPEX::PREVIEW')
         top.geometry("400x300")
@@ -278,10 +262,10 @@ class SecondWindow():
         list.insert(END, txt)
         list.pack()
 
-    # Create a Show Header button. 
-    # Reads text information from header and display it in new window
+    # Create a Show Header button.
     # FIXME: Text should be well-organized in the window 'SPEX::FITSHEADER'
     def ShowHeader(self):
+        """Reads text information from header and display it in new window"""
         text = re.sub(" +", " ", self.hdul[0].header.tostring())
         top = Toplevel()
         top.title('SPEX::FITSHEADER')
@@ -295,14 +279,14 @@ class SecondWindow():
         scrollbar1.config(command=header.yview)
 
     def destroy(self):
+        """Closing 'Select Input' window, clicking 'Close' button"""
         # self.root.wm_attributes("-disabled", False)
         self.top1.destroy() #close the window when user click 
 
-        """ 
-        In next section activate a Set From button
-        Allows a user to read and select between two distinct values (e.g. on/off)
-        """
+
     def checked(self):
+        """ 'Set From' button activation.
+        Allows user to select between two distinct values (e.g. on/off)"""
         if self.SetFromButton['state'] == 'disabled':
             self.SetFromButton['state'] = 'normal'
             self.StartButton['state'] = 'normal'
@@ -334,8 +318,9 @@ class SecondWindow():
     ########################################################### PLOTTING ##################################################
 
     def show_plot(self, e):
-        plots = plotting.Input(self.name) # call the class to plot Spectrum, Time profile, Spectrogram
-                                          # parameters are taken from loaded .fits file
+        """Call the class to plot Spectrum, Time profile, Spectrogram;
+        parameters are taken from .fits file, chosen(loaded) by user"""
+        plots = plotting.Input(self.name)
         #if user pick in Plot Units section 'Rate' and 'Spectrum', plot:
         if self.var.get() == 'Rate':
             if e == 'spec':

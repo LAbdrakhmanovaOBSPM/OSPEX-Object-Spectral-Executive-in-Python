@@ -16,33 +16,18 @@
 
 """
 
-
 #import the libraries
 from tkinter import *
-from astropy.io import fits
-import numpy as np
-from matplotlib import pyplot as plt, figure
-from pandas.plotting import register_matplotlib_converters
-register_matplotlib_converters()
-import warnings
-from astropy.modeling import models, fitting
-from astropy.modeling.models import custom_model
-import plotting
-import second
 import do_fit
 
 
 class Set_Energy():
-
+    """Class to set Energy range(s) in Y axis"""
     yVal = None
+    """Value(s) for Y axis"""
 
-    """ 
-
-    Class to perform a spectrum fitting
-
-    """
-    #create a new window called 'SPEX Fit Options'
     def __init__(self, parent):
+            """Creating a new window called 'SPEX Fit Options'"""
             self.p = parent
             #self.rootP = rootParent
             self.newwin2 = Toplevel(parent)
@@ -51,11 +36,10 @@ class Set_Energy():
             self.display2 = Label(self.newwin2, text = "\n Enter Energy range(s)(keV) in the following format: "
                                              "Start_-_End"
                                              "\n \n Use '-' as separators"
-                                             "\n \n Example: '10 - 20'", 
+                                             "\n \n Example: '10_-_20'",
                                       fg='black', 
                                       font=("Times", 11))
             self.display2.place(relx=0.15, rely=0.02)
-        
             self.e = StringVar()
             self.e.set('10 - 20')
             self.ee1 = Entry(self.newwin2, textvariable = self.e )
@@ -66,9 +50,8 @@ class Set_Energy():
             show_Button = Button(self.newwin2, text = "Finished editing", command = self.show_entry_fields)
             show_Button.place(relx=0.15, rely=0.75, relheight=0.05, relwidth=0.20)
 
-      
     def show_entry_fields(self):
-            
+            """Getting the values from user choice"""
             do_fit.Fitting.setEVal = self.ee1.get()
             do_fit.Fitting.evalue.set(self.ee1.get())
             print('fitting e', self.ee1.get(), do_fit.Fitting.evalue)

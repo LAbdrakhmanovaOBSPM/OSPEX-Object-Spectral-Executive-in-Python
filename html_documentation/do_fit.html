@@ -1,0 +1,1785 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.7.2" />
+<title>do_fit API documentation</title>
+<meta name="description" content="Application: Data processing software for RHESSI and STIX instruments …" />
+<link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
+<link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+<style>.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{font-weight:bold}#index h4 + ul{margin-bottom:.6em}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>do_fit</code></h1>
+</header>
+<section id="section-intro">
+<p>Application: Data processing software for RHESSI and STIX instruments</p>
+<p>Start date: 11/03/2019</p>
+<p>Creators: Liaisian Abdrakhmanova, Abdallah Hamini, Aichatou Aboubacar</p>
+<p>Organization: LESIA, Observatory of Paris, France</p>
+<p>Graphical User Interface: GUI was created using tkinter library</p>
+<p>Usage: information to test the program provided in Requirements file</p>
+<p>Status = 'Development'</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;
+
+  Application: Data processing software for RHESSI and STIX instruments
+
+  Start date: 11/03/2019
+
+  Creators: Liaisian Abdrakhmanova, Abdallah Hamini, Aichatou Aboubacar
+
+  Organization: LESIA, Observatory of Paris, France
+  
+  Graphical User Interface: GUI was created using tkinter library
+
+  Usage: information to test the program provided in Requirements file
+
+  Status = &#39;Development&#39;
+
+&#34;&#34;&#34;
+
+
+#import the libraries
+from tkinter import *
+from astropy.io import fits
+import numpy as np
+from matplotlib import pyplot as plt, figure
+from pandas.plotting import register_matplotlib_converters
+register_matplotlib_converters()
+import warnings
+from astropy.modeling import models, fitting
+from astropy.modeling.models import custom_model
+import plotting
+import second
+import new_window
+
+
+
+class Fitting:
+    &#34;&#34;&#34;
+    Class to perform a spectrum fitting
+    &#34;&#34;&#34;
+
+    E_min = None
+    &#34;&#34;&#34;Energy in keV&#34;&#34;&#34;
+    setEVal = None
+    &#34;&#34;&#34;Energy setting value&#34;&#34;&#34;
+    evalue = None
+    &#34;&#34;&#34;Value from Energy array chosen by user&#34;&#34;&#34;
+
+    #create a new window called &#39;SPEX Fit Options&#39;
+    def __init__(self, root):
+        &#34;&#34;&#34;Creates a new window, providing widgets to perform fitting analysis&#34;&#34;&#34;
+        self.top2 = Toplevel()
+        self.top2.title(&#39;SPEX Fit Options&#39;) #title of the window
+        self.top2.geometry(&#34;1000x600&#34;) #size of the new window
+        Label(self.top2,
+              text=&#34;Fit Options&#34;, #place the text at the top of the window  
+              fg=&#34;red&#34;, #in red
+              font=&#34;Helvetica 12 bold italic&#34;).pack() #with specific text font
+
+        self.root = root
+        self.sepBkVar = IntVar()
+        #E_min = &#34;global&#34;
+        self.lbl1 = Label(self.top2, text=&#34;Choose Fit Function Model:&#34;, fg=&#39;blue&#39;, font=(&#34;Helvetica&#34;, 11, &#34;bold&#34;)) #name the listbox
+        self.lbl1.place(relx=0.07, rely=0.07) # set the position on window
+
+        self.lbl2 = Label(self.top2, text=&#34;Information:&#34;, fg=&#39;blue&#39;, font=(&#34;Helvetica&#34;, 11,&#34;bold&#34;)) #name the scrollbar
+        self.lbl2.place(relx=0.44, rely=0.07) #set the position
+        
+        self.lbl3 = Label(self.top2, text=&#34;Set function components and x, y parameters:&#34;, fg=&#39;blue&#39;, font=(&#34;Helvetica&#34;, 11,&#34;bold&#34;)) #name the scrollbar
+        self.lbl3.place(relx=0.65, rely=0.07) #set the position
+
+        self.lblFunc = Label(self.top2, text=&#34;Set function components: &#34;)#name the scrollbar
+        self.lblFunc.place(relx=0.73, rely=0.20) #set the position
+
+
+        setY = str(Fitting.setEVal) if Fitting.setEVal is not None else &#39;10 - 20&#39;
+        &#34;&#34;&#34;Set Y axis. User choice from the interafce&#34;&#34;&#34;
+        print(&#34;set val&#34;, setY, new_window.Set_Energy.yVal)
+        Fitting.evalue = StringVar()
+        Fitting.evalue.set(setY)
+        self.show_Button = Button(self.top2, textvariable=Fitting.evalue, command = lambda:self.editEnergy(self.top2))
+        &#34;&#34;&#34;Button to select the value(s) for Y axis.
+           By default it is called &#39;10 - 20&#39;. Changes the name by user choice. For example: 
+           If user selected Energy range &#39;30 - 100&#39;, the name of the button will display this info(&#39;30 - 100&#39;)&#34;&#34;&#34;
+        self.show_Button.place(relx=0.81, rely=0.39, relheight=0.05, relwidth=0.07)
+
+        def Set_Function(): # new window Set_Function definition
+            &#34;&#34;&#34;Creates a new window for &#34;Set Y axis&#34; part&#34;&#34;&#34;
+            newwin = Toplevel(root)
+            newwin.title(&#39;Function values&#39;) #title of the window
+            newwin.geometry(&#34;600x400&#34;) #size of the new window
+            display = Label(newwin, text=&#34;Choose function values: &#34;, fg=&#39;blue&#39;, font=(&#34;Helvetica&#34;, 11,&#34;bold&#34;))
+            display.place(relx=0.04, rely=0.07)
+            
+        self.Value_Button = Button(self.top2, text=&#34;Function value(s)&#34;, command = Set_Function) #place a &#34;Function value&#34; button
+        self.Value_Button.place(relx=0.75, rely=0.26, relheight=0.05, relwidth=0.13) #locate
+
+        self.X_Label = Label(self.top2, text=&#34;Energy range(s) to fit: &#34;) #name &#34;Energy range(s) to fit&#34;
+        self.X_Label.place(relx=0.65, rely=0.40) #locate
+
+#################### Main window description ######################
+
+        self.lbox = Listbox(self.top2, selectmode=EXTENDED, highlightcolor = &#39;red&#39;, bd = 4, selectbackground = &#39;grey&#39;)
+        &#34;&#34;&#34; 
+        On the left side of the &#39;SPEX Fit Options&#39; window: place a list of text alternatives (listbox).
+        The user can choose(highlight) one of the options.
+        Options(functions):
+        1) One Dimensional Power Law;
+        2) 1-D Broken Power Law;
+        3) Gaussian;
+        4) Polynomial;
+        5) Exponential;
+        6) Single Power Law Times an Exponetial
+        &#34;&#34;&#34;
+        self.lbox.place(relx=0.05, rely=0.15, relheight=0.45, relwidth=0.25)
+
+        self.scroll = Scrollbar(self.top2, command=self.lbox.yview)
+        self.scroll.place(relx=0.3, rely=0.15, relheight=0.45, relwidth=0.02)
+        self.lbox.config(yscrollcommand=self.scroll.set)
+
+        # New frame at the bottom. Locate there &#39;Plot Units&#39; and &#39;Do Fit&#39; widgets
+        self.frameFit = LabelFrame(self.top2, relief=RAISED, borderwidth=10) #determine the border of the frame and size
+        self.frameFit.place(relx=0.05, rely=0.63, relheight=0.25, relwidth=0.85) # the frame position
+
+        self.PlotUnits5 = Label(self.frameFit, text=&#34;Plot Units: &#34;, fg=&#39;blue&#39;, font=(&#34;Helvetica&#34;, 11, &#34;bold&#34;)) #lay out new text file 
+        self.PlotUnits5.place(relx=0.04, rely=0.4)
+
+        # Add button for Units: Rate, Counts, Flux
+        # Allows user to make a choice between three parameters
+        self.Component_choicesFit = (&#39;Rate&#39;, &#39;Counts&#39;, &#39;Flux&#39;)
+        self.var = StringVar(self.frameFit)
+        self.var.set(self.Component_choicesFit[0])
+        self.selection = OptionMenu(self.frameFit, self.var, *self.Component_choicesFit)
+        self.selection.place(relx=0.15, rely=0.38, relheight=0.23, relwidth=0.15)
+
+        self.DoFit5_Button = Button(self.frameFit, text=&#34;Do Fit&#34;, command=self._selective_fit) #place a &#34;Do Fit&#34; button 
+        self.DoFit5_Button.place(relx=0.65, rely=0.38, relheight=0.23, relwidth=0.15) #locate
+
+        self.refreshButton5 = Button(self.top2, text=&#34;Refresh&#34;) #add Refresh button at the buttom
+                                                                #resets original view
+        self.refreshButton5.place(relx=0.4, rely=0.94)
+
+        &#34;&#34;&#34;Scrollbar with information related to each function&#34;&#34;&#34;
+        self.closeButton5 = Button(self.top2, text=&#34;Close&#34;, command=self.destroy5) #add Close button
+                                                                                   #Close &#34;Fit Options&#34; window
+        self.closeButton5.place(relx=0.5, rely=0.94)
+        self.models = [&#39;PowerLaw1D&#39;, &#39;BrokenPowerLaw1D&#39;, &#39;Gaussian&#39;, &#39;Polynomial&#39;, &#39;Exponential&#39;, &#39;Single Power Law Times an Exponetial&#39;] #function names
+        for p in self.models:
+            &#34;&#34;&#34; 
+            On the right: place an &#39;entry text&#39; Scrollbar widget (scrollbar)
+            When user highlight the function, displays the text information about function description and input parameters
+            &#34;&#34;&#34;
+            self.lbox.insert(END, p)
+        self.lbox.bind(&#34;&lt;&lt;ListboxSelect&gt;&gt;&#34;, self.onSelect)
+        self.list = {&#39;PowerLaw1D&#39;: {&#39;One dimensional power law model&#39;,&#39;\n\n&#39;,
+                                    &#39;amplitude – model amplitude at the reference energy&#39;, &#39;\n&#39;,
+                                    &#39;x – reference energy&#39;, &#39;\n&#39;, &#39;alpha – power law index&#39;}, #if user choose PowerLaw1D, display
+                     &#39;BrokenPowerLaw1D&#39;: {&#39;One dimensional power law model with a break&#39;,&#39;\n\n&#39;,
+                                          &#39;amplitude - model amplitude at the break energy&#39;, &#39;\n&#39;,
+                                          &#39;alpha 1 – power law index for x&lt;x_break&#39;, &#39;\n&#39;,
+                                          &#39;alpha 2 – power law index for x&gt;x_break&#39;}, #if user choose BrokenPowerLaw1D, display
+                     &#39;Gaussian&#39;: {&#39;Single Gaussian function(high quality), width in sigma&#39;, &#39;\n&#39;, 
+                                  &#39;does not go through DRM&#39;,&#39;\n&#39;,
+                                  &#39;This function returns the sum of Gaussian and &#39;, &#39;\n&#39;, &#39;2nd order Polynomial&#39;,
+                                  &#39;amplitude - integrated intensity, mean - centroid&#39;, &#39;\n&#39;, &#39;stddev - sigma&#39;}, #if user choose Gaussian, display
+                     &#39;Polynomial&#39;: {&#39;Polynomial function with offset in x&#39;,&#39;\n&#39;,
+                     &#39;c0 - 0th order coefficient&#39;, &#39;\n&#39;, &#39;c1 - 1st order coefficient&#39;, &#39;\n&#39;, &#39;c2 - 2nd order coefficient&#39;, &#39;\n&#39;,
+                     &#39;c3 - 3rd order coefficient&#39;, &#39;\n&#39;, &#39;c4 - 4th order coefficient&#39;, &#39;\n&#39;, &#39;c5 - x offset, such that function value at x = c5 is C0 &#39;}, #Polynomial
+                     &#39;Exponential&#39;: {&#39;Exponential function&#39;, &#39;\n&#39;, &#39;t0 - Normalization&#39;, &#39;\n&#39;, &#39;t1 - Pseudo temperature&#39;}, #Exponential
+                     &#39;Single Power Law Times an Exponetial&#39;: {&#39;Multiplication of Single Power Law and Exponential&#39;, &#39;\n&#39;,
+                     &#39;p0 - normalization at epivot for power-law&#39;, &#39;\n&#39;, &#39;p1 - negative power - law index&#39;, &#39;\n&#39;,
+                     &#39;p2 - epivot (kEv) for power - law&#39;, &#39;\n&#39;, &#39;e1 - normalization for exponential&#39;, &#39;\n&#39;, &#39;e2 - pseudo temperature for exponential&#39;}} 
+                      #Single Power Law Times an Exponential
+        self.list_selection = Listbox(self.top2, highlightcolor = &#39;red&#39;, bd = 4)
+        self.list_selection.place(relx=0.33, rely=0.15, relheight=0.45, relwidth=0.30)
+
+    def editEnergy(self, p1):
+        &#34;&#34;&#34;Call new class to edit Y axis&#34;&#34;&#34;
+        new_window.Set_Energy(p1)
+
+    def onSelect(self, event):
+        &#34;&#34;&#34;Determine the function selection from the list&#34;&#34;&#34;
+        widget = event.widget
+        selection=widget.curselection()
+        files_avalibe = []
+
+        if selection:
+            for s_i in selection:
+                selected_i = self.models[s_i]
+                files_avalibe += self.list[selected_i]
+                print(files_avalibe)
+
+                self.update_file_list(files_avalibe)
+
+    def update_file_list(self, file_list):
+        &#34;&#34;&#34;Updating the frame(In Information: ) and adding new function description, related to the user choice&#34;&#34;&#34;
+        self.list_selection.delete(0, END)
+        for i in file_list:
+            self.list_selection.insert(END, i)
+
+    def findfiles(self, val):
+        &#34;&#34;&#34;Finding the information related to the function name&#34;&#34;&#34;
+        sender = val.widget
+
+    def destroy5(self):
+        &#34;&#34;&#34;Closing &#39;SPEX Fit Options&#39; window&#34;&#34;&#34;
+        self.top2.destroy()
+
+    def _selective_fit(self):
+       &#34;&#34;&#34;Selection depending on Plot Units and Function Model
+          Predefine Input Data in x and y
+          We equate three components to y1, y2, y3. The value of x is the same for all cases
+          x - independent variable, nominally energy in keV
+          y - Plot Unit&#34;&#34;&#34;
+       # load chosen file in Select Input section
+       fname = Fitting.fname
+       if fname is None: # if file not choosen, print
+         print(&#39;Please, choose input file&#39;)
+
+       else:
+        hdulist = fits.open(fname) 
+        header1 = hdulist[1].header
+        header3 = hdulist[3].header
+        data1 = hdulist[1].data
+        data2 = hdulist[2].data
+        Rate = data1.RATE
+        Time = data1.TIME - 2
+        Livetime = data1.LIVETIME
+        Time_del = data1.TIMEDEL
+        Channel = data1.CHANNEL
+        Fitting.E_min = data2.E_MIN
+        E_max = data2.E_MAX
+        Area = header3[24]
+        E_mean = np.mean(Fitting.E_min)
+
+        &#34;&#34;&#34;Define Spectrum Units: Rate, Counts, Flux&#34;&#34;&#34;
+
+        # Define the range for Low and High energies
+        n = len(Fitting.E_min)
+        deltaE = np.zeros(shape=(n))
+        for i in range(n):
+            deltaE[i] = E_max[i] - Fitting.E_min[i]
+
+        # Next, we determine the PLot Units components
+        # Rate
+        CountRate = np.zeros(shape=(n))
+        for i in range(n):
+            CountRate[i] = np.mean(Rate[:, i])
+
+        # Counts
+        Counts = np.zeros(shape=(n))
+        for i in range(n):
+            Counts[i] = np.mean(Rate[:, i] * Time_del[:])
+
+        # Flux
+        Flux = np.zeros(shape=(n))
+        for i in range(n):
+            Flux[i] = np.mean(Rate[:, i] / (Area * deltaE[i] - 2))
+
+        # Set the conditions to Set Y axis
+        if Fitting.setEVal is None:
+            x = Fitting.E_min
+            y1 = CountRate
+            y2 = Counts
+            y3 = Flux
+        else:
+            # Energy boundaries
+            energy_min = int(Fitting.setEVal.split(&#39; - &#39;)[0])
+            energy_max = int(Fitting.setEVal.split(&#39; - &#39;)[1])
+            assert energy_max &gt; energy_min
+            # Energy value mask
+            energy_mask = (Fitting.E_min &gt;= energy_min) &amp; (Fitting.E_min &lt;= energy_max)
+            x = Fitting.E_min[energy_mask]
+            y1 = CountRate[energy_mask]
+            y2 = Counts[energy_mask]
+            y3 = Flux[energy_mask]
+
+        # def find_all_indexes(input_str, search_str):
+        #     l1 = []
+        #     length = len(input_str)
+        #     index = 0
+        #     while index &lt; length:
+        #         i = input_str.find(search_str, index)
+        #         if i == -1:
+        #             return l1
+        #         l1.append(i)
+        #         index = i + 1
+        #     return l1
+        # print(find_all_indexes(str(E_min), str(E_min[0:-1])))
+        # indexesX = np.where((x &lt;= x[-1]) &amp; (x &gt;= x[0]))
+        # print(indexesX)
+        # indexesY1 = np.where((y3 &lt; y3[-1]) &amp; (y3 &gt; y3[0]))
+        # print(indexesY1)
+        # nX = int(input(self.e1.get()))
+        # nY = int(input(self.e1.get()))
+        # keyword_arrayX = []
+        # keyword_arrayY = []
+        # first_E_min = indexes[0]
+        # last_E_min = indexes[-1]
+        #
+        # if first_E_min &lt; arrayX[0] and last_E_min&lt;arrayX[-1]:
+
+#################################################### Define Fitters ######################################################
+        
+        # Fitter creates a new model for x and у, with finding the best fit values
+        fitg1 = fitting.LevMarLSQFitter()
+        #print(fitg1)
+
+        &#34;&#34;&#34; 
+        Levenberg - Marquandt algorithm for non - linear least - squares optimization
+
+        The algorithm works by minimizing the squared residuals, defined as:
+            
+                Residual^2 = (y - f(t))^2 ,
+ 
+        where y is the measured dependent variable;
+
+        f(t) is the calculated value
+
+        The LM algorithm is an iterative process, guessing at the solution of the best minimum
+
+
+         &#34;&#34;&#34;
+
+#################################################### Fitting the data using astropy.modeling ###############################
+
+        # Define a One dimensional power law model with initial guess
+        PowerLaw1D = models.PowerLaw1D() #(amplitude=1, x_0=3, alpha=50, fixed = {&#39;alpha&#39;: True})
+
+        &#34;&#34;&#34;
+        PowerLaw1D(amplitude=1, x_0=1, alpha=1, **kwargs)
+
+        One dimensional power law model.
+
+        Parameters:     
+
+            amplitude : float. Model amplitude at the reference point.
+
+            x_0 : float. Reference point.
+
+            alpha : float. Power law index.
+        &#34;&#34;&#34;
+        
+        # Define a One dimensional broken power law model 
+        BrokenPowerLaw1D = models.BrokenPowerLaw1D(amplitude=1, x_break=3, alpha_1=400, alpha_2=1.93, fixed = {&#39;alpha_1&#39;: True, &#39;alpha_2&#39;: True})
+
+        &#34;&#34;&#34;
+        BrokenPowerLaw1D(amplitude=1, x_break=1, alpha_1=1, alpha_2=1, **kwargs)
+
+
+        One dimensional power law model with a break.
+
+        Parameters:     
+
+            amplitude : float. Model amplitude at the break point.
+
+            x_break : float. Break point.
+
+            alpha_1 : float. Power law index for x &lt; x_break.
+
+            alpha_2 : float. Power law index for x &gt; x_break.
+        &#34;&#34;&#34;   
+        
+        # Define a Gaussian model 
+        ginit = models.Gaussian1D(1000, 6.7, 0.1, fixed = {&#39;mean&#39;: True, &#39;stddev&#39;: True})
+        #(1000, 6.7, 0.1)
+
+        &#34;&#34;&#34;
+        One dimensional Gaussian model
+
+        Parameters:
+
+            amplitude: Amplitude of the Gaussian.
+            
+            mean: Mean of the Gaussian.
+
+            stddev: Standard deviation of the Gaussian.
+       
+        Other Parameters:
+
+            fixed : optional. A dictionary {parameter_name: boolean} of parameters to not be varied during fitting. True means the parameter is held fixed. 
+            Alternatively the fixed property of a parameter may be used.
+
+    
+            tied: optional. A dictionary {parameter_name: callable} of parameters which are linked to some other parameter.
+
+            The dictionary values are callables providing the linking relationship. Alternatively the tied property of a parameter may be used.
+
+    
+            bounds: optional. A dictionary {parameter_name: value} of lower and upper bounds of parameters. 
+            Keys are parameter names. Values are a list or a tuple of length 2 giving the desired range for the parameter.
+            Alternatively, the min and max properties of a parameter may be used.
+
+            eqcons: optional. A list of functions of length n such that eqcons[j](x0,*args) == 0.0 in a successfully optimized problem.
+
+        
+            ineqcons: optional. A list of functions of length n such that ieqcons[j](x0,*args) &gt;= 0.0 is a successfully optimized problem. 
+
+        &#34;&#34;&#34;
+        p_init = models.Polynomial1D(2) # Define 2nd order Polynomial function
+        #p_init.parameters = [1,1,1]
+
+        &#34;&#34;&#34;
+        1D Polynomial model.
+        
+        
+        Parameters:
+
+            degree: Degree of the series.
+
+        
+            domain: Optional.
+
+            window: Optional. If None, it is set to [-1,1] Fitters will remap the domain to this window.
+
+        
+            **params: Keyword. Value pairs, representing parameter_name: value.
+
+        
+
+        Other Parameters:
+
+            fixed: optional. A dictionary {parameter_name: boolean} of parameters to not be varied during fitting. True means the parameter is held fixed. 
+            Alternatively the fixed property of a parameter may be used.
+
+            tied: optional. A dictionary {parameter_name: callable} of parameters which are linked to some other parameter.
+            The dictionary values are callables providing the linking relationship.
+            Alternatively the tied property of a parameter may be used.
+   
+            bounds: optional. A dictionary {parameter_name: value} of lower and upper bounds of parameters. Keys are parameter names. 
+            Values are a list or a tuple of length 2 giving the desired range for the parameter. 
+            Alternatively, the min and max properties of a parameter may be used.
+
+            eqcons: optional.  A list of functions of length n such that eqcons[j](x0,*args) == 0.0 in a successfully optimized problem.
+
+       
+            ineqcons: optional. A list of functions of length n such that ieqcons[j](x0,*args) &gt;= 0.0 is a successfully optimized problem.
+        &#34;&#34;&#34;
+
+        Model = ginit + p_init 
+
+        &#34;&#34;&#34; The Model(function) returns the sum of a Gaussian and 2nd order Polynomial &#34;&#34;&#34;
+
+        # Define 6th order Polynomial function
+        Poly = models.Polynomial1D(5, window=[-10, 10], fixed = {&#39;c3&#39;: True, &#39;c4&#39;: True})
+        Poly.parameters = [1,1,1,1,1,50]
+        
+        # Define Exponential function
+        @custom_model
+        def func_exponential(x, t1 = 1., t2 = 1.):
+            return (np.exp(t1 - x/t2))
+        exp = func_exponential(t1=1., t2 = 1.)
+
+        &#34;&#34;&#34;
+        Purpose: Exponential function
+
+        Category: spectral fitting
+
+        Inputs:
+        t0 - Normalization
+        t1 - Pseudo temperature
+
+        Outputs:
+        result of function, exponential
+        &#34;&#34;&#34;
+
+        # Define Single Power Law Times an Exponential
+        @custom_model
+        def func_exponential_powerlaw(x, p0 = 1., p1 = 1., p2 = 1., e3 = 1.,e4 =1.):
+            return ((p0*(x/p2)**p1)*(np.exp(e3-x/e4)))
+        exp_powerlaw = func_exponential_powerlaw(p0=1., p1 = 3., p2= 50., e3= 1.,e4=1., fixed = {&#39;p2&#39;: True})
+
+        &#34;&#34;&#34;
+        Purpose: single power - law times an exponential
+
+        Category: spectral fitting
+
+        Inputs:
+        p - first 3 parameters describe the single power - law, e - describes the exponential
+ 
+        p0 = noramlization at epivot for power - law
+        p1 = negative power - law index
+        p2 = epivot (keV) for power - law
+
+        e3 = normalization for exponential
+        e4 = pseudo temperature for exponential
+
+        Outputs:
+        result of function, a power - law times an exponential
+        &#34;&#34;&#34;
+
+######################### Define the functions for Rate ###############################
+
+        # If user select the Rate in Plot Units and PowerLaw1D in Choose Fit Function Model, plot:
+        if (self.var.get() == &#39;Rate&#39;) &amp; (self.lbox.curselection()[0] == 0):
+            gPLRate = fitg1(PowerLaw1D, x, y1, weights=1.0 / y1)
+            print(gPLRate)
+            plt.figure()
+            plt.plot(x, y1, drawstyle=&#39;steps-post&#39;, label=&#34;Rate&#34;)
+            plt.plot(x, gPLRate(x), drawstyle=&#39;steps-post&#39;, color=&#39;red&#39;, label=&#34;PowerLaw1D&#34;)
+            plt.yscale(&#39;log&#39;)
+            plt.xscale(&#39;log&#39;)
+            plt.ylim(ymax = 100, ymin = 0.1) #FIXME: find a solution for general case
+            plt.xlabel(&#39;Energy(keV)&#39;)
+            plt.ylabel(&#39;Rate(Counts/s)&#39;)
+            plt.legend(loc=2)
+            plt.title(&#39;Rate Fitting using 1D Power Law Model&#39;)
+            plt.show()
+            # print(&#39;RATE &amp; PowerLaw1D&#39;)
+
+        # If user select Rate in Plot Units and BrokenPowerLaw1D in Choose Fit Function Model, plot:
+        elif (self.var.get() == &#39;Rate&#39;) &amp; (self.lbox.curselection()[0] == 1):
+            gBPLRate = fitg1(BrokenPowerLaw1D, x, y1, weights=1.0 / y1)
+            print(gBPLRate)
+            plt.figure()
+            plt.plot(x, y1, drawstyle=&#39;steps-post&#39;, label=&#34;Rate&#34;)
+            plt.plot(x, gBPLRate(x), drawstyle=&#39;steps-post&#39;, color=&#39;red&#39;, label=&#34;BrokenPowerLaw1D&#34;)
+            plt.yscale(&#39;log&#39;)
+            plt.xscale(&#39;log&#39;)
+            plt.ylim(ymax = 100, ymin = 0.1)
+            plt.xlabel(&#39;Energy(keV)&#39;)
+            plt.ylabel(&#39;Rate(Counts/s)&#39;)
+            plt.legend(loc=2)
+            plt.title(&#39;Rate Fitting using 1D Broken Power Law Model&#39;)
+            plt.show()
+            # print(&#39;RATE &amp; BrokenPowerLaw1D&#39;)
+
+        # If user select Rate in Plot Units and Gaussian in Choose Fit Function Model:
+        elif (self.var.get() == &#39;Rate&#39;) &amp; (self.lbox.curselection()[0] == 2):
+            gaussianRate = fitg1(Model,x,y1, weights = 1.0/y1)
+            print(gaussianRate)
+            plt.figure()
+            plt.plot(x,y1,drawstyle=&#39;steps-post&#39;, label = &#34;Rate&#34;)
+            plt.plot(x,gaussianRate(x),drawstyle=&#39;steps-pre&#39;, label=&#39;Gaussian&#39;)
+            plt.yscale(&#39;log&#39;)
+            plt.xscale(&#39;log&#39;)
+            plt.ylim(ymax = 100, ymin = 0.1)
+            plt.xlabel(&#39;Energy(keV)&#39;)
+            plt.ylabel(&#39;Rate(Counts/s)&#39;)
+            plt.title(&#39;Rate Fitting using Gaussian Model&#39;)
+            plt.legend(loc=2)
+            plt.show()
+
+        # If user select Rate in Plot Units and Polynomial in Choose Fit Function Model:
+        elif (self.var.get() == &#39;Rate&#39;) &amp; (self.lbox.curselection()[0] == 3):
+            PolyRate = fitg1(Poly,x,y1, weights = 1.0/y1)
+            print(PolyRate)
+            plt.figure()
+            plt.plot(x,y1,drawstyle=&#39;steps-post&#39;, label = &#34;Rate&#34;)
+            plt.plot(x,PolyRate(x),drawstyle=&#39;steps-pre&#39;, label=&#39;Polynomial&#39;)
+            plt.yscale(&#39;log&#39;)
+            plt.xscale(&#39;log&#39;)
+            plt.ylim(ymax = 100, ymin = 0.1)
+            plt.xlabel(&#39;Energy(keV)&#39;)
+            plt.ylabel(&#39;Rate(Counts/s)&#39;)
+            plt.title(&#39;Rate Fitting using Polynomial Model&#39;)
+            plt.legend(loc=2)
+            plt.show()
+
+        # If user select Rate in Plot Units and Exponential in Choose Fit Function Model:
+        elif (self.var.get() == &#39;Rate&#39;) &amp; (self.lbox.curselection()[0] == 4):
+            expRate = fitg1(exp, x, y1)
+            print(expRate)
+            plt.figure()
+            plt.plot(x,y1,drawstyle=&#39;steps-post&#39;, label = &#34;Rate&#34;)
+            plt.plot(x,expRate(x),drawstyle=&#39;steps-pre&#39;, label=&#39;Exponential&#39;)
+            plt.yscale(&#39;log&#39;)
+            plt.xscale(&#39;log&#39;)
+            plt.ylim(ymax = 100, ymin = 0.1)
+            plt.xlabel(&#39;Energy(keV)&#39;)
+            plt.ylabel(&#39;Rate(Counts/s)&#39;)
+            plt.title(&#39;Rate Fitting using Exponential Model&#39;)
+            plt.legend(loc=2)
+            plt.show()
+
+        # If user select Rate in Plot Units and Exponential Power Law in Choose Fit Function Model:
+        elif (self.var.get() == &#39;Rate&#39;) &amp; (self.lbox.curselection()[0] == 5):
+            ExpPLRate = fitg1(exp_powerlaw, x, y1, weights=1.0 / y1)
+            print(ExpPLRate)
+            plt.figure()
+            plt.plot(x, y1, drawstyle=&#39;steps-post&#39;, label=&#34;Rate&#34;)
+            plt.plot(x, ExpPLRate(x), drawstyle=&#39;steps-post&#39;, color=&#39;red&#39;, label=&#34;ExpPowerLaw&#34;)
+            plt.yscale(&#39;log&#39;)
+            plt.xscale(&#39;log&#39;)
+            plt.ylim(ymax = 100, ymin = 0.1)
+            plt.xlabel(&#39;Energy(keV)&#39;)
+            plt.ylabel(&#39;Rate(Counts/s)&#39;)
+            plt.legend(loc=2)
+            plt.title(&#39;Rate Fitting using Exponential Power Law Model&#39;)
+            plt.show()
+
+        
+
+######################### Define the functions for Counts ###############################
+
+        # If user select Counts in Plot Units and PowerLaw1D in Choose Fit Function Model:
+        elif (self.var.get() == &#39;Counts&#39;) &amp; (self.lbox.curselection()[0] == 0):
+            gPLCounts = fitg1(PowerLaw1D, x, y2, weights=1.0 / y2)
+            print(gPLCounts)
+            plt.figure()
+            plt.plot(x, y2, drawstyle=&#39;steps-post&#39;, label=&#34;Counts&#34;)
+            plt.plot(x, gPLCounts(x), drawstyle=&#39;steps-post&#39;, color=&#39;red&#39;, label=&#34;PowerLaw1D&#34;)
+            plt.yscale(&#39;log&#39;)
+            plt.xscale(&#39;log&#39;)
+            plt.ylim(ymax = 1000, ymin = 0.1) #FIXME: find a solution for general case
+            plt.xlabel(&#39;Energy(keV)&#39;)
+            plt.ylabel(&#39;Counts(Counts)&#39;)
+            plt.legend(loc=2)
+            plt.title(&#39;Counts Fitting using 1D Power Law Model&#39;)
+            plt.show()
+            # print(&#39;COUNTS &amp; PowerLaw1D&#39;)
+
+        # If user select Counts in Plot Units and BrokenPowerLaw1D in Choose Fit Function Model:
+        elif (self.var.get() == &#39;Counts&#39;) &amp; (self.lbox.curselection()[0] == 1):
+            gBPLCounts = fitg1(BrokenPowerLaw1D, x, y2, weights=1.0 / y2)
+            print(gBPLCounts)
+            plt.figure()
+            plt.plot(x, y2, drawstyle=&#39;steps-post&#39;, label=&#34;Counts&#34;)
+            plt.plot(x, gBPLCounts(x), drawstyle=&#39;steps-post&#39;, color=&#39;red&#39;, label=&#34;BrokenPowerLaw1D&#34;)
+            plt.yscale(&#39;log&#39;)
+            plt.xscale(&#39;log&#39;)
+            plt.ylim(ymax = 1000, ymin = 0.1)
+            plt.xlabel(&#39;Energy(keV)&#39;)
+            plt.ylabel(&#39;Counts(Counts)&#39;)
+            plt.legend(loc=2)
+            plt.title(&#39;Counts Fitting using 1D Broken Power Law Model&#39;)
+            plt.show()
+            # print(&#39;COUNTS &amp; BrokenPowerLaw1D&#39;)
+
+        # If user select Counts in Plot Units and Gaussian in Choose Fit Function Model:
+        elif (self.var.get() == &#39;Counts&#39;) &amp; (self.lbox.curselection()[0] == 2):
+            gaussianCounts = fitg1(Model,x,y2, weights = 1.0/y2)
+            print(gaussianCounts)
+            plt.figure()
+            plt.plot(x,y2,drawstyle=&#39;steps-post&#39;, label = &#34;Counts&#34;)
+            plt.plot(x,gaussianCounts(x),drawstyle=&#39;steps-pre&#39;, label=&#39;Gaussian&#39;)
+            plt.yscale(&#39;log&#39;)
+            plt.xscale(&#39;log&#39;)
+            plt.ylim(ymax = 1000, ymin = 0.1)
+            plt.xlabel(&#39;Energy(keV)&#39;)
+            plt.ylabel(&#39;Counts(Counts)&#39;)
+            plt.title(&#39;Counts Fitting using Gaussian Model&#39;)
+            plt.legend(loc=2)
+            plt.show()
+
+        # If user select Counts in Plot Units and Polynomial in Choose Fit Function Model:
+        elif (self.var.get() == &#39;Counts&#39;) &amp; (self.lbox.curselection()[0] == 3):
+            PolyCounts = fitg1(Poly,x,y2, weights = 1.0/y2)
+            print(PolyCounts)
+            plt.figure()
+            plt.plot(x,y2,drawstyle=&#39;steps-post&#39;, label = &#34;Counts&#34;)
+            plt.plot(x,PolyCounts(x),drawstyle=&#39;steps-pre&#39;, label=&#39;Polynomial&#39;)
+            plt.yscale(&#39;log&#39;)
+            plt.xscale(&#39;log&#39;)
+            plt.ylim(ymax = 1000, ymin = 0.1)
+            plt.xlabel(&#39;Energy(keV)&#39;)
+            plt.ylabel(&#39;Counts(Counts)&#39;)
+            plt.title(&#39;Counts Fitting using Polynomial Model&#39;)
+            plt.legend(loc=2)
+            plt.show()
+
+        # If user select Counts in Plot Units and Exponential in Choose Fit Function Model:
+        elif (self.var.get() == &#39;Counts&#39;) &amp; (self.lbox.curselection()[0] == 4):
+            expCounts = fitg1(exp, x, y2, weights=1.0 / y2)
+            print(expCounts)
+            plt.figure()
+            plt.plot(x,y2,drawstyle=&#39;steps-post&#39;, label = &#34;Counts&#34;)
+            plt.plot(x,expCounts(x),drawstyle=&#39;steps-pre&#39;, label=&#39;Exponential&#39;)
+            plt.yscale(&#39;log&#39;)
+            plt.xscale(&#39;log&#39;)
+            plt.ylim(ymax = 1000, ymin = 0.1)
+            plt.xlabel(&#39;Energy(keV)&#39;)
+            plt.ylabel(&#39;Counts(Counts)&#39;)
+            plt.title(&#39;Counts Fitting using Exponential Model&#39;)
+            plt.legend(loc=2)
+            plt.show()
+
+        # If user select Counts in Plot Units and Exponential Power Law in Choose Fit Function Model:
+        elif (self.var.get() == &#39;Counts&#39;) &amp; (self.lbox.curselection()[0] == 5):
+            ExpPLCounts = fitg1(exp_powerlaw, x, y2, weights=1.0 / y2)
+            print(ExpPLCounts)
+            plt.figure()
+            plt.plot(x, y2, drawstyle=&#39;steps-post&#39;, label=&#34;Counts&#34;)
+            plt.plot(x, ExpPLCounts(x), drawstyle=&#39;steps-post&#39;, color=&#39;red&#39;, label=&#34;ExpPowerLaw&#34;)
+            plt.yscale(&#39;log&#39;)
+            plt.xscale(&#39;log&#39;)
+            plt.ylim(ymax = 1000, ymin = 0.1)
+            plt.xlabel(&#39;Energy(keV)&#39;)
+            plt.ylabel(&#39;Counts(Counts)&#39;)
+            plt.legend(loc=2)
+            plt.title(&#39;Counts Fitting using Exponential Power Law Model&#39;)
+            plt.show()
+
+######################### Define the functions for Flux ###############################
+
+        # If user select Flux in Plot Units and PowerLaw1D in Choose Fit Function Model:
+        elif (self.var.get() == &#39;Flux&#39;) &amp; (self.lbox.curselection()[0] == 0):
+            gPLFlux = fitg1(PowerLaw1D, x, y3, weights=1.0 / y3)
+            plt.figure()
+            plt.plot(x, y3, drawstyle=&#39;steps-post&#39;, label=&#34;Flux&#34;)
+            plt.plot(x, gPLFlux(x), drawstyle=&#39;steps-post&#39;, color=&#39;red&#39;, label=&#34;PowerLaw1D&#34;)
+            plt.yscale(&#39;log&#39;)
+            plt.xscale(&#39;log&#39;)
+            plt.ylim(ymax = 1, ymin = 0.0001) #FIXME: find a solution for general case
+            plt.xlabel(&#39;Energy(keV)&#39;)
+            plt.ylabel(&#39;Flux(Counts/s cm(-2) keV(-1))&#39;)
+            plt.legend(loc=2)
+            plt.title(&#39;Flux Fitting using 1D Power Law Model&#39;)
+            plt.show()
+            # print(&#39;FLUX &amp; PowerLaw1D&#39;)
+
+        # If user select Flux in Plot Units and BrokenPowerLaw1D in Choose Fit Function Model:
+        elif (self.var.get() == &#39;Flux&#39;) &amp; (self.lbox.curselection()[0] == 1):
+
+            # Apply Levenberg - Marquandt algorithm
+            gBPLFlux = fitg1(BrokenPowerLaw1D, x, y3, weights=1.0 / y3)
+            print(gBPLFlux)
+            plt.figure()
+            plt.plot(x, y3, drawstyle=&#39;steps-post&#39;, label=&#34;Flux&#34;)
+            plt.plot(x, gBPLFlux(x), drawstyle=&#39;steps-post&#39;, color=&#39;red&#39;, label=&#34;BrokenPowerLaw1D&#34;)
+            plt.yscale(&#39;log&#39;)
+            plt.xscale(&#39;log&#39;)
+            plt.ylim(ymax = 1, ymin = 0.0001) #FIXME: find a solution for general case
+            plt.xlabel(&#39;Energy(keV)&#39;)
+            plt.ylabel(&#39;Flux(Counts/s cm(-2) keV(-1))&#39;)
+            plt.legend(loc=2)
+            plt.title(&#39;Flux Fitting using 1D Broken Power Law Model&#39;)
+            plt.show()
+            # print(&#39;FLUX &amp; BrokenPowerLaw1D&#39;)
+
+        # If user select Flux in Plot Units and Gaussian in Choose Fit Function Model:
+        elif (self.var.get() == &#39;Flux&#39;) &amp; (self.lbox.curselection()[0] == 2):
+            gaussianFlux = fitg1(Model,x,y3, weights = 1.0/y3)
+            print(gaussianFlux)
+            plt.figure()
+            plt.plot(x,y3,drawstyle=&#39;steps-post&#39;, label = &#34;Flux&#34;)
+            plt.plot(x,gaussianFlux(x),drawstyle=&#39;steps-pre&#39;, label=&#39;Gaussian&#39;)
+            plt.yscale(&#39;log&#39;)
+            plt.xscale(&#39;log&#39;)
+            plt.ylim(ymax = 1, ymin = 0.0001) #FIXME: find a solution for general case
+            plt.xlabel(&#39;Energy(keV)&#39;)
+            plt.ylabel(&#39;Flux(Counts/s cm(-2) keV(-1))&#39;)
+            plt.title(&#39;Flux Fitting using Gaussian Model&#39;)
+            plt.legend(loc=2)
+            plt.show()
+
+        # If user select Flux in Plot Units and Polynomial in Choose Fit Function Model:
+        elif (self.var.get() == &#39;Flux&#39;) &amp; (self.lbox.curselection()[0] == 3):
+            PolyFlux = fitg1(Poly,x,y3, weights = 1.0/y3)
+            print(PolyFlux)
+            plt.figure()
+            plt.plot(x,y3,drawstyle=&#39;steps-post&#39;, label = &#34;Flux&#34;)
+            plt.plot(x,PolyFlux(x),drawstyle=&#39;steps-pre&#39;, label=&#39;Polynomial&#39;)
+            plt.yscale(&#39;log&#39;)
+            plt.xscale(&#39;log&#39;)
+            plt.ylim(ymax = 1, ymin = 0.0001) #FIXME: find a solution for general case
+            plt.xlabel(&#39;Energy(keV)&#39;)
+            plt.ylabel(&#39;Flux(Counts/s cm(-2) keV(-1))&#39;)
+            plt.title(&#39;Flux Fitting using Polynomial Model&#39;)
+            plt.legend(loc=2)
+            plt.show()
+
+        # If user select Flux in Plot Units and Exponential in Choose Fit Function Model:
+        elif (self.var.get() == &#39;Flux&#39;) &amp; (self.lbox.curselection()[0] == 4):
+            expFlux = fitg1(exp, x, y3)
+            print(expFlux)
+            plt.figure()
+            plt.plot(x,y3,drawstyle=&#39;steps-post&#39;, label = &#34;Flux&#34;)
+            plt.plot(x,expFlux(x),drawstyle=&#39;steps-pre&#39;, label=&#39;Exponential&#39;)
+            plt.yscale(&#39;log&#39;)
+            plt.xscale(&#39;log&#39;)
+            plt.ylim(ymax = 1, ymin = 0.0001) #FIXME: find a solution for general case
+            plt.xlabel(&#39;Energy(keV)&#39;)
+            plt.ylabel(&#39;Flux(Counts/s cm(-2) keV(-1))&#39;)
+            plt.title(&#39;Flux Fitting using Exponential Model&#39;)
+            plt.legend(loc=2)
+            plt.show()
+
+        # If user select Flux in Plot Units and Exponential Power Law in Choose Fit Function Model:
+        elif (self.var.get() == &#39;Flux&#39;) &amp; (self.lbox.curselection()[0] == 5):
+            ExpPLFlux = fitg1(exp_powerlaw, x, y3, weights=1.0 / y3)
+            print(ExpPLFlux)
+            plt.figure()
+            plt.plot(x, y3, drawstyle=&#39;steps-post&#39;, label=&#34;Flux&#34;)
+            plt.plot(x, ExpPLFlux(x), drawstyle=&#39;steps-post&#39;, color=&#39;red&#39;, label=&#34;ExpPowerLaw&#34;)
+            plt.yscale(&#39;log&#39;)
+            plt.xscale(&#39;log&#39;)
+            plt.ylim(ymax = 1, ymin = 0.0001) #FIXME: find a solution for general case
+            plt.xlabel(&#39;Energy(keV)&#39;)
+            plt.ylabel(&#39;Flux(Counts/s cm(-2) keV(-1))&#39;)
+            plt.legend(loc=2)
+            plt.title(&#39;Flux Fitting using Exponential Power Law Model&#39;)
+            plt.show()
+
+        # FIXME:
+        # Calculate the Reduced Chi - square, test version
+        # Initial guess
+        #N = len(E_min) #total number of points
+        #print(N)
+        #sigma = 1.0
+        #y_err = sigma / E_min
+
+        #def calc_reduced_chi_square(fit, x, y, yerr, N, n_free):
+            #&#34;&#34;&#34;
+            #fit (array) values for the fit
+            #x,y,y_err (arrays) data
+            #N total number of points
+            #n_free number of parameters we are fitting
+            #&#34;&#34;&#34;
+            #return 1.0 / (N - n_free) * sum(((fit - y) / y_err) ** 2)
+
+        #reduced_chi_squared = calc_reduced_chi_square(gPLFlux(x), x, y3, y3, N, 3) # calculate for Flux
+        #print(&#39;Reduced Chi Squared with Levenberg - Marquandt algorithm: {}&#39;.format(reduced_chi_squared))</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="do_fit.Fitting"><code class="flex name class">
+<span>class <span class="ident">Fitting</span></span>
+<span>(</span><span>root)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Class to perform a spectrum fitting</p>
+<p>Creates a new window, providing widgets to perform fitting analysis</p></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Fitting:
+    &#34;&#34;&#34;
+    Class to perform a spectrum fitting
+    &#34;&#34;&#34;
+
+    E_min = None
+    &#34;&#34;&#34;Energy in keV&#34;&#34;&#34;
+    setEVal = None
+    &#34;&#34;&#34;Energy setting value&#34;&#34;&#34;
+    evalue = None
+    &#34;&#34;&#34;Value from Energy array chosen by user&#34;&#34;&#34;
+
+    #create a new window called &#39;SPEX Fit Options&#39;
+    def __init__(self, root):
+        &#34;&#34;&#34;Creates a new window, providing widgets to perform fitting analysis&#34;&#34;&#34;
+        self.top2 = Toplevel()
+        self.top2.title(&#39;SPEX Fit Options&#39;) #title of the window
+        self.top2.geometry(&#34;1000x600&#34;) #size of the new window
+        Label(self.top2,
+              text=&#34;Fit Options&#34;, #place the text at the top of the window  
+              fg=&#34;red&#34;, #in red
+              font=&#34;Helvetica 12 bold italic&#34;).pack() #with specific text font
+
+        self.root = root
+        self.sepBkVar = IntVar()
+        #E_min = &#34;global&#34;
+        self.lbl1 = Label(self.top2, text=&#34;Choose Fit Function Model:&#34;, fg=&#39;blue&#39;, font=(&#34;Helvetica&#34;, 11, &#34;bold&#34;)) #name the listbox
+        self.lbl1.place(relx=0.07, rely=0.07) # set the position on window
+
+        self.lbl2 = Label(self.top2, text=&#34;Information:&#34;, fg=&#39;blue&#39;, font=(&#34;Helvetica&#34;, 11,&#34;bold&#34;)) #name the scrollbar
+        self.lbl2.place(relx=0.44, rely=0.07) #set the position
+        
+        self.lbl3 = Label(self.top2, text=&#34;Set function components and x, y parameters:&#34;, fg=&#39;blue&#39;, font=(&#34;Helvetica&#34;, 11,&#34;bold&#34;)) #name the scrollbar
+        self.lbl3.place(relx=0.65, rely=0.07) #set the position
+
+        self.lblFunc = Label(self.top2, text=&#34;Set function components: &#34;)#name the scrollbar
+        self.lblFunc.place(relx=0.73, rely=0.20) #set the position
+
+
+        setY = str(Fitting.setEVal) if Fitting.setEVal is not None else &#39;10 - 20&#39;
+        &#34;&#34;&#34;Set Y axis. User choice from the interafce&#34;&#34;&#34;
+        print(&#34;set val&#34;, setY, new_window.Set_Energy.yVal)
+        Fitting.evalue = StringVar()
+        Fitting.evalue.set(setY)
+        self.show_Button = Button(self.top2, textvariable=Fitting.evalue, command = lambda:self.editEnergy(self.top2))
+        &#34;&#34;&#34;Button to select the value(s) for Y axis.
+           By default it is called &#39;10 - 20&#39;. Changes the name by user choice. For example: 
+           If user selected Energy range &#39;30 - 100&#39;, the name of the button will display this info(&#39;30 - 100&#39;)&#34;&#34;&#34;
+        self.show_Button.place(relx=0.81, rely=0.39, relheight=0.05, relwidth=0.07)
+
+        def Set_Function(): # new window Set_Function definition
+            &#34;&#34;&#34;Creates a new window for &#34;Set Y axis&#34; part&#34;&#34;&#34;
+            newwin = Toplevel(root)
+            newwin.title(&#39;Function values&#39;) #title of the window
+            newwin.geometry(&#34;600x400&#34;) #size of the new window
+            display = Label(newwin, text=&#34;Choose function values: &#34;, fg=&#39;blue&#39;, font=(&#34;Helvetica&#34;, 11,&#34;bold&#34;))
+            display.place(relx=0.04, rely=0.07)
+            
+        self.Value_Button = Button(self.top2, text=&#34;Function value(s)&#34;, command = Set_Function) #place a &#34;Function value&#34; button
+        self.Value_Button.place(relx=0.75, rely=0.26, relheight=0.05, relwidth=0.13) #locate
+
+        self.X_Label = Label(self.top2, text=&#34;Energy range(s) to fit: &#34;) #name &#34;Energy range(s) to fit&#34;
+        self.X_Label.place(relx=0.65, rely=0.40) #locate
+
+#################### Main window description ######################
+
+        self.lbox = Listbox(self.top2, selectmode=EXTENDED, highlightcolor = &#39;red&#39;, bd = 4, selectbackground = &#39;grey&#39;)
+        &#34;&#34;&#34; 
+        On the left side of the &#39;SPEX Fit Options&#39; window: place a list of text alternatives (listbox).
+        The user can choose(highlight) one of the options.
+        Options(functions):
+        1) One Dimensional Power Law;
+        2) 1-D Broken Power Law;
+        3) Gaussian;
+        4) Polynomial;
+        5) Exponential;
+        6) Single Power Law Times an Exponetial
+        &#34;&#34;&#34;
+        self.lbox.place(relx=0.05, rely=0.15, relheight=0.45, relwidth=0.25)
+
+        self.scroll = Scrollbar(self.top2, command=self.lbox.yview)
+        self.scroll.place(relx=0.3, rely=0.15, relheight=0.45, relwidth=0.02)
+        self.lbox.config(yscrollcommand=self.scroll.set)
+
+        # New frame at the bottom. Locate there &#39;Plot Units&#39; and &#39;Do Fit&#39; widgets
+        self.frameFit = LabelFrame(self.top2, relief=RAISED, borderwidth=10) #determine the border of the frame and size
+        self.frameFit.place(relx=0.05, rely=0.63, relheight=0.25, relwidth=0.85) # the frame position
+
+        self.PlotUnits5 = Label(self.frameFit, text=&#34;Plot Units: &#34;, fg=&#39;blue&#39;, font=(&#34;Helvetica&#34;, 11, &#34;bold&#34;)) #lay out new text file 
+        self.PlotUnits5.place(relx=0.04, rely=0.4)
+
+        # Add button for Units: Rate, Counts, Flux
+        # Allows user to make a choice between three parameters
+        self.Component_choicesFit = (&#39;Rate&#39;, &#39;Counts&#39;, &#39;Flux&#39;)
+        self.var = StringVar(self.frameFit)
+        self.var.set(self.Component_choicesFit[0])
+        self.selection = OptionMenu(self.frameFit, self.var, *self.Component_choicesFit)
+        self.selection.place(relx=0.15, rely=0.38, relheight=0.23, relwidth=0.15)
+
+        self.DoFit5_Button = Button(self.frameFit, text=&#34;Do Fit&#34;, command=self._selective_fit) #place a &#34;Do Fit&#34; button 
+        self.DoFit5_Button.place(relx=0.65, rely=0.38, relheight=0.23, relwidth=0.15) #locate
+
+        self.refreshButton5 = Button(self.top2, text=&#34;Refresh&#34;) #add Refresh button at the buttom
+                                                                #resets original view
+        self.refreshButton5.place(relx=0.4, rely=0.94)
+
+        &#34;&#34;&#34;Scrollbar with information related to each function&#34;&#34;&#34;
+        self.closeButton5 = Button(self.top2, text=&#34;Close&#34;, command=self.destroy5) #add Close button
+                                                                                   #Close &#34;Fit Options&#34; window
+        self.closeButton5.place(relx=0.5, rely=0.94)
+        self.models = [&#39;PowerLaw1D&#39;, &#39;BrokenPowerLaw1D&#39;, &#39;Gaussian&#39;, &#39;Polynomial&#39;, &#39;Exponential&#39;, &#39;Single Power Law Times an Exponetial&#39;] #function names
+        for p in self.models:
+            &#34;&#34;&#34; 
+            On the right: place an &#39;entry text&#39; Scrollbar widget (scrollbar)
+            When user highlight the function, displays the text information about function description and input parameters
+            &#34;&#34;&#34;
+            self.lbox.insert(END, p)
+        self.lbox.bind(&#34;&lt;&lt;ListboxSelect&gt;&gt;&#34;, self.onSelect)
+        self.list = {&#39;PowerLaw1D&#39;: {&#39;One dimensional power law model&#39;,&#39;\n\n&#39;,
+                                    &#39;amplitude – model amplitude at the reference energy&#39;, &#39;\n&#39;,
+                                    &#39;x – reference energy&#39;, &#39;\n&#39;, &#39;alpha – power law index&#39;}, #if user choose PowerLaw1D, display
+                     &#39;BrokenPowerLaw1D&#39;: {&#39;One dimensional power law model with a break&#39;,&#39;\n\n&#39;,
+                                          &#39;amplitude - model amplitude at the break energy&#39;, &#39;\n&#39;,
+                                          &#39;alpha 1 – power law index for x&lt;x_break&#39;, &#39;\n&#39;,
+                                          &#39;alpha 2 – power law index for x&gt;x_break&#39;}, #if user choose BrokenPowerLaw1D, display
+                     &#39;Gaussian&#39;: {&#39;Single Gaussian function(high quality), width in sigma&#39;, &#39;\n&#39;, 
+                                  &#39;does not go through DRM&#39;,&#39;\n&#39;,
+                                  &#39;This function returns the sum of Gaussian and &#39;, &#39;\n&#39;, &#39;2nd order Polynomial&#39;,
+                                  &#39;amplitude - integrated intensity, mean - centroid&#39;, &#39;\n&#39;, &#39;stddev - sigma&#39;}, #if user choose Gaussian, display
+                     &#39;Polynomial&#39;: {&#39;Polynomial function with offset in x&#39;,&#39;\n&#39;,
+                     &#39;c0 - 0th order coefficient&#39;, &#39;\n&#39;, &#39;c1 - 1st order coefficient&#39;, &#39;\n&#39;, &#39;c2 - 2nd order coefficient&#39;, &#39;\n&#39;,
+                     &#39;c3 - 3rd order coefficient&#39;, &#39;\n&#39;, &#39;c4 - 4th order coefficient&#39;, &#39;\n&#39;, &#39;c5 - x offset, such that function value at x = c5 is C0 &#39;}, #Polynomial
+                     &#39;Exponential&#39;: {&#39;Exponential function&#39;, &#39;\n&#39;, &#39;t0 - Normalization&#39;, &#39;\n&#39;, &#39;t1 - Pseudo temperature&#39;}, #Exponential
+                     &#39;Single Power Law Times an Exponetial&#39;: {&#39;Multiplication of Single Power Law and Exponential&#39;, &#39;\n&#39;,
+                     &#39;p0 - normalization at epivot for power-law&#39;, &#39;\n&#39;, &#39;p1 - negative power - law index&#39;, &#39;\n&#39;,
+                     &#39;p2 - epivot (kEv) for power - law&#39;, &#39;\n&#39;, &#39;e1 - normalization for exponential&#39;, &#39;\n&#39;, &#39;e2 - pseudo temperature for exponential&#39;}} 
+                      #Single Power Law Times an Exponential
+        self.list_selection = Listbox(self.top2, highlightcolor = &#39;red&#39;, bd = 4)
+        self.list_selection.place(relx=0.33, rely=0.15, relheight=0.45, relwidth=0.30)
+
+    def editEnergy(self, p1):
+        &#34;&#34;&#34;Call new class to edit Y axis&#34;&#34;&#34;
+        new_window.Set_Energy(p1)
+
+    def onSelect(self, event):
+        &#34;&#34;&#34;Determine the function selection from the list&#34;&#34;&#34;
+        widget = event.widget
+        selection=widget.curselection()
+        files_avalibe = []
+
+        if selection:
+            for s_i in selection:
+                selected_i = self.models[s_i]
+                files_avalibe += self.list[selected_i]
+                print(files_avalibe)
+
+                self.update_file_list(files_avalibe)
+
+    def update_file_list(self, file_list):
+        &#34;&#34;&#34;Updating the frame(In Information: ) and adding new function description, related to the user choice&#34;&#34;&#34;
+        self.list_selection.delete(0, END)
+        for i in file_list:
+            self.list_selection.insert(END, i)
+
+    def findfiles(self, val):
+        &#34;&#34;&#34;Finding the information related to the function name&#34;&#34;&#34;
+        sender = val.widget
+
+    def destroy5(self):
+        &#34;&#34;&#34;Closing &#39;SPEX Fit Options&#39; window&#34;&#34;&#34;
+        self.top2.destroy()
+
+    def _selective_fit(self):
+       &#34;&#34;&#34;Selection depending on Plot Units and Function Model
+          Predefine Input Data in x and y
+          We equate three components to y1, y2, y3. The value of x is the same for all cases
+          x - independent variable, nominally energy in keV
+          y - Plot Unit&#34;&#34;&#34;
+       # load chosen file in Select Input section
+       fname = Fitting.fname
+       if fname is None: # if file not choosen, print
+         print(&#39;Please, choose input file&#39;)
+
+       else:
+        hdulist = fits.open(fname) 
+        header1 = hdulist[1].header
+        header3 = hdulist[3].header
+        data1 = hdulist[1].data
+        data2 = hdulist[2].data
+        Rate = data1.RATE
+        Time = data1.TIME - 2
+        Livetime = data1.LIVETIME
+        Time_del = data1.TIMEDEL
+        Channel = data1.CHANNEL
+        Fitting.E_min = data2.E_MIN
+        E_max = data2.E_MAX
+        Area = header3[24]
+        E_mean = np.mean(Fitting.E_min)
+
+        &#34;&#34;&#34;Define Spectrum Units: Rate, Counts, Flux&#34;&#34;&#34;
+
+        # Define the range for Low and High energies
+        n = len(Fitting.E_min)
+        deltaE = np.zeros(shape=(n))
+        for i in range(n):
+            deltaE[i] = E_max[i] - Fitting.E_min[i]
+
+        # Next, we determine the PLot Units components
+        # Rate
+        CountRate = np.zeros(shape=(n))
+        for i in range(n):
+            CountRate[i] = np.mean(Rate[:, i])
+
+        # Counts
+        Counts = np.zeros(shape=(n))
+        for i in range(n):
+            Counts[i] = np.mean(Rate[:, i] * Time_del[:])
+
+        # Flux
+        Flux = np.zeros(shape=(n))
+        for i in range(n):
+            Flux[i] = np.mean(Rate[:, i] / (Area * deltaE[i] - 2))
+
+        # Set the conditions to Set Y axis
+        if Fitting.setEVal is None:
+            x = Fitting.E_min
+            y1 = CountRate
+            y2 = Counts
+            y3 = Flux
+        else:
+            # Energy boundaries
+            energy_min = int(Fitting.setEVal.split(&#39; - &#39;)[0])
+            energy_max = int(Fitting.setEVal.split(&#39; - &#39;)[1])
+            assert energy_max &gt; energy_min
+            # Energy value mask
+            energy_mask = (Fitting.E_min &gt;= energy_min) &amp; (Fitting.E_min &lt;= energy_max)
+            x = Fitting.E_min[energy_mask]
+            y1 = CountRate[energy_mask]
+            y2 = Counts[energy_mask]
+            y3 = Flux[energy_mask]
+
+        # def find_all_indexes(input_str, search_str):
+        #     l1 = []
+        #     length = len(input_str)
+        #     index = 0
+        #     while index &lt; length:
+        #         i = input_str.find(search_str, index)
+        #         if i == -1:
+        #             return l1
+        #         l1.append(i)
+        #         index = i + 1
+        #     return l1
+        # print(find_all_indexes(str(E_min), str(E_min[0:-1])))
+        # indexesX = np.where((x &lt;= x[-1]) &amp; (x &gt;= x[0]))
+        # print(indexesX)
+        # indexesY1 = np.where((y3 &lt; y3[-1]) &amp; (y3 &gt; y3[0]))
+        # print(indexesY1)
+        # nX = int(input(self.e1.get()))
+        # nY = int(input(self.e1.get()))
+        # keyword_arrayX = []
+        # keyword_arrayY = []
+        # first_E_min = indexes[0]
+        # last_E_min = indexes[-1]
+        #
+        # if first_E_min &lt; arrayX[0] and last_E_min&lt;arrayX[-1]:
+
+#################################################### Define Fitters ######################################################
+        
+        # Fitter creates a new model for x and у, with finding the best fit values
+        fitg1 = fitting.LevMarLSQFitter()
+        #print(fitg1)
+
+        &#34;&#34;&#34; 
+        Levenberg - Marquandt algorithm for non - linear least - squares optimization
+
+        The algorithm works by minimizing the squared residuals, defined as:
+            
+                Residual^2 = (y - f(t))^2 ,
+ 
+        where y is the measured dependent variable;
+
+        f(t) is the calculated value
+
+        The LM algorithm is an iterative process, guessing at the solution of the best minimum
+
+
+         &#34;&#34;&#34;
+
+#################################################### Fitting the data using astropy.modeling ###############################
+
+        # Define a One dimensional power law model with initial guess
+        PowerLaw1D = models.PowerLaw1D() #(amplitude=1, x_0=3, alpha=50, fixed = {&#39;alpha&#39;: True})
+
+        &#34;&#34;&#34;
+        PowerLaw1D(amplitude=1, x_0=1, alpha=1, **kwargs)
+
+        One dimensional power law model.
+
+        Parameters:     
+
+            amplitude : float. Model amplitude at the reference point.
+
+            x_0 : float. Reference point.
+
+            alpha : float. Power law index.
+        &#34;&#34;&#34;
+        
+        # Define a One dimensional broken power law model 
+        BrokenPowerLaw1D = models.BrokenPowerLaw1D(amplitude=1, x_break=3, alpha_1=400, alpha_2=1.93, fixed = {&#39;alpha_1&#39;: True, &#39;alpha_2&#39;: True})
+
+        &#34;&#34;&#34;
+        BrokenPowerLaw1D(amplitude=1, x_break=1, alpha_1=1, alpha_2=1, **kwargs)
+
+
+        One dimensional power law model with a break.
+
+        Parameters:     
+
+            amplitude : float. Model amplitude at the break point.
+
+            x_break : float. Break point.
+
+            alpha_1 : float. Power law index for x &lt; x_break.
+
+            alpha_2 : float. Power law index for x &gt; x_break.
+        &#34;&#34;&#34;   
+        
+        # Define a Gaussian model 
+        ginit = models.Gaussian1D(1000, 6.7, 0.1, fixed = {&#39;mean&#39;: True, &#39;stddev&#39;: True})
+        #(1000, 6.7, 0.1)
+
+        &#34;&#34;&#34;
+        One dimensional Gaussian model
+
+        Parameters:
+
+            amplitude: Amplitude of the Gaussian.
+            
+            mean: Mean of the Gaussian.
+
+            stddev: Standard deviation of the Gaussian.
+       
+        Other Parameters:
+
+            fixed : optional. A dictionary {parameter_name: boolean} of parameters to not be varied during fitting. True means the parameter is held fixed. 
+            Alternatively the fixed property of a parameter may be used.
+
+    
+            tied: optional. A dictionary {parameter_name: callable} of parameters which are linked to some other parameter.
+
+            The dictionary values are callables providing the linking relationship. Alternatively the tied property of a parameter may be used.
+
+    
+            bounds: optional. A dictionary {parameter_name: value} of lower and upper bounds of parameters. 
+            Keys are parameter names. Values are a list or a tuple of length 2 giving the desired range for the parameter.
+            Alternatively, the min and max properties of a parameter may be used.
+
+            eqcons: optional. A list of functions of length n such that eqcons[j](x0,*args) == 0.0 in a successfully optimized problem.
+
+        
+            ineqcons: optional. A list of functions of length n such that ieqcons[j](x0,*args) &gt;= 0.0 is a successfully optimized problem. 
+
+        &#34;&#34;&#34;
+        p_init = models.Polynomial1D(2) # Define 2nd order Polynomial function
+        #p_init.parameters = [1,1,1]
+
+        &#34;&#34;&#34;
+        1D Polynomial model.
+        
+        
+        Parameters:
+
+            degree: Degree of the series.
+
+        
+            domain: Optional.
+
+            window: Optional. If None, it is set to [-1,1] Fitters will remap the domain to this window.
+
+        
+            **params: Keyword. Value pairs, representing parameter_name: value.
+
+        
+
+        Other Parameters:
+
+            fixed: optional. A dictionary {parameter_name: boolean} of parameters to not be varied during fitting. True means the parameter is held fixed. 
+            Alternatively the fixed property of a parameter may be used.
+
+            tied: optional. A dictionary {parameter_name: callable} of parameters which are linked to some other parameter.
+            The dictionary values are callables providing the linking relationship.
+            Alternatively the tied property of a parameter may be used.
+   
+            bounds: optional. A dictionary {parameter_name: value} of lower and upper bounds of parameters. Keys are parameter names. 
+            Values are a list or a tuple of length 2 giving the desired range for the parameter. 
+            Alternatively, the min and max properties of a parameter may be used.
+
+            eqcons: optional.  A list of functions of length n such that eqcons[j](x0,*args) == 0.0 in a successfully optimized problem.
+
+       
+            ineqcons: optional. A list of functions of length n such that ieqcons[j](x0,*args) &gt;= 0.0 is a successfully optimized problem.
+        &#34;&#34;&#34;
+
+        Model = ginit + p_init 
+
+        &#34;&#34;&#34; The Model(function) returns the sum of a Gaussian and 2nd order Polynomial &#34;&#34;&#34;
+
+        # Define 6th order Polynomial function
+        Poly = models.Polynomial1D(5, window=[-10, 10], fixed = {&#39;c3&#39;: True, &#39;c4&#39;: True})
+        Poly.parameters = [1,1,1,1,1,50]
+        
+        # Define Exponential function
+        @custom_model
+        def func_exponential(x, t1 = 1., t2 = 1.):
+            return (np.exp(t1 - x/t2))
+        exp = func_exponential(t1=1., t2 = 1.)
+
+        &#34;&#34;&#34;
+        Purpose: Exponential function
+
+        Category: spectral fitting
+
+        Inputs:
+        t0 - Normalization
+        t1 - Pseudo temperature
+
+        Outputs:
+        result of function, exponential
+        &#34;&#34;&#34;
+
+        # Define Single Power Law Times an Exponential
+        @custom_model
+        def func_exponential_powerlaw(x, p0 = 1., p1 = 1., p2 = 1., e3 = 1.,e4 =1.):
+            return ((p0*(x/p2)**p1)*(np.exp(e3-x/e4)))
+        exp_powerlaw = func_exponential_powerlaw(p0=1., p1 = 3., p2= 50., e3= 1.,e4=1., fixed = {&#39;p2&#39;: True})
+
+        &#34;&#34;&#34;
+        Purpose: single power - law times an exponential
+
+        Category: spectral fitting
+
+        Inputs:
+        p - first 3 parameters describe the single power - law, e - describes the exponential
+ 
+        p0 = noramlization at epivot for power - law
+        p1 = negative power - law index
+        p2 = epivot (keV) for power - law
+
+        e3 = normalization for exponential
+        e4 = pseudo temperature for exponential
+
+        Outputs:
+        result of function, a power - law times an exponential
+        &#34;&#34;&#34;
+
+######################### Define the functions for Rate ###############################
+
+        # If user select the Rate in Plot Units and PowerLaw1D in Choose Fit Function Model, plot:
+        if (self.var.get() == &#39;Rate&#39;) &amp; (self.lbox.curselection()[0] == 0):
+            gPLRate = fitg1(PowerLaw1D, x, y1, weights=1.0 / y1)
+            print(gPLRate)
+            plt.figure()
+            plt.plot(x, y1, drawstyle=&#39;steps-post&#39;, label=&#34;Rate&#34;)
+            plt.plot(x, gPLRate(x), drawstyle=&#39;steps-post&#39;, color=&#39;red&#39;, label=&#34;PowerLaw1D&#34;)
+            plt.yscale(&#39;log&#39;)
+            plt.xscale(&#39;log&#39;)
+            plt.ylim(ymax = 100, ymin = 0.1) #FIXME: find a solution for general case
+            plt.xlabel(&#39;Energy(keV)&#39;)
+            plt.ylabel(&#39;Rate(Counts/s)&#39;)
+            plt.legend(loc=2)
+            plt.title(&#39;Rate Fitting using 1D Power Law Model&#39;)
+            plt.show()
+            # print(&#39;RATE &amp; PowerLaw1D&#39;)
+
+        # If user select Rate in Plot Units and BrokenPowerLaw1D in Choose Fit Function Model, plot:
+        elif (self.var.get() == &#39;Rate&#39;) &amp; (self.lbox.curselection()[0] == 1):
+            gBPLRate = fitg1(BrokenPowerLaw1D, x, y1, weights=1.0 / y1)
+            print(gBPLRate)
+            plt.figure()
+            plt.plot(x, y1, drawstyle=&#39;steps-post&#39;, label=&#34;Rate&#34;)
+            plt.plot(x, gBPLRate(x), drawstyle=&#39;steps-post&#39;, color=&#39;red&#39;, label=&#34;BrokenPowerLaw1D&#34;)
+            plt.yscale(&#39;log&#39;)
+            plt.xscale(&#39;log&#39;)
+            plt.ylim(ymax = 100, ymin = 0.1)
+            plt.xlabel(&#39;Energy(keV)&#39;)
+            plt.ylabel(&#39;Rate(Counts/s)&#39;)
+            plt.legend(loc=2)
+            plt.title(&#39;Rate Fitting using 1D Broken Power Law Model&#39;)
+            plt.show()
+            # print(&#39;RATE &amp; BrokenPowerLaw1D&#39;)
+
+        # If user select Rate in Plot Units and Gaussian in Choose Fit Function Model:
+        elif (self.var.get() == &#39;Rate&#39;) &amp; (self.lbox.curselection()[0] == 2):
+            gaussianRate = fitg1(Model,x,y1, weights = 1.0/y1)
+            print(gaussianRate)
+            plt.figure()
+            plt.plot(x,y1,drawstyle=&#39;steps-post&#39;, label = &#34;Rate&#34;)
+            plt.plot(x,gaussianRate(x),drawstyle=&#39;steps-pre&#39;, label=&#39;Gaussian&#39;)
+            plt.yscale(&#39;log&#39;)
+            plt.xscale(&#39;log&#39;)
+            plt.ylim(ymax = 100, ymin = 0.1)
+            plt.xlabel(&#39;Energy(keV)&#39;)
+            plt.ylabel(&#39;Rate(Counts/s)&#39;)
+            plt.title(&#39;Rate Fitting using Gaussian Model&#39;)
+            plt.legend(loc=2)
+            plt.show()
+
+        # If user select Rate in Plot Units and Polynomial in Choose Fit Function Model:
+        elif (self.var.get() == &#39;Rate&#39;) &amp; (self.lbox.curselection()[0] == 3):
+            PolyRate = fitg1(Poly,x,y1, weights = 1.0/y1)
+            print(PolyRate)
+            plt.figure()
+            plt.plot(x,y1,drawstyle=&#39;steps-post&#39;, label = &#34;Rate&#34;)
+            plt.plot(x,PolyRate(x),drawstyle=&#39;steps-pre&#39;, label=&#39;Polynomial&#39;)
+            plt.yscale(&#39;log&#39;)
+            plt.xscale(&#39;log&#39;)
+            plt.ylim(ymax = 100, ymin = 0.1)
+            plt.xlabel(&#39;Energy(keV)&#39;)
+            plt.ylabel(&#39;Rate(Counts/s)&#39;)
+            plt.title(&#39;Rate Fitting using Polynomial Model&#39;)
+            plt.legend(loc=2)
+            plt.show()
+
+        # If user select Rate in Plot Units and Exponential in Choose Fit Function Model:
+        elif (self.var.get() == &#39;Rate&#39;) &amp; (self.lbox.curselection()[0] == 4):
+            expRate = fitg1(exp, x, y1)
+            print(expRate)
+            plt.figure()
+            plt.plot(x,y1,drawstyle=&#39;steps-post&#39;, label = &#34;Rate&#34;)
+            plt.plot(x,expRate(x),drawstyle=&#39;steps-pre&#39;, label=&#39;Exponential&#39;)
+            plt.yscale(&#39;log&#39;)
+            plt.xscale(&#39;log&#39;)
+            plt.ylim(ymax = 100, ymin = 0.1)
+            plt.xlabel(&#39;Energy(keV)&#39;)
+            plt.ylabel(&#39;Rate(Counts/s)&#39;)
+            plt.title(&#39;Rate Fitting using Exponential Model&#39;)
+            plt.legend(loc=2)
+            plt.show()
+
+        # If user select Rate in Plot Units and Exponential Power Law in Choose Fit Function Model:
+        elif (self.var.get() == &#39;Rate&#39;) &amp; (self.lbox.curselection()[0] == 5):
+            ExpPLRate = fitg1(exp_powerlaw, x, y1, weights=1.0 / y1)
+            print(ExpPLRate)
+            plt.figure()
+            plt.plot(x, y1, drawstyle=&#39;steps-post&#39;, label=&#34;Rate&#34;)
+            plt.plot(x, ExpPLRate(x), drawstyle=&#39;steps-post&#39;, color=&#39;red&#39;, label=&#34;ExpPowerLaw&#34;)
+            plt.yscale(&#39;log&#39;)
+            plt.xscale(&#39;log&#39;)
+            plt.ylim(ymax = 100, ymin = 0.1)
+            plt.xlabel(&#39;Energy(keV)&#39;)
+            plt.ylabel(&#39;Rate(Counts/s)&#39;)
+            plt.legend(loc=2)
+            plt.title(&#39;Rate Fitting using Exponential Power Law Model&#39;)
+            plt.show()
+
+        
+
+######################### Define the functions for Counts ###############################
+
+        # If user select Counts in Plot Units and PowerLaw1D in Choose Fit Function Model:
+        elif (self.var.get() == &#39;Counts&#39;) &amp; (self.lbox.curselection()[0] == 0):
+            gPLCounts = fitg1(PowerLaw1D, x, y2, weights=1.0 / y2)
+            print(gPLCounts)
+            plt.figure()
+            plt.plot(x, y2, drawstyle=&#39;steps-post&#39;, label=&#34;Counts&#34;)
+            plt.plot(x, gPLCounts(x), drawstyle=&#39;steps-post&#39;, color=&#39;red&#39;, label=&#34;PowerLaw1D&#34;)
+            plt.yscale(&#39;log&#39;)
+            plt.xscale(&#39;log&#39;)
+            plt.ylim(ymax = 1000, ymin = 0.1) #FIXME: find a solution for general case
+            plt.xlabel(&#39;Energy(keV)&#39;)
+            plt.ylabel(&#39;Counts(Counts)&#39;)
+            plt.legend(loc=2)
+            plt.title(&#39;Counts Fitting using 1D Power Law Model&#39;)
+            plt.show()
+            # print(&#39;COUNTS &amp; PowerLaw1D&#39;)
+
+        # If user select Counts in Plot Units and BrokenPowerLaw1D in Choose Fit Function Model:
+        elif (self.var.get() == &#39;Counts&#39;) &amp; (self.lbox.curselection()[0] == 1):
+            gBPLCounts = fitg1(BrokenPowerLaw1D, x, y2, weights=1.0 / y2)
+            print(gBPLCounts)
+            plt.figure()
+            plt.plot(x, y2, drawstyle=&#39;steps-post&#39;, label=&#34;Counts&#34;)
+            plt.plot(x, gBPLCounts(x), drawstyle=&#39;steps-post&#39;, color=&#39;red&#39;, label=&#34;BrokenPowerLaw1D&#34;)
+            plt.yscale(&#39;log&#39;)
+            plt.xscale(&#39;log&#39;)
+            plt.ylim(ymax = 1000, ymin = 0.1)
+            plt.xlabel(&#39;Energy(keV)&#39;)
+            plt.ylabel(&#39;Counts(Counts)&#39;)
+            plt.legend(loc=2)
+            plt.title(&#39;Counts Fitting using 1D Broken Power Law Model&#39;)
+            plt.show()
+            # print(&#39;COUNTS &amp; BrokenPowerLaw1D&#39;)
+
+        # If user select Counts in Plot Units and Gaussian in Choose Fit Function Model:
+        elif (self.var.get() == &#39;Counts&#39;) &amp; (self.lbox.curselection()[0] == 2):
+            gaussianCounts = fitg1(Model,x,y2, weights = 1.0/y2)
+            print(gaussianCounts)
+            plt.figure()
+            plt.plot(x,y2,drawstyle=&#39;steps-post&#39;, label = &#34;Counts&#34;)
+            plt.plot(x,gaussianCounts(x),drawstyle=&#39;steps-pre&#39;, label=&#39;Gaussian&#39;)
+            plt.yscale(&#39;log&#39;)
+            plt.xscale(&#39;log&#39;)
+            plt.ylim(ymax = 1000, ymin = 0.1)
+            plt.xlabel(&#39;Energy(keV)&#39;)
+            plt.ylabel(&#39;Counts(Counts)&#39;)
+            plt.title(&#39;Counts Fitting using Gaussian Model&#39;)
+            plt.legend(loc=2)
+            plt.show()
+
+        # If user select Counts in Plot Units and Polynomial in Choose Fit Function Model:
+        elif (self.var.get() == &#39;Counts&#39;) &amp; (self.lbox.curselection()[0] == 3):
+            PolyCounts = fitg1(Poly,x,y2, weights = 1.0/y2)
+            print(PolyCounts)
+            plt.figure()
+            plt.plot(x,y2,drawstyle=&#39;steps-post&#39;, label = &#34;Counts&#34;)
+            plt.plot(x,PolyCounts(x),drawstyle=&#39;steps-pre&#39;, label=&#39;Polynomial&#39;)
+            plt.yscale(&#39;log&#39;)
+            plt.xscale(&#39;log&#39;)
+            plt.ylim(ymax = 1000, ymin = 0.1)
+            plt.xlabel(&#39;Energy(keV)&#39;)
+            plt.ylabel(&#39;Counts(Counts)&#39;)
+            plt.title(&#39;Counts Fitting using Polynomial Model&#39;)
+            plt.legend(loc=2)
+            plt.show()
+
+        # If user select Counts in Plot Units and Exponential in Choose Fit Function Model:
+        elif (self.var.get() == &#39;Counts&#39;) &amp; (self.lbox.curselection()[0] == 4):
+            expCounts = fitg1(exp, x, y2, weights=1.0 / y2)
+            print(expCounts)
+            plt.figure()
+            plt.plot(x,y2,drawstyle=&#39;steps-post&#39;, label = &#34;Counts&#34;)
+            plt.plot(x,expCounts(x),drawstyle=&#39;steps-pre&#39;, label=&#39;Exponential&#39;)
+            plt.yscale(&#39;log&#39;)
+            plt.xscale(&#39;log&#39;)
+            plt.ylim(ymax = 1000, ymin = 0.1)
+            plt.xlabel(&#39;Energy(keV)&#39;)
+            plt.ylabel(&#39;Counts(Counts)&#39;)
+            plt.title(&#39;Counts Fitting using Exponential Model&#39;)
+            plt.legend(loc=2)
+            plt.show()
+
+        # If user select Counts in Plot Units and Exponential Power Law in Choose Fit Function Model:
+        elif (self.var.get() == &#39;Counts&#39;) &amp; (self.lbox.curselection()[0] == 5):
+            ExpPLCounts = fitg1(exp_powerlaw, x, y2, weights=1.0 / y2)
+            print(ExpPLCounts)
+            plt.figure()
+            plt.plot(x, y2, drawstyle=&#39;steps-post&#39;, label=&#34;Counts&#34;)
+            plt.plot(x, ExpPLCounts(x), drawstyle=&#39;steps-post&#39;, color=&#39;red&#39;, label=&#34;ExpPowerLaw&#34;)
+            plt.yscale(&#39;log&#39;)
+            plt.xscale(&#39;log&#39;)
+            plt.ylim(ymax = 1000, ymin = 0.1)
+            plt.xlabel(&#39;Energy(keV)&#39;)
+            plt.ylabel(&#39;Counts(Counts)&#39;)
+            plt.legend(loc=2)
+            plt.title(&#39;Counts Fitting using Exponential Power Law Model&#39;)
+            plt.show()
+
+######################### Define the functions for Flux ###############################
+
+        # If user select Flux in Plot Units and PowerLaw1D in Choose Fit Function Model:
+        elif (self.var.get() == &#39;Flux&#39;) &amp; (self.lbox.curselection()[0] == 0):
+            gPLFlux = fitg1(PowerLaw1D, x, y3, weights=1.0 / y3)
+            plt.figure()
+            plt.plot(x, y3, drawstyle=&#39;steps-post&#39;, label=&#34;Flux&#34;)
+            plt.plot(x, gPLFlux(x), drawstyle=&#39;steps-post&#39;, color=&#39;red&#39;, label=&#34;PowerLaw1D&#34;)
+            plt.yscale(&#39;log&#39;)
+            plt.xscale(&#39;log&#39;)
+            plt.ylim(ymax = 1, ymin = 0.0001) #FIXME: find a solution for general case
+            plt.xlabel(&#39;Energy(keV)&#39;)
+            plt.ylabel(&#39;Flux(Counts/s cm(-2) keV(-1))&#39;)
+            plt.legend(loc=2)
+            plt.title(&#39;Flux Fitting using 1D Power Law Model&#39;)
+            plt.show()
+            # print(&#39;FLUX &amp; PowerLaw1D&#39;)
+
+        # If user select Flux in Plot Units and BrokenPowerLaw1D in Choose Fit Function Model:
+        elif (self.var.get() == &#39;Flux&#39;) &amp; (self.lbox.curselection()[0] == 1):
+
+            # Apply Levenberg - Marquandt algorithm
+            gBPLFlux = fitg1(BrokenPowerLaw1D, x, y3, weights=1.0 / y3)
+            print(gBPLFlux)
+            plt.figure()
+            plt.plot(x, y3, drawstyle=&#39;steps-post&#39;, label=&#34;Flux&#34;)
+            plt.plot(x, gBPLFlux(x), drawstyle=&#39;steps-post&#39;, color=&#39;red&#39;, label=&#34;BrokenPowerLaw1D&#34;)
+            plt.yscale(&#39;log&#39;)
+            plt.xscale(&#39;log&#39;)
+            plt.ylim(ymax = 1, ymin = 0.0001) #FIXME: find a solution for general case
+            plt.xlabel(&#39;Energy(keV)&#39;)
+            plt.ylabel(&#39;Flux(Counts/s cm(-2) keV(-1))&#39;)
+            plt.legend(loc=2)
+            plt.title(&#39;Flux Fitting using 1D Broken Power Law Model&#39;)
+            plt.show()
+            # print(&#39;FLUX &amp; BrokenPowerLaw1D&#39;)
+
+        # If user select Flux in Plot Units and Gaussian in Choose Fit Function Model:
+        elif (self.var.get() == &#39;Flux&#39;) &amp; (self.lbox.curselection()[0] == 2):
+            gaussianFlux = fitg1(Model,x,y3, weights = 1.0/y3)
+            print(gaussianFlux)
+            plt.figure()
+            plt.plot(x,y3,drawstyle=&#39;steps-post&#39;, label = &#34;Flux&#34;)
+            plt.plot(x,gaussianFlux(x),drawstyle=&#39;steps-pre&#39;, label=&#39;Gaussian&#39;)
+            plt.yscale(&#39;log&#39;)
+            plt.xscale(&#39;log&#39;)
+            plt.ylim(ymax = 1, ymin = 0.0001) #FIXME: find a solution for general case
+            plt.xlabel(&#39;Energy(keV)&#39;)
+            plt.ylabel(&#39;Flux(Counts/s cm(-2) keV(-1))&#39;)
+            plt.title(&#39;Flux Fitting using Gaussian Model&#39;)
+            plt.legend(loc=2)
+            plt.show()
+
+        # If user select Flux in Plot Units and Polynomial in Choose Fit Function Model:
+        elif (self.var.get() == &#39;Flux&#39;) &amp; (self.lbox.curselection()[0] == 3):
+            PolyFlux = fitg1(Poly,x,y3, weights = 1.0/y3)
+            print(PolyFlux)
+            plt.figure()
+            plt.plot(x,y3,drawstyle=&#39;steps-post&#39;, label = &#34;Flux&#34;)
+            plt.plot(x,PolyFlux(x),drawstyle=&#39;steps-pre&#39;, label=&#39;Polynomial&#39;)
+            plt.yscale(&#39;log&#39;)
+            plt.xscale(&#39;log&#39;)
+            plt.ylim(ymax = 1, ymin = 0.0001) #FIXME: find a solution for general case
+            plt.xlabel(&#39;Energy(keV)&#39;)
+            plt.ylabel(&#39;Flux(Counts/s cm(-2) keV(-1))&#39;)
+            plt.title(&#39;Flux Fitting using Polynomial Model&#39;)
+            plt.legend(loc=2)
+            plt.show()
+
+        # If user select Flux in Plot Units and Exponential in Choose Fit Function Model:
+        elif (self.var.get() == &#39;Flux&#39;) &amp; (self.lbox.curselection()[0] == 4):
+            expFlux = fitg1(exp, x, y3)
+            print(expFlux)
+            plt.figure()
+            plt.plot(x,y3,drawstyle=&#39;steps-post&#39;, label = &#34;Flux&#34;)
+            plt.plot(x,expFlux(x),drawstyle=&#39;steps-pre&#39;, label=&#39;Exponential&#39;)
+            plt.yscale(&#39;log&#39;)
+            plt.xscale(&#39;log&#39;)
+            plt.ylim(ymax = 1, ymin = 0.0001) #FIXME: find a solution for general case
+            plt.xlabel(&#39;Energy(keV)&#39;)
+            plt.ylabel(&#39;Flux(Counts/s cm(-2) keV(-1))&#39;)
+            plt.title(&#39;Flux Fitting using Exponential Model&#39;)
+            plt.legend(loc=2)
+            plt.show()
+
+        # If user select Flux in Plot Units and Exponential Power Law in Choose Fit Function Model:
+        elif (self.var.get() == &#39;Flux&#39;) &amp; (self.lbox.curselection()[0] == 5):
+            ExpPLFlux = fitg1(exp_powerlaw, x, y3, weights=1.0 / y3)
+            print(ExpPLFlux)
+            plt.figure()
+            plt.plot(x, y3, drawstyle=&#39;steps-post&#39;, label=&#34;Flux&#34;)
+            plt.plot(x, ExpPLFlux(x), drawstyle=&#39;steps-post&#39;, color=&#39;red&#39;, label=&#34;ExpPowerLaw&#34;)
+            plt.yscale(&#39;log&#39;)
+            plt.xscale(&#39;log&#39;)
+            plt.ylim(ymax = 1, ymin = 0.0001) #FIXME: find a solution for general case
+            plt.xlabel(&#39;Energy(keV)&#39;)
+            plt.ylabel(&#39;Flux(Counts/s cm(-2) keV(-1))&#39;)
+            plt.legend(loc=2)
+            plt.title(&#39;Flux Fitting using Exponential Power Law Model&#39;)
+            plt.show()</code></pre>
+</details>
+<h3>Class variables</h3>
+<dl>
+<dt id="do_fit.Fitting.E_min"><code class="name">var <span class="ident">E_min</span></code></dt>
+<dd>
+<section class="desc"><p>Energy in keV</p></section>
+</dd>
+<dt id="do_fit.Fitting.evalue"><code class="name">var <span class="ident">evalue</span></code></dt>
+<dd>
+<section class="desc"><p>Value from Energy array chosen by user</p></section>
+</dd>
+<dt id="do_fit.Fitting.setEVal"><code class="name">var <span class="ident">setEVal</span></code></dt>
+<dd>
+<section class="desc"><p>Energy setting value</p></section>
+</dd>
+</dl>
+<h3>Instance variables</h3>
+<dl>
+<dt id="do_fit.Fitting.lbox"><code class="name">var <span class="ident">lbox</span></code></dt>
+<dd>
+<section class="desc"><p>On the left side of the 'SPEX Fit Options' window: place a list of text alternatives (listbox).
+The user can choose(highlight) one of the options.
+Options(functions):
+1) One Dimensional Power Law;
+2) 1-D Broken Power Law;
+3) Gaussian;
+4) Polynomial;
+5) Exponential;
+6) Single Power Law Times an Exponetial</p></section>
+</dd>
+<dt id="do_fit.Fitting.show_Button"><code class="name">var <span class="ident">show_Button</span></code></dt>
+<dd>
+<section class="desc"><p>Button to select the value(s) for Y axis.
+By default it is called '10 - 20'. Changes the name by user choice. For example:
+If user selected Energy range '30 - 100', the name of the button will display this info('30 - 100')</p></section>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="do_fit.Fitting.destroy5"><code class="name flex">
+<span>def <span class="ident">destroy5</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Closing 'SPEX Fit Options' window</p></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def destroy5(self):
+    &#34;&#34;&#34;Closing &#39;SPEX Fit Options&#39; window&#34;&#34;&#34;
+    self.top2.destroy()</code></pre>
+</details>
+</dd>
+<dt id="do_fit.Fitting.editEnergy"><code class="name flex">
+<span>def <span class="ident">editEnergy</span></span>(<span>self, p1)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Call new class to edit Y axis</p></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def editEnergy(self, p1):
+    &#34;&#34;&#34;Call new class to edit Y axis&#34;&#34;&#34;
+    new_window.Set_Energy(p1)</code></pre>
+</details>
+</dd>
+<dt id="do_fit.Fitting.findfiles"><code class="name flex">
+<span>def <span class="ident">findfiles</span></span>(<span>self, val)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Finding the information related to the function name</p></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def findfiles(self, val):
+    &#34;&#34;&#34;Finding the information related to the function name&#34;&#34;&#34;
+    sender = val.widget</code></pre>
+</details>
+</dd>
+<dt id="do_fit.Fitting.onSelect"><code class="name flex">
+<span>def <span class="ident">onSelect</span></span>(<span>self, event)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Determine the function selection from the list</p></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def onSelect(self, event):
+    &#34;&#34;&#34;Determine the function selection from the list&#34;&#34;&#34;
+    widget = event.widget
+    selection=widget.curselection()
+    files_avalibe = []
+
+    if selection:
+        for s_i in selection:
+            selected_i = self.models[s_i]
+            files_avalibe += self.list[selected_i]
+            print(files_avalibe)
+
+            self.update_file_list(files_avalibe)</code></pre>
+</details>
+</dd>
+<dt id="do_fit.Fitting.update_file_list"><code class="name flex">
+<span>def <span class="ident">update_file_list</span></span>(<span>self, file_list)</span>
+</code></dt>
+<dd>
+<section class="desc"><p>Updating the frame(In Information: ) and adding new function description, related to the user choice</p></section>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def update_file_list(self, file_list):
+    &#34;&#34;&#34;Updating the frame(In Information: ) and adding new function description, related to the user choice&#34;&#34;&#34;
+    self.list_selection.delete(0, END)
+    for i in file_list:
+        self.list_selection.insert(END, i)</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="do_fit.Fitting" href="#do_fit.Fitting">Fitting</a></code></h4>
+<ul class="two-column">
+<li><code><a title="do_fit.Fitting.E_min" href="#do_fit.Fitting.E_min">E_min</a></code></li>
+<li><code><a title="do_fit.Fitting.destroy5" href="#do_fit.Fitting.destroy5">destroy5</a></code></li>
+<li><code><a title="do_fit.Fitting.editEnergy" href="#do_fit.Fitting.editEnergy">editEnergy</a></code></li>
+<li><code><a title="do_fit.Fitting.evalue" href="#do_fit.Fitting.evalue">evalue</a></code></li>
+<li><code><a title="do_fit.Fitting.findfiles" href="#do_fit.Fitting.findfiles">findfiles</a></code></li>
+<li><code><a title="do_fit.Fitting.lbox" href="#do_fit.Fitting.lbox">lbox</a></code></li>
+<li><code><a title="do_fit.Fitting.onSelect" href="#do_fit.Fitting.onSelect">onSelect</a></code></li>
+<li><code><a title="do_fit.Fitting.setEVal" href="#do_fit.Fitting.setEVal">setEVal</a></code></li>
+<li><code><a title="do_fit.Fitting.show_Button" href="#do_fit.Fitting.show_Button">show_Button</a></code></li>
+<li><code><a title="do_fit.Fitting.update_file_list" href="#do_fit.Fitting.update_file_list">update_file_list</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.7.2</a>.</p>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad()</script>
+</body>
+</html>
