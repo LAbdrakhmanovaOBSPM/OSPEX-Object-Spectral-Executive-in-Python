@@ -34,6 +34,8 @@ class BackgroundWindow():
 
         self.root = root
         self.sepBkVar = IntVar()
+        self.dataPlotVar = IntVar()
+        
         self.MethodChoices = ('0Poly', '1Poly', '2Poly', '3Poly', 'Exp', 'High E Profile', 'This E Profile')
         self.MethodVars = [StringVar() for i in range(7)]
 
@@ -150,7 +152,7 @@ class BackgroundWindow():
         self.SpexBands = Label(self.frame4, text="Time Profile in spex_ebands:")
         self.SpexBands.place(relx=0.01, rely=0.04)
 
-        self.Data = Checkbutton(self.frame4, text="Data", variable='Data')
+        self.Data = Checkbutton(self.frame4, text="Data", variable=self.dataPlotVar) #, command = plotForAllEnergies)
         self.Data.place(relx=0.22, rely=0.04)
 
         self.Background = Checkbutton(self.frame4, text="Background", variable='Background')
