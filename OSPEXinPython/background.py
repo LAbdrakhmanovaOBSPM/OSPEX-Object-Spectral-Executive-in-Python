@@ -196,6 +196,10 @@ class BackgroundWindow():
         self.notSeparateCanva()
 
 ##############################################      Functions          ####################################################################
+
+    def plotForAllEnergies(self):
+        editTime.EditTimeWindow(binInterval)
+
     """ Function to be executed when user clik on an energy bin 's change button """
     def editTimeInterval(self, binInterval):
         editTime.EditTimeWindow(binInterval)
