@@ -209,6 +209,7 @@ class Input():
         n = len(self.E_min)
         data = np.zeros(shape=n) 
         if typ == 'rate':
+            plt.figure()
             for i in range(n):
                 data[i] = np.mean(self.rate[:, i]) # determine Rate for "Plot Spectrum"
                 plt.rcParams["figure.figsize"] = [6, 6] # plot window size
@@ -220,6 +221,7 @@ class Input():
                 plt.ylabel('counts/s') # Label Y - axis
                 plt.title('SPEX HESSI Count Rate vs Energy') # plot title
         elif typ == 'counts':
+            plt.figure()
             for i in range(n):
                 data[i] = np.mean(self.rate[:, i] * self.sum) #determine Counts for "Plot Spectrum"
                 plt.rcParams["figure.figsize"] = [6, 6]
@@ -230,6 +232,7 @@ class Input():
                 plt.ylabel('counts')
                 plt.title('SPEX HESSI Counts vs Energy')
         elif typ == 'flux':
+            plt.figure()
             deltaE = np.zeros(shape=(n))
             for i in range(n):
                 deltaE[i] = self.E_max[i] - self.E_min[i] # energy range
