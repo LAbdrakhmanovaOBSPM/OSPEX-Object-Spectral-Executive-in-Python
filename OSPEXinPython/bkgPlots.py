@@ -141,10 +141,7 @@ class BackgPlots():
             colors = ['gray','magenta','lime', 'cyan', 'yellow', 'red']
             energyLab = ['3.0 to 6.0 keV', '6.0 to 12.0 keV', '12.0 to 25.0 keV', '25.0 to 49.0 keV',
                       '49.0 to 100.0 keV', '100.0 to 250.0 keV' ]
-            xticksVal = TimeNew2.strftime('%H:%M') #TimeNew2.time
-
-            #plt.figure()
-            #plt.plot(TimeNew2.time, dataRate, drawstyle='steps-post')
+            xticksVal = TimeNew2.strftime('%H:%M') 
 
             figName = "plot vs time" if background.BackgroundWindow.plotType == 'time' else "specgr"
             
@@ -160,7 +157,7 @@ class BackgPlots():
             ####################### plot bkg ########################################################################################
             bkgMethod = {0:'0Poly', 1:'1Poly', 2:'2Poly', 3:'3Poly', 4:'Exp', 5:'High E Profile', 6:'This E Profile'}
             if polyDeg == bkgMethod[0]:
-               fitRslt = np.poly1d(np.polyfit(Time2[startIndex:endIndex +1], unitData[startIndex:endIndex +1], 0)) #,  w= 1.0/unitData[startIndex:endIndex +1]))
+               fitRslt = np.poly1d(np.polyfit(Time2[startIndex:endIndex +1], unitData[startIndex:endIndex +1], 0)) 
             elif polyDeg == bkgMethod[1]:
                fitRslt = np.poly1d(np.polyfit(Time2[startIndex:endIndex +1], unitData[startIndex:endIndex +1], 1))
             elif polyDeg == bkgMethod[2]:
@@ -169,13 +166,13 @@ class BackgPlots():
                fitRslt = np.poly1d(np.polyfit(Time2[startIndex:endIndex +1], unitData[startIndex:endIndex +1], 3))
                   
             plt.plot(TimeNew2.time, fitRslt(Time2), drawstyle='steps-post', color='green', label = str(energyLab[int(energyBinIndex)]) + ' (Bk)')
-            #print('plot bkg', TimeNew2.time.shape, fitRslt(Time2).shape, unitData.shape)
+   
 
             ############################################ plot timeinterval #################################"
             if showTimeInterv:
-                plotTimeInterv = np.zeros(shape=(len(unitData), len(range(startIndex, endIndex)))) #, len(range(startIndex, endIndex + 1)))
+                plotTimeInterv = np.zeros(shape=(len(unitData), len(range(startIndex, endIndex)))) 
                 plotTimeIntervData = np.zeros(shape=(len(range(startIndex, endIndex + 1))))
-                #plotTimeInterv[:] = Time2[startIndex]
+      
                 k=0
                 for i in range(startIndex, endIndex):
                     plotTimeInterv[:,k] = Time2[i]
@@ -190,11 +187,6 @@ class BackgPlots():
             ################## plot data - bkg ################################################################################################
  
             plt.plot(TimeNew2.time, unitData - fitRslt(Time2),drawstyle='steps-post', color="blue" , label = str(energyLab[int(energyBinIndex)]) + ' (Data - Bk')
-            #plt.plot(Time2Array, np.sqrt(np.abs(unitData - fitRslt(Time2))),drawstyle='steps-post', label = "Polynomial1D, degree = 0")
-
-##            for val in range(Time2[startIndex], Time2[endIndex +1]):
-##                plt.plot(val, unitData, drawstyle='steps-post', color='red')
-                
 
             ############################ plot parameters #####################################
             plotTitle = 'SPEX HESSI Counts vs Time' if 'Counts' in unit else 'SPEX HESSI Count ' + unit + ' vs Time'
@@ -202,13 +194,8 @@ class BackgPlots():
             plt.ylabel('Counts/s cm(-2) keV(-1)')
             plt.yscale('log')
             plt.title(plotTitle)
-            #plt.legend()
             ax = plt.axes()
             legend = ax.legend(loc='upper right' )
-            
-            #ax.set_facecolor("black")
-            #ax.xaxis.set_major_formatter(mdates.DateFormatter('%H:%M'))
-
             plt.show()
 
         else:

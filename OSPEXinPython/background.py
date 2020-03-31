@@ -4,7 +4,6 @@ from matplotlib import pyplot as plt, figure
 import re
 import pandas as pd
 import plotting
-import background_plot
 import warnings
 import second
 import editTime
@@ -76,9 +75,9 @@ class BackgroundWindow():
         self.frame2.place(relx=0.05, rely=0.14, relheight=0.27, relwidth=0.9)
 
         self.SeparateBk = Checkbutton(self.frame2, text="Separate BK for each energy band",
-        variable=self.sepBkVar, command=self.onClikSeparateBk, state=NORMAL) #command=self.onClikSeparateBk, onvalue = True, offvalue = False,
+        variable=self.sepBkVar, command=self.onClikSeparateBk, state=NORMAL) 
         self.SeparateBk.place(relx=0.01, rely=0.04)
-        #self.SeparateBk.bind("<Button-1>", self.onClikSeparateBk)
+     
 
         self.AllBands_choices = ('Set all bands to', '0Poly', '1Poly', '2Poly', '3Poly', 'Exp', 'High E Profile', 'This E Profile')
         self.AllBandsVar = StringVar(self.frame2)
@@ -117,7 +116,7 @@ class BackgroundWindow():
         self.Bands0.place(relx=0.3, rely=0.4)
 
         """ Change Energy Band Button """
-        self.ChangeEnergBand = Button(self.frame2, text="Change") #, state=DISABLED, command=self.editTimeInterval)
+        self.ChangeEnergBand = Button(self.frame2, text="Change") 
         self.ChangeEnergBand.place(relx=0.38, rely=0.4)
 
         """ set_to_spex_eband Button """
@@ -152,7 +151,7 @@ class BackgroundWindow():
         self.SpexBands = Label(self.frame4, text="Time Profile in spex_ebands:")
         self.SpexBands.place(relx=0.01, rely=0.04)
 
-        self.Data = Checkbutton(self.frame4, text="Data", variable=self.dataPlotVar) #, command = plotForAllEnergies)
+        self.Data = Checkbutton(self.frame4, text="Data", variable=self.dataPlotVar) 
         self.Data.place(relx=0.22, rely=0.04)
 
         self.Background = Checkbutton(self.frame4, text="Background", variable='Background')
@@ -179,22 +178,19 @@ class BackgroundWindow():
 
         self.hscrollbar = Scrollbar(self.frame3, orient="horizontal")
         self.hscrollbar.pack(side='bottom', fill="x")
-        #self.hscrollbar.place(relx=0.1, rely=0.3)
+   
         #################################################################################################
 
         """                                  Canvas                                    """
-        self.backCanv = Canvas(self.frame3, bd=2, width=850, bg="#FFFFFF", height=120) #, background='#FFFFFF'
-        #self.backCanv.pack(fill='x')
+        self.backCanv = Canvas(self.frame3, bd=2, width=850, bg="#FFFFFF", height=120) 
         self.vscrollbar.config(command=self.backCanv.yview)
         self.hscrollbar.config(command=self.backCanv.xview)
         self.backCanv.config(yscrollcommand=self.vscrollbar.set)
         self.backCanv.config(xscrollcommand=self.hscrollbar.set)
         self.backCanv.config(scrollregion = (0,0,700,700))
-        #self.backCanv.place(relx=0.01, rely=0.1)
+   
         self.backCanv.pack(fill="both", expand=True)
-        #self.SeparateBk.config(command=self.backCanv.config(state="normal"))
-  
-        #self.backCanv.delete(ALL)
+
         self.notSeparateCanva()
 
 ##############################################      Functions          ####################################################################
@@ -246,13 +242,13 @@ class BackgroundWindow():
         self.Change = Button(self.frame0, text="Change")
         self.Change.place(relx=0.22, rely=0.55)
 
-        self.Show = Button(self.frame0, text="Show") #, command=lambda: self.show_backgroundplot("show", 6))
+        self.Show = Button(self.frame0, text="Show") 
         self.Show.place(relx=0.29, rely=0.55)
 
         self.PlotSpectr = Button(self.frame0, text="Plot Spectrum")
         self.PlotSpectr.place(relx=0.36, rely=0.55)
 
-        self.PlotVsTim = Button(self.frame0, text="Plot vs Time") #, command=lambda: self.show_backgroundplot("time", 6))
+        self.PlotVsTim = Button(self.frame0, text="Plot vs Time") 
         self.PlotVsTim.place(relx=0.48, rely=0.55)
 
         self.Error2 = Checkbutton(self.frame0, text="Error", variable='Error2')
@@ -354,21 +350,18 @@ class BackgroundWindow():
         editTime.EditTimeWindow.bkgTimeInterv = None
         editTime.EditTimeWindow.defaultTime.set(None)
 
-        print('show val', BackgroundWindow.plotType)
-        #plt.figure("plot vs time")
-##
+       
+
+
     def showTimeInterval(self, i):
         
-        #plt.figure()
         plt.clf()
         plt.figure('plot vs time')
         self.show_backgroundplot(BackgroundWindow.plotType, i, True)
         
-##        plots = bkgPlots.BackgPlots() if BackgroundWindow.fname is not None else None #background_plot.Input(BackgroundWindow.fname)
-##        plots.plot(BackgroundWindow.bkgTimeInterv, self.var.get(), i, self.MethodVars[i].get(), True)
 
     """ Code to be executed when user clik on a plot button like 'plot vs time', 'plot spectrum', 'plot' of a specific energy band """
-    def show_backgroundplot(self, e, i, showTime): #make plots (plot vs time, plot spectrum ... ) 
+    def show_backgroundplot(self, e, i, showTime): #make plots (plot vs time ... ) 
 
          energyLab = ['3.0 to 6.0 keV', '6.0 to 12.0 keV', '12.0 to 25.0 keV', '25.0 to 50.0 keV',
                       '50.0 to 100.0 keV', '100.0 to 300.0 keV' ]
@@ -379,65 +372,40 @@ class BackgroundWindow():
 
          
          BackgroundWindow.plotType = 'time' if e == 'time' else 'specgr'
-         print('show valll', BackgroundWindow.plotType)
+
         
       
          if BackgroundWindow.bkgTimeInterv is not None:
              print('time interv', BackgroundWindow.bkgTimeInterv)         
          if self.sepBkVar.get() == 1:
           if BackgroundWindow.fname is not None:          
-           plots = bkgPlots.BackgPlots() #background_plot.Input(BackgroundWindow.fname)
+           plots = bkgPlots.BackgPlots() 
            if self.var.get() == 'Rate':
             if e == 'time':
-                #plots.rate_vs_time_plotting()
-                plots.plot(BackgroundWindow.bkgTimeInterv, 'Rate', i, self.MethodVars[i].get(), showTime) #plots.backg_plot_vs_time('counts', i)
-##            elif e == 'show':
-##                plots.rate_vs_time_plotting()
-##            elif e == 'specgr':
-##                plots.plot_spectrogram_rate()
+                plots.plot(BackgroundWindow.bkgTimeInterv, 'Rate', i, self.MethodVars[i].get(), showTime) 
+
            if self.var.get() == 'Counts':
             if e == 'time':
-               plots.plot(BackgroundWindow.bkgTimeInterv, 'Counts', i, self.MethodVars[i].get(), showTime) #plots.backg_plot_vs_time('counts', i)
-##          elif e == 'show':
-##             plots.rate_vs_time_plotting()
-##          elif e == 'specgr':
-##               plots.plot_spectrogram_rate()
+               plots.plot(BackgroundWindow.bkgTimeInterv, 'Counts', i, self.MethodVars[i].get(), showTime) 
+
            if self.var.get() == 'Flux':
             if e == 'time':
-                plots.plot(BackgroundWindow.bkgTimeInterv, 'Flux', i, self.MethodVars[i].get(), showTime) #plots.backg_plot_vs_time('flux', i)
-##            elif e == 'show':
-##                plots.flux_vs_time_plotting()
-##            elif e == 'specgr':
-##                plots.plot_spectrogram_flux()
-
-##                
+                plots.plot(BackgroundWindow.bkgTimeInterv, 'Flux', i, self.MethodVars[i].get(), showTime) 
+             
          else:
            plots = plotting.Input(BackgroundWindow.fname)
           
            if self.var.get() == 'Rate':
             if e == 'time':
                 plots.rate_vs_time_plotting()
-##            elif e == 'show':
-##                plots.rate_vs_time_plotting()
-##            elif e == 'specgr':
-##                plots.plot_spectrogram_rate()
+
            if self.var.get() == 'Counts':
             if e == 'time':
                plots.counts_vs_time_plotting()
-##          elif e == 'show':
-##             plots.rate_vs_time_plotting()
-##          elif e == 'specgr':
-##               plots.plot_spectrogram_rate()
+
            if self.var.get() == 'Flux':
             if e == 'time':
                 plots.flux_vs_time_plotting()
-##            elif e == 'show':
-##                plots.flux_vs_time_plotting()
-##            elif e == 'specgr':
-##                plots.plot_spectrogram_flux()
-        
-            
-##
 
 
 

@@ -2,8 +2,6 @@ from tkinter import *
 from astropy.io import fits
 import re
 import pandas as pd
-import plotting
-import background_plot
 import warnings
 import second
 import editInterval
